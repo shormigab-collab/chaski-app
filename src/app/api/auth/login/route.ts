@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Credenciales inválidas" }, { status: 401 });
   }
 
-  await crearSesion({ userId: user.id, role: user.role });
+  await crearSesion({ userId: user.id, role: user.role as "CLIENTE" | "PROVEEDOR" | "ADMIN" });
 
   return NextResponse.json({ ok: true, role: user.role });
 }
