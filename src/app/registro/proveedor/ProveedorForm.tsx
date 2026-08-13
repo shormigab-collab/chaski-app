@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import CategoryIcon from "@/components/CategoryIcon";
 
-type Categoria = { id: string; nombre: string; icono: string };
+type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
 export default function ProveedorForm({ categorias }: { categorias: Categoria[] }) {
   const router = useRouter();
@@ -78,7 +79,10 @@ export default function ProveedorForm({ categorias }: { categorias: Categoria[] 
                     : "hover:border-gray-400"
                 }`}
               >
-                {cat.icono} {cat.nombre}
+                <span className="inline-flex items-center gap-1.5">
+                  <CategoryIcon slug={cat.slug} className="w-3.5 h-3.5 shrink-0" />
+                  {cat.nombre}
+                </span>
               </button>
             ))}
           </div>

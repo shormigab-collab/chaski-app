@@ -1,4 +1,6 @@
-type Categoria = { id: string; nombre: string; icono: string };
+import CategoryIcon from "@/components/CategoryIcon";
+
+type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
 export default function CategoryMarquee({ categorias }: { categorias: Categoria[] }) {
   const dobles = [...categorias, ...categorias];
@@ -11,7 +13,7 @@ export default function CategoryMarquee({ categorias }: { categorias: Categoria[
             key={`${cat.id}-${i}`}
             className="flex items-center gap-2 bg-white/5 text-cream/80 text-sm font-medium px-4 py-2 rounded-full whitespace-nowrap"
           >
-            <span>{cat.icono}</span>
+            <CategoryIcon slug={cat.slug} className="w-3.5 h-3.5 text-cream/60" />
             {cat.nombre}
           </span>
         ))}

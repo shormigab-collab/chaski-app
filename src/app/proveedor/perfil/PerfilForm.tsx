@@ -2,8 +2,10 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Camera } from "lucide-react";
+import CategoryIcon from "@/components/CategoryIcon";
 
-type Categoria = { id: string; nombre: string; icono: string };
+type Categoria = { id: string; nombre: string; slug: string; icono: string };
 type Perfil = {
   bio: string;
   fotoUrl: string;
@@ -83,8 +85,8 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
           {fotoUrl ? (
             <img src={fotoUrl} alt="Foto de perfil" className="w-full h-full object-cover" />
           ) : (
-            <span className="w-full h-full flex items-center justify-center text-2xl text-brand-300">
-              📷
+            <span className="w-full h-full flex items-center justify-center text-brand-300">
+              <Camera className="w-6 h-6" strokeWidth={1.75} />
             </span>
           )}
           <span className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium">
@@ -124,7 +126,10 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
                   : "border-black/10 hover:border-black/30"
               }`}
             >
-              {cat.icono} {cat.nombre}
+              <span className="inline-flex items-center gap-1.5">
+                <CategoryIcon slug={cat.slug} className="w-3.5 h-3.5 shrink-0" />
+                {cat.nombre}
+              </span>
             </button>
           ))}
         </div>

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import CategoryIcon from "@/components/CategoryIcon";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
@@ -74,7 +75,9 @@ export default function HeroSearch({ categorias }: { categorias: Categoria[] }) 
                 i === activo ? "bg-brand-50 text-brand-600" : "hover:bg-black/[0.03]"
               }`}
             >
-              <span className="text-lg">{cat.icono}</span>
+              <span className="w-8 h-8 rounded-lg bg-brand-50 text-brand-500 flex items-center justify-center shrink-0">
+                <CategoryIcon slug={cat.slug} className="w-4 h-4" />
+              </span>
               <span className="font-medium">{cat.nombre}</span>
             </button>
           ))}

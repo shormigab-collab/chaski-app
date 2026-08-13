@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import TrustBar from "@/components/TrustBar";
 import CategoryMarquee from "@/components/CategoryMarquee";
 import Testimonials from "@/components/Testimonials";
+import CategoryIcon from "@/components/CategoryIcon";
 
 export default async function HomePage() {
   const categorias = await prisma.categoria.findMany({ orderBy: { nombre: "asc" } });
@@ -59,7 +60,7 @@ export default async function HomePage() {
       </section>
 
       <TrustBar />
-      <CategoryMarquee categorias={categorias.map((c) => ({ id: c.id, nombre: c.nombre, icono: c.icono }))} />
+      <CategoryMarquee categorias={categorias.map((c) => ({ id: c.id, nombre: c.nombre, slug: c.slug, icono: c.icono }))} />
 
       {/* CATEGORIAS */}
       <section className="max-w-6xl mx-auto px-4 py-16">
@@ -76,7 +77,9 @@ export default async function HomePage() {
                 href={`/registro/cliente?categoria=${cat.slug}`}
                 className="group border border-black/5 bg-white rounded-2xl p-5 hover:border-brand-500 hover:shadow-md hover:shadow-brand-500/5 hover:-translate-y-0.5 transition-all block"
               >
-                <div className="text-2xl mb-3">{cat.icono}</div>
+                <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-3 group-hover:bg-brand-500 group-hover:text-cream transition-colors">
+                  <CategoryIcon slug={cat.slug} className="w-5 h-5" />
+                </div>
                 <div className="text-sm font-semibold text-ink/80 group-hover:text-brand-500 transition-colors leading-snug">
                   {cat.nombre}
                 </div>

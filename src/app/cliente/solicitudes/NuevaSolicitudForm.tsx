@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import CategoryIcon from "@/components/CategoryIcon";
 
 type Categoria = { id: string; nombre: string; icono: string; slug: string };
 
@@ -117,7 +118,9 @@ export default function NuevaSolicitudForm({
                     : "border-black/10 hover:border-black/30"
                 }`}
               >
-                <span className="block text-lg mb-1">{c.icono}</span>
+                <span className="w-8 h-8 rounded-lg bg-brand-50 text-brand-500 flex items-center justify-center mb-1.5">
+                  <CategoryIcon slug={c.slug} className="w-4 h-4" />
+                </span>
                 {c.nombre}
               </button>
             ))}
@@ -131,7 +134,13 @@ export default function NuevaSolicitudForm({
           <div>
             <h3 className="font-bold text-lg text-ink mb-1">Cuéntanos más</h3>
             <p className="text-sm text-ink/50">
-              Categoría: <span className="font-medium text-brand-600">{categoriaSeleccionada?.icono} {categoriaSeleccionada?.nombre}</span>
+              Categoría:{" "}
+              <span className="font-medium text-brand-600 inline-flex items-center gap-1.5">
+                {categoriaSeleccionada && (
+                  <CategoryIcon slug={categoriaSeleccionada.slug} className="w-3.5 h-3.5" />
+                )}
+                {categoriaSeleccionada?.nombre}
+              </span>
             </p>
           </div>
           <input

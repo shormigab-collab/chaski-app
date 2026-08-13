@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import NuevaSolicitudForm from "./NuevaSolicitudForm";
+import CategoryIcon from "@/components/CategoryIcon";
 
 export default async function MisSolicitudes({
   searchParams,
@@ -42,8 +43,9 @@ export default async function MisSolicitudes({
           <div key={s.id} className="border border-black/5 bg-white rounded-2xl p-5">
             <div className="flex justify-between items-start">
               <div>
-                <span className="text-xs uppercase tracking-wide text-brand-500 font-semibold">
-                  {s.categoria.icono} {s.categoria.nombre}
+                <span className="text-xs uppercase tracking-wide text-brand-500 font-semibold inline-flex items-center gap-1.5">
+                  <CategoryIcon slug={s.categoria.slug} className="w-3.5 h-3.5" />
+                  {s.categoria.nombre}
                 </span>
                 <h3 className="font-semibold text-lg text-ink">{s.titulo}</h3>
               </div>

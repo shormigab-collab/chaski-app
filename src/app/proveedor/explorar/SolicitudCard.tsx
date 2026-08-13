@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import CategoryIcon from "@/components/CategoryIcon";
 
 type Solicitud = {
   id: string;
@@ -10,7 +11,7 @@ type Solicitud = {
   ciudad: string;
   presupuesto: string | null;
   categoriaNombre: string;
-  categoriaIcono: string;
+  categoriaSlug: string;
   nombreCliente: string;
   telefonoContacto: string;
   createdAt: string;
@@ -44,8 +45,9 @@ export default function SolicitudCard({
 
   return (
     <div className="border rounded-xl p-5 bg-white">
-      <span className="text-xs uppercase tracking-wide text-brand-600 font-semibold">
-        {solicitud.categoriaIcono} {solicitud.categoriaNombre} · {solicitud.ciudad}
+      <span className="text-xs uppercase tracking-wide text-brand-600 font-semibold inline-flex items-center gap-1.5">
+        <CategoryIcon slug={solicitud.categoriaSlug} className="w-3.5 h-3.5" />
+        {solicitud.categoriaNombre} · {solicitud.ciudad}
       </span>
       <h3 className="font-semibold text-lg">{solicitud.titulo}</h3>
       <p className="text-gray-600 text-sm mt-1">{solicitud.descripcion}</p>

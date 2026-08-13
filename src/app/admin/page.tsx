@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import CategoryIcon from "@/components/CategoryIcon";
 
 export default async function AdminPage() {
   const usuario = await obtenerUsuarioActual();
@@ -56,7 +57,12 @@ export default async function AdminPage() {
           <tbody>
             {categorias.map((c) => (
               <tr key={c.id} className="border-t">
-                <td className="p-3">{c.icono} {c.nombre}</td>
+                <td className="p-3">
+                  <span className="inline-flex items-center gap-2">
+                    <CategoryIcon slug={c.slug} className="w-4 h-4 text-brand-500" />
+                    {c.nombre}
+                  </span>
+                </td>
                 <td className="p-3">{c._count.proveedores}</td>
                 <td className="p-3">{c._count.solicitudes}</td>
               </tr>

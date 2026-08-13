@@ -50,7 +50,7 @@ export default async function ExplorarSolicitudes() {
               ciudad: s.ciudad,
               presupuesto: s.presupuesto,
               categoriaNombre: s.categoria.nombre,
-              categoriaIcono: s.categoria.icono,
+              categoriaSlug: s.categoria.slug,
               nombreCliente: s.cliente.nombre,
               telefonoContacto: s.telefonoContacto,
               createdAt: s.createdAt.toISOString(),
