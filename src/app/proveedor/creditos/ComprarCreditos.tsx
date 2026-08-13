@@ -35,9 +35,9 @@ export default function ComprarCreditos({ paquetes }: { paquetes: Paquete[] }) {
       <div className="grid sm:grid-cols-3 gap-4">
         {paquetes.map((p) => (
           <div key={p.id} className="border rounded-xl p-5 text-center">
-            <div className="text-2xl font-bold text-brand-600">{p.creditos}</div>
+            <div className="text-2xl font-bold text-brand-600 tabular-nums">{p.creditos}</div>
             <div className="text-sm text-gray-500 mb-3">créditos</div>
-            <div className="font-semibold mb-4">
+            <div className="font-semibold mb-4 tabular-nums">
               ${p.precioCOP.toLocaleString("es-CO")} COP
             </div>
             <button

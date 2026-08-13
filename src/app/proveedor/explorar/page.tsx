@@ -28,7 +28,7 @@ export default async function ExplorarSolicitudes() {
     <div className="max-w-3xl mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Solicitudes para ti</h1>
-        <span className="text-sm bg-brand-50 text-brand-700 px-3 py-1.5 rounded-full font-medium">
+        <span className="text-sm bg-brand-50 text-brand-700 px-3 py-1.5 rounded-full font-medium tabular-nums">
           {usuario.proveedor.creditos} créditos disponibles
         </span>
       </div>

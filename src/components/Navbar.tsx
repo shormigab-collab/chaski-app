@@ -55,7 +55,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
       </Link>
       <Link
         href="/proveedor/creditos"
-        className="bg-coral-50 text-coral-600 px-3.5 py-1.5 rounded-full font-semibold text-sm inline-block w-fit"
+        className="bg-coral-50 text-coral-600 px-3.5 py-1.5 rounded-full font-semibold text-sm inline-block w-fit tabular-nums"
       >
         {usuario?.role === "PROVEEDOR" ? usuario.proveedor?.creditos ?? 0 : 0} créditos
       </Link>

@@ -41,7 +41,7 @@ export default async function AdminPage() {
 
       <div className="mb-10 border rounded-xl p-5">
         <h2 className="font-semibold mb-1">Ingresos totales (pagos aprobados)</h2>
-        <p className="text-3xl font-bold text-brand-600">${ingresosCOP.toLocaleString("es-CO")} COP</p>
+        <p className="text-3xl font-bold text-brand-600 tabular-nums">${ingresosCOP.toLocaleString("es-CO")} COP</p>
       </div>
 
       <h2 className="text-xl font-bold mb-3">Categorías</h2>
@@ -63,8 +63,8 @@ export default async function AdminPage() {
                     {c.nombre}
                   </span>
                 </td>
-                <td className="p-3">{c._count.proveedores}</td>
-                <td className="p-3">{c._count.solicitudes}</td>
+                <td className="p-3 tabular-nums">{c._count.proveedores}</td>
+                <td className="p-3 tabular-nums">{c._count.solicitudes}</td>
               </tr>
             ))}
           </tbody>
@@ -87,8 +87,8 @@ export default async function AdminPage() {
             {transacciones.map((t) => (
               <tr key={t.id} className="border-t">
                 <td className="p-3">{t.user.nombre}</td>
-                <td className="p-3">{t.creditos}</td>
-                <td className="p-3">${t.montoCOP.toLocaleString("es-CO")}</td>
+                <td className="p-3 tabular-nums">{t.creditos}</td>
+                <td className="p-3 tabular-nums">${t.montoCOP.toLocaleString("es-CO")}</td>
                 <td className="p-3">{t.estado}</td>
                 <td className="p-3">{t.createdAt.toLocaleDateString("es-CO")}</td>
               </tr>
@@ -108,7 +108,7 @@ export default async function AdminPage() {
 function MetricCard({ label, value }: { label: string; value: number }) {
   return (
     <div className="border rounded-xl p-5 text-center">
-      <div className="text-3xl font-bold text-brand-600">{value}</div>
+      <div className="text-3xl font-bold text-brand-600 tabular-nums">{value}</div>
       <div className="text-sm text-gray-500">{label}</div>
     </div>
   );
