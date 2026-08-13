@@ -8,9 +8,19 @@ import TrustBar from "@/components/TrustBar";
 import CategoryMarquee from "@/components/CategoryMarquee";
 import Testimonials from "@/components/Testimonials";
 import CategoryIcon from "@/components/CategoryIcon";
+import Comparativa from "@/components/Comparativa";
+import ActividadReciente from "@/components/ActividadReciente";
 
 export default async function HomePage() {
-  const categorias = await prisma.categoria.findMany({ orderBy: { nombre: "asc" } });
+  const [categorias, solicitudesRecientes] = await Promise.all([
+    prisma.categoria.findMany({ orderBy: { nombre: "asc" } }),
+    prisma.solicitud.findMany({
+      where: { estado: "ABIERTA" },
+      include: { categoria: true },
+      orderBy: { createdAt: "desc" },
+      take: 6,
+    }),
+  ]);
 
   return (
     <div>
@@ -114,6 +124,19 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <Comparativa />
+
+      <ActividadReciente
+        items={solicitudesRecientes.map((s) => ({
+          id: s.id,
+          titulo: s.titulo,
+          ciudad: s.ciudad,
+          categoriaSlug: s.categoria.slug,
+          categoriaNombre: s.categoria.nombre,
+          createdAt: s.createdAt,
+        }))}
+      />
 
       <Testimonials />
 
