@@ -58,8 +58,13 @@ export async function obtenerSesion(): Promise<SessionPayload | null> {
 export async function obtenerUsuarioActual() {
   const sesion = await obtenerSesion();
   if (!sesion) return null;
-  return prisma.user.findUnique({
+  const usuario = await prisma.user.findUnique({
     where: { id: sesion.userId },
     include: { proveedor: true },
   });
+  if (!usuario) return null;
+  // Prisma tipa "role" como string generico (no como union literal) porque
+  // en el schema lo guardamos como String en vez de enum. Aqui lo tipamos
+  // de vuelta para que el resto de la app lo use con seguridad de tipos.
+  return { ...usuario, role: usuario.role as SessionPayload["role"] };
 }
