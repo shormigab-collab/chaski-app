@@ -1,0 +1,119 @@
+// Esquema de base de datos del marketplace
+// Local: SQLite. Produccion: cambia provider a "postgresql" y usa DATABASE_URL de Supabase/Neon.
+// Nota: SQLite no soporta enums nativos en Prisma, por eso los roles y estados
+// se guardan como texto (String) en vez de "enum". El valor siempre es uno de
+// los indicados en el comentario de cada campo.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  nombre        String
+  telefono      String?
+  role          String   // "CLIENTE" | "PROVEEDOR" | "ADMIN"
+  ciudad        String?
+  pais          String   @default("Colombia")
+  createdAt     DateTime @default(now())
+
+  proveedor     Proveedor?
+  solicitudes   Solicitud[]
+  transacciones Transaccion[]
+  resenasHechas Resena[]      @relation("ResenasHechas")
+}
+
+model Categoria {
+  id          String       @id @default(cuid())
+  nombre      String       @unique
+  slug        String       @unique
+  icono       String       @default("🔧")
+  proveedores Proveedor[]
+  solicitudes Solicitud[]
+}
+
+model Proveedor {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio            String?
+  fotoUrl        String?  // foto de perfil, guardada como data URL base64
+  aniosExperiencia Int?    @default(0)
+  creditos       Int      @default(3) // creditos de bienvenida
+  verificado     Boolean  @default(false)
+  calificacionProm Float  @default(0)
+  totalResenas   Int      @default(0)
+  createdAt      DateTime @default(now())
+
+  categorias     Categoria[]
+  desbloqueos    Desbloqueo[]
+  resenasRecibidas Resena[]
+}
+
+model Solicitud {
+  id           String          @id @default(cuid())
+  clienteId    String
+  cliente      User            @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  categoriaId  String
+  categoria    Categoria       @relation(fields: [categoriaId], references: [id])
+  titulo       String
+  descripcion  String
+  ciudad       String
+  presupuesto  String?
+  telefonoContacto String
+  estado       String          @default("ABIERTA") // "ABIERTA" | "CERRADA"
+  createdAt    DateTime        @default(now())
+
+  desbloqueos  Desbloqueo[]
+}
+
+// Cuando un proveedor gasta creditos para ver el contacto de una solicitud
+model Desbloqueo {
+  id           String    @id @default(cuid())
+  proveedorId  String
+  proveedor    Proveedor @relation(fields: [proveedorId], references: [id], onDelete: Cascade)
+  solicitudId  String
+  solicitud    Solicitud @relation(fields: [solicitudId], references: [id], onDelete: Cascade)
+  creditosUsados Int     @default(1)
+  createdAt    DateTime  @default(now())
+
+  @@unique([proveedorId, solicitudId])
+}
+
+model PaqueteCreditos {
+  id        String   @id @default(cuid())
+  nombre    String
+  creditos  Int
+  precioCOP Int
+  activo    Boolean  @default(true)
+}
+
+model Transaccion {
+  id            String            @id @default(cuid())
+  userId        String
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  creditos      Int
+  montoCOP      Int
+  estado        String            @default("PENDIENTE") // "PENDIENTE" | "APROBADA" | "RECHAZADA"
+  mpPaymentId   String?
+  mpPreferenceId String?
+  createdAt     DateTime          @default(now())
+}
+
+model Resena {
+  id          String    @id @default(cuid())
+  proveedorId String
+  proveedor   Proveedor @relation(fields: [proveedorId], references: [id], onDelete: Cascade)
+  autorId     String
+  autor       User      @relation("ResenasHechas", fields: [autorId], references: [id], onDelete: Cascade)
+  puntuacion  Int
+  comentario  String?
+  createdAt   DateTime  @default(now())
+}
