@@ -99,6 +99,18 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
     ? linksProveedor
     : linksAdmin;
 
+  // El toggle de idioma solo tiene sentido en las paginas de mercadeo
+  // (home en espanol y landing en ingles), no dentro de la app ya logueada.
+  const mostrarToggleIdioma = !usuario && (pathname === "/" || esIngles);
+  const toggleIdioma = mostrarToggleIdioma ? (
+    <Link
+      href={esIngles ? "/" : "/en"}
+      className="text-xs font-semibold text-ink/50 hover:text-ink border border-black/10 rounded-full px-3 py-1.5 transition-colors shrink-0"
+    >
+      {esIngles ? "ES" : "EN"}
+    </Link>
+  ) : null;
+
   return (
     <header className="sticky top-0 z-20 backdrop-blur-md bg-cream/80 border-b border-black/5">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3.5">
@@ -107,24 +119,30 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
         </Link>
 
         {/* Desktop */}
-        <nav className="hidden sm:flex items-center gap-5 text-sm font-medium">{linksActivos}</nav>
+        <nav className="hidden sm:flex items-center gap-5 text-sm font-medium">
+          {linksActivos}
+          {toggleIdioma}
+        </nav>
 
         {/* Mobile toggle */}
-        <button
-          onClick={() => setAbierto((v) => !v)}
-          className="sm:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors"
-          aria-label="Abrir menú"
-        >
-          {abierto ? (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M6 6L18 18M6 18L18 6" stroke="#211E3D" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          ) : (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M4 7H20M4 12H20M4 17H20" stroke="#211E3D" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          )}
-        </button>
+        <div className="sm:hidden flex items-center gap-2">
+          {toggleIdioma}
+          <button
+            onClick={() => setAbierto((v) => !v)}
+            className="w-9 h-9 flex items-center justify-center rounded-full hover:bg-black/5 transition-colors"
+            aria-label="Abrir menú"
+          >
+            {abierto ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M6 6L18 18M6 18L18 6" stroke="#211E3D" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M4 7H20M4 12H20M4 17H20" stroke="#211E3D" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
