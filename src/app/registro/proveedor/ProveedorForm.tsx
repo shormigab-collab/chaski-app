@@ -8,12 +8,20 @@ import CategoryIcon from "@/components/CategoryIcon";
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
 const CREDITOS_BIENVENIDA = 5;
+const CREDITOS_REFERIDO = 7;
 
-export default function ProveedorForm({ categorias }: { categorias: Categoria[] }) {
+export default function ProveedorForm({
+  categorias,
+  refCode,
+}: {
+  categorias: Categoria[];
+  refCode?: string;
+}) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [cargando, setCargando] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState<string[]>([]);
+  const creditosAMostrar = refCode ? CREDITOS_REFERIDO : CREDITOS_BIENVENIDA;
 
   function toggleCategoria(id: string) {
     setSeleccionadas((prev) =>
@@ -42,6 +50,7 @@ export default function ProveedorForm({ categorias }: { categorias: Categoria[] 
         ciudad: form.get("ciudad"),
         bio: form.get("bio"),
         categoriaIds: seleccionadas,
+        ref: refCode,
       }),
     });
     setCargando(false);
@@ -78,8 +87,9 @@ export default function ProveedorForm({ categorias }: { categorias: Categoria[] 
             <Gift className="w-4 h-4 text-white" />
           </div>
           <p className="text-sm text-ink/80 leading-snug">
-            <span className="font-bold text-ink">Recibes {CREDITOS_BIENVENIDA} créditos de bienvenida</span> para
+            <span className="font-bold text-ink">Recibes {creditosAMostrar} créditos de bienvenida</span> para
             empezar a contactar clientes apenas termines tu registro.
+            {refCode && " Vienes invitado por un colega, por eso recibes créditos extra."}
           </p>
         </div>
 
@@ -133,7 +143,7 @@ export default function ProveedorForm({ categorias }: { categorias: Categoria[] 
               disabled={cargando}
               className="w-full bg-brand-500 text-cream py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50 min-h-[44px]"
             >
-              {cargando ? "Creando perfil..." : `Crear mi perfil y recibir ${CREDITOS_BIENVENIDA} créditos`}
+              {cargando ? "Creando perfil..." : `Crear mi perfil y recibir ${creditosAMostrar} créditos`}
             </button>
           </form>
         </div>

@@ -50,6 +50,10 @@ model Proveedor {
   verificado     Boolean  @default(false)
   calificacionProm Float  @default(0)
   totalResenas   Int      @default(0)
+  codigoReferido String?  @unique // link de invitacion propio de este proveedor
+  referidoPorId  String?
+  referidoPor    Proveedor?  @relation("Referidos", fields: [referidoPorId], references: [id])
+  referidos      Proveedor[] @relation("Referidos")
   createdAt      DateTime @default(now())
 
   categorias     Categoria[]

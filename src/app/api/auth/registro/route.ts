@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { hashPassword, crearSesion } from "@/lib/auth";
+import { generarCodigoReferido } from "@/lib/referidos";
 
 const esquemaBase = z.object({
   role: z.enum(["CLIENTE", "PROVEEDOR"]),
@@ -12,7 +13,12 @@ const esquemaBase = z.object({
   ciudad: z.string().min(2),
   bio: z.string().optional(),
   categoriaIds: z.array(z.string()).optional(),
+  ref: z.string().trim().max(60).optional(), // codigo de referido, opcional
 });
+
+const CREDITOS_BASE = 5; // impulso de lanzamiento para los primeros proveedores (normalmente 3)
+const CREDITOS_REFERIDO = 7; // bono si viene invitado por otro proveedor
+const CREDITOS_BONO_REFERENTE = 3; // bono para quien invito
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -33,6 +39,18 @@ export async function POST(req: Request) {
 
   const passwordHash = await hashPassword(data.password);
 
+  // Si viene con un codigo de referido valido, el nuevo proveedor recibe un
+  // bono de bienvenida mas alto.
+  let referente: { id: string } | null = null;
+  if (data.role === "PROVEEDOR" && data.ref) {
+    referente = await prisma.proveedor.findUnique({
+      where: { codigoReferido: data.ref },
+      select: { id: true },
+    });
+  }
+
+  const codigoReferidoPropio = data.role === "PROVEEDOR" ? await generarCodigoReferido(data.nombre) : undefined;
+
   const user = await prisma.user.create({
     data: {
       nombre: data.nombre,
@@ -46,7 +64,9 @@ export async function POST(req: Request) {
             proveedor: {
               create: {
                 bio: data.bio,
-                creditos: 5, // impulso de lanzamiento para los primeros proveedores (normalmente 3)
+                creditos: referente ? CREDITOS_REFERIDO : CREDITOS_BASE,
+                codigoReferido: codigoReferidoPropio,
+                referidoPorId: referente?.id,
                 categorias: { connect: data.categoriaIds!.map((id) => ({ id })) },
               },
             },
@@ -54,6 +74,14 @@ export async function POST(req: Request) {
         : {}),
     },
   });
+
+  // Premia a quien invito, ahora que el nuevo proveedor ya quedo creado.
+  if (referente) {
+    await prisma.proveedor.update({
+      where: { id: referente.id },
+      data: { creditos: { increment: CREDITOS_BONO_REFERENTE } },
+    });
+  }
 
   await crearSesion({ userId: user.id, role: user.role as "CLIENTE" | "PROVEEDOR" | "ADMIN" });
 

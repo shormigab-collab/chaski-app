@@ -68,6 +68,9 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
       <Link href="/proveedor/perfil" className="text-ink/60 hover:text-ink transition-colors">
         Mi perfil
       </Link>
+      <Link href="/proveedor/invitar" className="text-ink/60 hover:text-ink transition-colors">
+        Invitar y ganar
+      </Link>
       <Link
         href="/proveedor/creditos"
         className="bg-coral-50 text-coral-600 px-3.5 py-1.5 rounded-full font-semibold text-sm inline-block w-fit tabular-nums"
