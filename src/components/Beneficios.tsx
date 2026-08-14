@@ -25,12 +25,37 @@ const BENEFICIOS = [
   },
 ];
 
-export default function Beneficios() {
+const BENEFITS_EN = [
+  {
+    Icono: Clock,
+    titulo: "Save time",
+    texto: "Get proposals without searching for professionals one by one.",
+    bg: "bg-brand-50",
+    text: "text-brand-500",
+  },
+  {
+    Icono: ListChecks,
+    titulo: "Compare easily",
+    texto: "Review experience, location, and specialty before you choose.",
+    bg: "bg-coral-50",
+    text: "text-coral-500",
+  },
+  {
+    Icono: Handshake,
+    titulo: "Hire directly",
+    texto: "Contact the professional with no commission on what you pay them.",
+    bg: "bg-gold-50",
+    text: "text-gold-600",
+  },
+];
+
+export default function Beneficios({ lang = "es" }: { lang?: "es" | "en" }) {
+  const items = lang === "en" ? BENEFITS_EN : BENEFICIOS;
   return (
     <section className="bg-white border-y border-black/5">
       <div className="max-w-5xl mx-auto px-4 py-16 sm:py-20">
         <div className="grid sm:grid-cols-3 gap-5">
-          {BENEFICIOS.map((b, i) => (
+          {items.map((b, i) => (
             <Reveal key={b.titulo} delay={i * 100}>
               <div className="h-full border border-black/5 rounded-2xl p-6 hover:shadow-md hover:shadow-black/5 hover:-translate-y-0.5 transition-all">
                 <div className={`w-11 h-11 rounded-xl ${b.bg} ${b.text} flex items-center justify-center mb-4`}>

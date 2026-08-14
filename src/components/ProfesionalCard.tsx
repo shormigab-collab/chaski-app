@@ -20,6 +20,11 @@ const MESES = [
   "jul", "ago", "sep", "oct", "nov", "dic",
 ];
 
+const MONTHS_EN = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
 // Bandas de color para el encabezado de la tarjeta. Se elige una de
 // forma estable según el id del profesional, para que cada tarjeta se
 // vea distinta sin depender de tener una foto real.
@@ -36,11 +41,12 @@ function hashIndex(str: string, mod: number) {
   return h % mod;
 }
 
-export default function ProfesionalCard({ p }: { p: ProfesionalCardData }) {
+export default function ProfesionalCard({ p, lang = "es" }: { p: ProfesionalCardData; lang?: "es" | "en" }) {
   const categoriaPrincipal = p.categorias[0];
   const inicial = p.nombre.trim().charAt(0).toUpperCase() || "?";
   const ubicacion = [p.ciudad, p.pais].filter(Boolean).join(", ");
-  const miembroDesde = `${MESES[p.memberSince.getMonth()]} ${p.memberSince.getFullYear()}`;
+  const meses = lang === "en" ? MONTHS_EN : MESES;
+  const miembroDesde = `${meses[p.memberSince.getMonth()]} ${p.memberSince.getFullYear()}`;
   const banda = BANDAS[hashIndex(p.id, BANDAS.length)];
 
   return (
@@ -92,18 +98,22 @@ export default function ProfesionalCard({ p }: { p: ProfesionalCardData }) {
             <div className="flex items-center gap-1.5 text-xs text-ink/50">
               <Briefcase className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
               <span>
-                {p.aniosExperiencia} {p.aniosExperiencia === 1 ? "año" : "años"} de experiencia
+                {lang === "en"
+                  ? `${p.aniosExperiencia} ${p.aniosExperiencia === 1 ? "year" : "years"} of experience`
+                  : `${p.aniosExperiencia} ${p.aniosExperiencia === 1 ? "año" : "años"} de experiencia`}
               </span>
             </div>
           )}
-          <div className="text-[11px] text-ink/35">Miembro desde {miembroDesde}</div>
+          <div className="text-[11px] text-ink/35">
+            {lang === "en" ? "Member since" : "Miembro desde"} {miembroDesde}
+          </div>
         </div>
 
         <Link
           href={`/profesionales/${p.id}`}
           className="block text-center text-sm font-semibold bg-brand-50 text-brand-600 rounded-full py-2.5 hover:bg-brand-500 hover:text-cream transition-colors min-h-[44px] flex items-center justify-center"
         >
-          Ver perfil
+          {lang === "en" ? "View profile" : "Ver perfil"}
         </Link>
       </div>
     </div>

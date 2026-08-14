@@ -6,7 +6,13 @@ import CategoryIcon from "@/components/CategoryIcon";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
-export default function HeroSearch({ categorias }: { categorias: Categoria[] }) {
+export default function HeroSearch({
+  categorias,
+  lang = "es",
+}: {
+  categorias: Categoria[];
+  lang?: "es" | "en";
+}) {
   const router = useRouter();
   const [query, setQuery] = useState("");
   const [abierto, setAbierto] = useState(false);
@@ -19,6 +25,11 @@ export default function HeroSearch({ categorias }: { categorias: Categoria[] }) 
   }, [query, categorias]);
 
   function irACategoria(cat: Categoria) {
+    if (lang === "en") {
+      setAbierto(false);
+      document.getElementById("interesado")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
     router.push(`/registro/cliente?categoria=${cat.slug}`);
   }
 
@@ -39,7 +50,9 @@ export default function HeroSearch({ categorias }: { categorias: Categoria[] }) 
 
   return (
     <div className="relative max-w-md mx-auto md:mx-0">
-      <p className="text-xs font-medium text-ink/40 mb-1.5 px-1">o busca directamente una especialidad</p>
+      <p className="text-xs font-medium text-ink/40 mb-1.5 px-1">
+        {lang === "en" ? "or search directly for a specialty" : "o busca directamente una especialidad"}
+      </p>
       <div className="flex items-center bg-white border border-black/10 rounded-full shadow-sm shadow-black/5 pl-4 pr-1.5 py-1 focus-within:border-brand-300 transition-colors">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-ink/35 shrink-0">
           <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
@@ -55,14 +68,14 @@ export default function HeroSearch({ categorias }: { categorias: Categoria[] }) 
           onFocus={() => setAbierto(true)}
           onBlur={() => setTimeout(() => setAbierto(false), 150)}
           onKeyDown={onKeyDown}
-          placeholder="Ej: diseño de logo, SEO, contador..."
+          placeholder={lang === "en" ? "E.g: logo design, SEO, bookkeeper..." : "Ej: diseño de logo, SEO, contador..."}
           className="flex-1 px-3 py-2.5 text-sm outline-none bg-transparent placeholder:text-ink/35 min-h-[44px]"
         />
         <button
           onClick={() => resultados[0] && irACategoria(resultados[0])}
           className="text-brand-500 text-sm font-semibold px-4 rounded-full hover:bg-brand-50 transition-colors shrink-0 min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
         >
-          Buscar
+          {lang === "en" ? "Search" : "Buscar"}
         </button>
       </div>
 

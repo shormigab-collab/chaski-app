@@ -37,20 +37,58 @@ const PUNTOS = [
   },
 ];
 
-export default function Confianza() {
+// Misma nota de honestidad aplica a la version en ingles: solo describe
+// lo que el producto realmente pide hoy al crear un perfil.
+const POINTS_EN = [
+  {
+    Icono: UserCheck,
+    titulo: "Identity",
+    texto: "Every professional registers with their real name and a direct contact number.",
+    bg: "bg-brand-50",
+    text: "text-brand-500",
+  },
+  {
+    Icono: Briefcase,
+    titulo: "Experience",
+    texto: "They list their years of experience and the categories they work in.",
+    bg: "bg-coral-50",
+    text: "text-coral-500",
+  },
+  {
+    Icono: FileText,
+    titulo: "Complete profile",
+    texto: "They have a bio, city, and, if they choose, a profile photo.",
+    bg: "bg-gold-50",
+    text: "text-gold-600",
+  },
+  {
+    Icono: MessageSquare,
+    titulo: "Direct contact",
+    texto: "You talk directly with the professional — no middleman, no anonymous profiles.",
+    bg: "bg-brand-50",
+    text: "text-brand-500",
+  },
+];
+
+export default function Confianza({ lang = "es" }: { lang?: "es" | "en" }) {
+  const puntos = lang === "en" ? POINTS_EN : PUNTOS;
   return (
     <section className="max-w-5xl mx-auto px-4 py-16 sm:py-20">
       <Reveal>
         <div className="text-center mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-ink">Perfiles reales, no anónimos</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-ink">
+            {lang === "en" ? "Real profiles, not anonymous" : "Perfiles reales, no anónimos"}
+          </h2>
           <p className="text-ink/55 mt-2 max-w-lg mx-auto">
-            Para publicar un perfil en chaski, cada profesional debe completar esta información.
+            {lang === "en"
+              ? "To publish a profile on chaski, every professional has to complete this information."
+              : "Para publicar un perfil en chaski, cada profesional debe completar esta información."}
           </p>
         </div>
       </Reveal>
 
       <div className="grid sm:grid-cols-2 gap-5">
-        {PUNTOS.map((p, i) => (
+        {puntos.map((p, i) => (
           <Reveal key={p.titulo} delay={i * 80}>
             <div className="flex items-start gap-4 border border-black/5 bg-white rounded-2xl p-5 hover:shadow-md hover:shadow-black/5 transition-shadow">
               <span className={`w-10 h-10 rounded-xl ${p.bg} ${p.text} flex items-center justify-center shrink-0`}>

@@ -27,6 +27,15 @@ const CURADAS: { slug: string; etiqueta: string }[] = [
   { slug: "consultoria-empresarial", etiqueta: "Consultoría empresarial" },
 ];
 
+const CURATED_EN: { slug: string; etiqueta: string }[] = [
+  { slug: "marketing-redes", etiqueta: "Digital marketing" },
+  { slug: "diseno-grafico", etiqueta: "Design & branding" },
+  { slug: "desarrollo-web", etiqueta: "Web development" },
+  { slug: "contabilidad", etiqueta: "Accounting" },
+  { slug: "soporte-tecnico", etiqueta: "Support & operations" },
+  { slug: "consultoria-empresarial", etiqueta: "Business consulting" },
+];
+
 // Fotos solo para las 6 categorias destacadas (no para el listado
 // expandido "ver todas"), asi la grilla principal se ve mas atractiva
 // sin sobrecargar la vista con fotos en las 24 categorias.
@@ -39,23 +48,36 @@ const FOTOS: Record<string, string> = {
   "consultoria-empresarial": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=70",
 };
 
-export default function CategoriasHome({ categorias }: { categorias: Categoria[] }) {
+export default function CategoriasHome({
+  categorias,
+  lang = "es",
+}: {
+  categorias: Categoria[];
+  lang?: "es" | "en";
+}) {
   const [verTodas, setVerTodas] = useState(false);
 
   const porSlug = new Map(categorias.map((c) => [c.slug, c]));
-  const curadas = CURADAS
+  const listaCurada = lang === "en" ? CURATED_EN : CURADAS;
+  const curadas = listaCurada
     .map((c) => (porSlug.get(c.slug) ? { ...porSlug.get(c.slug)!, etiqueta: c.etiqueta } : null))
     .filter((c): c is Categoria & { etiqueta: string } => c !== null);
 
   const slugsCuradas = new Set(curadas.map((c) => c.slug));
-  const otras = categorias.filter((c) => !slugsCuradas.has(c.slug));
+  const otras = lang === "en" ? [] : categorias.filter((c) => !slugsCuradas.has(c.slug));
 
   return (
     <section className="max-w-6xl mx-auto px-4 py-16 sm:py-20">
       <Reveal>
         <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-ink">Explora por categoría</h2>
-          <p className="text-ink/55 mt-2">Encuentra al profesional que necesitas por especialidad.</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-ink">
+            {lang === "en" ? "Browse by category" : "Explora por categoría"}
+          </h2>
+          <p className="text-ink/55 mt-2">
+            {lang === "en"
+              ? "Find the professional you need by specialty."
+              : "Encuentra al profesional que necesitas por especialidad."}
+          </p>
         </div>
       </Reveal>
 
@@ -66,7 +88,7 @@ export default function CategoriasHome({ categorias }: { categorias: Categoria[]
           return (
             <Reveal key={cat.id} delay={i * 50}>
               <Link
-                href={`/registro/cliente?categoria=${cat.slug}`}
+                href={lang === "en" ? "/en#interesado" : `/registro/cliente?categoria=${cat.slug}`}
                 className="group border border-black/5 bg-white rounded-2xl overflow-hidden hover:border-brand-500 hover:shadow-md hover:shadow-brand-500/5 hover:-translate-y-0.5 transition-all block min-h-[44px]"
               >
                 <div className={`relative h-24 sm:h-28 ${ac.bg}`}>

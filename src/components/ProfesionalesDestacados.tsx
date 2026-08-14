@@ -7,8 +7,10 @@ import ProfesionalCard, { type ProfesionalCardData } from "@/components/Profesio
 // ejemplo: se explica honestamente que la comunidad esta creciendo.
 export default function ProfesionalesDestacados({
   profesionales,
+  lang = "es",
 }: {
   profesionales: ProfesionalCardData[];
+  lang?: "es" | "en";
 }) {
   return (
     <section className="bg-white border-y border-black/5">
@@ -16,14 +18,20 @@ export default function ProfesionalesDestacados({
         <Reveal>
           <div className="flex items-end justify-between mb-8 gap-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-ink">Expertos listos para ayudarte</h2>
-              <p className="text-ink/55 mt-1.5">Profesionales reales, con perfil completo en chaski.</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-ink">
+                {lang === "en" ? "Experts ready to help" : "Expertos listos para ayudarte"}
+              </h2>
+              <p className="text-ink/55 mt-1.5">
+                {lang === "en"
+                  ? "Real professionals, with a complete profile on chaski."
+                  : "Profesionales reales, con perfil completo en chaski."}
+              </p>
             </div>
             <Link
-              href="/profesionales"
+              href={lang === "en" ? "/profesionales" : "/profesionales"}
               className="hidden sm:inline-block text-sm font-semibold text-brand-500 hover:text-brand-600 transition-colors shrink-0"
             >
-              Ver todos →
+              {lang === "en" ? "View all →" : "Ver todos →"}
             </Link>
           </div>
         </Reveal>
@@ -33,16 +41,25 @@ export default function ProfesionalesDestacados({
             <div className="flex sm:grid sm:grid-cols-3 gap-4 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:overflow-visible sm:pb-0">
               {profesionales.map((p, i) => (
                 <Reveal key={p.id} delay={i * 80} className="min-w-[260px] sm:min-w-0 snap-start shrink-0 sm:shrink">
-                  <ProfesionalCard p={p} />
+                  <ProfesionalCard p={p} lang={lang} />
                 </Reveal>
               ))}
             </div>
             <div className="sm:hidden mt-6 text-center">
               <Link href="/profesionales" className="text-sm font-semibold text-brand-500 hover:text-brand-600 transition-colors">
-                Ver todos →
+                {lang === "en" ? "View all →" : "Ver todos →"}
               </Link>
             </div>
           </>
+        ) : lang === "en" ? (
+          <Reveal>
+            <div className="text-center border border-black/5 rounded-2xl py-14 px-6 max-w-md mx-auto">
+              <p className="text-ink/60 font-medium">
+                We&apos;re onboarding our first professionals right now — check back soon, or tell us what you need
+                below and we&apos;ll personally match you.
+              </p>
+            </div>
+          </Reveal>
         ) : (
           <Reveal>
             <div className="text-center border border-black/5 rounded-2xl py-14 px-6 max-w-md mx-auto">

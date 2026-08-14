@@ -4,12 +4,12 @@ import CategoryIcon from "@/components/CategoryIcon";
 // Vista previa ilustrativa del producto (no son perfiles reales) que
 // muestra cómo se ven las tarjetas de profesionales dentro de chaski.
 const EJEMPLOS = [
-  { foto: "https://i.pravatar.cc/80?img=32", nombre: "Ana G.", categoriaSlug: "diseno-grafico", categoria: "Diseño gráfico", ciudad: "Bogotá, Colombia", anios: 6 },
-  { foto: "https://i.pravatar.cc/80?img=12", nombre: "Luis M.", categoriaSlug: "desarrollo-web", categoria: "Desarrollo web", ciudad: "CDMX, México", anios: 4 },
-  { foto: "https://i.pravatar.cc/80?img=47", nombre: "Paula R.", categoriaSlug: "contabilidad", categoria: "Contabilidad", ciudad: "Lima, Perú", anios: 8 },
+  { foto: "https://i.pravatar.cc/80?img=32", nombre: "Ana G.", categoriaSlug: "diseno-grafico", categoria: "Diseño gráfico", categoriaEn: "Graphic design", ciudad: "Bogotá, Colombia", anios: 6 },
+  { foto: "https://i.pravatar.cc/80?img=12", nombre: "Luis M.", categoriaSlug: "desarrollo-web", categoria: "Desarrollo web", categoriaEn: "Web development", ciudad: "CDMX, México", anios: 4 },
+  { foto: "https://i.pravatar.cc/80?img=47", nombre: "Paula R.", categoriaSlug: "contabilidad", categoria: "Contabilidad", categoriaEn: "Accounting", ciudad: "Lima, Perú", anios: 8 },
 ];
 
-export default function HeroMockup() {
+export default function HeroMockup({ lang = "es" }: { lang?: "es" | "en" }) {
   return (
     <div className="relative w-full max-w-md mx-auto md:mx-0">
       <div className="absolute -top-6 -right-6 w-full h-full bg-coral-100/70 rounded-[2rem] -z-20" />
@@ -31,7 +31,9 @@ export default function HeroMockup() {
           <span className="w-2.5 h-2.5 rounded-full bg-black/10" />
           <span className="w-2.5 h-2.5 rounded-full bg-black/10" />
           <span className="w-2.5 h-2.5 rounded-full bg-black/10" />
-          <span className="ml-2 text-[11px] text-ink/35 font-medium">Vista previa · usechaski.com/profesionales</span>
+          <span className="ml-2 text-[11px] text-ink/35 font-medium">
+            {lang === "en" ? "Preview · usechaski.com/professionals" : "Vista previa · usechaski.com/profesionales"}
+          </span>
         </div>
 
         <div className="p-4 space-y-3">
@@ -46,7 +48,7 @@ export default function HeroMockup() {
                 <div className="text-sm font-semibold text-ink truncate">{p.nombre}</div>
                 <div className="flex items-center gap-1.5 text-[11px] text-brand-500 font-medium">
                   <CategoryIcon slug={p.categoriaSlug} className="w-3 h-3 shrink-0" />
-                  <span className="truncate">{p.categoria}</span>
+                  <span className="truncate">{lang === "en" ? p.categoriaEn : p.categoria}</span>
                 </div>
                 <div className="flex items-center gap-1 text-[11px] text-ink/40 mt-0.5">
                   <MapPin className="w-3 h-3 shrink-0" strokeWidth={1.75} />
@@ -54,7 +56,7 @@ export default function HeroMockup() {
                 </div>
               </div>
               <span className="text-[11px] font-semibold text-brand-500 bg-brand-50 rounded-full px-2.5 py-1 shrink-0">
-                Ver perfil
+                {lang === "en" ? "View profile" : "Ver perfil"}
               </span>
             </div>
           ))}
@@ -67,8 +69,10 @@ export default function HeroMockup() {
           <CheckCircle2 className="w-4 h-4 text-brand-500" strokeWidth={2} />
         </span>
         <div className="leading-tight">
-          <div className="text-sm font-bold text-ink">Publicar es gratis</div>
-          <div className="text-[11px] text-ink/45">toma menos de 2 minutos</div>
+          <div className="text-sm font-bold text-ink">{lang === "en" ? "Posting is free" : "Publicar es gratis"}</div>
+          <div className="text-[11px] text-ink/45">
+            {lang === "en" ? "takes less than 2 minutes" : "toma menos de 2 minutos"}
+          </div>
         </div>
       </div>
     </div>
