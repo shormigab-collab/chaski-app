@@ -119,3 +119,14 @@ model Resena {
 
   @@unique([proveedorId, autorId])
 }
+
+// Interesados de EE.UU. captados en la landing en ingles (/en), antes de
+// construir el flujo completo bilingue. Se contactan manualmente.
+model LeadUS {
+  id        String   @id @default(cuid())
+  nombre    String
+  email     String
+  empresa   String?
+  mensaje   String
+  createdAt DateTime @default(now())
+}

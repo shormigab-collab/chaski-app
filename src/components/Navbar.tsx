@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 
 type UsuarioConProveedor = {
@@ -13,8 +14,22 @@ type UsuarioConProveedor = {
 
 export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
   const [abierto, setAbierto] = useState(false);
+  const pathname = usePathname();
+  const esIngles = pathname?.startsWith("/en");
 
-  const linksInvitado = (
+  const linksInvitado = esIngles ? (
+    <>
+      <Link href="/login" className="text-ink/60 hover:text-ink transition-colors">
+        Log in
+      </Link>
+      <a
+        href="#interesado"
+        className="bg-brand-500 text-cream px-4 py-2 rounded-full hover:bg-brand-600 transition-colors shadow-sm text-center"
+      >
+        Get started
+      </a>
+    </>
+  ) : (
     <>
       <Link href="/como-funciona" className="text-ink/60 hover:text-ink transition-colors">
         Cómo funciona
@@ -87,7 +102,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
   return (
     <header className="sticky top-0 z-20 backdrop-blur-md bg-cream/80 border-b border-black/5">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3.5">
-        <Link href="/" className="shrink-0" onClick={() => setAbierto(false)}>
+        <Link href={esIngles ? "/en" : "/"} className="shrink-0" onClick={() => setAbierto(false)}>
           <Logo size={34} />
         </Link>
 

@@ -7,12 +7,13 @@ export default async function AdminPage() {
   const usuario = await obtenerUsuarioActual();
   if (!usuario || usuario.role !== "ADMIN") redirect("/login");
 
-  const [totalClientes, totalProveedores, totalSolicitudes, totalDesbloqueos, transacciones, categorias] =
+  const [totalClientes, totalProveedores, totalSolicitudes, totalDesbloqueos, totalLeadsUS, transacciones, categorias, leadsUS] =
     await Promise.all([
       prisma.user.count({ where: { role: "CLIENTE" } }),
       prisma.user.count({ where: { role: "PROVEEDOR" } }),
       prisma.solicitud.count(),
       prisma.desbloqueo.count(),
+      prisma.leadUS.count(),
       prisma.transaccion.findMany({
         include: { user: true },
         orderBy: { createdAt: "desc" },
@@ -22,6 +23,7 @@ export default async function AdminPage() {
         include: { _count: { select: { proveedores: true, solicitudes: true } } },
         orderBy: { nombre: "asc" },
       }),
+      prisma.leadUS.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
     ]);
 
   const ingresosCOP = transacciones
@@ -32,11 +34,12 @@ export default async function AdminPage() {
     <div className="max-w-5xl mx-auto px-4 py-12">
       <h1 className="text-2xl font-bold mb-8">Panel de administración</h1>
 
-      <div className="grid sm:grid-cols-4 gap-4 mb-10">
+      <div className="grid sm:grid-cols-5 gap-4 mb-10">
         <MetricCard label="Clientes" value={totalClientes} />
         <MetricCard label="Proveedores" value={totalProveedores} />
         <MetricCard label="Solicitudes" value={totalSolicitudes} />
         <MetricCard label="Desbloqueos" value={totalDesbloqueos} />
+        <MetricCard label="Interesados EE.UU." value={totalLeadsUS} />
       </div>
 
       <div className="mb-10 border rounded-xl p-5">
@@ -67,6 +70,41 @@ export default async function AdminPage() {
                 <td className="p-3 tabular-nums">{c._count.solicitudes}</td>
               </tr>
             ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2 className="text-xl font-bold mb-3">Interesados de EE.UU. (landing /en)</h2>
+      <div className="overflow-x-auto mb-10">
+        <table className="w-full text-sm border rounded-xl overflow-hidden">
+          <thead className="bg-gray-50 text-left">
+            <tr>
+              <th className="p-3">Nombre</th>
+              <th className="p-3">Correo</th>
+              <th className="p-3">Empresa</th>
+              <th className="p-3">Mensaje</th>
+              <th className="p-3">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            {leadsUS.map((l) => (
+              <tr key={l.id} className="border-t align-top">
+                <td className="p-3 whitespace-nowrap">{l.nombre}</td>
+                <td className="p-3 whitespace-nowrap">
+                  <a href={`mailto:${l.email}`} className="text-brand-600 hover:underline">
+                    {l.email}
+                  </a>
+                </td>
+                <td className="p-3 whitespace-nowrap">{l.empresa || "—"}</td>
+                <td className="p-3 max-w-xs">{l.mensaje}</td>
+                <td className="p-3 whitespace-nowrap">{l.createdAt.toLocaleDateString("es-CO")}</td>
+              </tr>
+            ))}
+            {leadsUS.length === 0 && (
+              <tr>
+                <td className="p-3 text-gray-500" colSpan={5}>Aún no hay interesados registrados.</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
