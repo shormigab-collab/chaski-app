@@ -179,8 +179,8 @@ export default async function HomePage() {
                 ¿Eres profesional independiente o agencia?
               </h2>
               <p className="text-cream/75 mb-8 max-w-xl mx-auto">
-                Crea tu perfil gratis, recibe créditos de bienvenida y empieza a contactar clientes que buscan justo
-                lo que ofreces.
+                Crea tu perfil gratis, recibe 5 créditos de bienvenida y empieza a contactar clientes que buscan
+                justo lo que ofreces.
               </p>
               <Link
                 href="/registro/proveedor"

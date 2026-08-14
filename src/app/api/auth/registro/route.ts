@@ -46,7 +46,7 @@ export async function POST(req: Request) {
             proveedor: {
               create: {
                 bio: data.bio,
-                creditos: 10, // impulso de lanzamiento para los primeros proveedores (normalmente 3)
+                creditos: 5, // impulso de lanzamiento para los primeros proveedores (normalmente 3)
                 categorias: { connect: data.categoriaIds!.map((id) => ({ id })) },
               },
             },
