@@ -93,38 +93,74 @@ export default async function HomePage() {
       <ProfesionalesDestacados profesionales={profesionales} />
 
       {/* COMO FUNCIONA */}
-      <section className="bg-white border-y border-black/5">
-        <div className="max-w-5xl mx-auto px-4 py-16 sm:py-20">
+      <section className="bg-brand-50/40 border-y border-black/5">
+        <div className="max-w-6xl mx-auto px-4 py-16 sm:py-20 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <Reveal>
-            <h2 className="text-2xl sm:text-3xl font-bold text-ink text-center mb-14">Cómo funciona</h2>
+            <div className="relative max-w-md mx-auto md:mx-0">
+              <div className="absolute -bottom-6 -right-6 w-2/3 h-2/3 bg-coral-100/60 rounded-[2rem] -z-10" />
+              <div className="absolute -top-6 -left-6 w-1/2 h-1/2 bg-gold-400/15 rounded-[2rem] -z-10" />
+              <div className="rounded-[2rem] overflow-hidden shadow-xl shadow-black/10 aspect-[4/5]">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+                  alt="Profesional trabajando en su computador"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </Reveal>
-          <div className="grid sm:grid-cols-3 gap-10 text-center">
-            {[
-              { n: 1, t: "Describe tu necesidad", d: "Cuéntanos qué buscas, gratis y en menos de 2 minutos." },
-              { n: 2, t: "Recibe propuestas", d: "Profesionales interesados te contactan directamente." },
-              { n: 3, t: "Compara y elige", d: "Revisa perfiles y decide con quién trabajar, sin compromiso." },
-            ].map((paso, i) => (
-              <Reveal key={paso.n} delay={i * 120}>
-                <div>
-                  <div className="w-12 h-12 rounded-full bg-brand-500 text-cream font-bold text-lg flex items-center justify-center mx-auto mb-4">
-                    {paso.n}
+
+          <div>
+            <Reveal>
+              <h2 className="text-2xl sm:text-3xl font-bold text-ink mb-10">Cómo funciona</h2>
+            </Reveal>
+
+            <div className="relative space-y-8">
+              <div className="absolute left-6 top-3 bottom-3 w-px bg-black/10" aria-hidden="true" />
+              {[
+                {
+                  n: 1,
+                  t: "Describe tu necesidad",
+                  d: "Cuéntanos qué buscas, gratis y en menos de 2 minutos.",
+                  color: "bg-brand-500",
+                },
+                {
+                  n: 2,
+                  t: "Recibe propuestas",
+                  d: "Profesionales interesados te contactan directamente.",
+                  color: "bg-coral-500",
+                },
+                {
+                  n: 3,
+                  t: "Compara y elige",
+                  d: "Revisa perfiles y decide con quién trabajar, sin compromiso.",
+                  color: "bg-gold-500",
+                },
+              ].map((paso, i) => (
+                <Reveal key={paso.n} delay={i * 120}>
+                  <div className="relative flex gap-5">
+                    <div
+                      className={`relative z-10 w-12 h-12 rounded-full ${paso.color} text-cream font-bold text-lg flex items-center justify-center shrink-0 ring-4 ring-brand-50`}
+                    >
+                      {paso.n}
+                    </div>
+                    <div className="pt-1.5">
+                      <h3 className="font-semibold text-ink mb-1">{paso.t}</h3>
+                      <p className="text-sm text-ink/55">{paso.d}</p>
+                    </div>
                   </div>
-                  <h3 className="font-semibold text-ink mb-2">{paso.t}</h3>
-                  <p className="text-sm text-ink/55">{paso.d}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={360}>
-            <div className="text-center mt-12">
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={400}>
               <Link
                 href="/registro/cliente"
-                className="inline-flex items-center justify-center min-h-[44px] bg-brand-500 text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                className="inline-flex items-center justify-center min-h-[44px] bg-brand-500 text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors mt-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
               >
                 Publicar un proyecto gratis
               </Link>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </section>
 

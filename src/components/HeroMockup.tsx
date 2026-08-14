@@ -4,9 +4,9 @@ import CategoryIcon from "@/components/CategoryIcon";
 // Vista previa ilustrativa del producto (no son perfiles reales) que
 // muestra cómo se ven las tarjetas de profesionales dentro de chaski.
 const EJEMPLOS = [
-  { inicial: "A", nombre: "Ana G.", categoriaSlug: "diseno-grafico", categoria: "Diseño gráfico", ciudad: "Bogotá, Colombia", anios: 6 },
-  { inicial: "L", nombre: "Luis M.", categoriaSlug: "desarrollo-web", categoria: "Desarrollo web", ciudad: "CDMX, México", anios: 4 },
-  { inicial: "P", nombre: "Paula R.", categoriaSlug: "contabilidad", categoria: "Contabilidad", ciudad: "Lima, Perú", anios: 8 },
+  { foto: "https://i.pravatar.cc/80?img=32", nombre: "Ana G.", categoriaSlug: "diseno-grafico", categoria: "Diseño gráfico", ciudad: "Bogotá, Colombia", anios: 6 },
+  { foto: "https://i.pravatar.cc/80?img=12", nombre: "Luis M.", categoriaSlug: "desarrollo-web", categoria: "Desarrollo web", ciudad: "CDMX, México", anios: 4 },
+  { foto: "https://i.pravatar.cc/80?img=47", nombre: "Paula R.", categoriaSlug: "contabilidad", categoria: "Contabilidad", ciudad: "Lima, Perú", anios: 8 },
 ];
 
 export default function HeroMockup() {
@@ -37,9 +37,11 @@ export default function HeroMockup() {
         <div className="p-4 space-y-3">
           {EJEMPLOS.map((p) => (
             <div key={p.nombre} className="flex items-center gap-3 border border-black/5 rounded-xl p-3">
-              <span className="w-10 h-10 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center font-bold shrink-0">
-                {p.inicial}
-              </span>
+              <img
+                src={p.foto}
+                alt=""
+                className="w-10 h-10 rounded-full object-cover shrink-0 ring-2 ring-white"
+              />
               <div className="min-w-0 flex-1">
                 <div className="text-sm font-semibold text-ink truncate">{p.nombre}</div>
                 <div className="flex items-center gap-1.5 text-[11px] text-brand-500 font-medium">
