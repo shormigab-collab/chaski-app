@@ -38,9 +38,10 @@ export default function HeroSearch({ categorias }: { categorias: Categoria[] }) 
   }
 
   return (
-    <div className="relative max-w-xl mx-auto">
-      <div className="flex items-center bg-white border border-black/10 rounded-full shadow-sm shadow-black/5 pl-5 pr-1.5 py-1.5 focus-within:border-brand-500 transition-colors">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="text-ink/40 shrink-0">
+    <div className="relative max-w-md mx-auto md:mx-0">
+      <p className="text-xs font-medium text-ink/40 mb-1.5 px-1">o busca directamente una especialidad</p>
+      <div className="flex items-center bg-white border border-black/10 rounded-full shadow-sm shadow-black/5 pl-4 pr-1.5 py-1 focus-within:border-brand-300 transition-colors">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="text-ink/35 shrink-0">
           <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2" />
           <path d="M20 20L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         </svg>
@@ -54,12 +55,12 @@ export default function HeroSearch({ categorias }: { categorias: Categoria[] }) 
           onFocus={() => setAbierto(true)}
           onBlur={() => setTimeout(() => setAbierto(false), 150)}
           onKeyDown={onKeyDown}
-          placeholder="¿Qué necesitas? Ej: diseño de logo, SEO, contador..."
-          className="flex-1 px-3 py-2 text-sm sm:text-base outline-none bg-transparent placeholder:text-ink/35"
+          placeholder="Ej: diseño de logo, SEO, contador..."
+          className="flex-1 px-3 py-2.5 text-sm outline-none bg-transparent placeholder:text-ink/35 min-h-[44px]"
         />
         <button
           onClick={() => resultados[0] && irACategoria(resultados[0])}
-          className="bg-brand-500 text-cream text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-brand-600 transition-colors shrink-0"
+          className="text-brand-500 text-sm font-semibold px-4 rounded-full hover:bg-brand-50 transition-colors shrink-0 min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
         >
           Buscar
         </button>
