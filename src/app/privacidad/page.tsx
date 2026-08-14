@@ -24,8 +24,8 @@ export default function PrivacidadPage() {
         </p>
         <p>
           Puedes solicitar la eliminación de tu cuenta y tus datos en cualquier momento escribiendo a{" "}
-          <a href="mailto:hola@usechaski.com" className="text-brand-500 font-medium hover:text-brand-600">
-            hola@usechaski.com
+          <a href="mailto:soporte@usechaski.com" className="text-brand-500 font-medium hover:text-brand-600">
+            soporte@usechaski.com
           </a>
           .
         </p>

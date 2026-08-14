@@ -24,8 +24,8 @@ export default function AyudaPage() {
           <h2 className="text-lg font-semibold text-ink mb-2">¿Necesitas más ayuda?</h2>
           <p className="text-ink/60">
             Escríbenos a{" "}
-            <a href="mailto:hola@usechaski.com" className="text-brand-500 font-medium hover:text-brand-600">
-              hola@usechaski.com
+            <a href="mailto:soporte@usechaski.com" className="text-brand-500 font-medium hover:text-brand-600">
+              soporte@usechaski.com
             </a>{" "}
             y te respondemos lo antes posible.
           </p>

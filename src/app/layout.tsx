@@ -124,8 +124,8 @@ export default async function RootLayout({
                   </Link>
                 </li>
                 <li>
-                  <a href="mailto:hola@usechaski.com" className="text-ink/60 hover:text-brand-500 transition-colors">
-                    hola@usechaski.com
+                  <a href="mailto:soporte@usechaski.com" className="text-ink/60 hover:text-brand-500 transition-colors">
+                    soporte@usechaski.com
                   </a>
                 </li>
               </ul>
