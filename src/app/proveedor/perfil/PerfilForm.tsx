@@ -23,6 +23,7 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
   const [seleccionadas, setSeleccionadas] = useState<string[]>(perfil.categoriaIds);
   const [fotoUrl, setFotoUrl] = useState(perfil.fotoUrl);
   const [errorFoto, setErrorFoto] = useState("");
+  const [subiendoFoto, setSubiendoFoto] = useState(false);
   const [guardado, setGuardado] = useState(false);
   const [cargando, setCargando] = useState(false);
 
@@ -30,7 +31,7 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
     setSeleccionadas((prev) => (prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]));
   }
 
-  function onFotoSeleccionada(e: React.ChangeEvent<HTMLInputElement>) {
+  async function onFotoSeleccionada(e: React.ChangeEvent<HTMLInputElement>) {
     setErrorFoto("");
     const file = e.target.files?.[0];
     if (!file) return;
@@ -44,9 +45,24 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => setFotoUrl(reader.result as string);
-    reader.readAsDataURL(file);
+    // Vista previa instantánea mientras se sube al storage.
+    const anterior = fotoUrl;
+    setFotoUrl(URL.createObjectURL(file));
+    setSubiendoFoto(true);
+
+    try {
+      const datosArchivo = new FormData();
+      datosArchivo.append("foto", file);
+      const res = await fetch("/api/proveedor/foto", { method: "POST", body: datosArchivo });
+      if (!res.ok) throw new Error("upload failed");
+      const { url } = await res.json();
+      setFotoUrl(url);
+    } catch {
+      setErrorFoto("No se pudo subir la imagen. Intenta de nuevo.");
+      setFotoUrl(anterior);
+    } finally {
+      setSubiendoFoto(false);
+    }
   }
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -80,7 +96,8 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-black/10 bg-brand-50 shrink-0 group"
+          disabled={subiendoFoto}
+          className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-black/10 bg-brand-50 shrink-0 group disabled:opacity-70"
         >
           {fotoUrl ? (
             <img src={fotoUrl} alt="Foto de perfil" className="w-full h-full object-cover" />
@@ -89,17 +106,22 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
               <Camera className="w-6 h-6" strokeWidth={1.75} />
             </span>
           )}
-          <span className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-medium">
-            Cambiar
+          <span
+            className={`absolute inset-0 bg-black/40 flex items-center justify-center text-white text-xs font-medium transition-opacity ${
+              subiendoFoto ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+            }`}
+          >
+            {subiendoFoto ? "Subiendo..." : "Cambiar"}
           </span>
         </button>
         <div>
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="text-sm font-semibold text-brand-600 hover:text-brand-700"
+            disabled={subiendoFoto}
+            className="text-sm font-semibold text-brand-600 hover:text-brand-700 disabled:opacity-60"
           >
-            {fotoUrl ? "Cambiar foto" : "Subir foto de perfil"}
+            {subiendoFoto ? "Subiendo..." : fotoUrl ? "Cambiar foto" : "Subir foto de perfil"}
           </button>
           <p className="text-xs text-ink/40 mt-0.5">JPG o PNG, máx. {TAMANO_MAXIMO_MB}MB</p>
           {errorFoto && <p className="text-xs text-coral-600 mt-0.5">{errorFoto}</p>}
@@ -136,8 +158,11 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
       </div>
 
       {guardado && <p className="text-brand-600 text-sm">Perfil actualizado.</p>}
-      <button disabled={cargando} className="bg-brand-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50">
-        {cargando ? "Guardando..." : "Guardar cambios"}
+      <button
+        disabled={cargando || subiendoFoto}
+        className="bg-brand-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50"
+      >
+        {subiendoFoto ? "Espera a que termine de subir la foto..." : cargando ? "Guardando..." : "Guardar cambios"}
       </button>
     </form>
   );
