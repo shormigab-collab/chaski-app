@@ -6,16 +6,22 @@ const BENEFICIOS = [
     Icono: Clock,
     titulo: "Ahorra tiempo",
     texto: "Recibe propuestas sin buscar profesionales uno por uno.",
+    bg: "bg-brand-50",
+    text: "text-brand-500",
   },
   {
     Icono: ListChecks,
     titulo: "Compara mejor",
     texto: "Revisa experiencia, ubicación y especialidad antes de elegir.",
+    bg: "bg-coral-50",
+    text: "text-coral-500",
   },
   {
     Icono: Handshake,
     titulo: "Contrata directamente",
     texto: "Contacta al profesional sin comisión sobre lo que le pagues.",
+    bg: "bg-gold-50",
+    text: "text-gold-600",
   },
 ];
 
@@ -26,8 +32,8 @@ export default function Beneficios() {
         <div className="grid sm:grid-cols-3 gap-5">
           {BENEFICIOS.map((b, i) => (
             <Reveal key={b.titulo} delay={i * 100}>
-              <div className="h-full border border-black/5 rounded-2xl p-6">
-                <div className="w-11 h-11 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-4">
+              <div className="h-full border border-black/5 rounded-2xl p-6 hover:shadow-md hover:shadow-black/5 hover:-translate-y-0.5 transition-all">
+                <div className={`w-11 h-11 rounded-xl ${b.bg} ${b.text} flex items-center justify-center mb-4`}>
                   <b.Icono className="w-5 h-5" strokeWidth={1.75} />
                 </div>
                 <h3 className="font-semibold text-ink mb-1.5">{b.titulo}</h3>

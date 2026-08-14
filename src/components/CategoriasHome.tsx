@@ -7,6 +7,14 @@ import CategoryIcon from "@/components/CategoryIcon";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
+// Ciclo de acentos de color para que la grilla de categorías no se vea
+// monocromática. Se aplica por posición, no por categoría específica.
+const ACENTOS = [
+  { bg: "bg-brand-50", text: "text-brand-500", hover: "group-hover:bg-brand-500" },
+  { bg: "bg-coral-50", text: "text-coral-500", hover: "group-hover:bg-coral-500" },
+  { bg: "bg-gold-50", text: "text-gold-600", hover: "group-hover:bg-gold-500" },
+];
+
 // Categorias curadas para la vista inicial (etiquetas mas cortas y
 // agrupadas para la portada). El enlace sigue apuntando a la categoria
 // real de la base de datos, asi que el flujo de registro no cambia.
@@ -40,38 +48,44 @@ export default function CategoriasHome({ categorias }: { categorias: Categoria[]
       </Reveal>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        {curadas.map((cat, i) => (
-          <Reveal key={cat.id} delay={i * 50}>
-            <Link
-              href={`/registro/cliente?categoria=${cat.slug}`}
-              className="group border border-black/5 bg-white rounded-2xl p-5 hover:border-brand-500 hover:shadow-md hover:shadow-brand-500/5 hover:-translate-y-0.5 transition-all block min-h-[44px]"
-            >
-              <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-3 group-hover:bg-brand-500 group-hover:text-cream transition-colors">
-                <CategoryIcon slug={cat.slug} className="w-5 h-5" />
-              </div>
-              <div className="text-sm font-semibold text-ink/80 group-hover:text-brand-500 transition-colors leading-snug">
-                {cat.etiqueta}
-              </div>
-            </Link>
-          </Reveal>
-        ))}
-
-        {verTodas &&
-          otras.map((cat, i) => (
-            <Reveal key={cat.id} delay={(i % 8) * 40}>
+        {curadas.map((cat, i) => {
+          const ac = ACENTOS[i % ACENTOS.length];
+          return (
+            <Reveal key={cat.id} delay={i * 50}>
               <Link
                 href={`/registro/cliente?categoria=${cat.slug}`}
                 className="group border border-black/5 bg-white rounded-2xl p-5 hover:border-brand-500 hover:shadow-md hover:shadow-brand-500/5 hover:-translate-y-0.5 transition-all block min-h-[44px]"
               >
-                <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center mb-3 group-hover:bg-brand-500 group-hover:text-cream transition-colors">
+                <div className={`w-10 h-10 rounded-xl ${ac.bg} ${ac.text} flex items-center justify-center mb-3 ${ac.hover} group-hover:text-cream transition-colors`}>
                   <CategoryIcon slug={cat.slug} className="w-5 h-5" />
                 </div>
                 <div className="text-sm font-semibold text-ink/80 group-hover:text-brand-500 transition-colors leading-snug">
-                  {cat.nombre}
+                  {cat.etiqueta}
                 </div>
               </Link>
             </Reveal>
-          ))}
+          );
+        })}
+
+        {verTodas &&
+          otras.map((cat, i) => {
+            const ac = ACENTOS[i % ACENTOS.length];
+            return (
+              <Reveal key={cat.id} delay={(i % 8) * 40}>
+                <Link
+                  href={`/registro/cliente?categoria=${cat.slug}`}
+                  className="group border border-black/5 bg-white rounded-2xl p-5 hover:border-brand-500 hover:shadow-md hover:shadow-brand-500/5 hover:-translate-y-0.5 transition-all block min-h-[44px]"
+                >
+                  <div className={`w-10 h-10 rounded-xl ${ac.bg} ${ac.text} flex items-center justify-center mb-3 ${ac.hover} group-hover:text-cream transition-colors`}>
+                    <CategoryIcon slug={cat.slug} className="w-5 h-5" />
+                  </div>
+                  <div className="text-sm font-semibold text-ink/80 group-hover:text-brand-500 transition-colors leading-snug">
+                    {cat.nombre}
+                  </div>
+                </Link>
+              </Reveal>
+            );
+          })}
       </div>
 
       {otras.length > 0 && (

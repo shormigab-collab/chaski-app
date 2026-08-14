@@ -32,18 +32,25 @@ export default async function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-100/40 blur-3xl" />
-        <div className="absolute top-40 -left-24 w-72 h-72 rounded-full bg-coral-100/30 blur-3xl" />
+      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50/60 via-cream to-cream">
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-100/50 blur-3xl" />
+        <div className="absolute top-40 -left-24 w-72 h-72 rounded-full bg-coral-100/40 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full bg-gold-100/40 blur-3xl" />
 
         <div className="relative max-w-6xl mx-auto px-4 pt-14 sm:pt-16 pb-16 sm:pb-20 grid md:grid-cols-2 gap-12 md:gap-14 items-center">
           <div className="text-center md:text-left">
+            <span className="inline-block text-xs font-semibold text-coral-600 bg-coral-50 px-3 py-1 rounded-full mb-4">
+              Marketplace de profesionales en LatAm
+            </span>
             <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl sm:leading-[1.1] font-extrabold text-ink mb-5 tracking-tight">
-              Publica lo que necesitas. Recibe propuestas de expertos verificados en LatAm.
+              No busques profesionales.{" "}
+              <span className="bg-gradient-to-r from-brand-500 to-coral-500 bg-clip-text text-transparent">
+                Deja que te encuentren a ti.
+              </span>
             </h1>
             <p className="text-base sm:text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0">
-              Compara perfiles, experiencia y propuestas sin buscar uno por uno. Publicar es gratis y toma menos de
-              2 minutos.
+              Publica tu proyecto gratis y recibe propuestas directas de expertos en diseño, desarrollo, marketing,
+              contabilidad y más. Sin cotizar uno por uno.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
@@ -126,19 +133,27 @@ export default async function HomePage() {
       <Confianza />
 
       {/* CTA FINAL */}
-      <section className="max-w-5xl mx-auto px-4 py-16 sm:py-20 text-center">
+      <section className="max-w-6xl mx-auto px-4 pb-16 sm:pb-20">
         <Reveal>
-          <h2 className="text-2xl sm:text-3xl font-bold text-ink mb-4">¿Eres profesional independiente o agencia?</h2>
-          <p className="text-ink/60 mb-8 max-w-xl mx-auto">
-            Crea tu perfil gratis, recibe créditos de bienvenida y empieza a contactar clientes que buscan justo lo
-            que ofreces.
-          </p>
-          <Link
-            href="/registro/proveedor"
-            className="inline-flex items-center justify-center min-h-[44px] bg-ink text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
-          >
-            Crear mi perfil profesional
-          </Link>
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-500 via-brand-500 to-coral-600 px-6 py-16 sm:py-20 text-center">
+            <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 blur-2xl" />
+            <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-gold-400/20 blur-2xl" />
+            <div className="relative">
+              <h2 className="text-2xl sm:text-3xl font-bold text-cream mb-4">
+                ¿Eres profesional independiente o agencia?
+              </h2>
+              <p className="text-cream/75 mb-8 max-w-xl mx-auto">
+                Crea tu perfil gratis, recibe créditos de bienvenida y empieza a contactar clientes que buscan justo
+                lo que ofreces.
+              </p>
+              <Link
+                href="/registro/proveedor"
+                className="inline-flex items-center justify-center min-h-[44px] bg-cream text-brand-600 px-7 py-3.5 rounded-full font-semibold hover:bg-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
+              >
+                Crear mi perfil profesional
+              </Link>
+            </div>
+          </div>
         </Reveal>
       </section>
     </div>

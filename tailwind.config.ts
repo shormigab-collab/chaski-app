@@ -29,8 +29,11 @@ const config: Config = {
           700: "#C43D20",
         },
         gold: {
+          50: "#FEF6E7",
+          100: "#FCE9C4",
           400: "#F7C05C",
           500: "#F5A524",
+          600: "#D9860B",
         },
         cream: "#FAF8F5",
         ink: "#211E3D",

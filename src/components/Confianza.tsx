@@ -11,21 +11,29 @@ const PUNTOS = [
     Icono: UserCheck,
     titulo: "Identidad",
     texto: "Cada profesional se registra con su nombre real y un número de contacto directo.",
+    bg: "bg-brand-50",
+    text: "text-brand-500",
   },
   {
     Icono: Briefcase,
     titulo: "Experiencia",
     texto: "Indica sus años de experiencia y las categorías en las que trabaja.",
+    bg: "bg-coral-50",
+    text: "text-coral-500",
   },
   {
     Icono: FileText,
     titulo: "Perfil completo",
     texto: "Cuenta con una bio, ciudad y, si quiere, una foto de perfil.",
+    bg: "bg-gold-50",
+    text: "text-gold-600",
   },
   {
     Icono: MessageSquare,
     titulo: "Contacto directo",
     texto: "Hablas directo con el profesional, sin intermediarios ni perfiles anónimos.",
+    bg: "bg-brand-50",
+    text: "text-brand-500",
   },
 ];
 
@@ -44,8 +52,8 @@ export default function Confianza() {
       <div className="grid sm:grid-cols-2 gap-5">
         {PUNTOS.map((p, i) => (
           <Reveal key={p.titulo} delay={i * 80}>
-            <div className="flex items-start gap-4 border border-black/5 bg-white rounded-2xl p-5">
-              <span className="w-10 h-10 rounded-xl bg-brand-50 text-brand-500 flex items-center justify-center shrink-0">
+            <div className="flex items-start gap-4 border border-black/5 bg-white rounded-2xl p-5 hover:shadow-md hover:shadow-black/5 transition-shadow">
+              <span className={`w-10 h-10 rounded-xl ${p.bg} ${p.text} flex items-center justify-center shrink-0`}>
                 <p.Icono className="w-5 h-5" strokeWidth={1.75} />
               </span>
               <div>
