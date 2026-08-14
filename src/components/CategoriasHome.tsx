@@ -27,6 +27,18 @@ const CURADAS: { slug: string; etiqueta: string }[] = [
   { slug: "consultoria-empresarial", etiqueta: "Consultoría empresarial" },
 ];
 
+// Fotos solo para las 6 categorias destacadas (no para el listado
+// expandido "ver todas"), asi la grilla principal se ve mas atractiva
+// sin sobrecargar la vista con fotos en las 24 categorias.
+const FOTOS: Record<string, string> = {
+  "marketing-redes": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=70",
+  "diseno-grafico": "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=400&q=70",
+  "desarrollo-web": "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?auto=format&fit=crop&w=400&q=70",
+  contabilidad: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=400&q=70",
+  "soporte-tecnico": "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=70",
+  "consultoria-empresarial": "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=70",
+};
+
 export default function CategoriasHome({ categorias }: { categorias: Categoria[] }) {
   const [verTodas, setVerTodas] = useState(false);
 
@@ -50,16 +62,28 @@ export default function CategoriasHome({ categorias }: { categorias: Categoria[]
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {curadas.map((cat, i) => {
           const ac = ACENTOS[i % ACENTOS.length];
+          const foto = FOTOS[cat.slug];
           return (
             <Reveal key={cat.id} delay={i * 50}>
               <Link
                 href={`/registro/cliente?categoria=${cat.slug}`}
-                className="group border border-black/5 bg-white rounded-2xl p-5 hover:border-brand-500 hover:shadow-md hover:shadow-brand-500/5 hover:-translate-y-0.5 transition-all block min-h-[44px]"
+                className="group border border-black/5 bg-white rounded-2xl overflow-hidden hover:border-brand-500 hover:shadow-md hover:shadow-brand-500/5 hover:-translate-y-0.5 transition-all block min-h-[44px]"
               >
-                <div className={`w-10 h-10 rounded-xl ${ac.bg} ${ac.text} flex items-center justify-center mb-3 ${ac.hover} group-hover:text-cream transition-colors`}>
-                  <CategoryIcon slug={cat.slug} className="w-5 h-5" />
+                <div className={`relative h-24 sm:h-28 ${ac.bg}`}>
+                  {foto && (
+                    <img
+                      src={foto}
+                      alt=""
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-black/0" />
+                  <span className={`absolute bottom-2.5 left-2.5 w-8 h-8 rounded-lg bg-white/95 ${ac.text} flex items-center justify-center`}>
+                    <CategoryIcon slug={cat.slug} className="w-4 h-4" />
+                  </span>
                 </div>
-                <div className="text-sm font-semibold text-ink/80 group-hover:text-brand-500 transition-colors leading-snug">
+                <div className="text-sm font-semibold text-ink/80 group-hover:text-brand-500 transition-colors leading-snug p-4">
                   {cat.etiqueta}
                 </div>
               </Link>
