@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Sparkles } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 
 type Categoria = { id: string; nombre: string; icono: string; slug: string };
@@ -31,6 +32,10 @@ export default function NuevaSolicitudForm({
   const [presupuesto, setPresupuesto] = useState("");
   const [telefonoContacto, setTelefonoContacto] = useState(usuario.telefono ?? "");
 
+  const [textoIA, setTextoIA] = useState("");
+  const [generandoIA, setGenerandoIA] = useState(false);
+  const [errorIA, setErrorIA] = useState("");
+
   function siguiente() {
     setError("");
     if (paso === 1 && !categoriaId) {
@@ -42,6 +47,32 @@ export default function NuevaSolicitudForm({
       return;
     }
     setPaso((p) => Math.min(p + 1, total));
+  }
+
+  async function generarConIA() {
+    if (textoIA.trim().length < 10) {
+      setErrorIA("Cuéntanos un poco más (mínimo 10 caracteres)");
+      return;
+    }
+    setErrorIA("");
+    setGenerandoIA(true);
+    const res = await fetch("/api/solicitudes/asistente", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ texto: textoIA }),
+    });
+    const data = await res.json();
+    setGenerandoIA(false);
+    if (res.ok) {
+      const cat = categorias.find((c) => c.slug === data.categoriaSlug);
+      if (cat) setCategoriaId(cat.id);
+      setTitulo(data.titulo);
+      setDescripcion(data.descripcion);
+      setError("");
+      setPaso(2);
+    } else {
+      setErrorIA(data.error || "No pudimos generar la solicitud, intenta llenarlo manualmente");
+    }
   }
 
   function anterior() {
@@ -102,7 +133,33 @@ export default function NuevaSolicitudForm({
       {paso === 1 && (
         <div>
           <h3 className="font-bold text-lg text-ink mb-1">¿Qué tipo de servicio necesitas?</h3>
-          <p className="text-sm text-ink/50 mb-5">Elige la categoría que mejor describa tu proyecto.</p>
+          <p className="text-sm text-ink/50 mb-4">Elige la categoría que mejor describa tu proyecto.</p>
+
+          <div className="bg-brand-50/60 border border-brand-100 rounded-xl p-4 mb-5">
+            <p className="text-xs font-semibold text-brand-600 mb-2 inline-flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              O cuéntanos qué necesitas y lo armamos por ti
+            </p>
+            <textarea
+              value={textoIA}
+              onChange={(e) => setTextoIA(e.target.value)}
+              placeholder="Ej: necesito que me ayuden a diseñar el logo de mi negocio de arepas y armar mis redes sociales"
+              rows={2}
+              className="w-full text-sm border border-black/10 rounded-lg px-3 py-2.5 outline-none focus:border-brand-500 transition-colors bg-white"
+            />
+            {errorIA && <p className="text-coral-600 text-xs mt-1.5">{errorIA}</p>}
+            <button
+              type="button"
+              onClick={generarConIA}
+              disabled={generandoIA}
+              className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold bg-brand-500 text-cream px-4 py-2 rounded-full hover:bg-brand-600 disabled:opacity-50 transition-colors"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              {generandoIA ? "Redactando..." : "Completar con IA"}
+            </button>
+          </div>
+
+          <p className="text-xs text-ink/40 mb-3">O elige manualmente:</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-80 overflow-y-auto pr-1">
             {categorias.map((c) => (
               <button
