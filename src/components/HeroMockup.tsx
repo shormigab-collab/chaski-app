@@ -12,8 +12,18 @@ const EJEMPLOS = [
 export default function HeroMockup() {
   return (
     <div className="relative w-full max-w-md mx-auto md:mx-0">
-      <div className="absolute -top-6 -right-6 w-full h-full bg-coral-100/70 rounded-[2rem] -z-10" />
-      <div className="absolute -bottom-6 -left-6 w-2/3 h-2/3 bg-gold-400/15 rounded-[2rem] -z-10" />
+      <div className="absolute -top-6 -right-6 w-full h-full bg-coral-100/70 rounded-[2rem] -z-20" />
+      <div className="absolute -bottom-6 -left-6 w-2/3 h-2/3 bg-gold-400/15 rounded-[2rem] -z-20" />
+
+      {/* foto decorativa que asoma detrás del mockup — solo ambiente visual,
+          no representa a una persona real de la plataforma */}
+      <div className="absolute -top-9 -left-9 w-32 h-40 sm:w-40 sm:h-48 rounded-2xl overflow-hidden shadow-xl shadow-black/20 ring-4 ring-cream -rotate-6 -z-10">
+        <img
+          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=400&q=80"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
 
       <div className="rounded-[1.75rem] overflow-hidden shadow-2xl shadow-black/15 bg-white border border-black/5">
         {/* barra tipo navegador, deja claro que es una vista previa del producto */}
