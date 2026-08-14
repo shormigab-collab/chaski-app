@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Briefcase } from "lucide-react";
+import { MapPin, Briefcase, Star } from "lucide-react";
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
 
@@ -32,7 +32,16 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 export default async function PerfilProfesionalPage({ params }: { params: { id: string } }) {
   const proveedor = await prisma.proveedor.findUnique({
     where: { id: params.id },
-    include: { user: true, categorias: true },
+    include: {
+      user: true,
+      categorias: true,
+      resenasRecibidas: {
+        where: { comentario: { not: null } },
+        include: { autor: true },
+        orderBy: { createdAt: "desc" },
+        take: 10,
+      },
+    },
   });
 
   if (!proveedor) notFound();
@@ -56,7 +65,18 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
             </span>
           )}
           <div>
-            <h1 className="text-xl font-bold text-ink">{proveedor.user.nombre}</h1>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h1 className="text-xl font-bold text-ink">{proveedor.user.nombre}</h1>
+              {proveedor.totalResenas > 0 && (
+                <span className="inline-flex items-center gap-1 text-sm font-medium text-ink/60">
+                  <Star className="w-4 h-4 fill-gold-500 text-gold-500" />
+                  {proveedor.calificacionProm.toFixed(1)}
+                  <span className="text-ink/35">
+                    ({proveedor.totalResenas} {proveedor.totalResenas === 1 ? "reseña" : "reseñas"})
+                  </span>
+                </span>
+              )}
+            </div>
             {ubicacion && (
               <div className="flex items-center gap-1.5 text-sm text-ink/50 mt-0.5">
                 <MapPin className="w-4 h-4 shrink-0" strokeWidth={1.75} />
@@ -88,6 +108,30 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
         )}
 
         {proveedor.bio && <p className="text-ink/70 leading-relaxed">{proveedor.bio}</p>}
+
+        {proveedor.resenasRecibidas.length > 0 && (
+          <div className="mt-8 border-t border-black/5 pt-6">
+            <h2 className="text-sm font-semibold text-ink mb-3">Lo que dicen sus clientes</h2>
+            <div className="space-y-4">
+              {proveedor.resenasRecibidas.map((r) => (
+                <div key={r.id} className="bg-cream rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-0.5">
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <Star
+                          key={n}
+                          className={`w-3.5 h-3.5 ${n <= r.puntuacion ? "fill-gold-500 text-gold-500" : "text-black/15"}`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-xs font-medium text-ink/50">{r.autor.nombre.split(" ")[0]}</span>
+                  </div>
+                  <p className="text-sm text-ink/70">{r.comentario}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mt-8 border-t border-black/5 pt-6">
           <p className="text-sm text-ink/55 mb-3">

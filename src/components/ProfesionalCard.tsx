@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Briefcase } from "lucide-react";
+import { MapPin, Briefcase, Star } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 
 export type ProfesionalCardData = {
@@ -11,6 +11,8 @@ export type ProfesionalCardData = {
   aniosExperiencia: number | null;
   categorias: { id: string; nombre: string; slug: string }[];
   memberSince: Date;
+  calificacionProm?: number;
+  totalResenas?: number;
 };
 
 const MESES = [
@@ -61,7 +63,16 @@ export default function ProfesionalCard({ p }: { p: ProfesionalCardData }) {
 
       <div className="flex flex-col flex-1 p-5 pt-9">
         <div className="mb-3">
-          <div className="font-semibold text-ink truncate">{p.nombre}</div>
+          <div className="flex items-center gap-1.5">
+            <div className="font-semibold text-ink truncate">{p.nombre}</div>
+            {!!p.totalResenas && (
+              <span className="inline-flex items-center gap-0.5 text-xs font-medium text-ink/60 shrink-0">
+                <Star className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />
+                {p.calificacionProm?.toFixed(1)}
+                <span className="text-ink/35">({p.totalResenas})</span>
+              </span>
+            )}
+          </div>
           {categoriaPrincipal && (
             <div className="inline-flex items-center gap-1.5 text-xs text-brand-600 bg-brand-50 font-medium px-2 py-0.5 rounded-full mt-1">
               <CategoryIcon slug={categoriaPrincipal.slug} className="w-3.5 h-3.5 shrink-0" />

@@ -27,6 +27,8 @@ export default async function HomePage() {
     aniosExperiencia: p.aniosExperiencia,
     categorias: p.categorias.map((c) => ({ id: c.id, nombre: c.nombre, slug: c.slug })),
     memberSince: p.createdAt,
+    calificacionProm: p.calificacionProm,
+    totalResenas: p.totalResenas,
   }));
 
   return (

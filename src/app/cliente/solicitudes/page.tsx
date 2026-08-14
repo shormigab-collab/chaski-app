@@ -3,6 +3,7 @@ import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import NuevaSolicitudForm from "./NuevaSolicitudForm";
 import CategoryIcon from "@/components/CategoryIcon";
+import CalificarProveedor from "./CalificarProveedor";
 
 export default async function MisSolicitudes({
   searchParams,
@@ -12,7 +13,7 @@ export default async function MisSolicitudes({
   const usuario = await obtenerUsuarioActual();
   if (!usuario || usuario.role !== "CLIENTE") redirect("/login");
 
-  const [categorias, solicitudes] = await Promise.all([
+  const [categorias, solicitudes, resenas] = await Promise.all([
     prisma.categoria.findMany({ orderBy: { nombre: "asc" } }),
     prisma.solicitud.findMany({
       where: { clienteId: usuario.id },
@@ -22,7 +23,12 @@ export default async function MisSolicitudes({
       },
       orderBy: { createdAt: "desc" },
     }),
+    prisma.resena.findMany({ where: { autorId: usuario.id } }),
   ]);
+
+  const resenasPorProveedor = new Map(
+    resenas.map((r) => [r.proveedorId, { puntuacion: r.puntuacion, comentario: r.comentario }])
+  );
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
@@ -59,18 +65,27 @@ export default async function MisSolicitudes({
               {s.desbloqueos.length === 1 ? "" : "n"} contactado
             </p>
             {s.desbloqueos.length > 0 && (
-              <div className="mt-2 flex flex-wrap gap-2">
+              <div className="mt-2 flex flex-wrap gap-2 items-start">
                 {s.desbloqueos.map((d) => (
-                  <span key={d.id} className="flex items-center gap-1.5 text-xs bg-coral-50 text-coral-600 pl-1 pr-2.5 py-1 rounded-full font-medium">
-                    {d.proveedor.fotoUrl ? (
-                      <img src={d.proveedor.fotoUrl} alt="" className="w-5 h-5 rounded-full object-cover" />
-                    ) : (
-                      <span className="w-5 h-5 rounded-full bg-coral-100 flex items-center justify-center text-[10px]">
-                        {d.proveedor.user.nombre.charAt(0).toUpperCase()}
-                      </span>
-                    )}
-                    {d.proveedor.user.nombre}
-                  </span>
+                  <div key={d.id} className="flex flex-col items-start">
+                    <span className="flex items-center gap-1.5 text-xs bg-coral-50 text-coral-600 pl-1 pr-2.5 py-1 rounded-full font-medium">
+                      {d.proveedor.fotoUrl ? (
+                        <img src={d.proveedor.fotoUrl} alt="" className="w-5 h-5 rounded-full object-cover" />
+                      ) : (
+                        <span className="w-5 h-5 rounded-full bg-coral-100 flex items-center justify-center text-[10px]">
+                          {d.proveedor.user.nombre.charAt(0).toUpperCase()}
+                        </span>
+                      )}
+                      {d.proveedor.user.nombre}
+                    </span>
+                    <div className="mt-1 pl-1">
+                      <CalificarProveedor
+                        proveedorId={d.proveedorId}
+                        proveedorNombre={d.proveedor.user.nombre}
+                        resenaInicial={resenasPorProveedor.get(d.proveedorId) ?? null}
+                      />
+                    </div>
+                  </div>
                 ))}
               </div>
             )}
