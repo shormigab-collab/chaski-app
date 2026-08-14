@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     description: DESCRIPCION,
   },
   verification: {
-    google: "hMonxJGmFKclRxbswQFByeyCYsvi9zzXprn8tq2DFgY",
+    google: "O9_CI1H68RijmHeN7_N_CfsmcS5Q5hlViv2RZKixf1s",
   },
 };
 
