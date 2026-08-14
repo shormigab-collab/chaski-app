@@ -1,8 +1,33 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MapPin, Briefcase } from "lucide-react";
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const proveedor = await prisma.proveedor.findUnique({
+    where: { id: params.id },
+    include: { user: true, categorias: true },
+  });
+
+  if (!proveedor) return { title: "Profesional no encontrado" };
+
+  const categoriaPrincipal = proveedor.categorias[0]?.nombre;
+  const ubicacion = [proveedor.user.ciudad, proveedor.user.pais].filter(Boolean).join(", ");
+  const titulo = categoriaPrincipal
+    ? `${proveedor.user.nombre} — ${categoriaPrincipal}${ubicacion ? ` en ${ubicacion}` : ""}`
+    : proveedor.user.nombre;
+  const descripcion =
+    proveedor.bio?.slice(0, 155) ||
+    `Contacta a ${proveedor.user.nombre} en chaski, el marketplace de profesionales independientes en LatAm.`;
+
+  return {
+    title: titulo,
+    description: descripcion,
+    openGraph: { title: titulo, description: descripcion },
+  };
+}
 
 export default async function PerfilProfesionalPage({ params }: { params: { id: string } }) {
   const proveedor = await prisma.proveedor.findUnique({

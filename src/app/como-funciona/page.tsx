@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Search, Send, CheckCircle2, UserPlus, ListFilter, Coins, ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
+
+export const metadata: Metadata = {
+  title: "Cómo funciona",
+  description:
+    "Publica tu proyecto gratis y recibe propuestas de profesionales, o crea tu perfil y encuentra clientes. Así funciona chaski, el marketplace de profesionales en LatAm.",
+};
 
 const PASOS_CLIENTE = [
   { Icono: Search, t: "Publica gratis", d: "Describe qué necesitas y en qué ciudad estás. Toma menos de 2 minutos." },
