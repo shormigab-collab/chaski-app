@@ -123,7 +123,8 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
   const tituloSeccion = "text-xs font-semibold uppercase tracking-wide text-brand-600 mt-6 mb-1 first:mt-0";
 
   return (
-    <header className="sticky top-0 z-20 backdrop-blur-md bg-cream/80 border-b border-black/5">
+    <>
+      <header className="sticky top-0 z-20 backdrop-blur-md bg-cream/80 border-b border-black/5">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3.5">
         <Link href={esIngles ? "/en" : "/"} className="shrink-0" onClick={cerrar}>
           <Logo size={34} />
@@ -149,6 +150,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
           </button>
         </div>
       </div>
+      </header>
 
       {/* Fondo oscuro del panel movil */}
       <div
@@ -244,6 +246,6 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
           )}
         </div>
       </div>
-    </header>
+    </>
   );
 }
