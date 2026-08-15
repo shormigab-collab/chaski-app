@@ -2,7 +2,37 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Linkedin, Facebook, Instagram, X } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
+
+// Redes sociales de chaski. LinkedIn y Facebook ya existen; X e Instagram
+// aun no se han creado, asi que apuntan al handle esperado ("usechaski")
+// y quedan listos para cuando el usuario cree esas cuentas.
+const REDES = [
+  { Icono: Linkedin, href: "https://www.linkedin.com/company/usechaski", label: "LinkedIn" },
+  { Icono: Facebook, href: "https://www.facebook.com/profile.php?id=61593459986605", label: "Facebook" },
+  { Icono: X, href: "https://x.com/usechaski", label: "X" },
+  { Icono: Instagram, href: "https://instagram.com/usechaski", label: "Instagram" },
+];
+
+function RedesSociales() {
+  return (
+    <div className="flex items-center gap-2.5">
+      {REDES.map((r) => (
+        <a
+          key={r.label}
+          href={r.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={r.label}
+          className="w-8 h-8 rounded-full border border-black/10 text-ink/45 flex items-center justify-center hover:text-brand-500 hover:border-brand-500 transition-colors"
+        >
+          <r.Icono className="w-4 h-4" strokeWidth={1.75} />
+        </a>
+      ))}
+    </div>
+  );
+}
 
 export default function Footer() {
   const pathname = usePathname();
@@ -56,8 +86,9 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-black/5 py-6">
-          <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="text-xs text-ink/40">© {new Date().getFullYear()} chaski. All rights reserved.</span>
+            <RedesSociales />
             <span className="text-xs text-ink/40">Connecting talent across the Americas</span>
           </div>
         </div>
@@ -148,10 +179,11 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-black/5 py-6">
-        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="text-xs text-ink/40">
             © {new Date().getFullYear()} chaski. Todos los derechos reservados.
           </span>
+          <RedesSociales />
           <span className="text-xs text-ink/40">Hecho para conectar talento en Latinoamérica</span>
         </div>
       </div>
