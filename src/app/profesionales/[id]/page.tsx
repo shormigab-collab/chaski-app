@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { MapPin, Briefcase, Star, DollarSign, Linkedin } from "lucide-react";
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
+import { parsePortafolio, ACENTOS_PORTAFOLIO } from "@/lib/portafolio";
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const proveedor = await prisma.proveedor.findUnique({
@@ -48,6 +49,7 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
 
   const inicial = proveedor.user.nombre.trim().charAt(0).toUpperCase() || "?";
   const ubicacion = [proveedor.user.ciudad, proveedor.user.pais].filter(Boolean).join(", ");
+  const proyectosPortafolio = parsePortafolio(proveedor.portafolio);
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-12 sm:py-16">
@@ -129,6 +131,42 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
         )}
 
         {proveedor.bio && <p className="text-ink/70 leading-relaxed">{proveedor.bio}</p>}
+
+        {proyectosPortafolio.length > 0 && (
+          <div className="mt-8 border-t border-black/5 pt-6">
+            <h2 className="text-sm font-semibold text-ink mb-4">Portafolio</h2>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {proyectosPortafolio.map((p, i) => {
+                const acento = ACENTOS_PORTAFOLIO[i % ACENTOS_PORTAFOLIO.length];
+                return (
+                  <div
+                    key={i}
+                    className="group relative rounded-2xl overflow-hidden border border-black/5 bg-white hover:shadow-lg hover:shadow-black/5 hover:-translate-y-0.5 transition-all"
+                  >
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <img
+                        src={p.imagenUrl}
+                        alt={p.titulo}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/0 to-black/0" />
+                      <span
+                        className={`absolute top-3 left-3 w-7 h-7 rounded-full bg-gradient-to-br ${acento.grad} flex items-center justify-center text-white text-xs font-bold shadow-sm`}
+                      >
+                        {i + 1}
+                      </span>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold text-ink text-sm mb-1">{p.titulo}</h3>
+                      {p.descripcion && <p className="text-xs text-ink/55 leading-relaxed">{p.descripcion}</p>}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {proveedor.resenasRecibidas.length > 0 && (
           <div className="mt-8 border-t border-black/5 pt-6">

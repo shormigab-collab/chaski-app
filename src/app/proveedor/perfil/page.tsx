@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { parsePortafolio } from "@/lib/portafolio";
 import PerfilForm from "./PerfilForm";
 
 export default async function PerfilProveedor() {
@@ -30,6 +31,7 @@ export default async function PerfilProveedor() {
           aniosExperiencia: proveedor?.aniosExperiencia ?? null,
           tarifaAproximada: proveedor?.tarifaAproximada ?? "",
           linkedinUrl: proveedor?.linkedinUrl ?? "",
+          portafolio: parsePortafolio(proveedor?.portafolio),
         }}
       />
     </div>

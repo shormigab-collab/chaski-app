@@ -2,6 +2,13 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { obtenerUsuarioActual } from "@/lib/auth";
+import { MAX_PROYECTOS_PORTAFOLIO } from "@/lib/portafolio";
+
+const proyectoEsquema = z.object({
+  titulo: z.string().trim().min(2).max(80),
+  descripcion: z.string().trim().max(200).optional(),
+  imagenUrl: z.string().trim().min(1),
+});
 
 const esquema = z.object({
   nombre: z.string().min(2),
@@ -13,6 +20,7 @@ const esquema = z.object({
   aniosExperiencia: z.coerce.number().int().min(0).max(60).optional(),
   tarifaAproximada: z.string().trim().max(60).optional(),
   linkedinUrl: z.string().trim().max(200).optional(),
+  portafolio: z.array(proyectoEsquema).max(MAX_PROYECTOS_PORTAFOLIO).optional(),
 });
 
 export async function PUT(req: Request) {
@@ -41,6 +49,7 @@ export async function PUT(req: Request) {
       aniosExperiencia: data.aniosExperiencia,
       tarifaAproximada: data.tarifaAproximada,
       linkedinUrl: data.linkedinUrl,
+      portafolio: data.portafolio ? JSON.stringify(data.portafolio) : undefined,
       categorias: { set: data.categoriaIds.map((id) => ({ id })) },
     },
   });
