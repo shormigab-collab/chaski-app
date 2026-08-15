@@ -34,6 +34,9 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
       <Link href="/como-funciona" className="text-ink/60 hover:text-ink transition-colors">
         Cómo funciona
       </Link>
+      <Link href="/blog" className="text-ink/60 hover:text-ink transition-colors">
+        Blog
+      </Link>
       <Link href="/login" className="text-ink/60 hover:text-ink transition-colors">
         Iniciar sesión
       </Link>

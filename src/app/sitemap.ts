@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db";
+import { POSTS } from "@/lib/blog";
 
 const BASE_URL = "https://www.usechaski.com";
 
@@ -11,6 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: BASE_URL, changeFrequency: "weekly", priority: 1 },
     { url: `${BASE_URL}/como-funciona`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE_URL}/profesionales`, changeFrequency: "daily", priority: 0.9 },
+    { url: `${BASE_URL}/blog`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${BASE_URL}/registro/cliente`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/registro/proveedor`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/en`, changeFrequency: "monthly", priority: 0.7 },
@@ -18,6 +20,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/terminos`, changeFrequency: "yearly", priority: 0.1 },
     { url: `${BASE_URL}/privacidad`, changeFrequency: "yearly", priority: 0.1 },
   ];
+
+  const rutasBlog: MetadataRoute.Sitemap = POSTS.map((p) => ({
+    url: `${BASE_URL}/blog/${p.slug}`,
+    lastModified: new Date(p.fecha),
+    changeFrequency: "monthly",
+    priority: 0.5,
+  }));
 
   let rutasProveedores: MetadataRoute.Sitemap = [];
   try {
@@ -33,5 +42,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // devuelven igual las rutas fijas en vez de romper el build.
   }
 
-  return [...rutasEstaticas, ...rutasProveedores];
+  return [...rutasEstaticas, ...rutasBlog, ...rutasProveedores];
 }
