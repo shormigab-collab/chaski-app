@@ -27,6 +27,9 @@ export default async function PerfilProveedor() {
           nombre: usuario.nombre,
           telefono: usuario.telefono ?? "",
           ciudad: usuario.ciudad ?? "",
+          aniosExperiencia: proveedor?.aniosExperiencia ?? null,
+          tarifaAproximada: proveedor?.tarifaAproximada ?? "",
+          linkedinUrl: proveedor?.linkedinUrl ?? "",
         }}
       />
     </div>

@@ -46,6 +46,8 @@ model Proveedor {
   bio            String?
   fotoUrl        String?  // foto de perfil, guardada como data URL base64
   aniosExperiencia Int?    @default(0)
+  tarifaAproximada String? // texto libre, ej. "$15-25 USD/hora" (no forzamos moneda ni estructura)
+  linkedinUrl    String?  // link opcional a LinkedIn; no implica verificacion real todavia
   creditos       Int      @default(3) // creditos de bienvenida
   verificado     Boolean  @default(false)
   calificacionProm Float  @default(0)

@@ -10,6 +10,9 @@ const esquema = z.object({
   bio: z.string().optional(),
   fotoUrl: z.string().optional(),
   categoriaIds: z.array(z.string()).min(1),
+  aniosExperiencia: z.coerce.number().int().min(0).max(60).optional(),
+  tarifaAproximada: z.string().trim().max(60).optional(),
+  linkedinUrl: z.string().trim().max(200).optional(),
 });
 
 export async function PUT(req: Request) {
@@ -35,6 +38,9 @@ export async function PUT(req: Request) {
     data: {
       bio: data.bio,
       fotoUrl: data.fotoUrl,
+      aniosExperiencia: data.aniosExperiencia,
+      tarifaAproximada: data.tarifaAproximada,
+      linkedinUrl: data.linkedinUrl,
       categorias: { set: data.categoriaIds.map((id) => ({ id })) },
     },
   });

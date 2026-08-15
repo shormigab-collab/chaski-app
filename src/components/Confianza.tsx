@@ -75,7 +75,7 @@ export default function Confianza({ lang = "es" }: { lang?: "es" | "en" }) {
           <div className="text-center mb-12">
             <span className="inline-flex items-center gap-1.5 bg-brand-500 text-cream text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
               <ShieldCheck className="w-3.5 h-3.5" />
-              {lang === "en" ? "Verified trust" : "Confianza verificada"}
+              {lang === "en" ? "Real trust" : "Confianza real"}
             </span>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-ink tracking-tight">
               {lang === "en" ? "Real profiles, not anonymous" : "Perfiles reales, no anónimos"}

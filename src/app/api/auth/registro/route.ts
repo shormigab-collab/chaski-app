@@ -14,6 +14,9 @@ const esquemaBase = z.object({
   bio: z.string().optional(),
   categoriaIds: z.array(z.string()).optional(),
   ref: z.string().trim().max(60).optional(), // codigo de referido, opcional
+  aniosExperiencia: z.coerce.number().int().min(0).max(60).optional(),
+  tarifaAproximada: z.string().trim().max(60).optional(),
+  linkedinUrl: z.string().trim().max(200).optional(),
 });
 
 const CREDITOS_BASE = 5; // impulso de lanzamiento para los primeros proveedores (normalmente 3)
@@ -64,6 +67,9 @@ export async function POST(req: Request) {
             proveedor: {
               create: {
                 bio: data.bio,
+                aniosExperiencia: data.aniosExperiencia,
+                tarifaAproximada: data.tarifaAproximada,
+                linkedinUrl: data.linkedinUrl,
                 creditos: referente ? CREDITOS_REFERIDO : CREDITOS_BASE,
                 codigoReferido: codigoReferidoPropio,
                 referidoPorId: referente?.id,

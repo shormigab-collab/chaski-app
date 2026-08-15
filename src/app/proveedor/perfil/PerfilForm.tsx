@@ -13,6 +13,9 @@ type Perfil = {
   nombre: string;
   telefono: string;
   ciudad: string;
+  aniosExperiencia: number | null;
+  tarifaAproximada: string;
+  linkedinUrl: string;
 };
 
 const TAMANO_MAXIMO_MB = 2;
@@ -80,6 +83,9 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
         bio: form.get("bio"),
         fotoUrl,
         categoriaIds: seleccionadas,
+        aniosExperiencia: form.get("aniosExperiencia") || undefined,
+        tarifaAproximada: form.get("tarifaAproximada") || undefined,
+        linkedinUrl: form.get("linkedinUrl") || undefined,
       }),
     });
     setCargando(false);
@@ -133,6 +139,31 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
       <input name="telefono" defaultValue={perfil.telefono} required className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
       <input name="ciudad" defaultValue={perfil.ciudad} required className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
       <textarea name="bio" defaultValue={perfil.bio} rows={3} placeholder="Sobre tu experiencia" className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
+
+      <div className="grid grid-cols-2 gap-3">
+        <input
+          name="aniosExperiencia"
+          type="number"
+          min={0}
+          max={60}
+          defaultValue={perfil.aniosExperiencia ?? ""}
+          placeholder="Años de experiencia"
+          className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
+        />
+        <input
+          name="tarifaAproximada"
+          defaultValue={perfil.tarifaAproximada}
+          placeholder="Tarifa aprox. (ej. $15-25/hora)"
+          className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
+        />
+      </div>
+      <input
+        name="linkedinUrl"
+        type="url"
+        defaultValue={perfil.linkedinUrl}
+        placeholder="Link de tu LinkedIn (opcional)"
+        className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
+      />
 
       <div>
         <p className="text-sm font-medium text-ink mb-2">Categorías de servicio</p>

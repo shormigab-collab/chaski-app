@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Briefcase, Star } from "lucide-react";
+import { MapPin, Briefcase, Star, DollarSign, Linkedin } from "lucide-react";
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
 
@@ -100,10 +100,31 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
           </div>
         )}
 
-        {!!proveedor.aniosExperiencia && (
-          <div className="flex items-center gap-1.5 text-sm text-ink/60 mb-5">
-            <Briefcase className="w-4 h-4 shrink-0" strokeWidth={1.75} />
-            {proveedor.aniosExperiencia} {proveedor.aniosExperiencia === 1 ? "año" : "años"} de experiencia
+        {(!!proveedor.aniosExperiencia || proveedor.tarifaAproximada || proveedor.linkedinUrl) && (
+          <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-ink/60 mb-5">
+            {!!proveedor.aniosExperiencia && (
+              <span className="flex items-center gap-1.5">
+                <Briefcase className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+                {proveedor.aniosExperiencia} {proveedor.aniosExperiencia === 1 ? "año" : "años"} de experiencia
+              </span>
+            )}
+            {proveedor.tarifaAproximada && (
+              <span className="flex items-center gap-1.5">
+                <DollarSign className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+                {proveedor.tarifaAproximada}
+              </span>
+            )}
+            {proveedor.linkedinUrl && (
+              <a
+                href={proveedor.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="flex items-center gap-1.5 text-brand-600 hover:text-brand-700"
+              >
+                <Linkedin className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+                LinkedIn
+              </a>
+            )}
           </div>
         )}
 

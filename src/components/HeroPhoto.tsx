@@ -22,8 +22,8 @@ export default function HeroPhoto() {
           </svg>
         </span>
         <div className="leading-tight">
-          <div className="text-sm font-bold text-ink">Perfiles verificados</div>
-          <div className="text-[11px] text-ink/45">revisados manualmente</div>
+          <div className="text-sm font-bold text-ink">Contacto directo</div>
+          <div className="text-[11px] text-ink/45">sin intermediarios</div>
         </div>
       </div>
 

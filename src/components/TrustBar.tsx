@@ -2,7 +2,7 @@ import { BadgeCheck, ShieldCheck, Zap, Globe2 } from "lucide-react";
 
 const ITEMS = [
   { Icono: BadgeCheck, texto: "Publicar es 100% gratis" },
-  { Icono: ShieldCheck, texto: "Perfiles verificados" },
+  { Icono: ShieldCheck, texto: "Perfiles con nombre real" },
   { Icono: Zap, texto: "Respuestas en horas, no días" },
   { Icono: Globe2, texto: "Profesionales en toda LatAm" },
 ];

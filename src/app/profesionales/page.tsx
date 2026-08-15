@@ -4,7 +4,7 @@ import ProfesionalCard from "@/components/ProfesionalCard";
 
 export const metadata = {
   title: "Profesionales | chaski",
-  description: "Explora profesionales verificados por su perfil en chaski, listos para ayudarte con tu proyecto.",
+  description: "Explora perfiles reales de profesionales independientes en chaski, listos para ayudarte con tu proyecto.",
 };
 
 export default async function ProfesionalesPage() {
@@ -20,6 +20,7 @@ export default async function ProfesionalesPage() {
     ciudad: p.user.ciudad,
     pais: p.user.pais,
     aniosExperiencia: p.aniosExperiencia,
+    tarifaAproximada: p.tarifaAproximada,
     categorias: p.categorias.map((c) => ({ id: c.id, nombre: c.nombre, slug: c.slug })),
     memberSince: p.createdAt,
     calificacionProm: p.calificacionProm,

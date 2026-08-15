@@ -51,6 +51,9 @@ export default function ProveedorForm({
         bio: form.get("bio"),
         categoriaIds: seleccionadas,
         ref: refCode,
+        aniosExperiencia: form.get("aniosExperiencia") || undefined,
+        tarifaAproximada: form.get("tarifaAproximada") || undefined,
+        linkedinUrl: form.get("linkedinUrl") || undefined,
       }),
     });
     setCargando(false);
@@ -105,6 +108,25 @@ export default function ProveedorForm({
               className={inputClass}
               rows={3}
             />
+
+            <div className="grid grid-cols-2 gap-3">
+              <input
+                name="aniosExperiencia"
+                type="number"
+                min={0}
+                max={60}
+                placeholder="Años de experiencia"
+                className={inputClass}
+              />
+              <input name="tarifaAproximada" placeholder="Tarifa aprox. (ej. $15-25/hora)" className={inputClass} />
+            </div>
+            <input
+              name="linkedinUrl"
+              type="url"
+              placeholder="Link de tu LinkedIn (opcional)"
+              className={inputClass}
+            />
+
             <input
               name="password"
               type="password"
