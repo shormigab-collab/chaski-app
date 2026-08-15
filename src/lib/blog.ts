@@ -9,9 +9,12 @@ export type BloqueContenido =
   | { tipo: "titulo"; texto: string }
   | { tipo: "lista"; items: string[] };
 
+export type CategoriaBlog = "Guía para clientes" | "Guía para freelancers";
+
 export type PostBlog = {
   slug: string;
   titulo: string;
+  categoria: CategoriaBlog;
   descripcionMeta: string;
   extracto: string;
   fecha: string; // ISO
@@ -22,6 +25,7 @@ export const POSTS: PostBlog[] = [
   {
     slug: "como-contratar-freelance-colombia",
     titulo: "Cómo contratar un profesional freelance en Colombia: guía rápida",
+    categoria: "Guía para clientes",
     descripcionMeta:
       "Guía práctica para contratar freelancers en Colombia: cómo definir el alcance del trabajo, qué revisar antes de pagar y señales de alerta para evitar fraudes.",
     extracto:
