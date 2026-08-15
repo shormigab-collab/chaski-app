@@ -1,30 +1,36 @@
-import { Heart, MessageCircle, Sparkles } from "lucide-react";
+import { Heart, MessageCircle, Sparkles, FileText } from "lucide-react";
 
-// Vista previa de la futura funcion de comunidad (fase 2, todavia no
-// construida). Es una maqueta ilustrativa, NO una publicacion real: el
-// avatar es generico, el nombre es un placeholder literal ("Tu nombre")
-// y no se muestran contadores de reacciones/comentarios inventados —
-// solo los iconos, sin numeros. Se marca explicitamente como
-// "Próximamente" y no lleva link de "ver más" (todavía no hay nada real
-// que mostrar) para no generar expectativas de una funcion que hoy no
-// esta disponible.
+// NOTA: este post es un ejemplo ilustrativo (nombre, texto, reacciones
+// y comentarios inventados) que replica el mockup de referencia — no
+// existe todavia la funcion de comunidad real (fase 2, ver
+// conversacion). El avatar usa iniciales en vez de una foto para que
+// quede claro que es un ejemplo, no una persona real con foto propia.
+// Reemplazar por publicaciones reales en cuanto la fase 2 este lista.
 export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }) {
   const t =
     lang === "en"
       ? {
           badge: "Coming soon",
           titulo: "De la comunidad",
-          placeholderNombre: "Your name",
-          placeholderRol: "Your specialty",
-          placeholderTexto: "This is what a project update could look like on your profile.",
+          nombre: "María José G.",
+          rol: "Estratega de Contenido",
+          tiempo: "3 h",
+          texto:
+            "I just published an article about how to build a content strategy that really connects with your audience. Would love to hear your thoughts! 👋",
+          articuloTitulo: "Content strategy that drives real impact",
+          articuloTiempo: "8 min read",
           cta: "Request services",
         }
       : {
           badge: "Próximamente",
           titulo: "De la comunidad",
-          placeholderNombre: "Tu nombre",
-          placeholderRol: "Tu especialidad",
-          placeholderTexto: "Así se podría ver una actualización de proyecto en tu perfil.",
+          nombre: "María José G.",
+          rol: "Estratega de Contenido",
+          tiempo: "3 h",
+          texto:
+            "Acabo de publicar un artículo sobre cómo crear una estrategia de contenido que conecte de verdad con tu audiencia. ¡Me encantaría saber qué opinan! 👋",
+          articuloTitulo: "Estrategia de contenido que genera impacto",
+          articuloTiempo: "8 min de lectura",
           cta: "Solicitar sus servicios",
         };
 
@@ -40,29 +46,37 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
 
       <div className="rounded-xl border border-border overflow-hidden flex-1 flex flex-col">
         <div className="flex items-center gap-2.5 p-3">
-          <span className="w-8 h-8 rounded-full bg-lavender flex items-center justify-center text-brand-400 font-semibold text-sm shrink-0">
-            ?
+          <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-[11px] font-bold shrink-0">
+            MJ
           </span>
           <div className="leading-tight min-w-0">
-            <div className="text-xs font-semibold text-ink/70 truncate">{t.placeholderNombre}</div>
-            <div className="text-[11px] text-ink/40 truncate">{t.placeholderRol}</div>
+            <div className="text-xs font-semibold text-ink/80 truncate">{t.nombre}</div>
+            <div className="text-[11px] text-ink/40 truncate">
+              {t.rol} · {t.tiempo}
+            </div>
           </div>
         </div>
-        <p className="px-3 pb-2 text-xs text-ink/60 leading-relaxed">{t.placeholderTexto}</p>
-        <div className="aspect-[16/9] bg-lavender relative flex-1">
-          <img
-            src="/images/equipo-reunion.webp"
-            alt=""
-            loading="lazy"
-            className="absolute inset-0 w-full h-full object-cover opacity-90"
-          />
-        </div>
-        <div className="flex items-center justify-between p-3">
-          <div className="flex items-center gap-3 text-ink/35">
-            <Heart className="w-4 h-4" strokeWidth={1.75} />
-            <MessageCircle className="w-4 h-4" strokeWidth={1.75} />
+        <p className="px-3 pb-3 text-xs text-ink/65 leading-relaxed">{t.texto}</p>
+        <div className="mx-3 mb-3 rounded-lg border border-border p-2.5 flex items-center gap-2.5">
+          <span className="w-9 h-9 rounded-md bg-lavender text-brand-500 flex items-center justify-center shrink-0">
+            <FileText className="w-4 h-4" strokeWidth={1.75} />
+          </span>
+          <div className="leading-tight min-w-0">
+            <div className="text-[11px] font-semibold text-ink/80 truncate">{t.articuloTitulo}</div>
+            <div className="text-[10px] text-ink/40">{t.articuloTiempo}</div>
           </div>
-          <span className="text-[11px] font-semibold text-white bg-brand-400 px-2.5 py-1 rounded-lg">{t.cta}</span>
+        </div>
+        <div className="mt-auto flex items-center justify-between p-3 pt-0">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1 text-[11px] font-medium text-ink/50">
+              <Heart className="w-3.5 h-3.5 fill-coral-500 text-coral-500" strokeWidth={1.75} />
+              24
+            </span>
+            <span className="flex items-center gap-1 text-[11px] font-medium text-ink/50">
+              <MessageCircle className="w-3.5 h-3.5" strokeWidth={1.75} />7
+            </span>
+          </div>
+          <span className="text-[11px] font-semibold text-white bg-brand-500 px-2.5 py-1.5 rounded-lg">{t.cta}</span>
         </div>
       </div>
     </div>

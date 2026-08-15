@@ -6,34 +6,42 @@ import CategoryIcon from "@/components/CategoryIcon";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
-// Ciclo de acentos de color para que la grilla de categorías no se vea
-// monocromática. Se aplica por posición, no por categoría específica.
+// Un color distinto por posicion (en vez de un ciclo corto que se
+// repite) para que la grilla se vea tan variada como el mockup de
+// referencia.
 const ACENTOS = [
   { bg: "bg-brand-500", text: "text-white" },
-  { bg: "bg-brand-400", text: "text-white" },
+  { bg: "bg-blue-500", text: "text-white" },
   { bg: "bg-coral-500", text: "text-white" },
   { bg: "bg-gold-500", text: "text-white" },
-  { bg: "bg-brand-600", text: "text-white" },
+  { bg: "bg-emerald-500", text: "text-white" },
+  { bg: "bg-pink-500", text: "text-white" },
+  { bg: "bg-teal-500", text: "text-white" },
+  { bg: "bg-brand-300", text: "text-white" },
 ];
 
 // Categorias curadas para la vista inicial (etiquetas mas cortas y
 // agrupadas para la portada). El enlace sigue apuntando a la categoria
 // real de la base de datos, asi que el flujo de registro no cambia.
 const CURADAS: { slug: string; etiqueta: string }[] = [
-  { slug: "marketing-redes", etiqueta: "Marketing" },
   { slug: "diseno-grafico", etiqueta: "Diseño y UX" },
   { slug: "desarrollo-web", etiqueta: "Desarrollo" },
-  { slug: "contabilidad", etiqueta: "Contabilidad" },
-  { slug: "soporte-tecnico", etiqueta: "Soporte y Admin" },
+  { slug: "marketing-redes", etiqueta: "Marketing" },
+  { slug: "copywriting", etiqueta: "Redacción" },
   { slug: "consultoria-empresarial", etiqueta: "Negocios" },
+  { slug: "animacion", etiqueta: "Video y Animación" },
+  { slug: "seo", etiqueta: "SEO" },
+  { slug: "soporte-tecnico", etiqueta: "Soporte y Admin" },
 ];
 
 const CURATED_EN: { slug: string; etiqueta: string }[] = [
-  { slug: "asistente-virtual", etiqueta: "Virtual assistant" },
-  { slug: "marketing-redes", etiqueta: "Marketing" },
   { slug: "diseno-grafico", etiqueta: "Design & UX" },
   { slug: "desarrollo-web", etiqueta: "Development" },
-  { slug: "contabilidad", etiqueta: "Accounting" },
+  { slug: "marketing-redes", etiqueta: "Marketing" },
+  { slug: "copywriting", etiqueta: "Copywriting" },
+  { slug: "consultoria-empresarial", etiqueta: "Business" },
+  { slug: "animacion", etiqueta: "Animation" },
+  { slug: "seo", etiqueta: "SEO" },
   { slug: "soporte-tecnico", etiqueta: "Support & Admin" },
 ];
 
