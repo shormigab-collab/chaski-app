@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import { obtenerUsuarioActual } from "@/lib/auth";
 
+// Manrope para encabezados (font-heading), Inter para cuerpo de texto e
+// interfaz (font-sans, el default). Antes solo se usaba Manrope en todo.
 const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-manrope",
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
 });
 
 const TITULO = "chaski — Encuentra al profesional ideal en LatAm";
@@ -55,7 +63,7 @@ export default async function RootLayout({
 }) {
   const usuario = await obtenerUsuarioActual();
   return (
-    <html lang="es" className={manrope.variable}>
+    <html lang="es" className={`${manrope.variable} ${inter.variable}`}>
       <body className="font-sans antialiased bg-cream text-ink">
         <Navbar usuario={usuario} />
         <main className="min-h-screen">{children}</main>

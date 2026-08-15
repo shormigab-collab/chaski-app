@@ -55,7 +55,7 @@ export default function Footer() {
 
   if (esIngles) {
     return (
-      <footer className="border-t border-black/5 mt-24 bg-white">
+      <footer className="border-t border-border mt-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 py-14 grid grid-cols-2 sm:grid-cols-3 gap-10">
           <div className="col-span-2 sm:col-span-1">
             <Link href="/en" className="inline-flex items-center gap-2 mb-3">
@@ -100,7 +100,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="border-t border-black/5 py-6">
+        <div className="border-t border-border py-6">
           <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <span className="text-xs text-ink/40">© {new Date().getFullYear()} chaski. All rights reserved.</span>
             <RedesSociales />
@@ -112,7 +112,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="border-t border-black/5 mt-24 bg-white">
+    <footer className="border-t border-border mt-24 bg-white">
       <div className="max-w-6xl mx-auto px-4 py-14 grid grid-cols-2 sm:grid-cols-4 gap-10">
         <div className="col-span-2 sm:col-span-1">
           <Link href="/" className="inline-flex items-center gap-2 mb-3">
@@ -193,7 +193,7 @@ export default function Footer() {
         </nav>
       </div>
 
-      <div className="border-t border-black/5 py-6">
+      <div className="border-t border-border py-6">
         <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span className="text-xs text-ink/40">
             © {new Date().getFullYear()} chaski. Todos los derechos reservados.

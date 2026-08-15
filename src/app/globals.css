@@ -7,8 +7,16 @@ html {
 }
 
 body {
-  color: #211E3D;
-  background: #FAF8F5;
+  color: #17133A; /* ink navy */
+  background: #FFF9F4; /* warm cream */
+}
+
+/* Encabezados en Manrope (font-heading), el resto del sitio usa Inter
+   (font-sans, el default del body). Se aplica por etiqueta semantica
+   para que quede consistente en todo el sitio sin tener que agregar la
+   clase font-heading componente por componente. */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-manrope), system-ui, sans-serif;
 }
 
 @keyframes float {

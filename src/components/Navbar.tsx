@@ -114,7 +114,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
   const toggleIdioma = mostrarToggleIdioma ? (
     <Link
       href={esIngles ? "/" : "/en"}
-      className="text-xs font-semibold text-ink/50 hover:text-ink border border-black/10 rounded-full px-3 py-1.5 transition-colors shrink-0"
+      className="text-xs font-semibold text-ink/50 hover:text-ink border border-border rounded-full px-3 py-1.5 transition-colors shrink-0"
     >
       {esIngles ? "ES" : "EN"}
     </Link>
@@ -126,7 +126,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
   return (
     <>
       {usuario?.role === "PROVEEDOR" && <ReferralBanner />}
-      <header className="sticky top-0 z-20 backdrop-blur-md bg-cream/80 border-b border-black/5">
+      <header className="sticky top-0 z-20 backdrop-blur-md bg-cream/80 border-b border-border">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3.5">
         <Link href={esIngles ? "/en" : "/"} className="shrink-0" onClick={cerrar}>
           <Logo size={34} />
@@ -147,7 +147,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
             aria-label="Abrir menú"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M4 7H20M4 12H20M4 17H20" stroke="#211E3D" strokeWidth="2" strokeLinecap="round" />
+              <path d="M4 7H20M4 12H20M4 17H20" stroke="#17133A" strokeWidth="2" strokeLinecap="round" />
             </svg>
           </button>
         </div>
@@ -165,11 +165,11 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
 
       {/* Panel deslizante movil */}
       <div
-        className={`sm:hidden fixed top-0 left-0 h-full w-[85%] max-w-xs bg-white z-40 shadow-2xl transition-transform duration-300 overflow-y-auto ${
+        className={`sm:hidden fixed top-0 left-0 h-full w-[85%] max-w-xs bg-white z-40 shadow-xl transition-transform duration-300 overflow-y-auto ${
           abierto ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between px-5 py-4 border-b border-black/5">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-border">
           <Link href={esIngles ? "/en" : "/"} onClick={cerrar}>
             <Logo size={30} />
           </Link>
@@ -213,7 +213,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
                 <Link
                   href="/"
                   className={`text-sm font-medium px-3.5 py-2 rounded-full border transition-colors ${
-                    !esIngles ? "border-brand-500 bg-brand-50 text-brand-600" : "border-black/10 text-ink/60"
+                    !esIngles ? "border-brand-500 bg-brand-50 text-brand-600" : "border-border text-ink/60"
                   }`}
                 >
                   Español
@@ -221,14 +221,14 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
                 <Link
                   href="/en"
                   className={`text-sm font-medium px-3.5 py-2 rounded-full border transition-colors ${
-                    esIngles ? "border-brand-500 bg-brand-50 text-brand-600" : "border-black/10 text-ink/60"
+                    esIngles ? "border-brand-500 bg-brand-50 text-brand-600" : "border-border text-ink/60"
                   }`}
                 >
                   English
                 </Link>
               </div>
 
-              <div className="mt-6 pt-5 border-t border-black/5 flex flex-col gap-2.5">
+              <div className="mt-6 pt-5 border-t border-border flex flex-col gap-2.5">
                 <Link
                   href={esIngles ? "/en#interesado" : "/registro"}
                   className="text-center bg-brand-500 text-cream px-4 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors min-h-[44px] flex items-center justify-center"
@@ -237,7 +237,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
                 </Link>
                 <Link
                   href="/login"
-                  className="text-center border border-black/10 text-ink px-4 py-3 rounded-full font-semibold hover:border-black/25 transition-colors min-h-[44px] flex items-center justify-center"
+                  className="text-center border border-border text-ink px-4 py-3 rounded-full font-semibold hover:border-brand-300 transition-colors min-h-[44px] flex items-center justify-center"
                 >
                   {esIngles ? "Log in" : "Iniciar sesión"}
                 </Link>
