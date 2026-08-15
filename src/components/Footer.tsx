@@ -9,15 +9,30 @@ import { LogoMark } from "@/components/Logo";
 // aun no se han creado, asi que apuntan al handle esperado ("usechaski")
 // y quedan listos para cuando el usuario cree esas cuentas.
 const REDES = [
-  { Icono: Linkedin, href: "https://www.linkedin.com/company/usechaski", label: "LinkedIn" },
-  { Icono: Facebook, href: "https://www.facebook.com/profile.php?id=61593459986605", label: "Facebook" },
-  { Icono: X, href: "https://x.com/usechaski", label: "X" },
-  { Icono: Instagram, href: "https://instagram.com/usechaski", label: "Instagram" },
+  {
+    Icono: Linkedin,
+    href: "https://www.linkedin.com/company/usechaski",
+    label: "LinkedIn",
+    bg: "bg-[#0A66C2]",
+  },
+  {
+    Icono: Facebook,
+    href: "https://www.facebook.com/profile.php?id=61593459986605",
+    label: "Facebook",
+    bg: "bg-[#1877F2]",
+  },
+  { Icono: X, href: "https://x.com/usechaski", label: "X", bg: "bg-ink" },
+  {
+    Icono: Instagram,
+    href: "https://instagram.com/usechaski",
+    label: "Instagram",
+    bg: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af]",
+  },
 ];
 
 function RedesSociales() {
   return (
-    <div className="flex items-center gap-2.5">
+    <div className="flex items-center gap-3">
       {REDES.map((r) => (
         <a
           key={r.label}
@@ -25,9 +40,9 @@ function RedesSociales() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={r.label}
-          className="w-8 h-8 rounded-full border border-black/10 text-ink/45 flex items-center justify-center hover:text-brand-500 hover:border-brand-500 transition-colors"
+          className={`w-10 h-10 rounded-full ${r.bg} text-white flex items-center justify-center shadow-sm hover:scale-110 hover:shadow-md transition-transform`}
         >
-          <r.Icono className="w-4 h-4" strokeWidth={1.75} />
+          <r.Icono className="w-[18px] h-[18px]" strokeWidth={1.75} />
         </a>
       ))}
     </div>
