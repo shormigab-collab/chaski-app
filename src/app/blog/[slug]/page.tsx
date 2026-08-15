@@ -1,12 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Users, Briefcase } from "lucide-react";
-import { POSTS, obtenerPost, type CategoriaBlog } from "@/lib/blog";
-
-const ESTILO_CATEGORIA: Record<CategoriaBlog, { Icono: typeof Users; grad: string }> = {
-  "Guía para clientes": { Icono: Users, grad: "from-brand-500 to-coral-500" },
-  "Guía para freelancers": { Icono: Briefcase, grad: "from-coral-500 to-gold-500" },
-};
+import { POSTS, obtenerPost } from "@/lib/blog";
 
 export function generateStaticParams() {
   return POSTS.map((p) => ({ slug: p.slug }));
@@ -37,14 +31,12 @@ function formatearFecha(iso: string) {
 export default function PostBlogPage({ params }: { params: { slug: string } }) {
   const post = obtenerPost(params.slug);
   if (!post) notFound();
-  const { Icono, grad } = ESTILO_CATEGORIA[post.categoria];
 
   return (
     <article>
-      <div className={`relative h-56 sm:h-72 bg-gradient-to-br ${grad} flex items-center justify-center overflow-hidden`}>
-        <div className="absolute -top-10 -right-10 w-56 h-56 rounded-full bg-white/10 blur-3xl" />
-        <div className="absolute -bottom-16 -left-10 w-56 h-56 rounded-full bg-black/10 blur-3xl" />
-        <Icono className="relative w-16 h-16 sm:w-20 sm:h-20 text-white/90" strokeWidth={1.5} />
+      <div className="relative h-56 sm:h-80 overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={post.imagen} alt={post.imagenAlt} className="w-full h-full object-cover" />
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-16">

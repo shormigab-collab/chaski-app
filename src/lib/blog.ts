@@ -15,6 +15,12 @@ export type PostBlog = {
   slug: string;
   titulo: string;
   categoria: CategoriaBlog;
+  // Foto de portada real (no generada, no de personas ficticias con nombre).
+  // Se usa el mismo hotlinking directo a Unsplash que ya funciona en el
+  // hero de la home. Alt describe la escena, no afirma que sea "un cliente
+  // real de chaski".
+  imagen: string;
+  imagenAlt: string;
   descripcionMeta: string;
   extracto: string;
   fecha: string; // ISO
@@ -26,6 +32,8 @@ export const POSTS: PostBlog[] = [
     slug: "como-contratar-freelance-colombia",
     titulo: "Cómo contratar un profesional freelance en Colombia: guía rápida",
     categoria: "Guía para clientes",
+    imagen: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&h=675&q=80",
+    imagenAlt: "Profesional trabajando en un proyecto freelance",
     descripcionMeta:
       "Guía práctica para contratar freelancers en Colombia: cómo definir el alcance del trabajo, qué revisar antes de pagar y señales de alerta para evitar fraudes.",
     extracto:

@@ -1,16 +1,11 @@
 import Link from "next/link";
-import { Users, Briefcase, BookOpenText } from "lucide-react";
-import { POSTS, type CategoriaBlog } from "@/lib/blog";
+import { BookOpenText } from "lucide-react";
+import { POSTS } from "@/lib/blog";
 
 export const metadata = {
   title: "Blog",
   description:
     "Guías y consejos para contratar profesionales freelance en Colombia y Latinoamérica, y para independientes que quieren conseguir más clientes.",
-};
-
-const ESTILO_CATEGORIA: Record<CategoriaBlog, { Icono: typeof Users; grad: string }> = {
-  "Guía para clientes": { Icono: Users, grad: "from-brand-500 to-coral-500" },
-  "Guía para freelancers": { Icono: Briefcase, grad: "from-coral-500 to-gold-500" },
 };
 
 function formatearFecha(iso: string) {
@@ -44,17 +39,19 @@ export default function BlogIndex() {
 
         <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto sm:max-w-none">
           {POSTS.map((post) => {
-            const { Icono, grad } = ESTILO_CATEGORIA[post.categoria];
             return (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
                 className="group block bg-white border border-black/5 rounded-2xl overflow-hidden shadow-sm shadow-black/[0.03] hover:shadow-lg hover:shadow-brand-500/10 hover:-translate-y-1 transition-all"
               >
-                <div className={`relative h-36 bg-gradient-to-br ${grad} flex items-center justify-center overflow-hidden`}>
-                  <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10 blur-2xl" />
-                  <div className="absolute -bottom-10 -left-6 w-28 h-28 rounded-full bg-black/10 blur-2xl" />
-                  <Icono className="relative w-12 h-12 text-white/90" strokeWidth={1.5} />
+                <div className="relative h-36 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={post.imagen}
+                    alt={post.imagenAlt}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
 
                 <div className="p-6">
