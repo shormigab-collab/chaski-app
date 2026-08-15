@@ -24,6 +24,23 @@ const ACENTOS = [
   { bg: "bg-[#9874E1]", text: "text-white" },
 ];
 
+// Foto ilustrativa por categoria (banco de fotos reales de uso libre,
+// vinculadas por palabra clave — no son fotos de trabajos de la
+// comunidad, solo imagenes de ambiente para que la tarjeta se vea mas
+// visual que un simple icono). Si una categoria no esta en el mapa
+// (las que aparecen solo al abrir "Ver todas") usa una foto generica.
+const FOTOS: Record<string, string> = {
+  "diseno-grafico": "https://loremflickr.com/300/300/graphicdesign,design",
+  "desarrollo-web": "https://loremflickr.com/300/300/coding,programming",
+  "marketing-redes": "https://loremflickr.com/300/300/marketing,socialmedia",
+  copywriting: "https://loremflickr.com/300/300/writing,notebook",
+  "consultoria-empresarial": "https://loremflickr.com/300/300/business,office",
+  animacion: "https://loremflickr.com/300/300/videocamera,film",
+  seo: "https://loremflickr.com/300/300/analytics,chart",
+  "soporte-tecnico": "https://loremflickr.com/300/300/support,headset",
+};
+const FOTO_GENERICA = "https://loremflickr.com/300/300/freelancer,remotework";
+
 // Categorias curadas para la vista inicial (etiquetas mas cortas y
 // agrupadas para la portada). El enlace sigue apuntando a la categoria
 // real de la base de datos, asi que el flujo de registro no cambia.
@@ -101,8 +118,18 @@ export default function CategoriasHome({
               href={`/registro/cliente?categoria=${cat.slug}${lang === "en" ? "&lang=en" : ""}`}
               className="group flex flex-col items-center text-center gap-2 rounded-xl border border-border p-3 hover:border-brand-500 hover:shadow-sm transition-all"
             >
-              <span className={`w-10 h-10 rounded-xl ${ac.bg} ${ac.text} flex items-center justify-center shrink-0`}>
-                <CategoryIcon slug={cat.slug} className="w-5 h-5" />
+              <span className="relative w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-border">
+                <img
+                  src={FOTOS[cat.slug] ?? FOTO_GENERICA}
+                  alt=""
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <span
+                  className={`absolute bottom-1 right-1 w-5 h-5 rounded-md ${ac.bg} ${ac.text} flex items-center justify-center shadow-sm`}
+                >
+                  <CategoryIcon slug={cat.slug} className="w-3 h-3" />
+                </span>
               </span>
               <span className="text-xs font-semibold text-ink/75 group-hover:text-brand-600 transition-colors leading-snug">
                 {etiqueta}

@@ -1,9 +1,10 @@
 import { CheckCircle2, Heart } from "lucide-react";
 
-// NOTA: las 3 tarjetas flotantes usan un ejemplo ilustrativo ("Camila
-// R.", "Cliente: HolaCoffee") replicando el mockup de referencia. No
-// son datos reales — se marcan asi para poder reemplazarlas facil mas
-// adelante cuando haya proyectos y clientes reales que mostrar.
+// NOTA: la tarjeta de proyectos y el badge "Disponible" usan un
+// ejemplo ilustrativo ("Camila R.", "Cliente: HolaCoffee") replicando
+// el mockup de referencia. No son datos reales — se marcan asi para
+// poder reemplazarlos facil mas adelante cuando haya proyectos y
+// clientes reales que mostrar.
 export default function HeroPhoto() {
   return (
     <div className="relative w-full max-w-lg mx-auto md:mx-0 pt-20 pb-10">
@@ -23,23 +24,43 @@ export default function HeroPhoto() {
         }}
       />
 
-      {/* tarjeta flotante: proyecto de ejemplo */}
-      <div className="absolute bottom-10 -left-4 sm:-left-10 w-40 bg-white rounded-2xl shadow-xl shadow-black/10 p-2.5 animate-float">
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-700 text-[10px] font-bold flex items-center justify-center shrink-0">
-            CR
-          </span>
-          <div className="leading-tight min-w-0">
-            <div className="text-[11px] font-bold text-ink truncate">Camila R.</div>
-            <div className="text-[9px] text-ink/45 truncate">Diseñadora UI/UX</div>
+      {/* tarjeta flotante: 2 proyectos de ejemplo en una sola tarjeta
+          (antes eran 2 tarjetas separadas — se combinaron para que la
+          composicion se sienta menos cargada) */}
+      <div className="absolute bottom-10 -left-4 sm:-left-10 w-60 bg-white rounded-2xl shadow-xl shadow-black/10 p-3 animate-float">
+        <div className="flex items-center gap-1.5 mb-2">
+          <CheckCircle2 className="w-3.5 h-3.5 text-brand-500 shrink-0" strokeWidth={2} />
+          <span className="text-[10px] font-bold text-brand-600">Trabajo destacado</span>
+        </div>
+        <div className="grid grid-cols-2 gap-1.5">
+          <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+            <img
+              src="https://loremflickr.com/300/225/fintech,mobileapp"
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <span className="absolute inset-x-0 bottom-0 bg-black/55 px-1.5 py-1">
+              <span className="text-[9px] font-semibold text-white leading-none block truncate">App Fintech</span>
+            </span>
+          </div>
+          <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
+            <img
+              src="https://loremflickr.com/300/225/branding,ecommerce"
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <span className="absolute inset-x-0 bottom-0 bg-black/55 px-1.5 py-1">
+              <span className="text-[9px] font-semibold text-white leading-none block truncate">Marca e-commerce</span>
+            </span>
           </div>
         </div>
-        <div className="aspect-[4/3] rounded-lg bg-gradient-to-br from-brand-400 to-brand-600 mb-1.5" />
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] font-medium text-ink/60">Diseño de app Fintech</span>
+        <div className="flex items-center justify-between mt-2">
+          <span className="text-[10px] text-ink/45 truncate">Camila R. · HolaCoffee</span>
           <span className="flex items-center gap-0.5 text-[10px] font-semibold text-coral-600 shrink-0">
             <Heart className="w-2.5 h-2.5 fill-coral-500 text-coral-500" />
-            24
+            42
           </span>
         </div>
       </div>
@@ -54,26 +75,6 @@ export default function HeroPhoto() {
         <div className="leading-tight">
           <div className="text-xs font-semibold text-ink/70">Disponible</div>
           <div className="text-[10px] text-ink/40">Colaboraciones remotas</div>
-        </div>
-      </div>
-
-      {/* tarjeta flotante: trabajo de ejemplo con cliente — arriba de la
-          foto, a la derecha, sin tapar la cara */}
-      <div
-        className="absolute top-1 -right-2 sm:-right-8 w-48 bg-white rounded-2xl shadow-xl shadow-black/10 p-3 animate-float"
-        style={{ animationDelay: "0.5s" }}
-      >
-        <div className="flex items-center gap-1.5 mb-1.5">
-          <CheckCircle2 className="w-3.5 h-3.5 text-brand-500 shrink-0" strokeWidth={2} />
-          <span className="text-[10px] font-bold text-brand-600">Trabajo destacado</span>
-        </div>
-        <div className="text-xs font-semibold text-ink leading-snug mb-1">Estrategia de marca para e-commerce</div>
-        <div className="flex items-center justify-between">
-          <span className="text-[10px] text-ink/45">Cliente: HolaCoffee</span>
-          <span className="flex items-center gap-0.5 text-[10px] font-semibold text-coral-600 shrink-0">
-            <Heart className="w-2.5 h-2.5 fill-coral-500 text-coral-500" />
-            18
-          </span>
         </div>
       </div>
     </div>
