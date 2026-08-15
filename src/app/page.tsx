@@ -111,8 +111,8 @@ export default async function HomePage() {
               <div className="absolute -top-6 -left-6 w-1/2 h-1/2 bg-gold-400/15 rounded-[2rem] -z-10" />
               <div className="rounded-[2rem] overflow-hidden shadow-xl shadow-black/10 aspect-[4/5]">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-                  alt="Profesional trabajando en su computador"
+                  src="/images/equipo-reunion.webp"
+                  alt="Equipo de profesionales colaborando en un proyecto"
                   className="w-full h-full object-cover"
                 />
               </div>

@@ -1,21 +1,17 @@
 export default function HeroPhoto() {
   return (
-    <div className="relative w-full max-w-md mx-auto md:mx-0">
-      {/* forma decorativa detrás */}
-      <div className="absolute -top-6 -right-6 w-full h-full bg-coral-100 rounded-[2rem] -z-10" />
-      <div className="absolute -bottom-6 -left-6 w-2/3 h-2/3 bg-gold-400/20 rounded-[2rem] -z-10" />
+    <div className="relative w-full max-w-lg mx-auto md:mx-0">
+      {/* foto principal: recorte con fondo transparente, sin marco */}
+      <img
+        src="/images/hero-equipo.png"
+        alt="Profesionales de Latinoamérica trabajando con laptop y tablet"
+        width={820}
+        height={546}
+        className="w-full h-auto relative z-0"
+      />
 
-      {/* foto principal */}
-      <div className="rounded-[2rem] overflow-hidden shadow-xl shadow-black/10 aspect-[4/5]">
-        <img
-          src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-          alt="Profesional trabajando en un proyecto"
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* tarjeta flotante: verificacion */}
-      <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl shadow-black/15 px-4 py-3 flex items-center gap-2.5 animate-float">
+      {/* tarjeta flotante: contacto directo */}
+      <div className="absolute bottom-8 -left-4 sm:-left-8 bg-white rounded-2xl shadow-xl shadow-black/10 px-4 py-3 flex items-center gap-2.5 animate-float">
         <span className="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center shrink-0">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
             <path d="M20 6L9 17l-5-5" stroke="#3B2F8F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -27,17 +23,13 @@ export default function HeroPhoto() {
         </div>
       </div>
 
-      {/* tarjeta flotante: avatares + contador */}
+      {/* tarjeta flotante: disponibilidad */}
       <div
-        className="absolute -top-5 -right-5 bg-white rounded-2xl shadow-xl shadow-black/15 px-3.5 py-3 flex items-center gap-2 animate-float"
+        className="absolute top-4 -right-2 sm:-right-6 bg-white rounded-2xl shadow-xl shadow-black/10 px-3.5 py-3 flex items-center gap-2 animate-float"
         style={{ animationDelay: "1s" }}
       >
-        <div className="flex -space-x-2">
-          <img src="https://i.pravatar.cc/60?img=12" className="w-7 h-7 rounded-full border-2 border-white object-cover" alt="" />
-          <img src="https://i.pravatar.cc/60?img=32" className="w-7 h-7 rounded-full border-2 border-white object-cover" alt="" />
-          <img src="https://i.pravatar.cc/60?img=47" className="w-7 h-7 rounded-full border-2 border-white object-cover" alt="" />
-        </div>
-        <span className="text-xs font-semibold text-ink/70">profesionales activos</span>
+        <span className="w-2.5 h-2.5 rounded-full bg-availability shrink-0" />
+        <span className="text-xs font-semibold text-ink/70">Publicar es gratis</span>
       </div>
     </div>
   );
