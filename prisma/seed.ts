@@ -5,6 +5,8 @@ const prisma = new PrismaClient();
 
 const categorias = [
   { nombre: "Asistente virtual / administrativo", slug: "asistente-virtual", icono: "🗂️" },
+  { nombre: "Psicología", slug: "psicologia", icono: "🧠" },
+  { nombre: "Nutrición", slug: "nutricion", icono: "🥗" },
   { nombre: "Diseño web", slug: "diseno-web", icono: "🌐" },
   { nombre: "Preparación de impuestos", slug: "impuestos", icono: "🧾" },
   { nombre: "Bookkeeping / Teneduría de libros", slug: "teneduria-libros", icono: "📒" },

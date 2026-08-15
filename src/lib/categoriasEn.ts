@@ -4,6 +4,8 @@
 // mostrar la etiqueta correcta sin necesitar otro campo en el schema.
 export const NOMBRES_CATEGORIA_EN: Record<string, string> = {
   "asistente-virtual": "Virtual assistant",
+  psicologia: "Psychology / therapy",
+  nutricion: "Nutrition",
   "diseno-web": "Web design",
   impuestos: "Tax preparation",
   "teneduria-libros": "Bookkeeping",

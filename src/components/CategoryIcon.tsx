@@ -24,6 +24,8 @@ import {
   Clapperboard,
   Box,
   ListChecks,
+  Brain,
+  Salad,
   type LucideIcon,
 } from "lucide-react";
 
@@ -33,6 +35,8 @@ import {
 // se ve poco profesional, tipo WhatsApp).
 const ICONOS: Record<string, LucideIcon> = {
   "asistente-virtual": ListChecks,
+  psicologia: Brain,
+  nutricion: Salad,
   "diseno-web": Globe,
   impuestos: Receipt,
   "teneduria-libros": BookOpenText,
