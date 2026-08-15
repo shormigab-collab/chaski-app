@@ -45,7 +45,8 @@ export default async function HomePage() {
               Marketplace de profesionales en LatAm
             </span>
             <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl sm:leading-[1.1] font-extrabold text-ink mb-5 tracking-tight">
-              No busques profesionales.{" "}
+              No busques profesionales.
+              <br />
               <span className="bg-gradient-to-r from-brand-500 to-coral-500 bg-clip-text text-transparent">
                 Deja que te encuentren a ti.
               </span>
