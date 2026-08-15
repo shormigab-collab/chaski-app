@@ -49,17 +49,35 @@ export default async function HomePage() {
             <span className="inline-block text-xs font-semibold text-coral-600 bg-coral-50 px-3 py-1 rounded-full mb-4">
               Una red profesional en Latinoamérica
             </span>
-            <h1
-              className="font-extrabold text-ink mb-5"
-              style={{
-                fontSize: "clamp(2.6rem, 4.6vw, 4.5rem)",
-                lineHeight: 1.02,
-                letterSpacing: "-0.035em",
-              }}
-            >
-              El talento de{" "}
-              <span className="text-coral-600">Latinoamérica,</span> en movimiento.
-            </h1>
+            <div className="relative">
+              {/* halo suave detras del titular para que se despegue del
+                  fondo con gradiente y los blobs decorativos */}
+              <div
+                className="hidden md:block absolute -inset-x-6 -inset-y-8 bg-white/50 blur-3xl rounded-[3rem] -z-10"
+                aria-hidden="true"
+              />
+              <h1
+                className="font-extrabold text-ink mb-5"
+                style={{
+                  fontSize: "clamp(2.6rem, 4.6vw, 4.5rem)",
+                  lineHeight: 1.02,
+                  letterSpacing: "-0.035em",
+                  textShadow: "0 1px 0 rgba(255,255,255,0.6), 0 14px 32px rgba(23,19,58,0.16)",
+                }}
+              >
+                El talento de{" "}
+                <span
+                  className="bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text text-transparent"
+                  style={{
+                    textShadow: "none",
+                    filter: "drop-shadow(0 6px 20px rgba(255,107,95,0.45))",
+                  }}
+                >
+                  Latinoamérica,
+                </span>{" "}
+                en movimiento.
+              </h1>
+            </div>
             <p className="text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0 leading-relaxed">
               Conecta, demuestra lo que sabes y encuentra oportunidades reales.
             </p>
