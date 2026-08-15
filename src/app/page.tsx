@@ -101,9 +101,16 @@ export default async function HomePage() {
 
       <TrustBar />
 
-      <CategoriasHome categorias={categorias} />
-
-      <TalentoEnAccion />
+      {/* Fila compacta: categorías / talento en acción / comunidad, lado a lado en desktop */}
+      <section className="max-w-6xl mx-auto px-4 py-16 sm:py-20">
+        <Reveal>
+          <div className="grid lg:grid-cols-[1fr_1.3fr_1fr] gap-5 items-stretch">
+            <CategoriasHome categorias={categorias} />
+            <TalentoEnAccion />
+            <ComunidadPreview />
+          </div>
+        </Reveal>
+      </section>
 
       <ProfesionalesDestacados profesionales={profesionales} />
 
@@ -178,8 +185,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      <ComunidadPreview />
 
       <Beneficios />
 

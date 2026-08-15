@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
-import Reveal from "@/components/Reveal";
 import CategoryIcon from "@/components/CategoryIcon";
 import { parsePortafolio, ACENTOS_PORTAFOLIO } from "@/lib/portafolio";
 
@@ -32,86 +31,62 @@ export default async function TalentoEnAccion({ lang = "es" }: { lang?: "es" | "
 
   const t =
     lang === "en"
-      ? { badge: "Talent in action", titulo: "Work that speaks for itself", cta: "View profile" }
-      : { badge: "Talento en acción", titulo: "Trabajo que habla por ti", cta: "Ver perfil" };
+      ? { titulo: "Work that speaks for itself", verTodos: "See all projects" }
+      : { titulo: "Trabajo que habla por ti", verTodos: "Ver todos los proyectos" };
 
   const [destacado, ...resto] = trabajos;
 
-  function Tarjeta({
-    trabajo,
-    i,
-    alto,
-  }: {
-    trabajo: (typeof trabajos)[number];
-    i: number;
-    alto?: boolean;
-  }) {
+  function Tarjeta({ trabajo, i, alto }: { trabajo: (typeof trabajos)[number]; i: number; alto?: boolean }) {
     const acento = ACENTOS_PORTAFOLIO[i % ACENTOS_PORTAFOLIO.length];
     return (
       <Link
         href={`/profesionales/${trabajo.proveedorId}`}
-        className={`group relative block rounded-2xl overflow-hidden border border-border bg-white hover:shadow-lg hover:shadow-black/5 hover:-translate-y-0.5 transition-all ${
-          alto ? "h-full" : ""
-        }`}
+        className={`group relative block rounded-xl overflow-hidden border border-border ${alto ? "aspect-[16/8]" : "aspect-[16/10]"}`}
       >
-        <div className={`relative overflow-hidden ${alto ? "aspect-[4/5] sm:h-full" : "aspect-[16/9]"}`}>
-          <img
-            src={trabajo.proyecto.imagenUrl}
-            alt={trabajo.proyecto.titulo}
-            loading="lazy"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          {trabajo.categoria && (
-            <span
-              className={`absolute top-3 left-3 inline-flex items-center gap-1.5 text-[11px] font-semibold text-white bg-gradient-to-br ${acento.grad} px-2.5 py-1 rounded-full shadow-sm`}
-            >
-              <CategoryIcon slug={trabajo.categoria.slug} className="w-3 h-3" />
-              {trabajo.categoria.nombre}
-            </span>
-          )}
-          <div className="absolute bottom-0 left-0 right-0 p-4">
-            <h3 className="font-semibold text-white text-sm sm:text-base mb-1 leading-snug">
-              {trabajo.proyecto.titulo}
-            </h3>
-            <span className="text-xs font-medium text-white/75">{trabajo.proveedorNombre}</span>
-          </div>
+        <img
+          src={trabajo.proyecto.imagenUrl}
+          alt={trabajo.proyecto.titulo}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+        {trabajo.categoria && (
+          <span
+            className={`absolute top-2.5 left-2.5 inline-flex items-center gap-1 text-[10px] font-semibold text-white bg-gradient-to-br ${acento.grad} px-2 py-0.5 rounded-full`}
+          >
+            <CategoryIcon slug={trabajo.categoria.slug} className="w-2.5 h-2.5" />
+            {trabajo.categoria.nombre}
+          </span>
+        )}
+        <div className="absolute bottom-0 left-0 right-0 p-3">
+          <h3 className={`font-semibold text-white leading-snug ${alto ? "text-sm" : "text-xs"}`}>
+            {trabajo.proyecto.titulo}
+          </h3>
+          <span className="text-[11px] font-medium text-white/75">por {trabajo.proveedorNombre}</span>
         </div>
       </Link>
     );
   }
 
   return (
-    <section className="max-w-6xl mx-auto px-4 py-16 sm:py-20">
-      <Reveal>
-        <div className="text-center mb-10">
-          <span className="inline-block text-xs font-semibold text-brand-600 bg-brand-50 px-3 py-1 rounded-full mb-4">
-            {t.badge}
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-ink">{t.titulo}</h2>
-        </div>
-      </Reveal>
+    <div className="bg-white border border-border rounded-2xl p-5 h-full flex flex-col">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="font-bold text-ink">{t.titulo}</h2>
+        <Link href="/profesionales" className="text-xs font-semibold text-brand-600 hover:text-brand-700 shrink-0">
+          {t.verTodos}
+        </Link>
+      </div>
 
-      {resto.length === 0 ? (
-        <div className="max-w-xl mx-auto">
-          <Reveal>
-            <Tarjeta trabajo={destacado} i={0} alto />
-          </Reveal>
-        </div>
-      ) : (
-        <div className="grid sm:grid-cols-2 gap-5 sm:h-[440px]">
-          <Reveal>
-            <Tarjeta trabajo={destacado} i={0} alto />
-          </Reveal>
-          <div className={`grid gap-5 h-full ${resto.length > 1 ? "grid-rows-2" : "grid-rows-1"}`}>
+      <div className="flex flex-col gap-3 flex-1">
+        <Tarjeta trabajo={destacado} i={0} alto />
+        {resto.length > 0 && (
+          <div className="grid grid-cols-2 gap-3">
             {resto.map((trabajo, i) => (
-              <Reveal key={`${trabajo.proveedorId}-${i}`} delay={(i + 1) * 80}>
-                <Tarjeta trabajo={trabajo} i={i + 1} />
-              </Reveal>
+              <Tarjeta key={`${trabajo.proveedorId}-${i}`} trabajo={trabajo} i={i + 1} />
             ))}
           </div>
-        </div>
-      )}
-    </section>
+        )}
+      </div>
+    </div>
   );
 }
