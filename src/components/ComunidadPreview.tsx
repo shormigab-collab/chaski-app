@@ -1,11 +1,13 @@
-import { Heart, MessageCircle, Sparkles, FileText } from "lucide-react";
+import { Heart, MessageCircle, Sparkles } from "lucide-react";
 
-// NOTA: este post es un ejemplo ilustrativo (nombre, texto, reacciones
-// y comentarios inventados) que replica el mockup de referencia — no
-// existe todavia la funcion de comunidad real (fase 2, ver
-// conversacion). El avatar usa iniciales en vez de una foto para que
-// quede claro que es un ejemplo, no una persona real con foto propia.
-// Reemplazar por publicaciones reales en cuanto la fase 2 este lista.
+// NOTA: este post es un ejemplo ilustrativo (nombre, texto, reacciones,
+// foto de avatar y comentarios inventados) que replica el mockup de
+// referencia — no existe todavia la funcion de comunidad real (fase 2,
+// ver conversacion). El avatar y la miniatura del articulo son fotos de
+// stock (pravatar.cc / Lorem Picsum, ambos bancos de fotos reales de
+// uso libre), no de la persona mencionada. Se marca explicitamente como
+// ejemplo en el pie de la tarjeta. Reemplazar por publicaciones reales
+// en cuanto la fase 2 este lista.
 export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }) {
   const t =
     lang === "en"
@@ -46,9 +48,12 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
 
       <div className="rounded-xl border border-border overflow-hidden flex-1 flex flex-col">
         <div className="flex items-center gap-2.5 p-3">
-          <span className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-[11px] font-bold shrink-0">
-            MJ
-          </span>
+          <img
+            src="https://i.pravatar.cc/60?img=47"
+            alt={t.nombre}
+            loading="lazy"
+            className="w-8 h-8 rounded-full object-cover shrink-0"
+          />
           <div className="leading-tight min-w-0">
             <div className="text-xs font-semibold text-ink/80 truncate">{t.nombre}</div>
             <div className="text-[11px] text-ink/40 truncate">
@@ -57,16 +62,19 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
           </div>
         </div>
         <p className="px-3 pb-3 text-xs text-ink/65 leading-relaxed">{t.texto}</p>
-        <div className="mx-3 mb-3 rounded-lg border border-border p-2.5 flex items-center gap-2.5">
-          <span className="w-9 h-9 rounded-md bg-lavender text-brand-500 flex items-center justify-center shrink-0">
-            <FileText className="w-4 h-4" strokeWidth={1.75} />
-          </span>
-          <div className="leading-tight min-w-0">
+        <div className="mx-3 mb-3 rounded-lg border border-border overflow-hidden flex items-center gap-2.5">
+          <img
+            src="https://picsum.photos/seed/chaski-articulo-contenido/120/120"
+            alt=""
+            loading="lazy"
+            className="w-9 h-9 object-cover shrink-0"
+          />
+          <div className="leading-tight min-w-0 py-2 pr-2">
             <div className="text-[11px] font-semibold text-ink/80 truncate">{t.articuloTitulo}</div>
             <div className="text-[10px] text-ink/40">{t.articuloTiempo}</div>
           </div>
         </div>
-        <div className="mt-auto flex items-center justify-between p-3 pt-0">
+        <div className="flex items-center justify-between p-3 pt-0">
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1 text-[11px] font-medium text-ink/50">
               <Heart className="w-3.5 h-3.5 fill-coral-500 text-coral-500" strokeWidth={1.75} />
@@ -78,6 +86,11 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
           </div>
           <span className="text-[11px] font-semibold text-white bg-brand-500 px-2.5 py-1.5 rounded-lg">{t.cta}</span>
         </div>
+        <p className="px-3 pb-2.5 text-[10px] text-ink/35 italic">
+          {lang === "en"
+            ? "Illustrative example, not a real person."
+            : "Ejemplo ilustrativo, aún no es una persona real."}
+        </p>
       </div>
     </div>
   );

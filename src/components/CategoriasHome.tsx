@@ -6,18 +6,22 @@ import CategoryIcon from "@/components/CategoryIcon";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
-// Un color distinto por posicion (en vez de un ciclo corto que se
-// repite) para que la grilla se vea tan variada como el mockup de
-// referencia.
+// Un color distinto por posicion, con los hex tomados directamente del
+// mockup de referencia (muestreados pixel a pixel de los iconos de
+// categoria) para que coincidan exactamente en vez de aproximarse con
+// la paleta por defecto de Tailwind.
+// Nota de contraste: gold/teal/green son fondos claros donde un icono
+// blanco casi no se ve (ratio menor a 3:1), asi que en esos tres uso el
+// icono en tono oscuro. El color de fondo en si es identico al mockup.
 const ACENTOS = [
-  { bg: "bg-brand-500", text: "text-white" },
-  { bg: "bg-blue-500", text: "text-white" },
-  { bg: "bg-coral-500", text: "text-white" },
-  { bg: "bg-gold-500", text: "text-white" },
-  { bg: "bg-emerald-500", text: "text-white" },
-  { bg: "bg-pink-500", text: "text-white" },
-  { bg: "bg-teal-500", text: "text-white" },
-  { bg: "bg-brand-300", text: "text-white" },
+  { bg: "bg-[#7048CD]", text: "text-white" },
+  { bg: "bg-[#4F7CEA]", text: "text-white" },
+  { bg: "bg-[#F76249]", text: "text-white" },
+  { bg: "bg-[#F9BC1E]", text: "text-ink" },
+  { bg: "bg-[#3DB875]", text: "text-ink" },
+  { bg: "bg-[#F358B5]", text: "text-white" },
+  { bg: "bg-[#1AC2CA]", text: "text-ink" },
+  { bg: "bg-[#9874E1]", text: "text-white" },
 ];
 
 // Categorias curadas para la vista inicial (etiquetas mas cortas y

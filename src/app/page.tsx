@@ -44,6 +44,31 @@ export default async function HomePage() {
         <div className="absolute top-40 -left-24 w-72 h-72 rounded-full bg-coral-100/40 blur-3xl" />
         <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full bg-gold-100/40 blur-3xl" />
 
+        {/* Linea tipo "camino" y chevron detras de la foto del hero, replicando
+            el motivo decorativo del mockup de referencia (mismo tono lavanda
+            que el chevron del logo). Puramente decorativo. */}
+        <svg
+          className="hidden md:block absolute top-6 right-[26%] w-32 h-64 text-[#C7AEF2] pointer-events-none"
+          viewBox="0 0 120 260"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M100 10 C20 40, 100 100, 15 140 C-55 172, 45 210, 25 250"
+            stroke="currentColor"
+            strokeWidth="20"
+            strokeLinecap="round"
+          />
+        </svg>
+        <svg
+          className="hidden md:block absolute top-1/2 -translate-y-1/2 right-2 w-14 h-24 text-[#C7AEF2] pointer-events-none"
+          viewBox="0 0 60 100"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path d="M8 6 L52 50 L8 94" stroke="currentColor" strokeWidth="16" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+
         <div className="relative max-w-6xl mx-auto px-4 pt-14 sm:pt-16 pb-16 sm:pb-20 grid md:grid-cols-2 gap-12 md:gap-14 items-center">
           <div className="text-center md:text-left">
             <span className="inline-block text-xs font-semibold text-coral-600 bg-coral-50 px-3 py-1 rounded-full mb-4">

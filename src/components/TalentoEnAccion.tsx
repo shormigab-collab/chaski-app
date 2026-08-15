@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Coffee, Smartphone, Globe } from "lucide-react";
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
 import { parsePortafolio, ACENTOS_PORTAFOLIO } from "@/lib/portafolio";
@@ -7,31 +6,30 @@ import { parsePortafolio, ACENTOS_PORTAFOLIO } from "@/lib/portafolio";
 // "Talento en accion": muestra proyectos REALES del portafolio de
 // proveedores registrados (ver lib/portafolio.ts). Si todavia no hay
 // ninguno (caso actual: 0 proveedores con portafolio cargado), se
-// muestran 3 ejemplos ilustrativos en su lugar — marcados con la
-// etiqueta "Ejemplo" y sin link a un perfil real — para que la seccion
-// no se vea vacia mientras la comunidad real crece. En cuanto haya
+// muestran 3 ejemplos ilustrativos en su lugar — con foto real (no
+// icono) para que se vea igual de completo que el mockup, marcados con
+// la etiqueta "Ejemplo" y sin link a un perfil real. En cuanto haya
 // proyectos reales, estos ejemplos dejan de mostrarse automaticamente.
+// Las fotos vienen de Lorem Picsum (banco de fotos reales, libre de
+// uso) — no son fotos de los proyectos reales mencionados.
 const EJEMPLOS = [
   {
     titulo: "Identidad de marca HolaCoffee",
     autor: "Andrés M.",
     categoriaLabel: "Diseño de marca",
-    Icono: Coffee,
-    grad: "from-brand-500 to-brand-700",
+    imagenUrl: "https://picsum.photos/seed/chaski-holacoffee/640/400",
   },
   {
     titulo: "App móvil de finanzas personales",
     autor: "Camila R.",
     categoriaLabel: "Desarrollo",
-    Icono: Smartphone,
-    grad: "from-coral-500 to-coral-700",
+    imagenUrl: "https://picsum.photos/seed/chaski-fintech/640/400",
   },
   {
     titulo: "Sitio web para SaaS educativo",
     autor: "Valeria S.",
     categoriaLabel: "Desarrollo web",
-    Icono: Globe,
-    grad: "from-gold-500 to-gold-600",
+    imagenUrl: "https://picsum.photos/seed/chaski-saas-edu/640/400",
   },
 ];
 
@@ -84,19 +82,14 @@ export default async function TalentoEnAccion({ lang = "es" }: { lang?: "es" | "
 
   function Tarjeta({ trabajo, i, alto }: { trabajo: TrabajoReal | TrabajoEjemplo; i: number; alto?: boolean }) {
     const acento = ACENTOS_PORTAFOLIO[i % ACENTOS_PORTAFOLIO.length];
-    const contenido =
-      trabajo.tipo === "real" ? (
-        <img
-          src={trabajo.imagenUrl}
-          alt={trabajo.titulo}
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-        />
-      ) : (
-        <div className={`absolute inset-0 bg-gradient-to-br ${trabajo.grad} flex items-center justify-center`}>
-          <trabajo.Icono className="w-8 h-8 text-white/40" strokeWidth={1.5} />
-        </div>
-      );
+    const contenido = (
+      <img
+        src={trabajo.imagenUrl}
+        alt={trabajo.titulo}
+        loading="lazy"
+        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+    );
 
     const cuerpo = (
       <>
@@ -156,6 +149,14 @@ export default async function TalentoEnAccion({ lang = "es" }: { lang?: "es" | "
           </div>
         )}
       </div>
+
+      {usaEjemplos && (
+        <p className="mt-3 text-[11px] text-ink/40 italic">
+          {lang === "en"
+            ? "Illustrative examples, not real people or projects yet."
+            : "Ejemplos ilustrativos, aún no son personas ni proyectos reales."}
+        </p>
+      )}
     </div>
   );
 }
