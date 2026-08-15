@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import HeroSearch from "@/components/HeroSearch";
-import HeroMockup from "@/components/HeroMockup";
+import HeroPhoto from "@/components/HeroPhoto";
 import Reveal from "@/components/Reveal";
+import TrustBar from "@/components/TrustBar";
 import CategoriasHome from "@/components/CategoriasHome";
+import TalentoEnAccion from "@/components/TalentoEnAccion";
 import ProfesionalesDestacados from "@/components/ProfesionalesDestacados";
+import ComunidadPreview from "@/components/ComunidadPreview";
 import Beneficios from "@/components/Beneficios";
 import Comparacion from "@/components/Comparacion";
 import Confianza from "@/components/Confianza";
@@ -44,39 +47,38 @@ export default async function HomePage() {
         <div className="relative max-w-6xl mx-auto px-4 pt-14 sm:pt-16 pb-16 sm:pb-20 grid md:grid-cols-2 gap-12 md:gap-14 items-center">
           <div className="text-center md:text-left">
             <span className="inline-block text-xs font-semibold text-coral-600 bg-coral-50 px-3 py-1 rounded-full mb-4">
-              Marketplace de profesionales en LatAm
+              Una red profesional en Latinoamérica
             </span>
             <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl sm:leading-[1.1] font-extrabold text-ink mb-5 tracking-tight">
-              No busques profesionales.{" "}
+              El talento de Latinoamérica,{" "}
               <span className="bg-gradient-to-r from-brand-500 to-coral-500 bg-clip-text text-transparent">
-                Deja que te encuentren a ti.
+                en movimiento.
               </span>
             </h1>
             <p className="text-base sm:text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0">
-              Publica tu proyecto gratis y recibe propuestas directas de expertos en diseño, desarrollo, marketing,
-              contabilidad y más. Sin cotizar uno por uno.
+              Conecta, demuestra lo que sabes y encuentra oportunidades reales.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
               <Link
-                href="/registro/cliente"
+                href="/registro/proveedor"
                 className="min-h-[44px] flex items-center justify-center bg-brand-500 text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors shadow-sm shadow-brand-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
               >
-                Publicar un proyecto gratis
+                Crear mi perfil gratis
               </Link>
               <Link
-                href="/profesionales"
-                className="min-h-[44px] flex items-center justify-center bg-white border border-black/10 text-ink px-7 py-3.5 rounded-full font-semibold hover:border-brand-500 hover:text-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                href="/registro/cliente"
+                className="min-h-[44px] flex items-center justify-center bg-white border border-border text-ink px-7 py-3.5 rounded-full font-semibold hover:border-brand-500 hover:text-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
               >
-                Explorar profesionales
+                Publicar un proyecto
               </Link>
             </div>
 
             <Link
-              href="/registro/proveedor"
+              href="/profesionales"
               className="inline-block mt-4 text-sm text-ink/45 hover:text-brand-500 underline decoration-dotted underline-offset-4 transition-colors"
             >
-              ¿Eres profesional? Crea tu perfil
+              Explorar profesionales
             </Link>
 
             <div className="mt-8">
@@ -87,17 +89,21 @@ export default async function HomePage() {
           </div>
 
           <div className="hidden md:block">
-            <HeroMockup />
+            <HeroPhoto />
           </div>
         </div>
       </section>
 
+      <TrustBar />
+
       <CategoriasHome categorias={categorias} />
+
+      <TalentoEnAccion />
 
       <ProfesionalesDestacados profesionales={profesionales} />
 
       {/* COMO FUNCIONA */}
-      <section className="bg-brand-50/40 border-y border-black/5">
+      <section className="bg-lavender/40 border-y border-border">
         <div className="max-w-6xl mx-auto px-4 py-16 sm:py-20 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <Reveal>
             <div className="relative max-w-md mx-auto md:mx-0">
@@ -119,7 +125,7 @@ export default async function HomePage() {
             </Reveal>
 
             <div className="relative space-y-8">
-              <div className="absolute left-6 top-3 bottom-3 w-px bg-black/10" aria-hidden="true" />
+              <div className="absolute left-6 top-3 bottom-3 w-px bg-border" aria-hidden="true" />
               {[
                 {
                   n: 1,
@@ -167,6 +173,8 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <ComunidadPreview />
 
       <Beneficios />
 

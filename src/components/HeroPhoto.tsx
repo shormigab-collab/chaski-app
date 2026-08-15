@@ -6,7 +6,7 @@ export default function HeroPhoto() {
       <div className="absolute -bottom-6 -left-6 w-2/3 h-2/3 bg-gold-400/20 rounded-[2rem] -z-10" />
 
       {/* foto principal */}
-      <div className="rounded-[2rem] overflow-hidden shadow-2xl shadow-black/20 aspect-[4/5]">
+      <div className="rounded-[2rem] overflow-hidden shadow-xl shadow-black/10 aspect-[4/5]">
         <img
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
           alt="Profesional trabajando en un proyecto"
@@ -18,7 +18,7 @@ export default function HeroPhoto() {
       <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-xl shadow-black/15 px-4 py-3 flex items-center gap-2.5 animate-float">
         <span className="w-8 h-8 rounded-full bg-brand-50 flex items-center justify-center shrink-0">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-            <path d="M20 6L9 17l-5-5" stroke="#2E2A6E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M20 6L9 17l-5-5" stroke="#3B2F8F" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </span>
         <div className="leading-tight">
