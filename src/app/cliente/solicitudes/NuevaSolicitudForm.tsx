@@ -216,7 +216,7 @@ export default function NuevaSolicitudForm({
               type="button"
               onClick={generarConIA}
               disabled={generandoIA}
-              className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold bg-brand-500 text-cream px-4 py-2 rounded-full hover:bg-brand-600 disabled:opacity-50 transition-colors"
+              className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold bg-brand-500 text-cream px-4 py-2 rounded-xl hover:bg-brand-600 disabled:opacity-50 transition-colors"
             >
               <Sparkles className="w-3.5 h-3.5" />
               {generandoIA ? t.iaCargando : t.iaBoton}
@@ -324,7 +324,7 @@ export default function NuevaSolicitudForm({
           <button
             type="button"
             onClick={siguiente}
-            className="bg-brand-500 text-cream px-6 py-2.5 rounded-full font-semibold hover:bg-brand-600 transition-colors"
+            className="bg-brand-500 text-cream px-6 py-2.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors"
           >
             {t.continuar}
           </button>
@@ -333,7 +333,7 @@ export default function NuevaSolicitudForm({
             type="button"
             onClick={publicar}
             disabled={cargando}
-            className="bg-brand-500 text-cream px-6 py-2.5 rounded-full font-semibold hover:bg-brand-600 disabled:opacity-50 transition-colors"
+            className="bg-brand-500 text-cream px-6 py-2.5 rounded-xl font-semibold hover:bg-brand-600 disabled:opacity-50 transition-colors"
           >
             {cargando ? t.publicando : t.publicar}
           </button>

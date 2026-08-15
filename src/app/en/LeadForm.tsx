@@ -85,7 +85,7 @@ export default function LeadForm() {
       {error && <p className="text-coral-600 text-sm">{error}</p>}
       <button
         disabled={enviando}
-        className="w-full bg-brand-500 text-cream py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50 min-h-[44px]"
+        className="w-full bg-brand-500 text-cream py-3.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50 min-h-[44px]"
       >
         {enviando ? "Sending..." : "Get started — it's free"}
       </button>

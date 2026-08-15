@@ -78,7 +78,7 @@ export default function PostBlogPage({ params }: { params: { slug: string } }) {
           <p className="text-ink font-semibold mb-3">¿Necesitas contratar un profesional para tu proyecto?</p>
           <Link
             href="/registro/cliente"
-            className="inline-block bg-brand-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors"
+            className="inline-block bg-brand-500 text-cream px-6 py-3 rounded-xl font-semibold hover:bg-brand-600 transition-colors"
           >
             Publica tu proyecto gratis en chaski
           </Link>

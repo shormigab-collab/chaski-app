@@ -67,7 +67,7 @@ export default function ActividadReciente({ items }: { items: Item[] }) {
               </p>
               <Link
                 href="/registro/cliente"
-                className="inline-block bg-brand-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors"
+                className="inline-block bg-brand-500 text-cream px-6 py-3 rounded-xl font-semibold hover:bg-brand-600 transition-colors"
               >
                 Publicar la primera solicitud
               </Link>

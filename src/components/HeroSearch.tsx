@@ -72,7 +72,7 @@ export default function HeroSearch({
         />
         <button
           onClick={() => resultados[0] && irACategoria(resultados[0])}
-          className="text-brand-500 text-sm font-semibold px-4 rounded-full hover:bg-brand-50 transition-colors shrink-0 min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+          className="text-brand-500 text-sm font-semibold px-4 rounded-xl hover:bg-brand-50 transition-colors shrink-0 min-h-[44px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
         >
           {lang === "en" ? "Search" : "Buscar"}
         </button>

@@ -73,7 +73,7 @@ export default function VirtualAssistantsPage() {
           </p>
           <Link
             href="/registro/cliente?categoria=asistente-virtual&lang=en"
-            className="inline-flex items-center justify-center min-h-[44px] bg-brand-500 text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors shadow-sm shadow-brand-500/20"
+            className="inline-flex items-center justify-center min-h-[44px] bg-brand-500 text-cream px-7 py-3.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors shadow-sm shadow-brand-500/20"
           >
             Post your project free
           </Link>
@@ -153,7 +153,7 @@ export default function VirtualAssistantsPage() {
               </p>
               <Link
                 href="/registro/cliente?categoria=asistente-virtual&lang=en"
-                className="inline-flex items-center justify-center min-h-[44px] bg-cream text-brand-600 px-7 py-3.5 rounded-full font-semibold hover:bg-white transition-colors"
+                className="inline-flex items-center justify-center min-h-[44px] bg-cream text-brand-600 px-7 py-3.5 rounded-xl font-semibold hover:bg-white transition-colors"
               >
                 Get started — it&apos;s free
               </Link>

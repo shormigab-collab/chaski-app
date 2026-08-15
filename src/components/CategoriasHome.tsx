@@ -119,7 +119,7 @@ export default function CategoriasHome({
           <button
             type="button"
             onClick={() => setVerTodas((v) => !v)}
-            className="inline-flex items-center justify-center min-h-[44px] px-6 rounded-full border border-border text-sm font-semibold text-ink/70 hover:border-brand-500 hover:text-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+            className="inline-flex items-center justify-center min-h-[44px] px-6 rounded-xl border border-border text-sm font-semibold text-ink/70 hover:border-brand-500 hover:text-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
           >
             {lang === "en"
               ? verTodas

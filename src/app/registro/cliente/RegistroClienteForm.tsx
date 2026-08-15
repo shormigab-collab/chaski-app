@@ -82,7 +82,7 @@ export default function RegistroClienteForm() {
         <input name="ciudad" required placeholder={t.ciudad} className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
         <input name="password" type="password" required minLength={6} placeholder={t.password} className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
         {error && <p className="text-coral-600 text-sm">{error}</p>}
-        <button disabled={cargando} className="w-full bg-brand-500 text-cream py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50">
+        <button disabled={cargando} className="w-full bg-brand-500 text-cream py-3 rounded-xl font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50">
           {cargando ? t.cargando : t.boton}
         </button>
       </form>

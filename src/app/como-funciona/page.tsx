@@ -65,7 +65,7 @@ export default function ComoFunciona() {
               </div>
               <Link
                 href="/registro/cliente"
-                className="mt-8 inline-flex items-center justify-center gap-2 min-h-[44px] bg-brand-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                className="mt-8 inline-flex items-center justify-center gap-2 min-h-[44px] bg-brand-500 text-cream px-6 py-3 rounded-xl font-semibold hover:bg-brand-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
               >
                 Publicar un proyecto gratis
                 <ArrowRight className="w-4 h-4" />
@@ -98,7 +98,7 @@ export default function ComoFunciona() {
               </p>
               <Link
                 href="/registro/proveedor"
-                className="mt-4 inline-flex items-center justify-center gap-2 min-h-[44px] bg-coral-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-coral-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral-500"
+                className="mt-4 inline-flex items-center justify-center gap-2 min-h-[44px] bg-coral-500 text-cream px-6 py-3 rounded-xl font-semibold hover:bg-coral-600 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral-500"
               >
                 Crear mi perfil profesional
                 <ArrowRight className="w-4 h-4" />
@@ -119,13 +119,13 @@ export default function ComoFunciona() {
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link
                   href="/registro/cliente"
-                  className="inline-flex items-center justify-center min-h-[44px] bg-cream text-brand-600 px-6 py-3 rounded-full font-semibold hover:bg-white transition-colors"
+                  className="inline-flex items-center justify-center min-h-[44px] bg-cream text-brand-600 px-6 py-3 rounded-xl font-semibold hover:bg-white transition-colors"
                 >
                   Publicar un proyecto
                 </Link>
                 <Link
                   href="/registro/proveedor"
-                  className="inline-flex items-center justify-center min-h-[44px] bg-white/10 text-cream border border-white/30 px-6 py-3 rounded-full font-semibold hover:bg-white/20 transition-colors"
+                  className="inline-flex items-center justify-center min-h-[44px] bg-white/10 text-cream border border-white/30 px-6 py-3 rounded-xl font-semibold hover:bg-white/20 transition-colors"
                 >
                   Crear perfil profesional
                 </Link>

@@ -27,7 +27,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
       </Link>
       <a
         href="#interesado"
-        className="bg-brand-500 text-cream px-4 py-2 rounded-full hover:bg-brand-600 transition-colors shadow-sm text-center"
+        className="bg-brand-500 text-cream px-4 py-2 rounded-xl hover:bg-brand-600 transition-colors shadow-sm text-center"
       >
         Get started
       </a>
@@ -45,7 +45,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
       </Link>
       <Link
         href="/registro"
-        className="bg-brand-500 text-cream px-4 py-2 rounded-full hover:bg-brand-600 transition-colors shadow-sm text-center"
+        className="bg-brand-500 text-cream px-4 py-2 rounded-xl hover:bg-brand-600 transition-colors shadow-sm text-center"
       >
         Registrarme
       </Link>
@@ -231,13 +231,13 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
               <div className="mt-6 pt-5 border-t border-border flex flex-col gap-2.5">
                 <Link
                   href={esIngles ? "/en#interesado" : "/registro"}
-                  className="text-center bg-brand-500 text-cream px-4 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors min-h-[44px] flex items-center justify-center"
+                  className="text-center bg-brand-500 text-cream px-4 py-3 rounded-xl font-semibold hover:bg-brand-600 transition-colors min-h-[44px] flex items-center justify-center"
                 >
                   {esIngles ? "Get started" : "Registrarme"}
                 </Link>
                 <Link
                   href="/login"
-                  className="text-center border border-border text-ink px-4 py-3 rounded-full font-semibold hover:border-brand-300 transition-colors min-h-[44px] flex items-center justify-center"
+                  className="text-center border border-border text-ink px-4 py-3 rounded-xl font-semibold hover:border-brand-300 transition-colors min-h-[44px] flex items-center justify-center"
                 >
                   {esIngles ? "Log in" : "Iniciar sesión"}
                 </Link>

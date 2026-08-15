@@ -343,7 +343,7 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
       {guardado && <p className="text-brand-600 text-sm">Perfil actualizado.</p>}
       <button
         disabled={cargando || subiendoFoto || subiendoIndice !== null}
-        className="bg-brand-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50"
+        className="bg-brand-500 text-cream px-6 py-3 rounded-xl font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50"
       >
         {subiendoFoto || subiendoIndice !== null
           ? "Espera a que termine de subir la foto..."

@@ -27,7 +27,7 @@ export default function CopiarLinkInvitacion({ link }: { link: string }) {
       />
       <button
         onClick={copiar}
-        className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold bg-brand-500 text-cream px-4 py-2.5 rounded-full hover:bg-brand-600 transition-colors min-h-[40px]"
+        className="shrink-0 inline-flex items-center gap-1.5 text-sm font-semibold bg-brand-500 text-cream px-4 py-2.5 rounded-xl hover:bg-brand-600 transition-colors min-h-[40px]"
       >
         {copiado ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
         {copiado ? "¡Copiado!" : "Copiar"}

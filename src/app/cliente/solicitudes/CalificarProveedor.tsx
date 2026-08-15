@@ -108,7 +108,7 @@ export default function CalificarProveedor({ proveedorId, proveedorNombre, resen
           type="button"
           disabled={enviando}
           onClick={enviar}
-          className="text-xs font-semibold bg-brand-500 text-cream px-4 py-2 rounded-full hover:bg-brand-600 transition-colors disabled:opacity-50"
+          className="text-xs font-semibold bg-brand-500 text-cream px-4 py-2 rounded-xl hover:bg-brand-600 transition-colors disabled:opacity-50"
         >
           {enviando ? "Guardando..." : "Enviar calificación"}
         </button>

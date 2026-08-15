@@ -68,7 +68,7 @@ export default function ProfesionalesDestacados({
               </p>
               <Link
                 href="/registro/proveedor"
-                className="inline-block bg-brand-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors min-h-[44px]"
+                className="inline-block bg-brand-500 text-cream px-6 py-3 rounded-xl font-semibold hover:bg-brand-600 transition-colors min-h-[44px]"
               >
                 Crear mi perfil profesional
               </Link>

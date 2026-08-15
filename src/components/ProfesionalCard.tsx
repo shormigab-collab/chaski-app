@@ -118,7 +118,7 @@ export default function ProfesionalCard({ p, lang = "es" }: { p: ProfesionalCard
 
         <Link
           href={`/profesionales/${p.id}`}
-          className="block text-center text-sm font-semibold bg-brand-50 text-brand-600 rounded-full py-2.5 hover:bg-brand-500 hover:text-cream transition-colors min-h-[44px] flex items-center justify-center"
+          className="block text-center text-sm font-semibold bg-brand-50 text-brand-600 rounded-xl py-2.5 hover:bg-brand-500 hover:text-cream transition-colors min-h-[44px] flex items-center justify-center"
         >
           {lang === "en" ? "View profile" : "Ver perfil"}
         </Link>

@@ -199,7 +199,7 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
           </p>
           <Link
             href="/registro/cliente"
-            className="inline-block bg-brand-500 text-cream px-6 py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors min-h-[44px]"
+            className="inline-block bg-brand-500 text-cream px-6 py-3 rounded-xl font-semibold hover:bg-brand-600 transition-colors min-h-[44px]"
           >
             Publicar un proyecto gratis
           </Link>

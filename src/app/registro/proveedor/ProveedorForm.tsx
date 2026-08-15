@@ -163,7 +163,7 @@ export default function ProveedorForm({
 
             <button
               disabled={cargando}
-              className="w-full bg-brand-500 text-cream py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50 min-h-[44px]"
+              className="w-full bg-brand-500 text-cream py-3.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50 min-h-[44px]"
             >
               {cargando ? "Creando perfil..." : `Crear mi perfil y recibir ${creditosAMostrar} créditos`}
             </button>
