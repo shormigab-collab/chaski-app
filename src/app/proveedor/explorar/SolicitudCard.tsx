@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { MapPin } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 
 type Solicitud = {
@@ -28,6 +29,10 @@ export default function SolicitudCard({
   const [visible, setVisible] = useState(desbloqueada);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
+  const [mostrarMapa, setMostrarMapa] = useState(false);
+  const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+    solicitud.ciudad
+  )}&output=embed`;
 
   async function desbloquear() {
     setError("");
@@ -53,6 +58,28 @@ export default function SolicitudCard({
       <p className="text-gray-600 text-sm mt-1">{solicitud.descripcion}</p>
       {solicitud.presupuesto && (
         <p className="text-sm text-gray-500 mt-1">Presupuesto: {solicitud.presupuesto}</p>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setMostrarMapa((v) => !v)}
+        className="mt-2 inline-flex items-center gap-1.5 text-sm text-brand-600 font-medium hover:text-brand-700"
+      >
+        <MapPin className="w-3.5 h-3.5" />
+        {mostrarMapa ? "Ocultar ubicación" : "Ver ubicación"}
+      </button>
+
+      {mostrarMapa && (
+        <div className="mt-2 rounded-lg overflow-hidden border">
+          <iframe
+            src={mapaSrc}
+            width="100%"
+            height="180"
+            style={{ border: 0 }}
+            loading="lazy"
+            title={`Ubicación aproximada en ${solicitud.ciudad}`}
+          />
+        </div>
       )}
 
       {visible ? (
