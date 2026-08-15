@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import Logo from "./Logo";
+import ReferralBanner from "./ReferralBanner";
 
 type UsuarioConProveedor = {
   id: string;
@@ -124,6 +125,7 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
 
   return (
     <>
+      {usuario?.role === "PROVEEDOR" && <ReferralBanner />}
       <header className="sticky top-0 z-20 backdrop-blur-md bg-cream/80 border-b border-black/5">
       <div className="max-w-6xl mx-auto flex items-center justify-between px-4 py-3.5">
         <Link href={esIngles ? "/en" : "/"} className="shrink-0" onClick={cerrar}>

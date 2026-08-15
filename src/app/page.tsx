@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 import CategoriasHome from "@/components/CategoriasHome";
 import ProfesionalesDestacados from "@/components/ProfesionalesDestacados";
 import Beneficios from "@/components/Beneficios";
+import Comparacion from "@/components/Comparacion";
 import Confianza from "@/components/Confianza";
 
 export default async function HomePage() {
@@ -168,6 +169,8 @@ export default async function HomePage() {
       </section>
 
       <Beneficios />
+
+      <Comparacion />
 
       <Confianza />
 

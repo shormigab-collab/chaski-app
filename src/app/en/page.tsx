@@ -7,6 +7,7 @@ import Reveal from "@/components/Reveal";
 import CategoriasHome from "@/components/CategoriasHome";
 import ProfesionalesDestacados from "@/components/ProfesionalesDestacados";
 import Beneficios from "@/components/Beneficios";
+import Comparacion from "@/components/Comparacion";
 import Confianza from "@/components/Confianza";
 import LeadForm from "./LeadForm";
 
@@ -171,6 +172,8 @@ export default async function EnglishLandingPage() {
       </section>
 
       <Beneficios lang="en" />
+
+      <Comparacion lang="en" />
 
       <Confianza lang="en" />
 
