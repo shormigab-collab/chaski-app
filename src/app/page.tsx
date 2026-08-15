@@ -49,13 +49,18 @@ export default async function HomePage() {
             <span className="inline-block text-xs font-semibold text-coral-600 bg-coral-50 px-3 py-1 rounded-full mb-4">
               Una red profesional en Latinoamérica
             </span>
-            <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl sm:leading-[1.1] font-extrabold text-ink mb-5 tracking-tight">
-              El talento de Latinoamérica,{" "}
-              <span className="bg-gradient-to-r from-brand-500 to-coral-500 bg-clip-text text-transparent">
-                en movimiento.
-              </span>
+            <h1
+              className="font-extrabold text-ink mb-5"
+              style={{
+                fontSize: "clamp(2.6rem, 4.6vw, 4.5rem)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.035em",
+              }}
+            >
+              El talento de{" "}
+              <span className="text-coral-600">Latinoamérica,</span> en movimiento.
             </h1>
-            <p className="text-base sm:text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0">
+            <p className="text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0 leading-relaxed">
               Conecta, demuestra lo que sabes y encuentra oportunidades reales.
             </p>
 

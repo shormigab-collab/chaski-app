@@ -29,7 +29,7 @@ export default function HeroPhoto() {
         style={{ animationDelay: "1s" }}
       >
         <span className="w-2.5 h-2.5 rounded-full bg-availability shrink-0" />
-        <span className="text-xs font-semibold text-ink/70">Publicar es gratis</span>
+        <span className="text-xs font-semibold text-ink/70">Disponible</span>
       </div>
     </div>
   );

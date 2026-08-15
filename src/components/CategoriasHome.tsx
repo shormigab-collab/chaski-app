@@ -61,7 +61,7 @@ export default function CategoriasHome({
       <Reveal>
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-ink">
-            {lang === "en" ? "Browse by category" : "Explora por categoría"}
+            {lang === "en" ? "Discover talent by specialty" : "Descubre talento por especialidad"}
           </h2>
           <p className="text-ink/55 mt-2">
             {lang === "en"
@@ -71,7 +71,7 @@ export default function CategoriasHome({
         </div>
       </Reveal>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
         {curadas.map((cat, i) => {
           const ac = ACENTOS[i % ACENTOS.length];
           return (

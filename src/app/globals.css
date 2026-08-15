@@ -6,6 +6,42 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  /* Tokens de diseno para valores que la escala por defecto de Tailwind
+     no cubre (radios intermedios, sombras especificas, clamp() tipografico).
+     Los colores base viven en tailwind.config.ts; estos son un espejo
+     para poder usarlos con var(...) donde haga falta un valor exacto. */
+  --chaski-ink: #17133a;
+  --chaski-ink-muted: #625f70;
+  --chaski-purple: #3b2f8f;
+  --chaski-purple-hover: #2d2475;
+  --chaski-coral: #ff6b5f;
+  --chaski-coral-strong: #d9463d;
+  --chaski-cream: #fff9f4;
+  --chaski-lavender: #f2efff;
+  --chaski-lavender-line: #d9ccff;
+  --chaski-surface: #ffffff;
+  --chaski-border: #e7e2ef;
+  --chaski-success: #169b62;
+  --chaski-warning: #e5a11a;
+
+  --chaski-radius-sm: 10px;
+  --chaski-radius-md: 14px;
+  --chaski-radius-lg: 20px;
+  --chaski-radius-pill: 999px;
+
+  --chaski-shadow-sm: 0 4px 14px rgba(23, 19, 58, 0.06);
+  --chaski-shadow-md: 0 14px 36px rgba(23, 19, 58, 0.09);
+
+  --chaski-container: 1400px;
+  --chaski-gutter-desktop: 68px;
+  --chaski-gutter-tablet: 32px;
+  --chaski-gutter-mobile: 20px;
+
+  --chaski-font-heading: "Manrope", "Inter", system-ui, sans-serif;
+  --chaski-font-body: "Inter", system-ui, sans-serif;
+}
+
 body {
   color: #17133A; /* ink navy */
   background: #FFF9F4; /* warm cream */

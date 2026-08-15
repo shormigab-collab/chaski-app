@@ -13,21 +13,21 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
     lang === "en"
       ? {
           badge: "Coming soon",
-          titulo: "Show your work, not just your profile",
+          titulo: "De la comunidad",
           sub: "Soon, every professional will be able to share project updates directly on Chaski — and clients will be able to reach out right from the post.",
           placeholderNombre: "Your name",
           placeholderRol: "Your specialty",
           placeholderTexto: "This is what a project update could look like on your profile.",
-          cta: "Contact",
+          cta: "Request services",
         }
       : {
           badge: "Próximamente",
-          titulo: "Muestra tu trabajo, no solo tu perfil",
+          titulo: "De la comunidad",
           sub: "Pronto cada profesional podrá compartir avances de proyectos directamente en Chaski — y los clientes podrán escribirle desde la misma publicación.",
           placeholderNombre: "Tu nombre",
           placeholderRol: "Tu especialidad",
           placeholderTexto: "Así se podría ver una actualización de proyecto en tu perfil.",
-          cta: "Contactar",
+          cta: "Solicitar sus servicios",
         };
 
   return (
@@ -73,7 +73,9 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
                   <Heart className="w-[18px] h-[18px]" strokeWidth={1.75} />
                   <MessageCircle className="w-[18px] h-[18px]" strokeWidth={1.75} />
                 </div>
-                <span className="text-xs font-semibold text-brand-400">{t.cta}</span>
+                <span className="text-xs font-semibold text-white bg-brand-400 px-3 py-1.5 rounded-full">
+                  {t.cta}
+                </span>
               </div>
             </div>
           </div>
