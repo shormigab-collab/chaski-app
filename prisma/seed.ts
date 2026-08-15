@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 const categorias = [
+  { nombre: "Asistente virtual / administrativo", slug: "asistente-virtual", icono: "🗂️" },
   { nombre: "Diseño web", slug: "diseno-web", icono: "🌐" },
   { nombre: "Preparación de impuestos", slug: "impuestos", icono: "🧾" },
   { nombre: "Bookkeeping / Teneduría de libros", slug: "teneduria-libros", icono: "📒" },

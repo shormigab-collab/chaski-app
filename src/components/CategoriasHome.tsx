@@ -29,6 +29,7 @@ const CURADAS: { slug: string; etiqueta: string }[] = [
 ];
 
 const CURATED_EN: { slug: string; etiqueta: string }[] = [
+  { slug: "asistente-virtual", etiqueta: "Virtual assistant" },
   { slug: "marketing-redes", etiqueta: "Digital marketing" },
   { slug: "diseno-grafico", etiqueta: "Design & branding" },
   { slug: "desarrollo-web", etiqueta: "Web development" },

@@ -12,9 +12,16 @@ import Confianza from "@/components/Confianza";
 import LeadForm from "./LeadForm";
 
 export const metadata: Metadata = {
-  title: "Hire Freelance Talent from Latin America | chaski",
+  title: "Hire Virtual Assistants & Freelance Talent from LatAm | chaski",
   description:
-    "Post your project free and get contacted directly by freelance designers, developers, marketers and more from Latin America. No agency fees.",
+    "Find virtual assistants and freelance talent from Latin America (LatAm). Post your project free and get contacted directly by designers, developers, marketers, VAs and more. No agency fees.",
+  keywords: [
+    "virtual assistants LatAm",
+    "hire virtual assistant Latin America",
+    "LatAm talent",
+    "remote talent Latin America",
+    "hire freelancers Latin America",
+  ],
   alternates: { canonical: "/en" },
 };
 
@@ -80,6 +87,13 @@ export default async function EnglishLandingPage() {
                 Explore professionals
               </Link>
             </div>
+
+            <Link
+              href="/en/virtual-assistants"
+              className="inline-block mt-4 text-sm text-ink/45 hover:text-brand-500 underline decoration-dotted underline-offset-4 transition-colors"
+            >
+              Looking specifically for a Virtual Assistant?
+            </Link>
 
             <div className="mt-8">
               <HeroSearch

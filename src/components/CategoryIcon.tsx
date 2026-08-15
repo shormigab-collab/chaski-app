@@ -23,6 +23,7 @@ import {
   Tag,
   Clapperboard,
   Box,
+  ListChecks,
   type LucideIcon,
 } from "lucide-react";
 
@@ -31,6 +32,7 @@ import {
 // depender del renderizado de emoji del sistema operativo (que varía y
 // se ve poco profesional, tipo WhatsApp).
 const ICONOS: Record<string, LucideIcon> = {
+  "asistente-virtual": ListChecks,
   "diseno-web": Globe,
   impuestos: Receipt,
   "teneduria-libros": BookOpenText,

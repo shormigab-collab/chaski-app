@@ -31,6 +31,11 @@ export default function Footer() {
                 </a>
               </li>
               <li>
+                <Link href="/en/virtual-assistants" className="text-ink/60 hover:text-brand-500 transition-colors">
+                  Hire a Virtual Assistant
+                </Link>
+              </li>
+              <li>
                 <Link href="/" className="text-ink/60 hover:text-brand-500 transition-colors">
                   Español
                 </Link>
