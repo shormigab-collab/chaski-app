@@ -6,18 +6,25 @@ import { CheckCircle2, Heart } from "lucide-react";
 // adelante cuando haya proyectos y clientes reales que mostrar.
 export default function HeroPhoto() {
   return (
-    <div className="relative w-full max-w-lg mx-auto md:mx-0 pt-6 pb-4">
-      {/* foto principal: recorte con fondo transparente, sin marco */}
+    <div className="relative w-full max-w-lg mx-auto md:mx-0 pt-20 pb-10">
+      {/* foto principal: recorte con fondo transparente, sin marco. El
+          degradado en la mascara difumina la parte de abajo (donde la
+          foto original termina a media pierna) para que no se vea como
+          un corte brusco, sino que se disuelve hacia el fondo. */}
       <img
         src="/images/hero-equipo.png"
         alt="Profesionales de Latinoamérica trabajando con laptop y tablet"
         width={820}
         height={546}
         className="w-full h-auto relative z-0"
+        style={{
+          maskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
+        }}
       />
 
       {/* tarjeta flotante: proyecto de ejemplo */}
-      <div className="absolute bottom-6 -left-4 sm:-left-10 w-40 bg-white rounded-2xl shadow-xl shadow-black/10 p-2.5 animate-float">
+      <div className="absolute bottom-10 -left-4 sm:-left-10 w-40 bg-white rounded-2xl shadow-xl shadow-black/10 p-2.5 animate-float">
         <div className="flex items-center gap-2 mb-2">
           <span className="w-6 h-6 rounded-full bg-brand-100 text-brand-700 text-[10px] font-bold flex items-center justify-center shrink-0">
             CR
@@ -37,9 +44,10 @@ export default function HeroPhoto() {
         </div>
       </div>
 
-      {/* tarjeta flotante: disponibilidad */}
+      {/* tarjeta flotante: disponibilidad — arriba de la foto (no encima
+          de las caras) */}
       <div
-        className="absolute top-0 left-[30%] bg-white rounded-2xl shadow-xl shadow-black/10 px-3.5 py-3 flex items-center gap-2 animate-float"
+        className="absolute top-0 left-[24%] bg-white rounded-2xl shadow-xl shadow-black/10 px-3.5 py-3 flex items-center gap-2 animate-float"
         style={{ animationDelay: "1s" }}
       >
         <span className="w-2.5 h-2.5 rounded-full bg-availability shrink-0" />
@@ -49,9 +57,10 @@ export default function HeroPhoto() {
         </div>
       </div>
 
-      {/* tarjeta flotante: trabajo de ejemplo con cliente */}
+      {/* tarjeta flotante: trabajo de ejemplo con cliente — arriba de la
+          foto, a la derecha, sin tapar la cara */}
       <div
-        className="absolute top-6 -right-2 sm:-right-8 w-48 bg-white rounded-2xl shadow-xl shadow-black/10 p-3 animate-float"
+        className="absolute top-1 -right-2 sm:-right-8 w-48 bg-white rounded-2xl shadow-xl shadow-black/10 p-3 animate-float"
         style={{ animationDelay: "0.5s" }}
       >
         <div className="flex items-center gap-1.5 mb-1.5">
