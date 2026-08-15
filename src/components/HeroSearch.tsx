@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import CategoryIcon from "@/components/CategoryIcon";
+import { nombreCategoria } from "@/lib/categoriasEn";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
@@ -21,16 +22,14 @@ export default function HeroSearch({
   const resultados = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return categorias.slice(0, 6);
-    return categorias.filter((c) => c.nombre.toLowerCase().includes(q)).slice(0, 6);
-  }, [query, categorias]);
+    return categorias.filter((c) => nombreCategoria(c, lang).toLowerCase().includes(q)).slice(0, 6);
+  }, [query, categorias, lang]);
 
   function irACategoria(cat: Categoria) {
-    if (lang === "en") {
-      setAbierto(false);
-      document.getElementById("interesado")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-    router.push(`/registro/cliente?categoria=${cat.slug}`);
+    setAbierto(false);
+    const params = new URLSearchParams({ categoria: cat.slug });
+    if (lang === "en") params.set("lang", "en");
+    router.push(`/registro/cliente?${params.toString()}`);
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -92,7 +91,7 @@ export default function HeroSearch({
               <span className="w-8 h-8 rounded-lg bg-brand-50 text-brand-500 flex items-center justify-center shrink-0">
                 <CategoryIcon slug={cat.slug} className="w-4 h-4" />
               </span>
-              <span className="font-medium">{cat.nombre}</span>
+              <span className="font-medium">{nombreCategoria(cat, lang)}</span>
             </button>
           ))}
         </div>

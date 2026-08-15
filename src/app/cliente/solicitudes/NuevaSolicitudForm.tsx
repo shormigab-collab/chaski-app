@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Sparkles } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
+import { nombreCategoria } from "@/lib/categoriasEn";
 
 type Categoria = { id: string; nombre: string; icono: string; slug: string };
 
@@ -11,10 +12,12 @@ export default function NuevaSolicitudForm({
   categorias,
   usuario,
   categoriaInicial,
+  lang = "es",
 }: {
   categorias: Categoria[];
   usuario: { telefono: string | null; ciudad: string | null };
   categoriaInicial?: string;
+  lang?: "es" | "en";
 }) {
   const router = useRouter();
   const total = 3;
@@ -36,14 +39,75 @@ export default function NuevaSolicitudForm({
   const [generandoIA, setGenerandoIA] = useState(false);
   const [errorIA, setErrorIA] = useState("");
 
+  const t =
+    lang === "en"
+      ? {
+          errCategoria: "Choose a category to continue",
+          errDetalle: "Fill in a title and a description of at least 10 characters",
+          errIA: "Tell us a bit more (minimum 10 characters)",
+          errIAFallback: "We couldn't generate the request automatically. Fill it in manually.",
+          errContacto: "Fill in your city and contact phone",
+          errPublicar: "Couldn't publish your request",
+          exito: "Request published! It's now visible to professionals. Feel free to post another one.",
+          p1Titulo: "What kind of service do you need?",
+          p1Sub: "Choose the category that best describes your project.",
+          iaLabel: "Or tell us what you need and we'll draft it for you",
+          iaPlaceholder: "E.g: I need help redesigning my company's website and setting up social media",
+          iaBoton: "Draft with AI",
+          iaCargando: "Drafting...",
+          oManual: "Or choose manually:",
+          p2Titulo: "Tell us more",
+          categoriaLabel: "Category:",
+          tituloPlaceholder: "Short title (e.g: I need a redesign of my website)",
+          descPlaceholder: "Describe in detail what you need",
+          p3Titulo: "Last details",
+          p3Sub: "This is how interested professionals will reach out to you.",
+          ciudadPlaceholder: "City",
+          presupuestoPlaceholder: "Approximate budget (optional)",
+          telefonoPlaceholder: "Contact phone number",
+          atras: "← Back",
+          continuar: "Continue",
+          publicar: "Post request",
+          publicando: "Posting...",
+        }
+      : {
+          errCategoria: "Elige una categoría para continuar",
+          errDetalle: "Completa el título y una descripción de al menos 10 caracteres",
+          errIA: "Cuéntanos un poco más (mínimo 10 caracteres)",
+          errIAFallback: "No pudimos generar la solicitud automáticamente. Completa los campos manualmente.",
+          errContacto: "Completa tu ciudad y teléfono de contacto",
+          errPublicar: "No se pudo publicar la solicitud",
+          exito: "¡Solicitud publicada! Ya es visible para profesionales. Puedes publicar otra si quieres.",
+          p1Titulo: "¿Qué tipo de servicio necesitas?",
+          p1Sub: "Elige la categoría que mejor describa tu proyecto.",
+          iaLabel: "O cuéntanos qué necesitas y lo armamos por ti",
+          iaPlaceholder: "Ej: necesito que me ayuden a diseñar el logo de mi negocio de arepas y armar mis redes sociales",
+          iaBoton: "Completar con IA",
+          iaCargando: "Redactando...",
+          oManual: "O elige manualmente:",
+          p2Titulo: "Cuéntanos más",
+          categoriaLabel: "Categoría:",
+          tituloPlaceholder: "Título breve (ej: Necesito un rediseño de mi sitio web)",
+          descPlaceholder: "Describe con detalle lo que necesitas",
+          p3Titulo: "Últimos datos",
+          p3Sub: "Así te podrán contactar los profesionales interesados.",
+          ciudadPlaceholder: "Ciudad",
+          presupuestoPlaceholder: "Presupuesto aproximado (opcional)",
+          telefonoPlaceholder: "Teléfono de contacto",
+          atras: "← Atrás",
+          continuar: "Continuar",
+          publicar: "Publicar solicitud",
+          publicando: "Publicando...",
+        };
+
   function siguiente() {
     setError("");
     if (paso === 1 && !categoriaId) {
-      setError("Elige una categoría para continuar");
+      setError(t.errCategoria);
       return;
     }
     if (paso === 2 && (titulo.trim().length < 3 || descripcion.trim().length < 10)) {
-      setError("Completa el título y una descripción de al menos 10 caracteres");
+      setError(t.errDetalle);
       return;
     }
     setPaso((p) => Math.min(p + 1, total));
@@ -51,7 +115,7 @@ export default function NuevaSolicitudForm({
 
   async function generarConIA() {
     if (textoIA.trim().length < 10) {
-      setErrorIA("Cuéntanos un poco más (mínimo 10 caracteres)");
+      setErrorIA(t.errIA);
       return;
     }
     setErrorIA("");
@@ -71,7 +135,7 @@ export default function NuevaSolicitudForm({
       setError("");
       setPaso(2);
     } else {
-      setErrorIA(data.error || "No pudimos generar la solicitud, intenta llenarlo manualmente");
+      setErrorIA(data.error || t.errIAFallback);
     }
   }
 
@@ -83,7 +147,7 @@ export default function NuevaSolicitudForm({
   async function publicar() {
     setError("");
     if (!ciudad.trim() || !telefonoContacto.trim()) {
-      setError("Completa tu ciudad y teléfono de contacto");
+      setError(t.errContacto);
       return;
     }
     setCargando(true);
@@ -103,7 +167,7 @@ export default function NuevaSolicitudForm({
       router.refresh();
     } else {
       const data = await res.json();
-      setError(data.error || "No se pudo publicar la solicitud");
+      setError(data.error || t.errPublicar);
     }
   }
 
@@ -125,25 +189,25 @@ export default function NuevaSolicitudForm({
 
       {exito && (
         <p className="mb-6 bg-brand-50 border border-brand-100 text-brand-600 text-sm rounded-xl p-3.5">
-          ¡Solicitud publicada! Ya es visible para profesionales. Puedes publicar otra si quieres.
+          {t.exito}
         </p>
       )}
 
       {/* Paso 1: categoria */}
       {paso === 1 && (
         <div>
-          <h3 className="font-bold text-lg text-ink mb-1">¿Qué tipo de servicio necesitas?</h3>
-          <p className="text-sm text-ink/50 mb-4">Elige la categoría que mejor describa tu proyecto.</p>
+          <h3 className="font-bold text-lg text-ink mb-1">{t.p1Titulo}</h3>
+          <p className="text-sm text-ink/50 mb-4">{t.p1Sub}</p>
 
           <div className="bg-brand-50/60 border border-brand-100 rounded-xl p-4 mb-5">
             <p className="text-xs font-semibold text-brand-600 mb-2 inline-flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
-              O cuéntanos qué necesitas y lo armamos por ti
+              {t.iaLabel}
             </p>
             <textarea
               value={textoIA}
               onChange={(e) => setTextoIA(e.target.value)}
-              placeholder="Ej: necesito que me ayuden a diseñar el logo de mi negocio de arepas y armar mis redes sociales"
+              placeholder={t.iaPlaceholder}
               rows={2}
               className="w-full text-sm border border-black/10 rounded-lg px-3 py-2.5 outline-none focus:border-brand-500 transition-colors bg-white"
             />
@@ -155,11 +219,11 @@ export default function NuevaSolicitudForm({
               className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold bg-brand-500 text-cream px-4 py-2 rounded-full hover:bg-brand-600 disabled:opacity-50 transition-colors"
             >
               <Sparkles className="w-3.5 h-3.5" />
-              {generandoIA ? "Redactando..." : "Completar con IA"}
+              {generandoIA ? t.iaCargando : t.iaBoton}
             </button>
           </div>
 
-          <p className="text-xs text-ink/40 mb-3">O elige manualmente:</p>
+          <p className="text-xs text-ink/40 mb-3">{t.oManual}</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-h-80 overflow-y-auto pr-1">
             {categorias.map((c) => (
               <button
@@ -178,7 +242,7 @@ export default function NuevaSolicitudForm({
                 <span className="w-8 h-8 rounded-lg bg-brand-50 text-brand-500 flex items-center justify-center mb-1.5">
                   <CategoryIcon slug={c.slug} className="w-4 h-4" />
                 </span>
-                {c.nombre}
+                {nombreCategoria(c, lang)}
               </button>
             ))}
           </div>
@@ -189,28 +253,28 @@ export default function NuevaSolicitudForm({
       {paso === 2 && (
         <div className="space-y-4">
           <div>
-            <h3 className="font-bold text-lg text-ink mb-1">Cuéntanos más</h3>
+            <h3 className="font-bold text-lg text-ink mb-1">{t.p2Titulo}</h3>
             <p className="text-sm text-ink/50">
-              Categoría:{" "}
+              {t.categoriaLabel}{" "}
               <span className="font-medium text-brand-600 inline-flex items-center gap-1.5">
                 {categoriaSeleccionada && (
                   <CategoryIcon slug={categoriaSeleccionada.slug} className="w-3.5 h-3.5" />
                 )}
-                {categoriaSeleccionada?.nombre}
+                {categoriaSeleccionada && nombreCategoria(categoriaSeleccionada, lang)}
               </span>
             </p>
           </div>
           <input
             value={titulo}
             onChange={(e) => setTitulo(e.target.value)}
-            placeholder="Título breve (ej: Necesito un rediseño de mi sitio web)"
+            placeholder={t.tituloPlaceholder}
             className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
           />
           <textarea
             value={descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
             rows={4}
-            placeholder="Describe con detalle lo que necesitas"
+            placeholder={t.descPlaceholder}
             className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
           />
         </div>
@@ -219,26 +283,26 @@ export default function NuevaSolicitudForm({
       {/* Paso 3: contacto */}
       {paso === 3 && (
         <div className="space-y-4">
-          <h3 className="font-bold text-lg text-ink mb-1">Últimos datos</h3>
-          <p className="text-sm text-ink/50 mb-2">Así te podrán contactar los profesionales interesados.</p>
+          <h3 className="font-bold text-lg text-ink mb-1">{t.p3Titulo}</h3>
+          <p className="text-sm text-ink/50 mb-2">{t.p3Sub}</p>
           <div className="grid sm:grid-cols-2 gap-4">
             <input
               value={ciudad}
               onChange={(e) => setCiudad(e.target.value)}
-              placeholder="Ciudad"
+              placeholder={t.ciudadPlaceholder}
               className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
             />
             <input
               value={presupuesto}
               onChange={(e) => setPresupuesto(e.target.value)}
-              placeholder="Presupuesto aproximado (opcional)"
+              placeholder={t.presupuestoPlaceholder}
               className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
             />
           </div>
           <input
             value={telefonoContacto}
             onChange={(e) => setTelefonoContacto(e.target.value)}
-            placeholder="Teléfono de contacto"
+            placeholder={t.telefonoPlaceholder}
             className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
           />
         </div>
@@ -253,7 +317,7 @@ export default function NuevaSolicitudForm({
           disabled={paso === 1}
           className="text-sm font-medium text-ink/50 hover:text-ink disabled:opacity-0 transition-colors"
         >
-          ← Atrás
+          {t.atras}
         </button>
 
         {paso < total ? (
@@ -262,7 +326,7 @@ export default function NuevaSolicitudForm({
             onClick={siguiente}
             className="bg-brand-500 text-cream px-6 py-2.5 rounded-full font-semibold hover:bg-brand-600 transition-colors"
           >
-            Continuar
+            {t.continuar}
           </button>
         ) : (
           <button
@@ -271,7 +335,7 @@ export default function NuevaSolicitudForm({
             disabled={cargando}
             className="bg-brand-500 text-cream px-6 py-2.5 rounded-full font-semibold hover:bg-brand-600 disabled:opacity-50 transition-colors"
           >
-            {cargando ? "Publicando..." : "Publicar solicitud"}
+            {cargando ? t.publicando : t.publicar}
           </button>
         )}
       </div>

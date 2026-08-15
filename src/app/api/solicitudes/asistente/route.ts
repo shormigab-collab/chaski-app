@@ -27,6 +27,8 @@ export async function POST(req: Request) {
 
 Categorías disponibles (usa exactamente uno de estos slugs): ${listaCategorias}
 
+Escribe el título y la descripción en el MISMO idioma en el que el usuario escribió su mensaje (si escribió en inglés, responde en inglés; si escribió en español, responde en español).
+
 Responde ÚNICAMENTE con un objeto JSON válido, sin texto adicional ni markdown, con este formato exacto:
 {"categoriaSlug": "uno de los slugs de arriba", "titulo": "título breve de máximo 70 caracteres", "descripcion": "descripción clara de 2-4 frases basada solo en lo que el usuario contó, sin inventar detalles que no mencionó"}`;
 

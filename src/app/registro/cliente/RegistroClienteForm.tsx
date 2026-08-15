@@ -8,6 +8,7 @@ export default function RegistroClienteForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const categoria = searchParams.get("categoria");
+  const lang = searchParams.get("lang") === "en" ? "en" : "es";
   const [error, setError] = useState("");
   const [cargando, setCargando] = useState(false);
 
@@ -30,34 +31,63 @@ export default function RegistroClienteForm() {
     });
     setCargando(false);
     if (res.ok) {
-      const destino = categoria
-        ? `/cliente/solicitudes?nuevo=1&categoria=${categoria}`
-        : "/cliente/solicitudes?nuevo=1";
-      router.push(destino);
+      const params = new URLSearchParams({ nuevo: "1" });
+      if (categoria) params.set("categoria", categoria);
+      if (lang === "en") params.set("lang", "en");
+      router.push(`/cliente/solicitudes?${params.toString()}`);
       router.refresh();
     } else {
       const data = await res.json();
-      setError(data.error || "No se pudo crear la cuenta");
+      setError(data.error || (lang === "en" ? "Couldn't create your account" : "No se pudo crear la cuenta"));
     }
   }
 
+  const t =
+    lang === "en"
+      ? {
+          titulo: "Create your free account",
+          sub: "Post what you need in under 2 minutes.",
+          nombre: "Full name",
+          email: "Email address",
+          telefono: "Phone number",
+          ciudad: "City",
+          password: "Password",
+          boton: "Create account",
+          cargando: "Creating account...",
+          yaCuenta: "Already have an account?",
+          login: "Log in",
+        }
+      : {
+          titulo: "Crea tu cuenta gratis",
+          sub: "Publica lo que necesitas en menos de 2 minutos.",
+          nombre: "Nombre completo",
+          email: "Correo electrónico",
+          telefono: "Teléfono (con WhatsApp)",
+          ciudad: "Ciudad",
+          password: "Contraseña",
+          boton: "Crear cuenta",
+          cargando: "Creando cuenta...",
+          yaCuenta: "¿Ya tienes cuenta?",
+          login: "Inicia sesión",
+        };
+
   return (
     <div className="max-w-md mx-auto px-4 py-16">
-      <h1 className="text-2xl font-bold text-ink mb-1">Crea tu cuenta gratis</h1>
-      <p className="text-ink/50 mb-6">Publica lo que necesitas en menos de 2 minutos.</p>
+      <h1 className="text-2xl font-bold text-ink mb-1">{t.titulo}</h1>
+      <p className="text-ink/50 mb-6">{t.sub}</p>
       <form onSubmit={onSubmit} className="space-y-4">
-        <input name="nombre" required placeholder="Nombre completo" className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
-        <input name="email" type="email" required placeholder="Correo electrónico" className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
-        <input name="telefono" required placeholder="Teléfono (con WhatsApp)" className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
-        <input name="ciudad" required placeholder="Ciudad" className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
-        <input name="password" type="password" required minLength={6} placeholder="Contraseña" className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
+        <input name="nombre" required placeholder={t.nombre} className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
+        <input name="email" type="email" required placeholder={t.email} className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
+        <input name="telefono" required placeholder={t.telefono} className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
+        <input name="ciudad" required placeholder={t.ciudad} className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
+        <input name="password" type="password" required minLength={6} placeholder={t.password} className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors" />
         {error && <p className="text-coral-600 text-sm">{error}</p>}
         <button disabled={cargando} className="w-full bg-brand-500 text-cream py-3 rounded-full font-semibold hover:bg-brand-600 transition-colors disabled:opacity-50">
-          {cargando ? "Creando cuenta..." : "Crear cuenta"}
+          {cargando ? t.cargando : t.boton}
         </button>
       </form>
       <p className="text-sm text-ink/50 mt-4 text-center">
-        ¿Ya tienes cuenta? <a href="/login" className="text-brand-600 font-medium">Inicia sesión</a>
+        {t.yaCuenta} <a href="/login" className="text-brand-600 font-medium">{t.login}</a>
       </p>
     </div>
   );

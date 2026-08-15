@@ -14,7 +14,7 @@ import LeadForm from "./LeadForm";
 export const metadata: Metadata = {
   title: "Hire Freelance Talent from Latin America | chaski",
   description:
-    "Post your project free and get contacted directly by vetted freelance designers, developers, marketers and more from Latin America. No agency fees.",
+    "Post your project free and get contacted directly by freelance designers, developers, marketers and more from Latin America. No agency fees.",
   alternates: { canonical: "/en" },
 };
 
@@ -67,12 +67,12 @@ export default async function EnglishLandingPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-              <a
-                href="#interesado"
+              <Link
+                href="/registro/cliente?lang=en"
                 className="min-h-[44px] flex items-center justify-center bg-brand-500 text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors shadow-sm shadow-brand-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
               >
                 Post your project free
-              </a>
+              </Link>
               <Link
                 href="/profesionales"
                 className="min-h-[44px] flex items-center justify-center bg-white border border-black/10 text-ink px-7 py-3.5 rounded-full font-semibold hover:border-brand-500 hover:text-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
@@ -160,12 +160,12 @@ export default async function EnglishLandingPage() {
             </div>
 
             <Reveal delay={400}>
-              <a
-                href="#interesado"
+              <Link
+                href="/registro/cliente?lang=en"
                 className="inline-flex items-center justify-center min-h-[44px] bg-brand-500 text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-brand-600 transition-colors mt-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
               >
                 Post your project free
-              </a>
+              </Link>
             </Reveal>
           </div>
         </div>
@@ -186,14 +186,14 @@ export default async function EnglishLandingPage() {
             <div className="relative">
               <h2 className="text-2xl sm:text-3xl font-bold text-cream mb-4">Have a project in mind?</h2>
               <p className="text-cream/75 mb-8 max-w-xl mx-auto">
-                Post it free and start hearing from vetted Latin American professionals — often within days.
+                Post it free and start hearing directly from Latin American professionals — often within days.
               </p>
-              <a
-                href="#interesado"
+              <Link
+                href="/registro/cliente?lang=en"
                 className="inline-flex items-center justify-center min-h-[44px] bg-cream text-brand-600 px-7 py-3.5 rounded-full font-semibold hover:bg-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream"
               >
                 Get started — it&apos;s free
-              </a>
+              </Link>
             </div>
           </div>
         </Reveal>
