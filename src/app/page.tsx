@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db";
 import HeroSearch from "@/components/HeroSearch";
 import HeroPhoto from "@/components/HeroPhoto";
 import Reveal from "@/components/Reveal";
+import ComoFunciona from "@/components/ComoFunciona";
 import TrustBar from "@/components/TrustBar";
 import CategoriasHome from "@/components/CategoriasHome";
 import TalentoEnAccion from "@/components/TalentoEnAccion";
@@ -150,58 +151,7 @@ export default async function HomePage() {
             </div>
           </Reveal>
 
-          <div>
-            <Reveal>
-              <h2 className="text-2xl sm:text-3xl font-bold text-ink mb-10">Cómo funciona</h2>
-            </Reveal>
-
-            <div className="relative space-y-8">
-              <div className="absolute left-6 top-3 bottom-3 w-px bg-border" aria-hidden="true" />
-              {[
-                {
-                  n: 1,
-                  t: "Describe tu necesidad",
-                  d: "Cuéntanos qué buscas, gratis y en menos de 2 minutos.",
-                  color: "bg-brand-500",
-                },
-                {
-                  n: 2,
-                  t: "Recibe propuestas",
-                  d: "Profesionales interesados te contactan directamente.",
-                  color: "bg-coral-500",
-                },
-                {
-                  n: 3,
-                  t: "Compara y elige",
-                  d: "Revisa perfiles y decide con quién trabajar, sin compromiso.",
-                  color: "bg-gold-500",
-                },
-              ].map((paso, i) => (
-                <Reveal key={paso.n} delay={i * 120}>
-                  <div className="relative flex gap-5">
-                    <div
-                      className={`relative z-10 w-12 h-12 rounded-full ${paso.color} text-white font-bold text-lg flex items-center justify-center shrink-0 shadow-sm`}
-                    >
-                      {paso.n}
-                    </div>
-                    <div className="pt-1.5">
-                      <h3 className="font-semibold text-ink mb-1">{paso.t}</h3>
-                      <p className="text-sm text-ink/55">{paso.d}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal delay={400}>
-              <Link
-                href="/registro/cliente"
-                className="inline-flex items-center justify-center min-h-[44px] bg-brand-500 text-cream px-7 py-3.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors mt-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
-              >
-                Publicar un proyecto gratis
-              </Link>
-            </Reveal>
-          </div>
+          <ComoFunciona />
         </div>
       </section>
 
