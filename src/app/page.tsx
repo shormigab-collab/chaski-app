@@ -137,9 +137,10 @@ export default async function HomePage() {
         <div className="max-w-6xl mx-auto px-4 py-16 sm:py-20 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <Reveal>
             <div className="relative max-w-md mx-auto md:mx-0">
-              <div className="absolute -bottom-6 -right-6 w-2/3 h-2/3 bg-coral-100/60 rounded-[2rem] -z-10" />
-              <div className="absolute -top-6 -left-6 w-1/2 h-1/2 bg-gold-400/15 rounded-[2rem] -z-10" />
-              <div className="rounded-[2rem] overflow-hidden shadow-xl shadow-black/10 aspect-[4/5]">
+              {/* una sola forma suave detras, en vez de 2 blobs — mas
+                  limpio y mas parecido al mockup de referencia */}
+              <div className="absolute -top-5 -left-5 w-2/3 h-2/3 bg-coral-100/50 rounded-[2rem] -z-10" />
+              <div className="rounded-[2rem] overflow-hidden shadow-lg shadow-brand-900/10 aspect-[4/5]">
                 <img
                   src="/images/equipo-reunion.webp"
                   alt="Equipo de profesionales colaborando en un proyecto"
@@ -179,7 +180,7 @@ export default async function HomePage() {
                 <Reveal key={paso.n} delay={i * 120}>
                   <div className="relative flex gap-5">
                     <div
-                      className={`relative z-10 w-12 h-12 rounded-full ${paso.color} text-cream font-bold text-lg flex items-center justify-center shrink-0 ring-4 ring-brand-50`}
+                      className={`relative z-10 w-12 h-12 rounded-full ${paso.color} text-white font-bold text-lg flex items-center justify-center shrink-0 shadow-sm`}
                     >
                       {paso.n}
                     </div>
