@@ -15,15 +15,14 @@ export type PostBlog = {
   slug: string;
   titulo: string;
   categoria: CategoriaBlog;
-  // Foto de portada real (no generada, no de personas ficticias con nombre).
-  // Se usa el mismo hotlinking directo a Unsplash que ya funciona en el
-  // hero de la home. Alt describe la escena, no afirma que sea "un cliente
+  // Foto de portada. Alt describe la escena, no afirma que sea "un cliente
   // real de chaski".
   imagen: string;
   imagenAlt: string;
   descripcionMeta: string;
   extracto: string;
   fecha: string; // ISO
+  minutosLectura: number;
   contenido: BloqueContenido[];
 };
 
@@ -32,13 +31,14 @@ export const POSTS: PostBlog[] = [
     slug: "como-contratar-freelance-colombia",
     titulo: "Cómo contratar un profesional freelance en Colombia: guía rápida",
     categoria: "Guía para clientes",
-    imagen: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&h=675&q=80",
-    imagenAlt: "Profesional trabajando en un proyecto freelance",
+    imagen: "/images/blog/como-contratar-freelance-colombia.webp",
+    imagenAlt: "Cliente y profesional freelance revisando un proyecto juntos en una laptop",
     descripcionMeta:
       "Guía práctica para contratar freelancers en Colombia: cómo definir el alcance del trabajo, qué revisar antes de pagar y señales de alerta para evitar fraudes.",
     extracto:
       "Cada vez más personas y negocios en Colombia contratan freelancers directamente en vez de pasar por una agencia. Esta guía cubre los pasos para hacerlo bien, desde definir lo que necesitas hasta detectar señales de alerta antes de pagar.",
     fecha: "2026-08-15",
+    minutosLectura: 5,
     contenido: [
       {
         tipo: "parrafo",
