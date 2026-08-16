@@ -6,30 +6,28 @@ import { parsePortafolio, ACENTOS_PORTAFOLIO } from "@/lib/portafolio";
 // "Talento en accion": muestra proyectos REALES del portafolio de
 // proveedores registrados (ver lib/portafolio.ts). Si todavia no hay
 // ninguno (caso actual: 0 proveedores con portafolio cargado), se
-// muestran 3 ejemplos ilustrativos en su lugar — con foto real (no
-// icono) para que se vea igual de completo que el mockup, marcados con
+// muestran 3 ejemplos ilustrativos en su lugar — con foto elegida a
+// mano para que coincida con lo que describe cada titulo, marcados con
 // la etiqueta "Ejemplo" y sin link a un perfil real. En cuanto haya
 // proyectos reales, estos ejemplos dejan de mostrarse automaticamente.
-// Las fotos vienen de Lorem Picsum (banco de fotos reales, libre de
-// uso) — no son fotos de los proyectos reales mencionados.
 const EJEMPLOS = [
   {
     titulo: "Identidad de marca HolaCoffee",
     autor: "Andrés M.",
     categoriaLabel: "Diseño de marca",
-    imagenUrl: "https://picsum.photos/seed/chaski-holacoffee/640/400",
+    imagenUrl: "/images/ejemplos/holacoffee.webp",
   },
   {
     titulo: "App móvil de finanzas personales",
     autor: "Camila R.",
     categoriaLabel: "Desarrollo",
-    imagenUrl: "https://picsum.photos/seed/chaski-fintech/640/400",
+    imagenUrl: "/images/ejemplos/fintech-app.webp",
   },
   {
     titulo: "Sitio web para SaaS educativo",
     autor: "Valeria S.",
     categoriaLabel: "Desarrollo web",
-    imagenUrl: "https://picsum.photos/seed/chaski-saas-edu/640/400",
+    imagenUrl: "/images/ejemplos/saas-web.webp",
   },
 ];
 

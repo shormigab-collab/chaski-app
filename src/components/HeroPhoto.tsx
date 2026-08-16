@@ -35,7 +35,7 @@ export default function HeroPhoto() {
         <div className="grid grid-cols-2 gap-1.5">
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
             <img
-              src="https://loremflickr.com/300/225/fintech,mobileapp"
+              src="/images/ejemplos/fintech-app.webp"
               alt=""
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
@@ -46,7 +46,7 @@ export default function HeroPhoto() {
           </div>
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
             <img
-              src="https://loremflickr.com/300/225/branding,ecommerce"
+              src="/images/ejemplos/holacoffee.webp"
               alt=""
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover"
