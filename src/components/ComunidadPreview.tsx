@@ -1,4 +1,5 @@
-import { Heart, MessageCircle, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Heart, MessageCircle, Sparkles, UserPlus } from "lucide-react";
 
 // NOTA: este post es un ejemplo ilustrativo (nombre, texto, reacciones,
 // foto de avatar y comentarios inventados) que replica el mockup de
@@ -22,6 +23,9 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
           articuloTitulo: "Content strategy that drives real impact",
           articuloTiempo: "8 min read",
           cta: "Request services",
+          ctaRellenoTitulo: "Want to be one of the first here?",
+          ctaRellenoTexto: "Create your professional profile for free",
+          ctaRellenoLink: "Create my profile",
         }
       : {
           badge: "Próximamente",
@@ -34,6 +38,9 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
           articuloTitulo: "Estrategia de contenido que genera impacto",
           articuloTiempo: "8 min de lectura",
           cta: "Solicitar sus servicios",
+          ctaRellenoTitulo: "¿Quieres ser de los primeros aquí?",
+          ctaRellenoTexto: "Crea tu perfil profesional gratis",
+          ctaRellenoLink: "Crear mi perfil",
         };
 
   return (
@@ -46,7 +53,7 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
         </span>
       </div>
 
-      <div className="rounded-xl border border-border overflow-hidden flex-1 flex flex-col">
+      <div className="rounded-xl border border-border overflow-hidden flex flex-col">
         <div className="flex items-center gap-2.5 p-3">
           <img
             src="https://i.pravatar.cc/60?img=47"
@@ -92,6 +99,18 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
             : "Ejemplo ilustrativo, aún no es una persona real."}
         </p>
       </div>
+
+      {/* relleno para que el panel no se vea vacio junto a sus vecinos —
+          invita a crear un perfil profesional en vez de dejar un hueco */}
+      <Link
+        href="/registro/proveedor"
+        className="flex-1 min-h-[90px] mt-3 flex flex-col items-center justify-center gap-1.5 text-center rounded-xl border-2 border-dashed border-border hover:border-brand-300 hover:bg-brand-50/30 transition-colors p-4"
+      >
+        <UserPlus className="w-5 h-5 text-brand-400" strokeWidth={1.75} />
+        <span className="text-sm font-semibold text-ink/70">{t.ctaRellenoTitulo}</span>
+        <span className="text-xs text-ink/45">{t.ctaRellenoTexto}</span>
+        <span className="text-xs text-brand-600 font-medium mt-0.5">{t.ctaRellenoLink} →</span>
+      </Link>
     </div>
   );
 }

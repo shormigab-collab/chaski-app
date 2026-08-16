@@ -5,7 +5,28 @@ import { CheckCircle2, Heart } from "lucide-react";
 // el mockup de referencia. No son datos reales — se marcan asi para
 // poder reemplazarlos facil mas adelante cuando haya proyectos y
 // clientes reales que mostrar.
-export default function HeroPhoto() {
+export default function HeroPhoto({ lang = "es" }: { lang?: "es" | "en" }) {
+  const t =
+    lang === "en"
+      ? {
+          alt: "Latin American professionals working with a laptop and tablet",
+          destacado: "Featured work",
+          appFintech: "Fintech App",
+          marca: "E-commerce branding",
+          autor: "Camila R. · HolaCoffee",
+          disponible: "Available",
+          colaboraciones: "Remote collaborations",
+        }
+      : {
+          alt: "Profesionales de Latinoamérica trabajando con laptop y tablet",
+          destacado: "Trabajo destacado",
+          appFintech: "App Fintech",
+          marca: "Marca e-commerce",
+          autor: "Camila R. · HolaCoffee",
+          disponible: "Disponible",
+          colaboraciones: "Colaboraciones remotas",
+        };
+
   return (
     <div className="relative w-full max-w-lg mx-auto md:mx-0 pt-20 pb-10">
       {/* foto principal: recorte con fondo transparente, sin marco. El
@@ -14,7 +35,7 @@ export default function HeroPhoto() {
           un corte brusco, sino que se disuelve hacia el fondo. */}
       <img
         src="/images/hero-equipo.png"
-        alt="Profesionales de Latinoamérica trabajando con laptop y tablet"
+        alt={t.alt}
         width={820}
         height={546}
         className="w-full h-auto relative z-0"
@@ -30,7 +51,7 @@ export default function HeroPhoto() {
       <div className="absolute bottom-10 -left-4 sm:-left-10 w-60 bg-white rounded-2xl shadow-xl shadow-black/10 p-3 animate-float">
         <div className="flex items-center gap-1.5 mb-2">
           <CheckCircle2 className="w-3.5 h-3.5 text-brand-500 shrink-0" strokeWidth={2} />
-          <span className="text-[10px] font-bold text-brand-600">Trabajo destacado</span>
+          <span className="text-[10px] font-bold text-brand-600">{t.destacado}</span>
         </div>
         <div className="grid grid-cols-2 gap-1.5">
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
@@ -41,7 +62,7 @@ export default function HeroPhoto() {
               className="absolute inset-0 w-full h-full object-cover"
             />
             <span className="absolute inset-x-0 bottom-0 bg-black/55 px-1.5 py-1">
-              <span className="text-[9px] font-semibold text-white leading-none block truncate">App Fintech</span>
+              <span className="text-[9px] font-semibold text-white leading-none block truncate">{t.appFintech}</span>
             </span>
           </div>
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
@@ -52,12 +73,12 @@ export default function HeroPhoto() {
               className="absolute inset-0 w-full h-full object-cover"
             />
             <span className="absolute inset-x-0 bottom-0 bg-black/55 px-1.5 py-1">
-              <span className="text-[9px] font-semibold text-white leading-none block truncate">Marca e-commerce</span>
+              <span className="text-[9px] font-semibold text-white leading-none block truncate">{t.marca}</span>
             </span>
           </div>
         </div>
         <div className="flex items-center justify-between mt-2">
-          <span className="text-[10px] text-ink/45 truncate">Camila R. · HolaCoffee</span>
+          <span className="text-[10px] text-ink/45 truncate">{t.autor}</span>
           <span className="flex items-center gap-0.5 text-[10px] font-semibold text-coral-600 shrink-0">
             <Heart className="w-2.5 h-2.5 fill-coral-500 text-coral-500" />
             42
@@ -73,8 +94,8 @@ export default function HeroPhoto() {
       >
         <span className="w-2.5 h-2.5 rounded-full bg-availability shrink-0" />
         <div className="leading-tight">
-          <div className="text-xs font-semibold text-ink/70">Disponible</div>
-          <div className="text-[10px] text-ink/40">Colaboraciones remotas</div>
+          <div className="text-xs font-semibold text-ink/70">{t.disponible}</div>
+          <div className="text-[10px] text-ink/40">{t.colaboraciones}</div>
         </div>
       </div>
     </div>

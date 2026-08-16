@@ -20,7 +20,17 @@ const BENEFICIOS = [
   { Icono: Handshake, texto: "Trato directo y sin comisiones" },
 ];
 
-export default function TrustBar() {
+const BENEFITS_EN = [
+  { Icono: Users, texto: "Real profiles from across Latin America" },
+  { Icono: BadgeCheck, texto: "Recommended talent" },
+  { Icono: Handshake, texto: "Direct deals, no commissions" },
+];
+
+export default function TrustBar({ lang = "es" }: { lang?: "es" | "en" }) {
+  const beneficios = lang === "en" ? BENEFITS_EN : BENEFICIOS;
+  const mensaje =
+    lang === "en" ? "A professional community that's just getting started" : "Una comunidad profesional que está comenzando a crecer";
+
   return (
     <div className="border-y border-border bg-cream">
       <div className="max-w-6xl mx-auto px-4 py-5 flex flex-col lg:flex-row items-center justify-between gap-4">
@@ -39,12 +49,10 @@ export default function TrustBar() {
               +28
             </span>
           </div>
-          <p className="text-sm font-semibold text-ink/70">
-            Una comunidad profesional que está comenzando a crecer
-          </p>
+          <p className="text-sm font-semibold text-ink/70">{mensaje}</p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          {BENEFICIOS.map((item) => (
+          {beneficios.map((item) => (
             <div key={item.texto} className="flex items-center gap-2">
               <span className="w-8 h-8 rounded-lg bg-brand-50 text-brand-500 flex items-center justify-center shrink-0">
                 <item.Icono className="w-4 h-4" strokeWidth={1.75} />

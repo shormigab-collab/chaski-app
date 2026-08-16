@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import HeroSearch from "@/components/HeroSearch";
-import HeroMockup from "@/components/HeroMockup";
+import HeroPhoto from "@/components/HeroPhoto";
 import Reveal from "@/components/Reveal";
+import ComoFunciona from "@/components/ComoFunciona";
+import TrustBar from "@/components/TrustBar";
 import CategoriasHome from "@/components/CategoriasHome";
+import TalentoEnAccion from "@/components/TalentoEnAccion";
 import ProfesionalesDestacados from "@/components/ProfesionalesDestacados";
+import ComunidadPreview from "@/components/ComunidadPreview";
 import Beneficios from "@/components/Beneficios";
 import Comparacion from "@/components/Comparacion";
 import Confianza from "@/components/Confianza";
@@ -62,13 +66,34 @@ export default async function EnglishLandingPage() {
             <span className="inline-block text-xs font-semibold text-coral-600 bg-coral-50 px-3 py-1 rounded-full mb-4">
               Marketplace for Latin American professionals
             </span>
-            <h1 className="text-[2.25rem] leading-[1.15] sm:text-5xl sm:leading-[1.1] font-extrabold text-ink mb-5 tracking-tight">
-              Don&apos;t search for talent.{" "}
-              <span className="bg-gradient-to-r from-brand-500 to-coral-500 bg-clip-text text-transparent">
-                Let it find you.
-              </span>
-            </h1>
-            <p className="text-base sm:text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0">
+            <div className="relative">
+              {/* mismo halo suave que la version en espanol */}
+              <div
+                className="hidden md:block absolute -inset-x-6 -inset-y-8 bg-white/50 blur-3xl rounded-[3rem] -z-10"
+                aria-hidden="true"
+              />
+              <h1
+                className="font-extrabold text-brand-600 mb-5"
+                style={{
+                  fontSize: "clamp(2.6rem, 4.6vw, 4.5rem)",
+                  lineHeight: 1.02,
+                  letterSpacing: "-0.035em",
+                  textShadow: "0 1px 0 rgba(255,255,255,0.6), 0 14px 32px rgba(41,32,111,0.18)",
+                }}
+              >
+                Don&apos;t search for talent.{" "}
+                <span
+                  className="bg-gradient-to-r from-gold-500 via-[#F58A2E] to-coral-600 bg-clip-text text-transparent"
+                  style={{
+                    textShadow: "none",
+                    filter: "drop-shadow(0 6px 20px rgba(245,138,46,0.45))",
+                  }}
+                >
+                  Let it find you.
+                </span>
+              </h1>
+            </div>
+            <p className="text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0 leading-relaxed">
               Post your project free and get direct proposals from experts in design, development, marketing,
               accounting and more — from Latin America. No back-and-forth quoting.
             </p>
@@ -82,7 +107,7 @@ export default async function EnglishLandingPage() {
               </Link>
               <Link
                 href="/profesionales"
-                className="min-h-[44px] flex items-center justify-center bg-white border border-black/10 text-ink px-7 py-3.5 rounded-xl font-semibold hover:border-brand-500 hover:text-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                className="min-h-[44px] flex items-center justify-center bg-white border border-border text-ink px-7 py-3.5 rounded-xl font-semibold hover:border-brand-500 hover:text-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
               >
                 Explore professionals
               </Link>
@@ -104,84 +129,43 @@ export default async function EnglishLandingPage() {
           </div>
 
           <div className="hidden md:block">
-            <HeroMockup lang="en" />
+            <HeroPhoto lang="en" />
           </div>
         </div>
       </section>
 
-      <CategoriasHome categorias={categorias} lang="en" />
+      <TrustBar lang="en" />
+
+      {/* Fila compacta: categorias / talento en accion / comunidad, lado a lado en desktop */}
+      <section className="max-w-6xl mx-auto px-4 py-16 sm:py-20">
+        <Reveal>
+          <div className="grid lg:grid-cols-[1fr_1.3fr_1fr] gap-5 items-stretch">
+            <CategoriasHome categorias={categorias} lang="en" />
+            <TalentoEnAccion lang="en" />
+            <ComunidadPreview lang="en" />
+          </div>
+        </Reveal>
+      </section>
 
       <ProfesionalesDestacados profesionales={profesionales} lang="en" />
 
       {/* HOW IT WORKS */}
-      <section className="bg-brand-50/40 border-y border-black/5">
+      <section className="bg-lavender/40 border-y border-border">
         <div className="max-w-6xl mx-auto px-4 py-16 sm:py-20 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <Reveal>
             <div className="relative max-w-md mx-auto md:mx-0">
-              <div className="absolute -bottom-6 -right-6 w-2/3 h-2/3 bg-coral-100/60 rounded-[2rem] -z-10" />
-              <div className="absolute -top-6 -left-6 w-1/2 h-1/2 bg-gold-400/15 rounded-[2rem] -z-10" />
-              <div className="rounded-[2rem] overflow-hidden shadow-xl shadow-black/10 aspect-[4/5]">
+              <div className="absolute -top-5 -left-5 w-2/3 h-2/3 bg-coral-100/50 rounded-[2rem] -z-10" />
+              <div className="rounded-[2rem] overflow-hidden shadow-lg shadow-brand-900/10 aspect-[4/5]">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
-                  alt="Professional working on their computer"
+                  src="/images/equipo-reunion.webp"
+                  alt="Team of professionals collaborating on a project"
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
           </Reveal>
 
-          <div>
-            <Reveal>
-              <h2 className="text-2xl sm:text-3xl font-bold text-ink mb-10">How it works</h2>
-            </Reveal>
-
-            <div className="relative space-y-8">
-              <div className="absolute left-6 top-3 bottom-3 w-px bg-black/10" aria-hidden="true" />
-              {[
-                {
-                  n: 1,
-                  t: "Describe what you need",
-                  d: "Tell us what you're looking for, free and in under 2 minutes.",
-                  color: "bg-brand-500",
-                },
-                {
-                  n: 2,
-                  t: "Get proposals",
-                  d: "Interested professionals contact you directly.",
-                  color: "bg-coral-500",
-                },
-                {
-                  n: 3,
-                  t: "Compare and choose",
-                  d: "Review profiles and decide who to work with, no commitment.",
-                  color: "bg-gold-500",
-                },
-              ].map((paso, i) => (
-                <Reveal key={paso.n} delay={i * 120}>
-                  <div className="relative flex gap-5">
-                    <div
-                      className={`relative z-10 w-12 h-12 rounded-full ${paso.color} text-cream font-bold text-lg flex items-center justify-center shrink-0 ring-4 ring-brand-50`}
-                    >
-                      {paso.n}
-                    </div>
-                    <div className="pt-1.5">
-                      <h3 className="font-semibold text-ink mb-1">{paso.t}</h3>
-                      <p className="text-sm text-ink/55">{paso.d}</p>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal delay={400}>
-              <Link
-                href="/registro/cliente?lang=en"
-                className="inline-flex items-center justify-center min-h-[44px] bg-brand-500 text-cream px-7 py-3.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors mt-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
-              >
-                Post your project free
-              </Link>
-            </Reveal>
-          </div>
+          <ComoFunciona lang="en" />
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ImagePlus } from "lucide-react";
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
 import { parsePortafolio, ACENTOS_PORTAFOLIO } from "@/lib/portafolio";
@@ -73,8 +74,20 @@ export default async function TalentoEnAccion({ lang = "es" }: { lang?: "es" | "
 
   const t =
     lang === "en"
-      ? { titulo: "Work that speaks for itself", verTodos: "See all projects" }
-      : { titulo: "Trabajo que habla por ti", verTodos: "Ver todos los proyectos" };
+      ? {
+          titulo: "Work that speaks for itself",
+          verTodos: "See all projects",
+          ctaTitulo: "Have projects to show?",
+          ctaTexto: "Create your profile and add your portfolio for free",
+          ctaLink: "Create my profile",
+        }
+      : {
+          titulo: "Trabajo que habla por ti",
+          verTodos: "Ver todos los proyectos",
+          ctaTitulo: "¿Tienes proyectos para mostrar?",
+          ctaTexto: "Crea tu perfil y agrega tu portafolio gratis",
+          ctaLink: "Crear mi perfil",
+        };
 
   const [destacado, ...resto] = trabajos;
 
@@ -153,6 +166,21 @@ export default async function TalentoEnAccion({ lang = "es" }: { lang?: "es" | "
               <Tarjeta key={i} trabajo={trabajo} i={i + 1} />
             ))}
           </div>
+        )}
+
+        {/* relleno para que el panel no se vea vacio cuando hay menos
+            proyectos que espacio disponible — invita a proveedores a
+            sumar su portafolio, en vez de dejar un hueco en blanco */}
+        {usaEjemplos && (
+          <Link
+            href="/registro/proveedor"
+            className="flex-1 min-h-[100px] flex flex-col items-center justify-center gap-1.5 text-center rounded-xl border-2 border-dashed border-border hover:border-brand-300 hover:bg-brand-50/30 transition-colors p-4"
+          >
+            <ImagePlus className="w-5 h-5 text-brand-400" strokeWidth={1.75} />
+            <span className="text-sm font-semibold text-ink/70">{t.ctaTitulo}</span>
+            <span className="text-xs text-ink/45">{t.ctaTexto}</span>
+            <span className="text-xs text-brand-600 font-medium mt-0.5">{t.ctaLink} →</span>
+          </Link>
         )}
       </div>
 
