@@ -57,20 +57,20 @@ export default async function HomePage() {
                 aria-hidden="true"
               />
               <h1
-                className="font-extrabold text-ink mb-5"
+                className="font-extrabold text-brand-600 mb-5"
                 style={{
                   fontSize: "clamp(2.6rem, 4.6vw, 4.5rem)",
                   lineHeight: 1.02,
                   letterSpacing: "-0.035em",
-                  textShadow: "0 1px 0 rgba(255,255,255,0.6), 0 14px 32px rgba(23,19,58,0.16)",
+                  textShadow: "0 1px 0 rgba(255,255,255,0.6), 0 14px 32px rgba(41,32,111,0.18)",
                 }}
               >
                 El talento de{" "}
                 <span
-                  className="bg-gradient-to-r from-coral-500 to-coral-600 bg-clip-text text-transparent"
+                  className="bg-gradient-to-r from-gold-500 via-[#F58A2E] to-coral-600 bg-clip-text text-transparent"
                   style={{
                     textShadow: "none",
-                    filter: "drop-shadow(0 6px 20px rgba(255,107,95,0.45))",
+                    filter: "drop-shadow(0 6px 20px rgba(245,138,46,0.45))",
                   }}
                 >
                   Latinoamérica,
