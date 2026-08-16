@@ -1,85 +1,133 @@
-import { Clock, ListChecks, Handshake } from "lucide-react";
+import Link from "next/link";
+import { Search, ListChecks, Handshake, ArrowRight } from "lucide-react";
 import Reveal from "@/components/Reveal";
 
-const BENEFICIOS = [
+const TARJETAS_ES = [
   {
-    Icono: Clock,
-    titulo: "Ahorra tiempo",
-    texto: "Recibe propuestas sin buscar profesionales uno por uno.",
-    grad: "from-brand-500 to-brand-600",
+    Icono: Search,
+    titulo: "Ahorra horas de búsqueda",
+    texto: "Recibe propuestas sin revisar perfiles uno por uno.",
+    grad: "from-brand-400 to-brand-600",
   },
   {
     Icono: ListChecks,
-    titulo: "Compara mejor",
-    texto: "Revisa experiencia, ubicación y especialidad antes de elegir.",
+    titulo: "Compara con contexto",
+    texto: "Evalúa experiencia, especialidad y ubicación antes de decidir.",
     grad: "from-coral-500 to-coral-600",
   },
   {
     Icono: Handshake,
-    titulo: "Contrata directamente",
-    texto: "Contacta al profesional sin comisión sobre lo que le pagues.",
+    titulo: "Habla directamente",
+    texto: "Acuerda alcance y condiciones sin intermediarios.",
     grad: "from-gold-500 to-gold-600",
   },
 ];
 
-const BENEFITS_EN = [
+const TARJETAS_EN = [
   {
-    Icono: Clock,
-    titulo: "Save time",
-    texto: "Get proposals without searching for professionals one by one.",
-    grad: "from-brand-500 to-brand-600",
+    Icono: Search,
+    titulo: "Save hours of searching",
+    texto: "Get proposals without reviewing profiles one by one.",
+    grad: "from-brand-400 to-brand-600",
   },
   {
     Icono: ListChecks,
-    titulo: "Compare easily",
-    texto: "Review experience, location, and specialty before you choose.",
+    titulo: "Compare with context",
+    texto: "Evaluate experience, specialty, and location before deciding.",
     grad: "from-coral-500 to-coral-600",
   },
   {
     Icono: Handshake,
-    titulo: "Hire directly",
-    texto: "Contact the professional with no commission on what you pay them.",
+    titulo: "Talk directly",
+    texto: "Agree on scope and terms with no middlemen.",
     grad: "from-gold-500 to-gold-600",
   },
 ];
 
 export default function Beneficios({ lang = "es" }: { lang?: "es" | "en" }) {
-  const items = lang === "en" ? BENEFITS_EN : BENEFICIOS;
-  return (
-    <section className="relative overflow-hidden bg-white border-y border-black/5">
-      <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-brand-50/60 blur-3xl -translate-y-1/2" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-coral-50/50 blur-3xl translate-y-1/2" />
+  const tarjetas = lang === "en" ? TARJETAS_EN : TARJETAS_ES;
+  const t =
+    lang === "en"
+      ? {
+          eyebrow: "WHY POST ON CHASKI",
+          h2a: "Hiring talent shouldn't feel like ",
+          h2b: "another job.",
+          sub: "Post what you need once and let relevant professionals come to you.",
+          cta: "Post for free",
+          trust: "No commissions · Direct contact",
+          href: "/registro/cliente?lang=en",
+        }
+      : {
+          eyebrow: "POR QUÉ PUBLICAR EN CHASKI",
+          h2a: "Contratar talento no debería sentirse como ",
+          h2b: "otro trabajo.",
+          sub: "Publica lo que necesitas una sola vez y deja que profesionales relevantes lleguen a ti.",
+          cta: "Publicar gratis",
+          trust: "Sin comisiones · Contacto directo",
+          href: "/registro/cliente",
+        };
 
-      <div className="relative max-w-5xl mx-auto px-4 py-16 sm:py-20">
+  return (
+    <section className="bg-cream">
+      <div className="max-w-6xl mx-auto px-4 py-16 sm:py-20">
         <Reveal>
-          <div className="text-center mb-12">
-            <span className="inline-block text-xs font-semibold text-brand-600 bg-brand-50 px-3 py-1 rounded-full mb-4">
-              {lang === "en" ? "Why post on chaski" : "Por qué publicar en chaski"}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-ink">
-              {lang === "en" ? "Built to make hiring easier" : "Diseñado para que contratar sea más fácil"}
-            </h2>
+          <div className="relative overflow-hidden bg-ink rounded-3xl p-8 sm:p-12 grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-8 items-center">
+            {/* linea tipo "camino" decorativa, muy sutil, mismo motivo de marca */}
+            <svg
+              className="hidden lg:block absolute -left-6 bottom-0 w-64 h-72 text-white/10 pointer-events-none"
+              viewBox="0 0 200 240"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M40 10 C10 40, 90 55, 60 90 C25 128, 105 130, 80 170 C58 203, 100 210, 90 235"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <circle cx="90" cy="235" r="5" stroke="currentColor" strokeWidth="2" />
+            </svg>
+
+            <div className="relative">
+              <span className="block text-xs font-bold tracking-widest text-coral-400 mb-4">{t.eyebrow}</span>
+              <h2
+                className="font-extrabold text-white mb-4"
+                style={{ fontSize: "clamp(1.75rem, 3.2vw, 2.5rem)", lineHeight: 1.15, letterSpacing: "-0.015em" }}
+              >
+                {t.h2a}
+                <span className="text-coral-400">{t.h2b}</span>
+              </h2>
+              <p className="text-white/65 max-w-sm mb-7 leading-relaxed">{t.sub}</p>
+
+              <Link
+                href={t.href}
+                className="inline-flex items-center justify-center gap-2 min-h-[48px] bg-coral-500 hover:bg-coral-600 text-white px-6 py-3 rounded-xl font-semibold transition-colors shadow-sm shadow-black/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-coral-400"
+              >
+                {t.cta}
+                <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
+              </Link>
+
+              <p className="text-sm text-white/45 mt-4">{t.trust}</p>
+            </div>
+
+            <div className="relative flex flex-col gap-4">
+              {tarjetas.map((b, i) => (
+                <Reveal key={b.titulo} delay={i * 100}>
+                  <div className="flex items-center gap-4 bg-lavender rounded-2xl p-5">
+                    <div
+                      className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${b.grad} text-white flex items-center justify-center shrink-0 shadow-sm`}
+                    >
+                      <b.Icono className="w-6 h-6" strokeWidth={1.75} />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="font-bold text-ink leading-snug">{b.titulo}</h3>
+                      <p className="text-sm text-ink/60 leading-snug mt-0.5">{b.texto}</p>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </Reveal>
-
-        <div className="grid sm:grid-cols-3 gap-5">
-          {items.map((b, i) => (
-            <Reveal key={b.titulo} delay={i * 100}>
-              <div className="group relative h-full bg-white border border-black/5 rounded-2xl p-7 overflow-hidden hover:shadow-lg hover:shadow-black/5 hover:-translate-y-1 transition-all">
-                <span className="absolute -top-2 -right-1 text-6xl font-extrabold text-ink/[0.04] select-none leading-none">
-                  {`0${i + 1}`}
-                </span>
-                <div
-                  className={`relative w-12 h-12 rounded-xl bg-gradient-to-br ${b.grad} text-white flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 transition-transform`}
-                >
-                  <b.Icono className="w-5 h-5" strokeWidth={1.75} />
-                </div>
-                <h3 className="relative font-semibold text-ink mb-1.5">{b.titulo}</h3>
-                <p className="relative text-sm text-ink/55 leading-relaxed">{b.texto}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
       </div>
     </section>
   );
