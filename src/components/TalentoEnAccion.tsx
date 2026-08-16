@@ -92,7 +92,10 @@ export default async function TalentoEnAccion({ lang = "es" }: { lang?: "es" | "
     const cuerpo = (
       <>
         {contenido}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+        {/* degradado mas fuerte y mas alto que antes: con titulos de 2
+            lineas, la version anterior se aclaraba justo donde caia el
+            texto y se perdia contra fotos claras (cielo, ventanas). */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/0" />
         <span
           className={`absolute top-2.5 left-2.5 inline-flex items-center gap-1 text-[10px] font-semibold text-white bg-gradient-to-br ${acento.grad} px-2 py-0.5 rounded-full`}
         >
@@ -107,10 +110,15 @@ export default async function TalentoEnAccion({ lang = "es" }: { lang?: "es" | "
           </span>
         )}
         <div className="absolute bottom-0 left-0 right-0 p-3">
-          <h3 className={`font-semibold text-white leading-snug ${alto ? "text-sm" : "text-xs"}`}>
+          <h3
+            className={`font-semibold text-white leading-snug ${alto ? "text-sm" : "text-xs"}`}
+            style={{ textShadow: "0 1px 4px rgba(0,0,0,0.85)" }}
+          >
             {trabajo.titulo}
           </h3>
-          <span className="text-[11px] font-medium text-white/75">por {trabajo.autor}</span>
+          <span className="text-[11px] font-medium text-white/85" style={{ textShadow: "0 1px 3px rgba(0,0,0,0.85)" }}>
+            por {trabajo.autor}
+          </span>
         </div>
       </>
     );
