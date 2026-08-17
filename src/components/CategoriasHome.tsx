@@ -24,22 +24,21 @@ const ACENTOS = [
   { bg: "bg-[#9874E1]", text: "text-white" },
 ];
 
-// Foto ilustrativa por categoria (banco de fotos reales de uso libre,
-// vinculadas por palabra clave — no son fotos de trabajos de la
-// comunidad, solo imagenes de ambiente para que la tarjeta se vea mas
-// visual que un simple icono). Si una categoria no esta en el mapa
-// (las que aparecen solo al abrir "Ver todas") usa una foto generica.
+// Foto ilustrativa por categoria (imagenes propias, una por especialidad,
+// para que la tarjeta se vea mas visual que un simple icono). Si una
+// categoria no esta en el mapa (las que aparecen solo al abrir "Ver
+// todas") usa una foto generica.
 const FOTOS: Record<string, string> = {
-  "diseno-grafico": "https://loremflickr.com/300/300/graphicdesign,design",
-  "desarrollo-web": "https://loremflickr.com/300/300/coding,programming",
-  "marketing-redes": "https://loremflickr.com/300/300/marketing,socialmedia",
-  copywriting: "https://loremflickr.com/300/300/writing,notebook",
-  "consultoria-empresarial": "https://loremflickr.com/300/300/business,office",
-  animacion: "https://loremflickr.com/300/300/videocamera,film",
-  seo: "https://loremflickr.com/300/300/analytics,chart",
-  "soporte-tecnico": "https://loremflickr.com/300/300/support,headset",
+  "diseno-grafico": "/images/categorias/diseno-grafico.webp",
+  "desarrollo-web": "/images/categorias/desarrollo-web.webp",
+  "marketing-redes": "/images/categorias/marketing-redes.webp",
+  copywriting: "/images/categorias/copywriting.webp",
+  "consultoria-empresarial": "/images/categorias/consultoria-empresarial.webp",
+  animacion: "/images/categorias/animacion.webp",
+  seo: "/images/categorias/seo.webp",
+  "soporte-tecnico": "/images/categorias/soporte-tecnico.webp",
 };
-const FOTO_GENERICA = "https://loremflickr.com/300/300/freelancer,remotework";
+const FOTO_GENERICA = "/images/categorias/consultoria-empresarial.webp";
 
 // Categorias curadas para la vista inicial (etiquetas mas cortas y
 // agrupadas para la portada). El enlace sigue apuntando a la categoria
