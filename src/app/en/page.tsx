@@ -155,25 +155,7 @@ export default async function EnglishLandingPage() {
 
       <ProfesionalesDestacados profesionales={profesionales} lang="en" />
 
-      {/* HOW IT WORKS */}
-      <section className="bg-lavender/40 border-y border-border">
-        <div className="max-w-6xl mx-auto px-4 py-16 sm:py-20 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-          <Reveal>
-            <div className="relative max-w-md mx-auto md:mx-0">
-              <div className="absolute -top-5 -left-5 w-2/3 h-2/3 bg-coral-100/50 rounded-[2rem] -z-10" />
-              <div className="rounded-[2rem] overflow-hidden shadow-lg shadow-brand-900/10 aspect-[4/5]">
-                <img
-                  src="/images/equipo-reunion.webp"
-                  alt="Team of professionals collaborating on a project"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </Reveal>
-
-          <ComoFunciona lang="en" />
-        </div>
-      </section>
+      <ComoFunciona lang="en" />
 
       <Beneficios lang="en" />
 

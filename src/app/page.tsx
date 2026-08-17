@@ -132,27 +132,7 @@ export default async function HomePage() {
 
       <ProfesionalesDestacados profesionales={profesionales} />
 
-      {/* COMO FUNCIONA */}
-      <section className="bg-lavender/40 border-y border-border">
-        <div className="max-w-6xl mx-auto px-4 py-16 sm:py-20 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-          <Reveal>
-            <div className="relative max-w-md mx-auto md:mx-0">
-              {/* una sola forma suave detras, en vez de 2 blobs — mas
-                  limpio y mas parecido al mockup de referencia */}
-              <div className="absolute -top-5 -left-5 w-2/3 h-2/3 bg-coral-100/50 rounded-[2rem] -z-10" />
-              <div className="rounded-[2rem] overflow-hidden shadow-lg shadow-brand-900/10 aspect-[4/5]">
-                <img
-                  src="/images/equipo-reunion.webp"
-                  alt="Equipo de profesionales colaborando en un proyecto"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </Reveal>
-
-          <ComoFunciona />
-        </div>
-      </section>
+      <ComoFunciona />
 
       <Beneficios />
 
