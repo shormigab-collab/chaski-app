@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { DollarSign, MessageSquare, ShieldCheck, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/db";
@@ -13,6 +14,21 @@ import ComunidadPreview from "@/components/ComunidadPreview";
 import Beneficios from "@/components/Beneficios";
 import Comparacion from "@/components/Comparacion";
 import Confianza from "@/components/Confianza";
+
+// Le dice a Google que esta pagina (en espanol) y "/en" son la misma
+// oferta en dos idiomas/mercados, no contenido duplicado ni paginas que
+// compiten entre si. "x-default" es la version que se muestra cuando el
+// idioma del buscador no coincide con ninguna de las dos declaradas.
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+    languages: {
+      es: "/",
+      en: "/en",
+      "x-default": "/",
+    },
+  },
+};
 
 export default async function HomePage() {
   const [categorias, proveedores] = await Promise.all([

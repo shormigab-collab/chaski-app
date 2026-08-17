@@ -27,7 +27,17 @@ export const metadata: Metadata = {
     "remote talent Latin America",
     "hire freelancers Latin America",
   ],
-  alternates: { canonical: "/en" },
+  // Misma logica que en src/app/page.tsx (espejo): le dice a Google que
+  // esta pagina y "/" son la misma oferta en dos idiomas, no contenido
+  // duplicado.
+  alternates: {
+    canonical: "/en",
+    languages: {
+      es: "/",
+      en: "/en",
+      "x-default": "/",
+    },
+  },
 };
 
 export default async function EnglishLandingPage() {

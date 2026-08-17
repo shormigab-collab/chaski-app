@@ -54,6 +54,12 @@ export const metadata: Metadata = {
   verification: {
     google: "O9_CI1H68RijmHeN7_N_CfsmcS5Q5hlViv2RZKixf1s",
   },
+  // Importante: NO poner aqui "alternates.canonical" — Next.js hereda ese
+  // campo tal cual en cualquier pagina hija que no lo declare explicitamente
+  // (blog, perfiles, etc.), lo que haria que todas esas paginas terminaran
+  // con canonical="/" apuntando al home. El hreflang / canonical de la
+  // portada en espanol vs "/en" se define en cada page.tsx por separado
+  // (ver src/app/page.tsx y src/app/en/page.tsx).
 };
 
 export default async function RootLayout({
