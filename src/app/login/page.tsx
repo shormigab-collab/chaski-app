@@ -57,16 +57,16 @@ export default function LoginPage() {
         {/* tarjeta principal */}
         <div className="grid md:grid-cols-2 rounded-[2rem] overflow-hidden shadow-xl shadow-brand-900/10 bg-white">
           {/* foto + copy */}
-          <div className="relative min-h-[280px] md:min-h-[600px]">
+          <div className="relative min-h-[460px] sm:min-h-[520px] md:min-h-[600px]">
             <img src="/images/login-mujer.webp" alt="Profesional trabajando en su portafolio" className="absolute inset-0 w-full h-full object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent" />
 
-            <span className="absolute top-5 left-5 sm:top-6 sm:left-6 inline-block text-xs font-bold tracking-widest text-brand-600 bg-white/95 px-4 py-2 rounded-full">
+            <span className="absolute top-5 left-5 right-5 sm:right-auto sm:top-6 sm:left-6 inline-block text-center sm:text-left text-[10px] sm:text-xs font-bold tracking-widest text-brand-600 bg-white/95 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full whitespace-nowrap overflow-hidden text-ellipsis">
               MARKETPLACE PROFESIONAL DE LATINOAMÉRICA
             </span>
 
             <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8">
-              <h2 className="font-extrabold text-white mb-3" style={{ fontSize: "clamp(1.6rem, 2.6vw, 2.1rem)", lineHeight: 1.15 }}>
+              <h2 className="font-extrabold text-white mb-3" style={{ fontSize: "clamp(1.5rem, 2.6vw, 2.1rem)", lineHeight: 1.15 }}>
                 Talento y <span className="text-coral-400">oportunidades,</span>
                 <br />
                 en un solo lugar.
