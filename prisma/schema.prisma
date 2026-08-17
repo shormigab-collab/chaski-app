@@ -24,6 +24,12 @@ model User {
   pais          String   @default("Colombia")
   createdAt     DateTime @default(now())
 
+  // Recuperacion de contraseña: token de un solo uso + fecha de expiracion.
+  // Se generan al pedir "olvide mi contraseña" y se borran (vuelven a null)
+  // en cuanto se usan o vencen.
+  resetToken         String?   @unique
+  resetTokenExpiraEn DateTime?
+
   proveedor     Proveedor?
   solicitudes   Solicitud[]
   transacciones Transaccion[]
