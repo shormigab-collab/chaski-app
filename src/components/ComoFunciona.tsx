@@ -117,7 +117,7 @@ export default function ComoFunciona({ lang = "es" }: { lang?: "es" | "en" }) {
           <Reveal>
             <div className="relative max-w-lg mx-auto md:mx-0">
               <div className="rounded-[2rem] overflow-hidden shadow-lg shadow-brand-900/10 aspect-[3/2]">
-                <img src="/images/hero-mesa-equipo.webp" alt={t.fotoAlt} className="w-full h-full object-cover" />
+                <img src="/images/como-funciona-equipo.webp" alt={t.fotoAlt} className="w-full h-full object-cover" />
               </div>
 
               <div className="absolute top-4 left-4 sm:top-5 sm:left-5 bg-white rounded-2xl shadow-lg shadow-black/10 px-3.5 py-2.5 flex items-center gap-2.5">
