@@ -105,6 +105,99 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "como-conseguir-clientes-freelancer-latinoamerica",
+    titulo: "Cómo conseguir tus primeros clientes como freelancer en Latinoamérica",
+    categoria: "Guía para freelancers",
+    imagen: "/images/blog/como-conseguir-clientes-freelancer-latinoamerica.webp",
+    imagenAlt: "Profesionales independientes revisando un proyecto y una propuesta en equipo",
+    descripcionMeta:
+      "Guía práctica para freelancers en Latinoamérica: cómo armar un perfil que genere confianza, dónde encontrar clientes y qué errores evitar al empezar.",
+    extracto:
+      "Empezar a trabajar por tu cuenta es más fácil que conseguir los primeros clientes que confíen en ti. Esta guía repasa cómo definir tu propuesta, armar un perfil que genere confianza y dónde buscar sin caer en la guerra de precios de las plataformas genéricas.",
+    fecha: "2026-08-17",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Trabajar de forma independiente en Latinoamérica ya no es raro: cada vez más diseñadores, desarrolladores, contadores, redactores y consultores dejan la relación de dependencia para ofrecer sus servicios por su cuenta. La parte difícil no es decidirse, sino conseguir a los primeros clientes que confíen en alguien sin un historial largo todavía. Esta guía cubre cómo prepararte, dónde buscar y qué errores evitar en esa primera etapa.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Antes de buscar clientes: define tu propuesta",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "El error más común al empezar es tratar de ofrecer un poco de todo con tal de no cerrarle la puerta a nadie. En la práctica pasa lo contrario: un perfil genérico genera menos confianza que uno específico. Define en una frase qué tipo de proyecto resuelves mejor y para qué tipo de cliente (por ejemplo, 'sitios web para negocios pequeños que están empezando a vender en línea' en vez de solo 'desarrollo web'). Esa claridad es la que después va a aparecer en tu perfil, en cómo te presentas y en el primer mensaje que le mandas a un cliente.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Arma un perfil que genere confianza",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Cuando un cliente no te conoce, tu perfil es lo único que tiene para decidir si te escribe o no. No necesitas años de experiencia para que se vea profesional: necesitas que sea claro y honesto. Una foto real (no un logo ni un ícono genérico), una bio corta que explique en qué te especializas y desde dónde trabajas, y ejemplos concretos de proyectos anteriores pesan más que una lista larga de servicios.",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "2 o 3 ejemplos de trabajo real, aunque sean proyectos pequeños o personales si estás empezando.",
+          "Una bio corta y específica, no un resumen genérico de 'profesional con experiencia en...'.",
+          "Un rango de tarifa aproximado, para que el cliente sepa si encaja con su presupuesto antes de escribirte.",
+          "Una forma de contacto directa (teléfono, WhatsApp o correo), sin intermediarios.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Dónde buscar tus primeros clientes",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Las recomendaciones de conocidos siguen siendo la forma más rápida de conseguir un primer cliente, así que vale la pena avisar en tu círculo cercano que estás disponible. Fuera de eso, las plataformas genéricas de freelancing internacional suelen forzarte a competir por precio contra cientos de perfiles similares en todo el mundo, lo cual es muy difícil cuando recién empiezas. Una alternativa es buscar en comunidades locales (grupos de LinkedIn, Facebook o WhatsApp de tu ciudad o industria) y en marketplaces enfocados en Latinoamérica, como chaski, donde creas tu perfil gratis y son los clientes que publican un proyecto los que te contactan directamente, sin subastas ni comisiones sobre lo que cobras.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Cómo responder cuando un cliente te escribe",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "La velocidad y la claridad de tu primera respuesta suelen pesar tanto como el precio. Responde lo antes posible, haz un par de preguntas para entender bien lo que necesita antes de dar una cifra, y si todavía no puedes dar un precio exacto, da un rango razonable en vez de quedarte callado. Un cliente que siente que lo escuchaste antes de cotizar confía más que uno al que le mandaste una tarifa fija sin haber entendido su proyecto.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Errores que alejan a los primeros clientes",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Cobrar muy por debajo del mercado solo por conseguir el primer proyecto: suele atraer clientes que después son los más difíciles de complacer.",
+          "Tardar días en responder un mensaje inicial.",
+          "Tener un perfil sin ejemplos de trabajo o con ejemplos que no tienen que ver con lo que ofreces.",
+          "Prometer plazos que sabes que van a ser difíciles de cumplir, solo para cerrar el trato.",
+          "No tener ninguna forma de contacto directo, lo que hace que el cliente dude de que hay una persona real detrás del perfil.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Sobre tu primera tarifa",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Antes de poner un precio, busca cuánto cobran otros profesionales con un nivel de experiencia parecido al tuyo en tu categoría y ciudad (o país, si trabajas remoto). No hace falta acertar desde el primer proyecto: es normal ajustar tu tarifa a medida que creces tu portafolio y ganas más confianza en lo que ofreces. Lo importante es no anclarte tan bajo al principio que después te cueste subir sin sentir que estás 'subiendo mucho' de golpe.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Conseguir los primeros clientes toma tiempo, pero cada perfil claro, cada respuesta rápida y cada proyecto bien entregado hace más fácil el siguiente. Si quieres empezar, puedes crear tu perfil profesional gratis en chaski y recibir 5 créditos de bienvenida para contactar a los primeros clientes que publiquen un proyecto que encaje contigo.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {
