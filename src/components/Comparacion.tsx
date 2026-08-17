@@ -138,7 +138,7 @@ export default function Comparacion({ lang = "es" }: { lang?: "es" | "en" }) {
               {filas.map((f) => (
                 <div key={f.label} className="flex items-center gap-3.5 px-5 sm:px-6 py-4">
                   <span className="w-10 h-10 rounded-xl bg-white text-brand-600 flex items-center justify-center shrink-0 shadow-sm">
-                    <f.Icono className="w-4.5 h-4.5" strokeWidth={1.75} />
+                    <f.Icono className="w-[18px] h-[18px]" strokeWidth={1.75} />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-[10px] font-bold tracking-wide text-brand-500/70 mb-0.5">{f.label}</div>
@@ -164,7 +164,7 @@ export default function Comparacion({ lang = "es" }: { lang?: "es" | "en" }) {
               {filas.map((f) => (
                 <div key={f.label} className="flex items-center gap-3.5 px-5 sm:px-6 py-4">
                   <span className="w-10 h-10 rounded-xl bg-black/5 text-ink/35 flex items-center justify-center shrink-0">
-                    <f.IconoTrad className="w-4.5 h-4.5" strokeWidth={1.75} />
+                    <f.IconoTrad className="w-[18px] h-[18px]" strokeWidth={1.75} />
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="text-[10px] font-bold tracking-wide text-ink/35 mb-0.5">{f.label}</div>
