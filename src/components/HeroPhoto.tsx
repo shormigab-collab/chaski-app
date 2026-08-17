@@ -1,101 +1,49 @@
-import { CheckCircle2, Heart } from "lucide-react";
-
-// NOTA: la tarjeta de proyectos y el badge "Disponible" usan un
-// ejemplo ilustrativo ("Camila R.", "Cliente: HolaCoffee") replicando
-// el mockup de referencia. No son datos reales — se marcan asi para
-// poder reemplazarlos facil mas adelante cuando haya proyectos y
-// clientes reales que mostrar.
+// NOTA: la tarjeta "Identidad de marca / Camila R." usa un ejemplo
+// ilustrativo (mismo proyecto de ejemplo que en "Trabajo que habla por
+// ti" — la miniatura es real, la atribucion a Camila R. es ilustrativa,
+// no un proyecto real de esa persona). No son datos reales — se marcan
+// asi para poder reemplazarlos facil mas adelante cuando haya
+// proyectos y clientes reales que mostrar.
 export default function HeroPhoto({ lang = "es" }: { lang?: "es" | "en" }) {
   const t =
     lang === "en"
       ? {
-          alt: "Latin American professionals working with a laptop and tablet",
-          destacado: "Featured work",
-          appFintech: "Fintech App",
-          marca: "E-commerce branding",
-          autor: "Camila R. · HolaCoffee",
-          disponible: "Available",
-          colaboraciones: "Remote collaborations",
+          alt: "Team of professionals working together on a project",
+          disponible: "Available for projects",
+          ejemplo: "Portfolio example",
+          titulo: "Brand identity",
+          autor: "Camila R.",
         }
       : {
-          alt: "Profesionales de Latinoamérica trabajando con laptop y tablet",
-          destacado: "Trabajo destacado",
-          appFintech: "App Fintech",
-          marca: "Marca e-commerce",
-          autor: "Camila R. · HolaCoffee",
-          disponible: "Disponible",
-          colaboraciones: "Colaboraciones remotas",
+          alt: "Equipo de profesionales trabajando juntos en un proyecto",
+          disponible: "Disponible para proyectos",
+          ejemplo: "Ejemplo de portafolio",
+          titulo: "Identidad de marca",
+          autor: "Camila R.",
         };
 
   return (
-    <div className="relative w-full max-w-lg mx-auto md:mx-0 pt-20 pb-10">
-      {/* foto principal: recorte con fondo transparente, sin marco. El
-          degradado en la mascara difumina la parte de abajo (donde la
-          foto original termina a media pierna) para que no se vea como
-          un corte brusco, sino que se disuelve hacia el fondo. */}
-      <img
-        src="/images/hero-equipo.png"
-        alt={t.alt}
-        width={820}
-        height={546}
-        className="w-full h-auto relative z-0"
-        style={{
-          maskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
-        }}
-      />
+    <div className="relative w-full max-w-lg mx-auto md:mx-0">
+      <div className="relative rounded-2xl overflow-hidden shadow-lg shadow-brand-900/10">
+        <img src="/images/hero-mesa-equipo.webp" alt={t.alt} className="w-full h-auto block" />
 
-      {/* tarjeta flotante: 2 proyectos de ejemplo en una sola tarjeta
-          (antes eran 2 tarjetas separadas — se combinaron para que la
-          composicion se sienta menos cargada) */}
-      <div className="absolute bottom-10 -left-4 sm:-left-10 w-60 bg-white rounded-2xl shadow-xl shadow-black/10 p-3 animate-float">
-        <div className="flex items-center gap-1.5 mb-2">
-          <CheckCircle2 className="w-3.5 h-3.5 text-brand-500 shrink-0" strokeWidth={2} />
-          <span className="text-[10px] font-bold text-brand-600">{t.destacado}</span>
+        {/* tarjeta: disponibilidad, arriba a la derecha */}
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-white rounded-2xl shadow-lg shadow-black/10 px-3.5 py-2.5 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-availability shrink-0" />
+          <span className="text-xs sm:text-sm font-semibold text-ink whitespace-nowrap">{t.disponible}</span>
         </div>
-        <div className="grid grid-cols-2 gap-1.5">
-          <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-            <img
-              src="/images/ejemplos/fintech-app.webp"
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <span className="absolute inset-x-0 bottom-0 bg-black/55 px-1.5 py-1">
-              <span className="text-[9px] font-semibold text-white leading-none block truncate">{t.appFintech}</span>
-            </span>
-          </div>
-          <div className="relative aspect-[4/3] rounded-lg overflow-hidden">
-            <img
-              src="/images/ejemplos/holacoffee.webp"
-              alt=""
-              loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <span className="absolute inset-x-0 bottom-0 bg-black/55 px-1.5 py-1">
-              <span className="text-[9px] font-semibold text-white leading-none block truncate">{t.marca}</span>
-            </span>
-          </div>
-        </div>
-        <div className="flex items-center justify-between mt-2">
-          <span className="text-[10px] text-ink/45 truncate">{t.autor}</span>
-          <span className="flex items-center gap-0.5 text-[10px] font-semibold text-coral-600 shrink-0">
-            <Heart className="w-2.5 h-2.5 fill-coral-500 text-coral-500" />
-            42
+
+        {/* tarjeta: ejemplo de portafolio, abajo a la izquierda — con
+            miniatura real, no un icono vacio */}
+        <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 bg-white rounded-2xl shadow-lg shadow-black/10 p-2.5 sm:p-3 flex items-center gap-2.5 max-w-[240px]">
+          <span className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden shrink-0">
+            <img src="/images/ejemplos/holacoffee.webp" alt="" className="w-full h-full object-cover" />
           </span>
-        </div>
-      </div>
-
-      {/* tarjeta flotante: disponibilidad — arriba de la foto (no encima
-          de las caras) */}
-      <div
-        className="absolute top-0 left-[24%] bg-white rounded-2xl shadow-xl shadow-black/10 px-3.5 py-3 flex items-center gap-2 animate-float"
-        style={{ animationDelay: "1s" }}
-      >
-        <span className="w-2.5 h-2.5 rounded-full bg-availability shrink-0" />
-        <div className="leading-tight">
-          <div className="text-xs font-semibold text-ink/70">{t.disponible}</div>
-          <div className="text-[10px] text-ink/40">{t.colaboraciones}</div>
+          <div className="min-w-0 leading-tight">
+            <div className="text-[10px] text-ink/40 mb-0.5 truncate">{t.ejemplo}</div>
+            <div className="text-sm font-bold text-ink truncate">{t.titulo}</div>
+            <div className="text-xs text-ink/55 truncate">{t.autor}</div>
+          </div>
         </div>
       </div>
     </div>

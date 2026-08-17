@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DollarSign, MessageSquare, ShieldCheck, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/db";
-import HeroSearch from "@/components/HeroSearch";
 import HeroPhoto from "@/components/HeroPhoto";
 import Reveal from "@/components/Reveal";
 import ComoFunciona from "@/components/ComoFunciona";
@@ -63,72 +63,73 @@ export default async function EnglishLandingPage() {
 
         <div className="relative max-w-6xl mx-auto px-4 pt-14 sm:pt-16 pb-16 sm:pb-20 grid md:grid-cols-2 gap-12 md:gap-14 items-center">
           <div className="text-center md:text-left">
-            <span className="inline-block text-xs font-semibold text-coral-600 bg-coral-50 px-3 py-1 rounded-full mb-4">
-              Marketplace for Latin American professionals
+            <span className="inline-block text-xs font-bold tracking-widest text-brand-600 bg-brand-50 px-4 py-2 rounded-full mb-5">
+              LATIN AMERICA&apos;S PROFESSIONAL MARKETPLACE
             </span>
-            <div className="relative">
-              {/* mismo halo suave que la version en espanol */}
-              <div
-                className="hidden md:block absolute -inset-x-6 -inset-y-8 bg-white/50 blur-3xl rounded-[3rem] -z-10"
-                aria-hidden="true"
-              />
-              <h1
-                className="font-extrabold text-brand-600 mb-5"
-                style={{
-                  fontSize: "clamp(2.6rem, 4.6vw, 4.5rem)",
-                  lineHeight: 1.02,
-                  letterSpacing: "-0.035em",
-                  textShadow: "0 1px 0 rgba(255,255,255,0.6), 0 14px 32px rgba(41,32,111,0.18)",
-                }}
-              >
-                Don&apos;t search for talent.{" "}
-                <span
-                  className="bg-gradient-to-r from-gold-500 via-[#F58A2E] to-coral-600 bg-clip-text text-transparent"
-                  style={{
-                    textShadow: "none",
-                    filter: "drop-shadow(0 6px 20px rgba(245,138,46,0.45))",
-                  }}
-                >
-                  Let it find you.
-                </span>
-              </h1>
-            </div>
+            <h1
+              className="font-extrabold text-ink mb-5"
+              style={{
+                fontSize: "clamp(2.4rem, 4.4vw, 3.75rem)",
+                lineHeight: 1.08,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              Show your <span className="text-coral-600">talent.</span> Connect with{" "}
+              <span className="text-coral-600">clients.</span>
+            </h1>
             <p className="text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0 leading-relaxed">
-              Post your project free and get direct proposals from experts in design, development, marketing,
-              accounting and more — from Latin America. No back-and-forth quoting.
+              Create your profile and share your projects with people looking for your services.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start mb-4">
               <Link
-                href="/registro/cliente?lang=en"
-                className="min-h-[44px] flex items-center justify-center bg-brand-500 text-cream px-7 py-3.5 rounded-xl font-semibold hover:bg-brand-600 transition-colors shadow-sm shadow-brand-500/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+                href="/registro/proveedor?lang=en"
+                className="min-h-[44px] flex items-center justify-center bg-brand-600 text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-brand-700 transition-colors shadow-sm shadow-brand-900/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600"
               >
-                Post your project free
+                Create my free profile
               </Link>
               <Link
-                href="/profesionales"
+                href="/registro/cliente?lang=en"
                 className="min-h-[44px] flex items-center justify-center bg-white border border-border text-ink px-7 py-3.5 rounded-xl font-semibold hover:border-brand-500 hover:text-brand-500 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
               >
-                Explore professionals
+                Post a project
               </Link>
             </div>
 
             <Link
+              href="/profesionales"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors mb-2"
+            >
+              I want to find talent
+              <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
+            </Link>
+            <br />
+            <Link
               href="/en/virtual-assistants"
-              className="inline-block mt-4 text-sm text-ink/45 hover:text-brand-500 underline decoration-dotted underline-offset-4 transition-colors"
+              className="inline-block mb-6 text-sm text-ink/45 hover:text-brand-500 underline decoration-dotted underline-offset-4 transition-colors"
             >
               Looking specifically for a Virtual Assistant?
             </Link>
 
-            <div className="mt-8">
-              <HeroSearch
-                categorias={categorias.map((c) => ({ id: c.id, nombre: c.nombre, slug: c.slug, icono: c.icono }))}
-                lang="en"
-              />
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2 text-sm text-ink/60">
+              <span className="flex items-center gap-1.5">
+                <DollarSign className="w-4 h-4 text-ink/40" strokeWidth={1.75} />
+                Free
+              </span>
+              <span className="hidden sm:inline text-ink/20">|</span>
+              <span className="flex items-center gap-1.5">
+                <MessageSquare className="w-4 h-4 text-ink/40" strokeWidth={1.75} />
+                Direct contact
+              </span>
+              <span className="hidden sm:inline text-ink/20">|</span>
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-ink/40" strokeWidth={1.75} />
+                No commissions
+              </span>
             </div>
           </div>
 
-          <div className="hidden md:block">
+          <div>
             <HeroPhoto lang="en" />
           </div>
         </div>

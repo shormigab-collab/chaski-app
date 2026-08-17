@@ -14,7 +14,7 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
     lang === "en"
       ? {
           badge: "Coming soon",
-          titulo: "De la comunidad",
+          titulo: "Community",
           nombre: "María José G.",
           rol: "Estratega de Contenido",
           tiempo: "3 h",
@@ -29,7 +29,7 @@ export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }
         }
       : {
           badge: "Próximamente",
-          titulo: "De la comunidad",
+          titulo: "Comunidad",
           nombre: "María José G.",
           rol: "Estratega de Contenido",
           tiempo: "3 h",

@@ -75,14 +75,14 @@ export default async function TalentoEnAccion({ lang = "es" }: { lang?: "es" | "
   const t =
     lang === "en"
       ? {
-          titulo: "Work that speaks for itself",
+          titulo: "Portfolios",
           verTodos: "See all projects",
           ctaTitulo: "Have projects to show?",
           ctaTexto: "Create your profile and add your portfolio for free",
           ctaLink: "Create my profile",
         }
       : {
-          titulo: "Trabajo que habla por ti",
+          titulo: "Portafolios",
           verTodos: "Ver todos los proyectos",
           ctaTitulo: "¿Tienes proyectos para mostrar?",
           ctaTexto: "Crea tu perfil y agrega tu portafolio gratis",

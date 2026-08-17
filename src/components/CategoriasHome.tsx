@@ -89,7 +89,7 @@ export default function CategoriasHome({
     <div className="bg-white border border-border rounded-2xl p-5 h-full">
       <div className="flex items-center justify-between mb-4">
         <h2 className="font-bold text-ink">
-          {lang === "en" ? "Discover talent by specialty" : "Descubre talento por especialidad"}
+          {lang === "en" ? "Specialties" : "Especialidades"}
         </h2>
         {otras.length > 0 && (
           <button
