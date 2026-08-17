@@ -66,11 +66,11 @@ export default function Confianza({ lang = "es" }: { lang?: "es" | "en" }) {
         <Reveal>
           <span className="block text-xs font-bold tracking-widest text-brand-600 mb-4">{t.eyebrow}</span>
           <h2
-            className="font-extrabold text-ink mb-4"
+            className="font-extrabold text-brand-500 mb-4"
             style={{ fontSize: "clamp(1.9rem, 3.4vw, 2.6rem)", lineHeight: 1.12, letterSpacing: "-0.02em" }}
           >
             {t.h2a}
-            <span className="text-coral-600">{t.h2b}</span>
+            <span className="text-coral-500">{t.h2b}</span>
           </h2>
           <p className="text-ink/55 max-w-sm mb-7 leading-relaxed">{t.sub}</p>
 

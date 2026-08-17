@@ -106,7 +106,7 @@ export default function ComoFunciona({ lang = "es" }: { lang?: "es" | "en" }) {
             <span className="inline-block text-xs font-bold tracking-widest text-brand-600 bg-brand-50 px-4 py-2 rounded-full mb-5">
               {t.eyebrow}
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-ink tracking-tight mb-3">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-500 tracking-tight mb-3">
               {t.h2a} <span className="text-coral-500">{t.h2b}</span>
             </h2>
             <p className="text-ink/55 max-w-md mx-auto">{t.sub}</p>

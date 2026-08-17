@@ -18,8 +18,12 @@ export default function ProfesionalesDestacados({
         <Reveal>
           <div className="flex items-end justify-between mb-8 gap-4">
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-ink">
-                {lang === "en" ? "Experts ready to help" : "Expertos listos para ayudarte"}
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-500">
+                {lang === "en" ? (
+                  <>Experts ready to <span className="text-coral-500">help.</span></>
+                ) : (
+                  <>Expertos listos para <span className="text-coral-500">ayudarte.</span></>
+                )}
               </h2>
               <p className="text-ink/55 mt-1.5">
                 {lang === "en"

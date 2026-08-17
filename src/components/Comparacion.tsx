@@ -89,7 +89,8 @@ export default function Comparacion({ lang = "es" }: { lang?: "es" | "en" }) {
     lang === "en"
       ? {
           eyebrow: "WHY CHASKI",
-          h2: "More options. Fewer middlemen.",
+          h2a: "More options. Fewer ",
+          h2b: "middlemen.",
           sub: "Post once, receive proposals, and choose with more context.",
           badgeDirecta: "THE DIRECT OPTION",
           tituloTrad: "Traditional search",
@@ -99,7 +100,8 @@ export default function Comparacion({ lang = "es" }: { lang?: "es" | "en" }) {
         }
       : {
           eyebrow: "POR QUÉ CHASKI",
-          h2: "Más opciones. Menos intermediarios.",
+          h2a: "Más opciones. Menos ",
+          h2b: "intermediarios.",
           sub: "Publica una vez, recibe propuestas y elige con mayor contexto.",
           badgeDirecta: "LA OPCIÓN DIRECTA",
           tituloTrad: "Búsqueda tradicional",
@@ -115,7 +117,10 @@ export default function Comparacion({ lang = "es" }: { lang?: "es" | "en" }) {
           <span className="inline-block text-xs font-bold tracking-widest text-brand-600 bg-brand-50 px-4 py-2 rounded-full mb-5">
             {t.eyebrow}
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-ink tracking-tight mb-3">{t.h2}</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-500 tracking-tight mb-3">
+            {t.h2a}
+            <span className="text-coral-500">{t.h2b}</span>
+          </h2>
           <p className="text-ink/55 max-w-md mx-auto">{t.sub}</p>
         </div>
       </Reveal>
