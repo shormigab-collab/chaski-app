@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DollarSign, MessageSquare, ShieldCheck, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/db";
 import HeroPhoto from "@/components/HeroPhoto";
+import HeroSearch from "@/components/HeroSearch";
 import Reveal from "@/components/Reveal";
 import ComoFunciona from "@/components/ComoFunciona";
 import TrustBar from "@/components/TrustBar";
@@ -67,15 +68,15 @@ export default async function EnglishLandingPage() {
               LATIN AMERICA&apos;S PROFESSIONAL MARKETPLACE
             </span>
             <h1
-              className="font-extrabold text-ink mb-5"
+              className="font-extrabold text-brand-500 mb-5"
               style={{
                 fontSize: "clamp(2.4rem, 4.4vw, 3.75rem)",
                 lineHeight: 1.08,
                 letterSpacing: "-0.03em",
               }}
             >
-              Show your <span className="text-coral-600">talent.</span> Connect with{" "}
-              <span className="text-coral-600">clients.</span>
+              Show your <span className="text-coral-500">talent.</span> Connect with{" "}
+              <span className="text-coral-500">clients.</span>
             </h1>
             <p className="text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0 leading-relaxed">
               Create your profile and share your projects with people looking for your services.
@@ -110,6 +111,10 @@ export default async function EnglishLandingPage() {
             >
               Looking specifically for a Virtual Assistant?
             </Link>
+
+            <div className="mt-4 mb-6">
+              <HeroSearch categorias={categorias} lang="en" />
+            </div>
 
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2 text-sm text-ink/60">
               <span className="flex items-center gap-1.5">

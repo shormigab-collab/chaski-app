@@ -2,6 +2,7 @@ import Link from "next/link";
 import { DollarSign, MessageSquare, ShieldCheck, ArrowRight } from "lucide-react";
 import { prisma } from "@/lib/db";
 import HeroPhoto from "@/components/HeroPhoto";
+import HeroSearch from "@/components/HeroSearch";
 import Reveal from "@/components/Reveal";
 import ComoFunciona from "@/components/ComoFunciona";
 import TrustBar from "@/components/TrustBar";
@@ -51,15 +52,15 @@ export default async function HomePage() {
               MARKETPLACE PROFESIONAL DE LATINOAMÉRICA
             </span>
             <h1
-              className="font-extrabold text-ink mb-5"
+              className="font-extrabold text-brand-500 mb-5"
               style={{
                 fontSize: "clamp(2.4rem, 4.4vw, 3.75rem)",
                 lineHeight: 1.08,
                 letterSpacing: "-0.03em",
               }}
             >
-              Muestra tu <span className="text-coral-600">talento.</span> Conecta con{" "}
-              <span className="text-coral-600">clientes.</span>
+              Muestra tu <span className="text-coral-500">talento.</span> Conecta con{" "}
+              <span className="text-coral-500">clientes.</span>
             </h1>
             <p className="text-lg text-ink/60 mb-8 max-w-md mx-auto md:mx-0 leading-relaxed">
               Crea tu perfil y comparte tus proyectos con personas que buscan tus servicios.
@@ -87,6 +88,10 @@ export default async function HomePage() {
               Quiero encontrar talento
               <ArrowRight className="w-4 h-4" strokeWidth={2.5} />
             </Link>
+
+            <div className="mt-4 mb-6">
+              <HeroSearch categorias={categorias} />
+            </div>
 
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-5 gap-y-2 text-sm text-ink/60">
               <span className="flex items-center gap-1.5">
