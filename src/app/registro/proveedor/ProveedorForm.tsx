@@ -172,8 +172,8 @@ export default function ProveedorForm({
                   />
                 </span>
                 <div className="min-w-0">
-                  <h3 className="font-bold text-ink text-lg leading-snug">Santiago R.</h3>
-                  <p className="text-sm text-ink/55">Diseñador de producto · Bogotá</p>
+                  <h3 className="font-bold text-ink text-lg leading-snug">Valentina R.</h3>
+                  <p className="text-sm text-ink/55">Diseñadora de producto · Bogotá</p>
                 </div>
               </div>
 
