@@ -3,28 +3,72 @@ import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
 
+// Ventanas de tiempo para el resumen "Esta semana": los ultimos 7 dias
+// comparados contra los 7 dias anteriores a esos, para saber si el
+// esfuerzo diario (buscar proveedores, ayudar a publicar solicitudes,
+// etc.) esta dando resultado semana a semana.
+function rangosSemana() {
+  const ahora = new Date();
+  const haceUnaSemana = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const haceDosSemanas = new Date(ahora.getTime() - 14 * 24 * 60 * 60 * 1000);
+  return { haceUnaSemana, haceDosSemanas };
+}
+
+function tendencia(actual: number, anterior: number) {
+  const diff = actual - anterior;
+  if (diff > 0) return { texto: `+${diff} vs. semana pasada`, color: "text-emerald-600" };
+  if (diff < 0) return { texto: `${diff} vs. semana pasada`, color: "text-coral-600" };
+  return { texto: "igual que la semana pasada", color: "text-gray-400" };
+}
+
 export default async function AdminPage() {
   const usuario = await obtenerUsuarioActual();
   if (!usuario || usuario.role !== "ADMIN") redirect("/login");
 
-  const [totalClientes, totalProveedores, totalSolicitudes, totalDesbloqueos, totalLeadsUS, transacciones, categorias, leadsUS] =
-    await Promise.all([
-      prisma.user.count({ where: { role: "CLIENTE" } }),
-      prisma.user.count({ where: { role: "PROVEEDOR" } }),
-      prisma.solicitud.count(),
-      prisma.desbloqueo.count(),
-      prisma.leadUS.count(),
-      prisma.transaccion.findMany({
-        include: { user: true },
-        orderBy: { createdAt: "desc" },
-        take: 20,
-      }),
-      prisma.categoria.findMany({
-        include: { _count: { select: { proveedores: true, solicitudes: true } } },
-        orderBy: { nombre: "asc" },
-      }),
-      prisma.leadUS.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
-    ]);
+  const { haceUnaSemana, haceDosSemanas } = rangosSemana();
+
+  const [
+    totalClientes,
+    totalProveedores,
+    totalSolicitudes,
+    totalDesbloqueos,
+    totalLeadsUS,
+    transacciones,
+    categorias,
+    leadsUS,
+    clientesEstaSemana,
+    clientesSemanaAnterior,
+    proveedoresEstaSemana,
+    proveedoresSemanaAnterior,
+    solicitudesEstaSemana,
+    solicitudesSemanaAnterior,
+    desbloqueosEstaSemana,
+    desbloqueosSemanaAnterior,
+  ] = await Promise.all([
+    prisma.user.count({ where: { role: "CLIENTE" } }),
+    prisma.user.count({ where: { role: "PROVEEDOR" } }),
+    prisma.solicitud.count(),
+    prisma.desbloqueo.count(),
+    prisma.leadUS.count(),
+    prisma.transaccion.findMany({
+      include: { user: true },
+      orderBy: { createdAt: "desc" },
+      take: 20,
+    }),
+    prisma.categoria.findMany({
+      include: { _count: { select: { proveedores: true, solicitudes: true } } },
+      orderBy: { nombre: "asc" },
+    }),
+    prisma.leadUS.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
+    prisma.user.count({ where: { role: "CLIENTE", createdAt: { gte: haceUnaSemana } } }),
+    prisma.user.count({ where: { role: "CLIENTE", createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
+    prisma.user.count({ where: { role: "PROVEEDOR", createdAt: { gte: haceUnaSemana } } }),
+    prisma.user.count({ where: { role: "PROVEEDOR", createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
+    prisma.solicitud.count({ where: { createdAt: { gte: haceUnaSemana } } }),
+    prisma.solicitud.count({ where: { createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
+    prisma.desbloqueo.count({ where: { createdAt: { gte: haceUnaSemana } } }),
+    prisma.desbloqueo.count({ where: { createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
+  ]);
 
   const ingresosCOP = transacciones
     .filter((t) => t.estado === "APROBADA")
@@ -34,6 +78,16 @@ export default async function AdminPage() {
     <div className="max-w-5xl mx-auto px-4 py-12">
       <h1 className="text-2xl font-bold mb-8">Panel de administración</h1>
 
+      <h2 className="text-xl font-bold mb-1">Esta semana (últimos 7 días)</h2>
+      <p className="text-sm text-gray-500 mb-3">Para saber si buscar proveedores y ayudar a publicar solicitudes está dando resultado.</p>
+      <div className="grid sm:grid-cols-4 gap-4 mb-10">
+        <WeeklyMetricCard label="Nuevos clientes" value={clientesEstaSemana} anterior={clientesSemanaAnterior} />
+        <WeeklyMetricCard label="Nuevos proveedores" value={proveedoresEstaSemana} anterior={proveedoresSemanaAnterior} />
+        <WeeklyMetricCard label="Solicitudes publicadas" value={solicitudesEstaSemana} anterior={solicitudesSemanaAnterior} />
+        <WeeklyMetricCard label="Desbloqueos (contactos)" value={desbloqueosEstaSemana} anterior={desbloqueosSemanaAnterior} />
+      </div>
+
+      <h2 className="text-xl font-bold mb-3">Totales</h2>
       <div className="grid sm:grid-cols-5 gap-4 mb-10">
         <MetricCard label="Clientes" value={totalClientes} />
         <MetricCard label="Proveedores" value={totalProveedores} />
@@ -148,6 +202,17 @@ function MetricCard({ label, value }: { label: string; value: number }) {
     <div className="border rounded-xl p-5 text-center">
       <div className="text-3xl font-bold text-brand-600 tabular-nums">{value}</div>
       <div className="text-sm text-gray-500">{label}</div>
+    </div>
+  );
+}
+
+function WeeklyMetricCard({ label, value, anterior }: { label: string; value: number; anterior: number }) {
+  const t = tendencia(value, anterior);
+  return (
+    <div className="border rounded-xl p-5 text-center">
+      <div className="text-3xl font-bold text-brand-600 tabular-nums">{value}</div>
+      <div className="text-sm text-gray-500 mb-1.5">{label}</div>
+      <div className={`text-xs font-medium ${t.color}`}>{t.texto}</div>
     </div>
   );
 }
