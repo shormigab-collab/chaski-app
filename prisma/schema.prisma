@@ -81,6 +81,8 @@ model Solicitud {
   ciudad       String
   presupuesto  String?
   telefonoContacto String
+  // Como prefiere el cliente que lo contacten: "TELEFONO" | "CORREO" | "AMBOS"
+  preferenciaContacto String @default("AMBOS")
   estado       String          @default("ABIERTA") // "ABIERTA" | "CERRADA"
   createdAt    DateTime        @default(now())
 

@@ -53,6 +53,8 @@ export default async function ExplorarSolicitudes() {
               categoriaSlug: s.categoria.slug,
               nombreCliente: s.cliente.nombre,
               telefonoContacto: s.telefonoContacto,
+              emailContacto: s.cliente.email,
+              preferenciaContacto: s.preferenciaContacto,
               createdAt: s.createdAt.toISOString(),
             }}
             desbloqueada={idsDesbloqueados.has(s.id)}

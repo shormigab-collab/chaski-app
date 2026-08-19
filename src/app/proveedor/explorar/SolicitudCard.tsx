@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { MapPin } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 
 type Solicitud = {
@@ -15,6 +15,8 @@ type Solicitud = {
   categoriaSlug: string;
   nombreCliente: string;
   telefonoContacto: string;
+  emailContacto: string;
+  preferenciaContacto: string; // "TELEFONO" | "CORREO" | "AMBOS"
   createdAt: string;
 };
 
@@ -84,10 +86,36 @@ export default function SolicitudCard({
 
       {visible ? (
         <div className="mt-3 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-          <p className="font-medium text-green-800">
-            {solicitud.nombreCliente} · {solicitud.telefonoContacto}
-          </p>
-          <p className="text-green-700">Contáctalo directamente para ofrecer tu servicio.</p>
+          <p className="font-medium text-green-800 mb-1.5">{solicitud.nombreCliente}</p>
+          <div className="space-y-1">
+            <p
+              className={`flex items-center gap-1.5 ${
+                solicitud.preferenciaContacto === "TELEFONO" ? "font-semibold text-green-900" : "text-green-700"
+              }`}
+            >
+              <Phone className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
+              {solicitud.telefonoContacto}
+              {solicitud.preferenciaContacto === "TELEFONO" && (
+                <span className="text-[10px] font-bold uppercase tracking-wide bg-green-600 text-white px-1.5 py-0.5 rounded-full">
+                  Preferido
+                </span>
+              )}
+            </p>
+            <p
+              className={`flex items-center gap-1.5 ${
+                solicitud.preferenciaContacto === "CORREO" ? "font-semibold text-green-900" : "text-green-700"
+              }`}
+            >
+              <Mail className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
+              {solicitud.emailContacto}
+              {solicitud.preferenciaContacto === "CORREO" && (
+                <span className="text-[10px] font-bold uppercase tracking-wide bg-green-600 text-white px-1.5 py-0.5 rounded-full">
+                  Preferido
+                </span>
+              )}
+            </p>
+          </div>
+          <p className="text-green-700 mt-1.5">Contáctalo directamente para ofrecer tu servicio.</p>
         </div>
       ) : (
         <div className="mt-3">

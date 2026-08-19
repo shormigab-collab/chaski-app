@@ -34,6 +34,7 @@ export default function NuevaSolicitudForm({
   const [ciudad, setCiudad] = useState(usuario.ciudad ?? "");
   const [presupuesto, setPresupuesto] = useState("");
   const [telefonoContacto, setTelefonoContacto] = useState(usuario.telefono ?? "");
+  const [preferenciaContacto, setPreferenciaContacto] = useState<"TELEFONO" | "CORREO" | "AMBOS">("AMBOS");
 
   const [textoIA, setTextoIA] = useState("");
   const [generandoIA, setGenerandoIA] = useState(false);
@@ -65,6 +66,10 @@ export default function NuevaSolicitudForm({
           ciudadPlaceholder: "City",
           presupuestoPlaceholder: "Approximate budget (optional)",
           telefonoPlaceholder: "Contact phone number",
+          preferenciaLabel: "How do you prefer to be contacted?",
+          prefTelefono: "Phone",
+          prefCorreo: "Email",
+          prefAmbos: "Either one",
           atras: "← Back",
           continuar: "Continue",
           publicar: "Post request",
@@ -94,6 +99,10 @@ export default function NuevaSolicitudForm({
           ciudadPlaceholder: "Ciudad",
           presupuestoPlaceholder: "Presupuesto aproximado (opcional)",
           telefonoPlaceholder: "Teléfono de contacto",
+          preferenciaLabel: "¿Cómo prefieres que te contacten?",
+          prefTelefono: "Teléfono",
+          prefCorreo: "Correo",
+          prefAmbos: "Cualquiera",
           atras: "← Atrás",
           continuar: "Continuar",
           publicar: "Publicar solicitud",
@@ -154,7 +163,15 @@ export default function NuevaSolicitudForm({
     const res = await fetch("/api/solicitudes", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ categoriaId, titulo, descripcion, ciudad, presupuesto, telefonoContacto }),
+      body: JSON.stringify({
+        categoriaId,
+        titulo,
+        descripcion,
+        ciudad,
+        presupuesto,
+        telefonoContacto,
+        preferenciaContacto,
+      }),
     });
     setCargando(false);
     if (res.ok) {
@@ -305,6 +322,32 @@ export default function NuevaSolicitudForm({
             placeholder={t.telefonoPlaceholder}
             className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
           />
+
+          <div>
+            <p className="text-sm font-semibold text-ink mb-2">{t.preferenciaLabel}</p>
+            <div className="flex gap-2">
+              {(
+                [
+                  { valor: "TELEFONO", texto: t.prefTelefono },
+                  { valor: "CORREO", texto: t.prefCorreo },
+                  { valor: "AMBOS", texto: t.prefAmbos },
+                ] as const
+              ).map((op) => (
+                <button
+                  type="button"
+                  key={op.valor}
+                  onClick={() => setPreferenciaContacto(op.valor)}
+                  className={`flex-1 text-sm border rounded-xl px-3 py-2.5 transition-colors ${
+                    preferenciaContacto === op.valor
+                      ? "border-brand-500 bg-brand-50 text-brand-600 font-medium"
+                      : "border-black/10 text-ink/70 hover:border-black/30"
+                  }`}
+                >
+                  {op.texto}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 

@@ -10,6 +10,7 @@ const esquema = z.object({
   ciudad: z.string().min(2),
   presupuesto: z.string().optional(),
   telefonoContacto: z.string().min(6),
+  preferenciaContacto: z.enum(["TELEFONO", "CORREO", "AMBOS"]).default("AMBOS"),
 });
 
 export async function POST(req: Request) {
