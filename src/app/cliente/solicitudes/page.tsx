@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db";
 import NuevaSolicitudForm from "./NuevaSolicitudForm";
 import CategoryIcon from "@/components/CategoryIcon";
 import CalificarProveedor from "./CalificarProveedor";
+import EditarSolicitudForm from "./EditarSolicitudForm";
 import { nombreCategoria } from "@/lib/categoriasEn";
 
 export default async function MisSolicitudes({
@@ -112,6 +113,21 @@ export default async function MisSolicitudes({
                 ))}
               </div>
             )}
+            <EditarSolicitudForm
+              solicitud={{
+                id: s.id,
+                categoriaId: s.categoriaId,
+                titulo: s.titulo,
+                descripcion: s.descripcion,
+                ciudad: s.ciudad,
+                presupuesto: s.presupuesto,
+                telefonoContacto: s.telefonoContacto,
+                preferenciaContacto: s.preferenciaContacto,
+                estado: s.estado,
+              }}
+              categorias={categorias}
+              lang={lang}
+            />
           </div>
         ))}
       </div>
