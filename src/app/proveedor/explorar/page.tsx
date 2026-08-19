@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { enmascararTelefono, enmascararCorreo } from "@/lib/contacto";
+import { tiempoRelativo } from "@/lib/tiempoRelativo";
 import SolicitudCard from "./SolicitudCard";
 
 export default async function ExplorarSolicitudes() {
@@ -16,7 +18,11 @@ export default async function ExplorarSolicitudes() {
   const [solicitudes, desbloqueos] = await Promise.all([
     prisma.solicitud.findMany({
       where: { categoriaId: { in: categoriaIds }, estado: "ABIERTA" },
-      include: { categoria: true, cliente: true },
+      include: {
+        categoria: true,
+        cliente: true,
+        _count: { select: { desbloqueos: true } },
+      },
       orderBy: { createdAt: "desc" },
     }),
     prisma.desbloqueo.findMany({ where: { proveedorId: usuario.proveedor.id } }),
@@ -40,26 +46,30 @@ export default async function ExplorarSolicitudes() {
       )}
 
       <div className="space-y-4">
-        {solicitudes.map((s) => (
-          <SolicitudCard
-            key={s.id}
-            solicitud={{
-              id: s.id,
-              titulo: s.titulo,
-              descripcion: s.descripcion,
-              ciudad: s.ciudad,
-              presupuesto: s.presupuesto,
-              categoriaNombre: s.categoria.nombre,
-              categoriaSlug: s.categoria.slug,
-              nombreCliente: s.cliente.nombre,
-              telefonoContacto: s.telefonoContacto,
-              emailContacto: s.cliente.email,
-              preferenciaContacto: s.preferenciaContacto,
-              createdAt: s.createdAt.toISOString(),
-            }}
-            desbloqueada={idsDesbloqueados.has(s.id)}
-          />
-        ))}
+        {solicitudes.map((s) => {
+          const desbloqueada = idsDesbloqueados.has(s.id);
+          return (
+            <SolicitudCard
+              key={s.id}
+              solicitud={{
+                id: s.id,
+                titulo: s.titulo,
+                descripcion: s.descripcion,
+                ciudad: s.ciudad,
+                presupuesto: s.presupuesto,
+                categoriaNombre: s.categoria.nombre,
+                categoriaSlug: s.categoria.slug,
+                nombreCliente: s.cliente.nombre,
+                telefonoMostrar: desbloqueada ? s.telefonoContacto : enmascararTelefono(s.telefonoContacto),
+                correoMostrar: desbloqueada ? s.cliente.email : enmascararCorreo(s.cliente.email),
+                preferenciaContacto: s.preferenciaContacto,
+                totalDesbloqueos: s._count.desbloqueos,
+                tiempoTexto: tiempoRelativo(s.createdAt),
+              }}
+              desbloqueada={desbloqueada}
+            />
+          );
+        })}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { MapPin, Phone, Mail, Users, Coins } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 
 type Solicitud = {
@@ -14,10 +14,17 @@ type Solicitud = {
   categoriaNombre: string;
   categoriaSlug: string;
   nombreCliente: string;
-  telefonoContacto: string;
-  emailContacto: string;
+  telefonoMostrar: string;
+  correoMostrar: string;
   preferenciaContacto: string; // "TELEFONO" | "CORREO" | "AMBOS"
-  createdAt: string;
+  totalDesbloqueos: number;
+  tiempoTexto: string;
+};
+
+const NOTA_PREFERENCIA: Record<string, string> = {
+  TELEFONO: "Prefiere que lo contacten por teléfono.",
+  CORREO: "Prefiere que lo contacten por correo.",
+  AMBOS: "Puedes contactarlo por teléfono o correo.",
 };
 
 export default function SolicitudCard({
@@ -35,6 +42,7 @@ export default function SolicitudCard({
   const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(
     solicitud.ciudad
   )}&output=embed`;
+  const primerNombre = solicitud.nombreCliente.split(" ")[0];
 
   async function desbloquear() {
     setError("");
@@ -52,12 +60,21 @@ export default function SolicitudCard({
 
   return (
     <div className="border rounded-xl p-5 bg-white">
-      <span className="text-xs uppercase tracking-wide text-brand-600 font-semibold inline-flex items-center gap-1.5">
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="font-bold text-lg text-ink">{solicitud.nombreCliente}</h3>
+        <span className="text-xs text-gray-400 shrink-0 whitespace-nowrap">{solicitud.tiempoTexto}</span>
+      </div>
+
+      <p className="font-semibold text-ink mt-0.5">{solicitud.titulo}</p>
+
+      <span className="text-xs uppercase tracking-wide text-brand-600 font-semibold inline-flex items-center gap-1.5 mt-1.5">
         <CategoryIcon slug={solicitud.categoriaSlug} className="w-3.5 h-3.5" />
         {solicitud.categoriaNombre} · {solicitud.ciudad}
       </span>
-      <h3 className="font-semibold text-lg">{solicitud.titulo}</h3>
-      <p className="text-gray-600 text-sm mt-1">{solicitud.descripcion}</p>
+
+      <p className="text-gray-400 text-sm mt-1.5">{NOTA_PREFERENCIA[solicitud.preferenciaContacto] || NOTA_PREFERENCIA.AMBOS}</p>
+
+      <p className="text-gray-600 text-sm mt-2">{solicitud.descripcion}</p>
       {solicitud.presupuesto && (
         <p className="text-sm text-gray-500 mt-1">Presupuesto: {solicitud.presupuesto}</p>
       )}
@@ -84,51 +101,61 @@ export default function SolicitudCard({
         </div>
       )}
 
+      <div className="mt-3 space-y-1.5 text-sm">
+        <p className="flex items-center gap-2 text-ink">
+          <Phone className="w-4 h-4 text-gray-400 shrink-0" strokeWidth={1.75} />
+          {solicitud.telefonoMostrar}
+        </p>
+        <p className="flex items-center gap-2 text-ink">
+          <Mail className="w-4 h-4 text-gray-400 shrink-0" strokeWidth={1.75} />
+          {solicitud.correoMostrar}
+        </p>
+      </div>
+
+      <div className="mt-3 flex items-center gap-2 text-sm text-gray-500 bg-gray-50 border rounded-lg px-3 py-2">
+        <Users className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+        {solicitud.totalDesbloqueos === 0
+          ? "Ningún profesional ha destapado este contacto todavía."
+          : `${solicitud.totalDesbloqueos} profesional${solicitud.totalDesbloqueos === 1 ? "" : "es"} ya destap${
+              solicitud.totalDesbloqueos === 1 ? "ó" : "aron"
+            } este contacto.`}
+      </div>
+
       {visible ? (
-        <div className="mt-3 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
-          <p className="font-medium text-green-800 mb-1.5">{solicitud.nombreCliente}</p>
-          <div className="space-y-1">
-            <p
-              className={`flex items-center gap-1.5 ${
-                solicitud.preferenciaContacto === "TELEFONO" ? "font-semibold text-green-900" : "text-green-700"
-              }`}
+        <div className="mt-4 bg-green-50 border border-green-200 rounded-lg p-3 text-sm">
+          <p className="text-green-700">Ya tienes el contacto completo. Escríbele directamente para ofrecer tu servicio.</p>
+          <div className="flex flex-wrap gap-2 mt-2">
+            <a
+              href={`tel:${solicitud.telefonoMostrar}`}
+              className="inline-flex items-center gap-1.5 bg-white border border-green-300 text-green-800 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-green-100"
             >
-              <Phone className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
-              {solicitud.telefonoContacto}
-              {solicitud.preferenciaContacto === "TELEFONO" && (
-                <span className="text-[10px] font-bold uppercase tracking-wide bg-green-600 text-white px-1.5 py-0.5 rounded-full">
-                  Preferido
-                </span>
-              )}
-            </p>
-            <p
-              className={`flex items-center gap-1.5 ${
-                solicitud.preferenciaContacto === "CORREO" ? "font-semibold text-green-900" : "text-green-700"
-              }`}
+              <Phone className="w-3.5 h-3.5" strokeWidth={1.75} />
+              Llamar
+            </a>
+            <a
+              href={`mailto:${solicitud.correoMostrar}`}
+              className="inline-flex items-center gap-1.5 bg-white border border-green-300 text-green-800 px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-green-100"
             >
-              <Mail className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
-              {solicitud.emailContacto}
-              {solicitud.preferenciaContacto === "CORREO" && (
-                <span className="text-[10px] font-bold uppercase tracking-wide bg-green-600 text-white px-1.5 py-0.5 rounded-full">
-                  Preferido
-                </span>
-              )}
-            </p>
+              <Mail className="w-3.5 h-3.5" strokeWidth={1.75} />
+              Enviar correo
+            </a>
           </div>
-          <p className="text-green-700 mt-1.5">Contáctalo directamente para ofrecer tu servicio.</p>
         </div>
       ) : (
-        <div className="mt-3">
+        <div className="mt-4 flex items-center justify-between gap-3">
+          <span className="inline-flex items-center gap-1.5 text-sm text-gray-500 font-medium">
+            <Coins className="w-4 h-4 text-brand-500" strokeWidth={1.75} />1 crédito
+          </span>
           <button
             onClick={desbloquear}
             disabled={cargando}
             className="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 disabled:opacity-50"
           >
-            {cargando ? "Desbloqueando..." : "Desbloquear contacto (1 crédito)"}
+            {cargando ? "Desbloqueando..." : `Contactar a ${primerNombre}`}
           </button>
-          {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
         </div>
       )}
+      {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
     </div>
   );
 }
