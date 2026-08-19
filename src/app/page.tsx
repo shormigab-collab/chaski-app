@@ -52,6 +52,7 @@ export default async function HomePage() {
     memberSince: p.createdAt,
     calificacionProm: p.calificacionProm,
     totalResenas: p.totalResenas,
+    verificado: p.verificado,
   }));
 
   return (

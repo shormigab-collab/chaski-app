@@ -34,6 +34,7 @@ model User {
   solicitudes   Solicitud[]
   transacciones Transaccion[]
   resenasHechas Resena[]      @relation("ResenasHechas")
+  reportesHechos Reporte[]
 }
 
 model Categoria {
@@ -57,6 +58,11 @@ model Proveedor {
   portafolio     String?  // JSON de un array de proyectos: [{ titulo, descripcion?, imagenUrl }], max 6
   creditos       Int      @default(3) // creditos de bienvenida
   verificado     Boolean  @default(false)
+  // Ruta (no URL publica) del documento de identidad subido para verificacion,
+  // guardado en el bucket privado "verificaciones" de Supabase Storage.
+  documentoVerificacionPath String?
+  // "SIN_ENVIAR" | "PENDIENTE" | "APROBADO" | "RECHAZADO"
+  estadoVerificacion String @default("SIN_ENVIAR")
   calificacionProm Float  @default(0)
   totalResenas   Int      @default(0)
   codigoReferido String?  @unique // link de invitacion propio de este proveedor
@@ -133,6 +139,21 @@ model Resena {
   createdAt   DateTime  @default(now())
 
   @@unique([proveedorId, autorId])
+}
+
+// Reporte de un perfil o solicitud sospechosa (ej. datos falsos, pide pagos
+// fuera de la plataforma, comportamiento abusivo). No tiene relacion directa
+// a Proveedor/Solicitud por FK para mantener el modelo simple: "objetivoId"
+// guarda el id del perfil o de la solicitud reportada segun "tipo".
+model Reporte {
+  id             String   @id @default(cuid())
+  tipo           String   // "PERFIL" | "SOLICITUD"
+  objetivoId     String
+  reporterUserId String
+  reporterUser   User     @relation(fields: [reporterUserId], references: [id], onDelete: Cascade)
+  motivo         String
+  estado         String   @default("PENDIENTE") // "PENDIENTE" | "REVISADO"
+  createdAt      DateTime @default(now())
 }
 
 // Interesados de EE.UU. captados en la landing en ingles (/en), antes de

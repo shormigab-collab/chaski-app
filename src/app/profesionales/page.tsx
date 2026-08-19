@@ -25,6 +25,7 @@ export default async function ProfesionalesPage() {
     memberSince: p.createdAt,
     calificacionProm: p.calificacionProm,
     totalResenas: p.totalResenas,
+    verificado: p.verificado,
   }));
 
   return (

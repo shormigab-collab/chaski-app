@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Briefcase, Star, DollarSign, Linkedin } from "lucide-react";
+import { MapPin, Briefcase, Star, DollarSign, Linkedin, ShieldCheck } from "lucide-react";
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
 import { parsePortafolio, ACENTOS_PORTAFOLIO } from "@/lib/portafolio";
+import ReportarBoton from "@/components/ReportarBoton";
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const proveedor = await prisma.proveedor.findUnique({
@@ -69,6 +70,12 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               <h1 className="text-xl font-bold text-ink">{proveedor.user.nombre}</h1>
+              {proveedor.verificado && (
+                <span className="inline-flex items-center gap-1 text-xs font-medium text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full">
+                  <ShieldCheck className="w-3.5 h-3.5" strokeWidth={1.75} />
+                  Identidad verificada
+                </span>
+              )}
               {proveedor.totalResenas > 0 && (
                 <span className="inline-flex items-center gap-1 text-sm font-medium text-ink/60">
                   <Star className="w-4 h-4 fill-gold-500 text-gold-500" />
@@ -203,6 +210,10 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
           >
             Publicar un proyecto gratis
           </Link>
+        </div>
+
+        <div className="mt-5">
+          <ReportarBoton tipo="PERFIL" objetivoId={proveedor.id} etiqueta="Reportar este perfil" />
         </div>
       </div>
     </div>

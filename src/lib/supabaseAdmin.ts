@@ -5,6 +5,11 @@ import { createClient } from "@supabase/supabase-js";
 // Nunca debe importarse desde un componente de cliente ni exponerse
 // con el prefijo NEXT_PUBLIC_.
 export const BUCKET_AVATARES = "avatares";
+// Bucket PRIVADO (sin acceso público) donde se guardan las fotos del
+// documento de identidad subido para verificación. Nunca generar una URL
+// pública de este bucket; solo URLs firmadas y de corta duración, y solo
+// para que el equipo de Chaski (admin) las revise.
+export const BUCKET_VERIFICACIONES = "verificaciones";
 
 export function getSupabaseAdmin() {
   const supabaseUrl = process.env.SUPABASE_URL;

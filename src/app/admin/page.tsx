@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
+import { getSupabaseAdmin, BUCKET_VERIFICACIONES } from "@/lib/supabaseAdmin";
 import CategoryIcon from "@/components/CategoryIcon";
+import AdminBotonAccion from "./AdminBotonAccion";
 
 // Ventanas de tiempo para el resumen "Esta semana": los ultimos 7 dias
 // comparados contra los 7 dias anteriores a esos, para saber si el
@@ -74,6 +76,45 @@ export default async function AdminPage() {
     .filter((t) => t.estado === "APROBADA")
     .reduce((acc, t) => acc + t.montoCOP, 0);
 
+  // Verificaciones de identidad pendientes de revisión.
+  const proveedoresPendientes = await prisma.proveedor.findMany({
+    where: { estadoVerificacion: "PENDIENTE" } as any,
+    include: { user: true },
+    orderBy: { createdAt: "asc" },
+  });
+  const supabaseAdmin = getSupabaseAdmin();
+  const pendientesVerificacion = await Promise.all(
+    proveedoresPendientes.map(async (p) => {
+      let urlDocumento: string | null = null;
+      if (p.documentoVerificacionPath) {
+        const { data } = await supabaseAdmin.storage
+          .from(BUCKET_VERIFICACIONES)
+          .createSignedUrl(p.documentoVerificacionPath, 600);
+        urlDocumento = data?.signedUrl ?? null;
+      }
+      return { id: p.id, nombre: p.user.nombre, email: p.user.email, urlDocumento };
+    })
+  );
+
+  // Reportes de perfiles/solicitudes sospechosas, pendientes de revisión.
+  const reportesPendientes = await prisma.reporte.findMany({
+    where: { estado: "PENDIENTE" },
+    include: { reporterUser: true },
+    orderBy: { createdAt: "desc" },
+  });
+  const idsPerfilReportados = reportesPendientes.filter((r) => r.tipo === "PERFIL").map((r) => r.objetivoId);
+  const idsSolicitudReportados = reportesPendientes.filter((r) => r.tipo === "SOLICITUD").map((r) => r.objetivoId);
+  const [proveedoresReportados, solicitudesReportadas] = await Promise.all([
+    idsPerfilReportados.length
+      ? prisma.proveedor.findMany({ where: { id: { in: idsPerfilReportados } }, include: { user: true } })
+      : Promise.resolve([]),
+    idsSolicitudReportados.length
+      ? prisma.solicitud.findMany({ where: { id: { in: idsSolicitudReportados } } })
+      : Promise.resolve([]),
+  ]);
+  const mapaProveedoresReportados = new Map(proveedoresReportados.map((p) => [p.id, p.user.nombre]));
+  const mapaSolicitudesReportadas = new Map(solicitudesReportadas.map((s) => [s.id, s.titulo]));
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
       <h1 className="text-2xl font-bold mb-8">Panel de administración</h1>
@@ -86,6 +127,92 @@ export default async function AdminPage() {
         <WeeklyMetricCard label="Solicitudes publicadas" value={solicitudesEstaSemana} anterior={solicitudesSemanaAnterior} />
         <WeeklyMetricCard label="Desbloqueos (contactos)" value={desbloqueosEstaSemana} anterior={desbloqueosSemanaAnterior} />
       </div>
+
+      {(pendientesVerificacion.length > 0 || reportesPendientes.length > 0) && (
+        <div className="mb-10 grid sm:grid-cols-2 gap-6">
+          <div>
+            <h2 className="text-xl font-bold mb-1">
+              Verificaciones pendientes {pendientesVerificacion.length > 0 && `(${pendientesVerificacion.length})`}
+            </h2>
+            <p className="text-sm text-gray-500 mb-3">Revisa el documento y aprueba o rechaza la insignia.</p>
+            {pendientesVerificacion.length === 0 ? (
+              <p className="text-sm text-gray-400">No hay nada pendiente.</p>
+            ) : (
+              <div className="space-y-3">
+                {pendientesVerificacion.map((p) => (
+                  <div key={p.id} className="border rounded-xl p-4">
+                    <p className="font-medium text-sm">{p.nombre}</p>
+                    <p className="text-xs text-gray-500 mb-2">{p.email}</p>
+                    {p.urlDocumento ? (
+                      <a
+                        href={p.urlDocumento}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-brand-600 hover:underline"
+                      >
+                        Ver documento subido →
+                      </a>
+                    ) : (
+                      <p className="text-xs text-gray-400">No se encontró el archivo.</p>
+                    )}
+                    <div className="flex gap-2 mt-3">
+                      <AdminBotonAccion
+                        url={`/api/admin/verificacion/${p.id}`}
+                        body={{ accion: "APROBAR" }}
+                        etiqueta="Aprobar"
+                        variante="brand"
+                      />
+                      <AdminBotonAccion
+                        url={`/api/admin/verificacion/${p.id}`}
+                        body={{ accion: "RECHAZAR" }}
+                        etiqueta="Rechazar"
+                        variante="gray"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div>
+            <h2 className="text-xl font-bold mb-1">
+              Reportes pendientes {reportesPendientes.length > 0 && `(${reportesPendientes.length})`}
+            </h2>
+            <p className="text-sm text-gray-500 mb-3">Perfiles o solicitudes marcadas como sospechosas.</p>
+            {reportesPendientes.length === 0 ? (
+              <p className="text-sm text-gray-400">No hay nada pendiente.</p>
+            ) : (
+              <div className="space-y-3">
+                {reportesPendientes.map((r) => {
+                  const objetivoNombre =
+                    r.tipo === "PERFIL"
+                      ? mapaProveedoresReportados.get(r.objetivoId) || "(perfil eliminado)"
+                      : mapaSolicitudesReportadas.get(r.objetivoId) || "(solicitud eliminada)";
+                  return (
+                    <div key={r.id} className="border rounded-xl p-4">
+                      <p className="text-xs font-semibold text-coral-600 uppercase tracking-wide">{r.tipo}</p>
+                      <p className="font-medium text-sm">{objetivoNombre}</p>
+                      <p className="text-sm text-gray-600 mt-1">{r.motivo}</p>
+                      <p className="text-xs text-gray-400 mt-1">
+                        Reportado por {r.reporterUser?.nombre} · {r.createdAt.toLocaleDateString("es-CO")}
+                      </p>
+                      <div className="mt-3">
+                        <AdminBotonAccion
+                          url={`/api/admin/reportes/${r.id}`}
+                          body={{}}
+                          etiqueta="Marcar revisado"
+                          variante="gray"
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       <h2 className="text-xl font-bold mb-3">Totales</h2>
       <div className="grid sm:grid-cols-5 gap-4 mb-10">

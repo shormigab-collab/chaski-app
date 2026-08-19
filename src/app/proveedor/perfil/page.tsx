@@ -32,6 +32,8 @@ export default async function PerfilProveedor() {
           tarifaAproximada: proveedor?.tarifaAproximada ?? "",
           linkedinUrl: proveedor?.linkedinUrl ?? "",
           portafolio: parsePortafolio(proveedor?.portafolio),
+          verificado: proveedor?.verificado ?? false,
+          estadoVerificacion: proveedor?.estadoVerificacion ?? "SIN_ENVIAR",
         }}
       />
     </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { MapPin, Briefcase, Star, DollarSign } from "lucide-react";
+import { MapPin, Briefcase, Star, DollarSign, ShieldCheck } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 
 export type ProfesionalCardData = {
@@ -14,6 +14,7 @@ export type ProfesionalCardData = {
   memberSince: Date;
   calificacionProm?: number;
   totalResenas?: number;
+  verificado?: boolean;
 };
 
 const MESES = [
@@ -72,6 +73,13 @@ export default function ProfesionalCard({ p, lang = "es" }: { p: ProfesionalCard
         <div className="mb-3">
           <div className="flex items-center gap-1.5">
             <div className="font-semibold text-ink truncate">{p.nombre}</div>
+            {p.verificado && (
+              <ShieldCheck
+                className="w-4 h-4 text-brand-500 shrink-0"
+                strokeWidth={1.75}
+                aria-label={lang === "en" ? "Verified identity" : "Identidad verificada"}
+              />
+            )}
             {!!p.totalResenas && (
               <span className="inline-flex items-center gap-0.5 text-xs font-medium text-ink/60 shrink-0">
                 <Star className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />

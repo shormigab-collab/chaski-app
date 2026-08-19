@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Camera, ImagePlus, Plus, X } from "lucide-react";
+import { Camera, ImagePlus, Plus, X, ShieldCheck, Clock, FileText } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 import { ACENTOS_PORTAFOLIO, MAX_PROYECTOS_PORTAFOLIO, type ProyectoPortafolio } from "@/lib/portafolio";
 
@@ -18,6 +18,8 @@ type Perfil = {
   tarifaAproximada: string;
   linkedinUrl: string;
   portafolio: ProyectoPortafolio[];
+  verificado: boolean;
+  estadoVerificacion: string; // "SIN_ENVIAR" | "PENDIENTE" | "APROBADO" | "RECHAZADO"
 };
 
 const TAMANO_MAXIMO_MB = 2;
@@ -36,6 +38,42 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
   const [errorPortafolio, setErrorPortafolio] = useState("");
   const [subiendoIndice, setSubiendoIndice] = useState<number | null>(null);
   const portafolioInputRef = useRef<HTMLInputElement>(null);
+
+  const [estadoVerificacion, setEstadoVerificacion] = useState(perfil.estadoVerificacion);
+  const [subiendoDoc, setSubiendoDoc] = useState(false);
+  const [errorDoc, setErrorDoc] = useState("");
+  const docInputRef = useRef<HTMLInputElement>(null);
+
+  async function onDocumentoSeleccionado(e: React.ChangeEvent<HTMLInputElement>) {
+    setErrorDoc("");
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+
+    const tiposPermitidos = ["image/jpeg", "image/png", "image/webp", "image/heic", "application/pdf"];
+    if (!tiposPermitidos.includes(file.type)) {
+      setErrorDoc("Sube una foto (JPG/PNG) o PDF de tu documento");
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setErrorDoc("El archivo debe pesar menos de 5MB");
+      return;
+    }
+
+    setSubiendoDoc(true);
+    try {
+      const datosArchivo = new FormData();
+      datosArchivo.append("documento", file);
+      const res = await fetch("/api/proveedor/verificacion", { method: "POST", body: datosArchivo });
+      if (!res.ok) throw new Error("upload failed");
+      setEstadoVerificacion("PENDIENTE");
+      router.refresh();
+    } catch {
+      setErrorDoc("No se pudo subir el archivo. Intenta de nuevo.");
+    } finally {
+      setSubiendoDoc(false);
+    }
+  }
 
   function agregarProyecto() {
     if (proyectos.length >= MAX_PROYECTOS_PORTAFOLIO) return;
@@ -250,6 +288,56 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
             </button>
           ))}
         </div>
+      </div>
+
+      <div className="border-t border-black/5 pt-6 mt-2">
+        <p className="text-sm font-medium text-ink mb-1">Verificación de identidad</p>
+
+        {estadoVerificacion === "APROBADO" && (
+          <div className="flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 text-sm text-emerald-700">
+            <ShieldCheck className="w-5 h-5 shrink-0" strokeWidth={1.75} />
+            Tu identidad está verificada. Se muestra una insignia en tu perfil público.
+          </div>
+        )}
+
+        {estadoVerificacion === "PENDIENTE" && (
+          <div className="flex items-center gap-2.5 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-600">
+            <Clock className="w-5 h-5 shrink-0" strokeWidth={1.75} />
+            Tu documento está en revisión. Te avisamos apenas quede listo.
+          </div>
+        )}
+
+        {(estadoVerificacion === "SIN_ENVIAR" || estadoVerificacion === "RECHAZADO") && (
+          <div>
+            {estadoVerificacion === "RECHAZADO" && (
+              <p className="text-xs text-coral-600 mb-2">
+                No pudimos verificar tu documento anterior. Sube una foto más clara para intentarlo de nuevo.
+              </p>
+            )}
+            <p className="text-xs text-ink/45 mb-3">
+              Sube una foto de tu cédula, DNI o pasaporte. Solo el equipo de Chaski la revisa para activar tu insignia
+              de verificado — nunca se muestra públicamente ni se comparte con clientes.
+            </p>
+            <button
+              type="button"
+              onClick={() => docInputRef.current?.click()}
+              disabled={subiendoDoc}
+              className="inline-flex items-center gap-2 border border-black/10 rounded-xl px-4 py-2.5 text-sm font-medium text-ink/70 hover:border-brand-400 hover:text-brand-600 transition-colors disabled:opacity-60"
+            >
+              <FileText className="w-4 h-4" strokeWidth={1.75} />
+              {subiendoDoc ? "Subiendo..." : "Subir documento de identidad"}
+            </button>
+            {errorDoc && <p className="text-xs text-coral-600 mt-1.5">{errorDoc}</p>}
+          </div>
+        )}
+
+        <input
+          ref={docInputRef}
+          type="file"
+          accept="image/*,application/pdf"
+          onChange={onDocumentoSeleccionado}
+          className="hidden"
+        />
       </div>
 
       <div className="border-t border-black/5 pt-6 mt-2">

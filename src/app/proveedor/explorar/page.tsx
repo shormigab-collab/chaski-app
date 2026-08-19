@@ -9,15 +9,12 @@ export default async function ExplorarSolicitudes() {
   const usuario = await obtenerUsuarioActual();
   if (!usuario || usuario.role !== "PROVEEDOR" || !usuario.proveedor) redirect("/login");
 
-  const proveedor = await prisma.proveedor.findUnique({
-    where: { id: usuario.proveedor.id },
-    include: { categorias: true },
-  });
-  const categoriaIds = proveedor?.categorias.map((c) => c.id) ?? [];
-
+  // Nota de producto: antes esto se filtraba solo a las categorias del
+  // proveedor. Por decision explicita de Sebas se muestran TODAS las
+  // solicitudes abiertas a todos los proveedores, sin filtrar por categoria.
   const [solicitudes, desbloqueos] = await Promise.all([
     prisma.solicitud.findMany({
-      where: { categoriaId: { in: categoriaIds }, estado: "ABIERTA" },
+      where: { estado: "ABIERTA" },
       include: {
         categoria: true,
         cliente: true,
@@ -41,7 +38,7 @@ export default async function ExplorarSolicitudes() {
 
       {solicitudes.length === 0 && (
         <p className="text-gray-500">
-          Todavía no hay solicitudes abiertas en tus categorías. Vuelve pronto.
+          Todavía no hay solicitudes abiertas. Vuelve pronto.
         </p>
       )}
 

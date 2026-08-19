@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { MapPin, Phone, Mail, Users, Coins } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
+import ReportarBoton from "@/components/ReportarBoton";
 
 type Solicitud = {
   id: string;
@@ -156,6 +157,10 @@ export default function SolicitudCard({
         </div>
       )}
       {error && <p className="text-red-600 text-sm mt-2">{error}</p>}
+
+      <div className="mt-3 pt-3 border-t border-black/5">
+        <ReportarBoton tipo="SOLICITUD" objetivoId={solicitud.id} etiqueta="Reportar esta solicitud" />
+      </div>
     </div>
   );
 }
