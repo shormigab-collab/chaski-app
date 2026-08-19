@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X } from "lucide-react";
+import { X, Search, User, Gift, Coins, Info, FileText, ShieldCheck, LogOut } from "lucide-react";
 import Logo from "./Logo";
 import ReferralBanner from "./ReferralBanner";
 
@@ -246,7 +246,75 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
               </div>
             </>
           ) : (
-            <nav className="flex flex-col text-sm font-medium pt-2">{linksActivos}</nav>
+            <div className="pt-4">
+              <div className="flex items-center gap-3 pb-4 mb-1 border-b border-border">
+                <span className="w-10 h-10 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-base shrink-0">
+                  {usuario.nombre.trim().charAt(0).toUpperCase() || "?"}
+                </span>
+                <div className="min-w-0">
+                  <p className="font-semibold text-ink text-sm truncate">{usuario.nombre}</p>
+                  <p className="text-xs text-ink/45">
+                    {usuario.role === "PROVEEDOR" ? "Proveedor" : usuario.role === "CLIENTE" ? "Cliente" : "Administrador"}
+                  </p>
+                </div>
+              </div>
+
+              {usuario.role === "PROVEEDOR" && (
+                <>
+                  <Link href="/proveedor/explorar" className={filaLink}>
+                    <Search className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                    Explorar
+                  </Link>
+                  <Link href="/proveedor/perfil" className={filaLink}>
+                    <User className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                    Mi perfil
+                  </Link>
+                  <Link href="/proveedor/invitar" className={filaLink}>
+                    <Gift className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                    Invitar y ganar
+                  </Link>
+                  <Link
+                    href="/proveedor/creditos"
+                    className="flex items-center justify-between py-2.5 text-[15px] text-ink hover:text-brand-600 transition-colors"
+                  >
+                    <span className="flex items-center">
+                      <Coins className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                      Créditos
+                    </span>
+                    <span className="bg-coral-50 text-coral-600 px-2.5 py-1 rounded-full font-semibold text-xs tabular-nums">
+                      {usuario.proveedor?.creditos ?? 0}
+                    </span>
+                  </Link>
+                </>
+              )}
+
+              {usuario.role === "CLIENTE" && (
+                <>
+                  <Link href="/como-funciona" className={filaLink}>
+                    <Info className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                    Cómo funciona
+                  </Link>
+                  <Link href="/cliente/solicitudes" className={filaLink}>
+                    <FileText className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                    Mis solicitudes
+                  </Link>
+                </>
+              )}
+
+              {usuario.role === "ADMIN" && (
+                <Link href="/admin" className={filaLink}>
+                  <ShieldCheck className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                  Admin
+                </Link>
+              )}
+
+              <form action="/api/auth/logout" method="post" className="mt-6 pt-5 border-t border-border">
+                <button className="w-full flex items-center justify-center gap-2 border border-border text-coral-600 px-4 py-3 rounded-xl font-semibold hover:border-coral-300 hover:bg-coral-50 transition-colors min-h-[44px]">
+                  <LogOut className="w-4 h-4" strokeWidth={1.75} />
+                  Salir
+                </button>
+              </form>
+            </div>
           )}
         </div>
       </div>
