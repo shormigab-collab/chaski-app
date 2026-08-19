@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Sparkles } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 import { nombreCategoria } from "@/lib/categoriasEn";
+import { MONEDAS, type Moneda } from "@/lib/moneda";
 
 type Categoria = { id: string; nombre: string; icono: string; slug: string };
 
@@ -33,6 +34,7 @@ export default function NuevaSolicitudForm({
   const [descripcion, setDescripcion] = useState("");
   const [ciudad, setCiudad] = useState(usuario.ciudad ?? "");
   const [presupuesto, setPresupuesto] = useState("");
+  const [presupuestoMoneda, setPresupuestoMoneda] = useState<Moneda>("COP");
   const [telefonoContacto, setTelefonoContacto] = useState(usuario.telefono ?? "");
   const [preferenciaContacto, setPreferenciaContacto] = useState<"TELEFONO" | "CORREO" | "AMBOS">("AMBOS");
 
@@ -169,6 +171,7 @@ export default function NuevaSolicitudForm({
         descripcion,
         ciudad,
         presupuesto,
+        presupuestoMoneda,
         telefonoContacto,
         preferenciaContacto,
       }),
@@ -309,12 +312,25 @@ export default function NuevaSolicitudForm({
               placeholder={t.ciudadPlaceholder}
               className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
             />
-            <input
-              value={presupuesto}
-              onChange={(e) => setPresupuesto(e.target.value)}
-              placeholder={t.presupuestoPlaceholder}
-              className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
-            />
+            <div className="flex gap-2">
+              <input
+                value={presupuesto}
+                onChange={(e) => setPresupuesto(e.target.value)}
+                placeholder={t.presupuestoPlaceholder}
+                className="flex-1 min-w-0 border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
+              />
+              <select
+                value={presupuestoMoneda}
+                onChange={(e) => setPresupuestoMoneda(e.target.value as Moneda)}
+                className="border border-black/10 rounded-xl px-2.5 py-3 text-sm outline-none focus:border-brand-500 transition-colors bg-white shrink-0"
+              >
+                {MONEDAS.map((m) => (
+                  <option key={m} value={m}>
+                    {m}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
           <input
             value={telefonoContacto}

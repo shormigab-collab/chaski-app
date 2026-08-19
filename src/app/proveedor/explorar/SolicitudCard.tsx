@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { MapPin, Phone, Mail, Users, Coins } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 import ReportarBoton from "@/components/ReportarBoton";
+import { formatearPresupuesto } from "@/lib/moneda";
 
 type Solicitud = {
   id: string;
@@ -12,6 +13,7 @@ type Solicitud = {
   descripcion: string;
   ciudad: string;
   presupuesto: string | null;
+  presupuestoMoneda: string;
   categoriaNombre: string;
   categoriaSlug: string;
   nombreCliente: string;
@@ -77,7 +79,9 @@ export default function SolicitudCard({
 
       <p className="text-gray-600 text-sm mt-2">{solicitud.descripcion}</p>
       {solicitud.presupuesto && (
-        <p className="text-sm text-gray-500 mt-1">Presupuesto: {solicitud.presupuesto}</p>
+        <p className="text-sm text-gray-500 mt-1">
+          Presupuesto: {formatearPresupuesto(solicitud.presupuesto, solicitud.presupuestoMoneda)}
+        </p>
       )}
 
       <button

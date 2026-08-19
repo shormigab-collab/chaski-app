@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Pencil, Lock, Unlock } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 import { nombreCategoria } from "@/lib/categoriasEn";
+import { MONEDAS, type Moneda } from "@/lib/moneda";
 
 type Categoria = { id: string; nombre: string; icono: string; slug: string };
 type Solicitud = {
@@ -14,6 +15,7 @@ type Solicitud = {
   descripcion: string;
   ciudad: string;
   presupuesto: string | null;
+  presupuestoMoneda: string;
   telefonoContacto: string;
   preferenciaContacto: string;
   estado: string;
@@ -39,6 +41,9 @@ export default function EditarSolicitudForm({
   const [descripcion, setDescripcion] = useState(solicitud.descripcion);
   const [ciudad, setCiudad] = useState(solicitud.ciudad);
   const [presupuesto, setPresupuesto] = useState(solicitud.presupuesto ?? "");
+  const [presupuestoMoneda, setPresupuestoMoneda] = useState<Moneda>(
+    (solicitud.presupuestoMoneda as Moneda) || "COP"
+  );
   const [telefonoContacto, setTelefonoContacto] = useState(solicitud.telefonoContacto);
   const [preferenciaContacto, setPreferenciaContacto] = useState<"TELEFONO" | "CORREO" | "AMBOS">(
     (solicitud.preferenciaContacto as "TELEFONO" | "CORREO" | "AMBOS") || "AMBOS"
@@ -101,6 +106,7 @@ export default function EditarSolicitudForm({
         descripcion,
         ciudad,
         presupuesto,
+        presupuestoMoneda,
         telefonoContacto,
         preferenciaContacto,
       }),
@@ -198,12 +204,25 @@ export default function EditarSolicitudForm({
           placeholder={t.ciudadPlaceholder}
           className="w-full border border-black/10 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-brand-500 transition-colors"
         />
-        <input
-          value={presupuesto}
-          onChange={(e) => setPresupuesto(e.target.value)}
-          placeholder={t.presupuestoPlaceholder}
-          className="w-full border border-black/10 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-brand-500 transition-colors"
-        />
+        <div className="flex gap-2">
+          <input
+            value={presupuesto}
+            onChange={(e) => setPresupuesto(e.target.value)}
+            placeholder={t.presupuestoPlaceholder}
+            className="flex-1 min-w-0 border border-black/10 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-brand-500 transition-colors"
+          />
+          <select
+            value={presupuestoMoneda}
+            onChange={(e) => setPresupuestoMoneda(e.target.value as Moneda)}
+            className="border border-black/10 rounded-xl px-2 py-2.5 text-sm outline-none focus:border-brand-500 transition-colors bg-white shrink-0"
+          >
+            {MONEDAS.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <input
         value={telefonoContacto}

@@ -121,6 +121,7 @@ export default async function MisSolicitudes({
                 descripcion: s.descripcion,
                 ciudad: s.ciudad,
                 presupuesto: s.presupuesto,
+                presupuestoMoneda: s.presupuestoMoneda,
                 telefonoContacto: s.telefonoContacto,
                 preferenciaContacto: s.preferenciaContacto,
                 estado: s.estado,

@@ -54,6 +54,7 @@ export default async function ExplorarSolicitudes() {
                 descripcion: s.descripcion,
                 ciudad: s.ciudad,
                 presupuesto: s.presupuesto,
+                presupuestoMoneda: s.presupuestoMoneda,
                 categoriaNombre: s.categoria.nombre,
                 categoriaSlug: s.categoria.slug,
                 nombreCliente: s.cliente.nombre,

@@ -17,6 +17,7 @@ import CategoryIcon from "@/components/CategoryIcon";
 import Logo from "@/components/Logo";
 import Reveal from "@/components/Reveal";
 import { nombreCategoria } from "@/lib/categoriasEn";
+import { MONEDAS, type Moneda } from "@/lib/moneda";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
@@ -55,6 +56,7 @@ export default function RegistroClienteForm({ categorias }: { categorias: Catego
   // paso 3: publicar
   const [ciudad, setCiudad] = useState("");
   const [presupuesto, setPresupuesto] = useState("");
+  const [presupuestoMoneda, setPresupuestoMoneda] = useState<Moneda>("COP");
   const [telefonoContacto, setTelefonoContacto] = useState("");
   const [preferenciaContacto, setPreferenciaContacto] = useState<"TELEFONO" | "CORREO" | "AMBOS">("AMBOS");
 
@@ -295,6 +297,7 @@ export default function RegistroClienteForm({ categorias }: { categorias: Catego
         descripcion,
         ciudad,
         presupuesto,
+        presupuestoMoneda,
         telefonoContacto,
         preferenciaContacto,
       }),
@@ -618,12 +621,25 @@ export default function RegistroClienteForm({ categorias }: { categorias: Catego
                       placeholder={t.ciudadPlaceholder}
                       className={inputClass}
                     />
-                    <input
-                      value={presupuesto}
-                      onChange={(e) => setPresupuesto(e.target.value)}
-                      placeholder={t.presupuestoPlaceholder}
-                      className={inputClass}
-                    />
+                    <div className="flex gap-2">
+                      <input
+                        value={presupuesto}
+                        onChange={(e) => setPresupuesto(e.target.value)}
+                        placeholder={t.presupuestoPlaceholder}
+                        className={`${inputClass} flex-1 min-w-0`}
+                      />
+                      <select
+                        value={presupuestoMoneda}
+                        onChange={(e) => setPresupuestoMoneda(e.target.value as Moneda)}
+                        className={`${inputClass} w-auto shrink-0`}
+                      >
+                        {MONEDAS.map((m) => (
+                          <option key={m} value={m}>
+                            {m}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                   <input
                     value={telefonoContacto}

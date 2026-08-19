@@ -86,6 +86,8 @@ model Solicitud {
   descripcion  String
   ciudad       String
   presupuesto  String?
+  // Moneda del presupuesto: "COP" | "USD" | "EUR"
+  presupuestoMoneda String @default("COP")
   telefonoContacto String
   // Como prefiere el cliente que lo contacten: "TELEFONO" | "CORREO" | "AMBOS"
   preferenciaContacto String @default("AMBOS")

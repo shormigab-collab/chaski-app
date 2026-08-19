@@ -9,6 +9,7 @@ const esquemaEdicion = z.object({
   descripcion: z.string().min(10),
   ciudad: z.string().min(2),
   presupuesto: z.string().optional(),
+  presupuestoMoneda: z.enum(["COP", "USD", "EUR"]).default("COP"),
   telefonoContacto: z.string().min(6),
   preferenciaContacto: z.enum(["TELEFONO", "CORREO", "AMBOS"]).default("AMBOS"),
 });
