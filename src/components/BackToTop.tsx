@@ -35,7 +35,9 @@ export default function BackToTop() {
       aria-label="Volver al inicio"
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
-      className={`lg:hidden fixed right-5 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-30 w-12 h-12 rounded-full bg-brand-500 text-cream shadow-lg shadow-black/20 flex items-center justify-center transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 ${
+      // Desplazado a la izquierda del boton del chat de soporte (que vive en
+      // right-5, w-14) para que no se encimen en movil.
+      className={`lg:hidden fixed right-[5.25rem] bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-30 w-12 h-12 rounded-full bg-brand-500 text-cream shadow-lg shadow-black/20 flex items-center justify-center transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 ${
         visible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-3 pointer-events-none"
       }`}
     >

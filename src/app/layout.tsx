@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import ChatSoporte from "@/components/ChatSoporte";
 import { obtenerUsuarioActual } from "@/lib/auth";
 
 // Manrope para encabezados (font-heading), Inter para cuerpo de texto e
@@ -77,6 +78,7 @@ export default async function RootLayout({
         <Footer />
 
         <BackToTop />
+        <ChatSoporte />
       </body>
     </html>
   );

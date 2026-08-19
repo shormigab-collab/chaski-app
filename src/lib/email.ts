@@ -29,6 +29,68 @@ function envolverPlantilla(tituloInterno: string, cuerpoHtml: string) {
   </div>`;
 }
 
+// Direccion donde caen los casos escalados desde el widget de chat. Mientras
+// no exista un buzon dedicado (ej. soporte@usechaski.com), por defecto cae
+// en el correo del propio Sebas para que nada se pierda; se puede cambiar
+// con la variable de entorno SUPPORT_EMAIL en cualquier momento.
+const SUPPORT_EMAIL = process.env.SUPPORT_EMAIL || "samuel@provintechus.com";
+
+export async function enviarCorreoEscalamientoSoporte(datos: {
+  nombre: string;
+  correo: string;
+  mensaje: string;
+  transcripcion: { role: "user" | "assistant"; content: string }[];
+}) {
+  if (!resend) {
+    console.warn("[email] RESEND_API_KEY no configurada, no se envio el escalamiento de soporte de", datos.correo);
+    return { ok: false, error: "RESEND_API_KEY no configurada" };
+  }
+
+  const transcripcionHtml = datos.transcripcion
+    .map(
+      (m) =>
+        `<p style="margin:0 0 8px;font-size:13px;color:${m.role === "user" ? "#17133A" : "#6B6484"};">
+          <strong>${m.role === "user" ? "Usuario" : "Asistente"}:</strong> ${m.content.replace(/</g, "&lt;")}
+        </p>`
+    )
+    .join("");
+
+  const html = envolverPlantilla(
+    "Caso escalado desde el chat de soporte de usechaski.com",
+    `
+      <h1 style="color:#17133A;font-size:20px;margin:0 0 12px;">Nuevo caso escalado desde el chat</h1>
+      <p style="color:#4A4560;font-size:14px;line-height:1.6;margin:0 0 4px;"><strong>Nombre:</strong> ${datos.nombre}</p>
+      <p style="color:#4A4560;font-size:14px;line-height:1.6;margin:0 0 16px;"><strong>Correo:</strong> ${datos.correo}</p>
+      <p style="color:#17133A;font-size:14px;line-height:1.6;margin:0 0 8px;"><strong>Mensaje:</strong></p>
+      <p style="color:#4A4560;font-size:14px;line-height:1.6;margin:0 0 20px;white-space:pre-wrap;">${datos.mensaje.replace(/</g, "&lt;")}</p>
+      ${
+        datos.transcripcion.length > 0
+          ? `<p style="color:#17133A;font-size:14px;margin:0 0 8px;"><strong>Conversación previa con el asistente:</strong></p>
+             <div style="background:#F7F5FC;border-radius:12px;padding:16px;">${transcripcionHtml}</div>`
+          : ""
+      }
+    `
+  );
+
+  try {
+    const { error } = await resend.emails.send({
+      from: FROM,
+      to: SUPPORT_EMAIL,
+      replyTo: datos.correo,
+      subject: `Soporte chaski: ${datos.nombre}`,
+      html,
+    });
+    if (error) {
+      console.error("[email] error al enviar escalamiento de soporte:", error);
+      return { ok: false, error: error.message };
+    }
+    return { ok: true };
+  } catch (err) {
+    console.error("[email] excepcion al enviar escalamiento de soporte:", err);
+    return { ok: false, error: "No se pudo enviar el correo" };
+  }
+}
+
 export async function enviarCorreoRecuperacion(email: string, nombre: string, resetUrl: string) {
   if (!resend) {
     console.warn("[email] RESEND_API_KEY no configurada, no se envio el correo de recuperacion a", email);
