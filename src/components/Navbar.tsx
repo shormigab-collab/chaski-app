@@ -163,9 +163,11 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
         aria-hidden="true"
       />
 
-      {/* Panel deslizante movil */}
+      {/* Panel deslizante movil: se ajusta al contenido (max-h-[85vh]) en vez
+          de forzar toda la altura de la pantalla, para que no quede un
+          espacio en blanco enorme cuando hay pocos links (ej. proveedor). */}
       <div
-        className={`sm:hidden fixed top-0 left-0 h-full w-[85%] max-w-xs bg-white z-40 shadow-xl transition-transform duration-300 overflow-y-auto ${
+        className={`sm:hidden fixed top-0 left-0 max-h-[85vh] w-[85%] max-w-xs bg-white z-40 shadow-xl rounded-br-2xl transition-transform duration-300 overflow-y-auto ${
           abierto ? "translate-x-0" : "-translate-x-full"
         }`}
       >
