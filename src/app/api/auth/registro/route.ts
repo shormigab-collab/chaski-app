@@ -16,6 +16,7 @@ const esquemaBase = z.object({
   ref: z.string().trim().max(60).optional(), // codigo de referido, opcional
   aniosExperiencia: z.coerce.number().int().min(0).max(60).optional(),
   tarifaAproximada: z.string().trim().max(60).optional(),
+  tarifaTipo: z.enum(["HORA", "PROYECTO", "MES"]).optional(),
   linkedinUrl: z.string().trim().max(200).optional(),
 });
 
@@ -54,6 +55,9 @@ export async function POST(req: Request) {
 
   const codigoReferidoPropio = data.role === "PROVEEDOR" ? await generarCodigoReferido(data.nombre) : undefined;
 
+  // "as any": tarifaTipo es un campo nuevo que aun no esta reflejado en el
+  // tipo generado de Prisma dentro de este entorno de desarrollo (ver nota
+  // en lib/tarifa.ts). En Vercel, "prisma generate" real ya lo tipa bien.
   const user = await prisma.user.create({
     data: {
       nombre: data.nombre,
@@ -69,6 +73,7 @@ export async function POST(req: Request) {
                 bio: data.bio,
                 aniosExperiencia: data.aniosExperiencia,
                 tarifaAproximada: data.tarifaAproximada,
+                tarifaTipo: data.tarifaTipo,
                 linkedinUrl: data.linkedinUrl,
                 creditos: referente ? CREDITOS_REFERIDO : CREDITOS_BASE,
                 codigoReferido: codigoReferidoPropio,
@@ -78,7 +83,7 @@ export async function POST(req: Request) {
             },
           }
         : {}),
-    },
+    } as any,
   });
 
   // Premia a quien invito, ahora que el nuevo proveedor ya quedo creado.

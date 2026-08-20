@@ -3,6 +3,7 @@ import { prisma } from "@/lib/db";
 import { obtenerUsuarioActual } from "@/lib/auth";
 import { preguntarClaude } from "@/lib/anthropic";
 import { formatearPresupuesto } from "@/lib/moneda";
+import { formatearTarifa } from "@/lib/tarifa";
 
 // Genera un borrador de mensaje de contacto para que el proveedor lo revise,
 // edite y copie manualmente. La IA NUNCA envia nada por si sola: chaski no
@@ -54,7 +55,11 @@ Presupuesto mencionado por el cliente: ${presupuestoTexto}
 Mi perfil profesional:
 Bio: ${usuario.proveedor.bio || "(sin biografía en el perfil)"}
 Años de experiencia: ${usuario.proveedor.aniosExperiencia ?? "(no especificado)"}
-Tarifa aproximada: ${usuario.proveedor.tarifaAproximada || "(no especificada)"}
+Tarifa aproximada: ${
+    usuario.proveedor.tarifaAproximada
+      ? formatearTarifa(usuario.proveedor.tarifaAproximada, usuario.proveedor.tarifaTipo)
+      : "(no especificada)"
+  }
 
 Escribe el mensaje de contacto.`;
 

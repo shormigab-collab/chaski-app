@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Camera, ImagePlus, Plus, X, ShieldCheck, Clock, FileText } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 import { ACENTOS_PORTAFOLIO, MAX_PROYECTOS_PORTAFOLIO, type ProyectoPortafolio } from "@/lib/portafolio";
+import { TARIFAS_TIPO, ETIQUETA_TARIFA_TIPO_SELECTOR } from "@/lib/tarifa";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 type Perfil = {
@@ -16,6 +17,7 @@ type Perfil = {
   ciudad: string;
   aniosExperiencia: number | null;
   tarifaAproximada: string;
+  tarifaTipo: string;
   linkedinUrl: string;
   portafolio: ProyectoPortafolio[];
   verificado: boolean;
@@ -186,6 +188,7 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
         categoriaIds: seleccionadas,
         aniosExperiencia: form.get("aniosExperiencia") || undefined,
         tarifaAproximada: form.get("tarifaAproximada") || undefined,
+        tarifaTipo: form.get("tarifaTipo") || undefined,
         linkedinUrl: form.get("linkedinUrl") || undefined,
         portafolio: proyectosValidos,
       }),
@@ -287,9 +290,24 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
         <input
           name="tarifaAproximada"
           defaultValue={perfil.tarifaAproximada}
-          placeholder="Tarifa aprox. (ej. $15-25/hora)"
+          placeholder="Tarifa aprox. (ej. $15-25 o $500.000)"
           className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
         />
+      </div>
+
+      <div>
+        <p className="text-xs font-semibold text-ink/50 mb-1.5">¿Cómo cobras?</p>
+        <select
+          name="tarifaTipo"
+          defaultValue={perfil.tarifaTipo || "PROYECTO"}
+          className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors bg-white"
+        >
+          {TARIFAS_TIPO.map((t) => (
+            <option key={t} value={t}>
+              {ETIQUETA_TARIFA_TIPO_SELECTOR[t]}
+            </option>
+          ))}
+        </select>
       </div>
       <input
         name="linkedinUrl"

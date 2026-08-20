@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { MapPin, Briefcase, Star, DollarSign, ShieldCheck } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
+import { formatearTarifa } from "@/lib/tarifa";
 
 export type ProfesionalCardData = {
   id: string;
@@ -10,6 +11,7 @@ export type ProfesionalCardData = {
   pais: string | null;
   aniosExperiencia: number | null;
   tarifaAproximada?: string | null;
+  tarifaTipo?: string;
   categorias: { id: string; nombre: string; slug: string }[];
   memberSince: Date;
   calificacionProm?: number;
@@ -116,7 +118,7 @@ export default function ProfesionalCard({ p, lang = "es" }: { p: ProfesionalCard
           {p.tarifaAproximada && (
             <div className="flex items-center gap-1.5 text-xs text-ink/50">
               <DollarSign className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
-              <span className="truncate">{p.tarifaAproximada}</span>
+              <span className="truncate">{formatearTarifa(p.tarifaAproximada, p.tarifaTipo || "PROYECTO")}</span>
             </div>
           )}
           <div className="text-[11px] text-ink/35">

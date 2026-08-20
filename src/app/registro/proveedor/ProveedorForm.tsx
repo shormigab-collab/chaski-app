@@ -7,6 +7,7 @@ import { Gift, Sparkles, ArrowRight, Check, User, MessageSquare, ShieldCheck } f
 import CategoryIcon from "@/components/CategoryIcon";
 import Logo from "@/components/Logo";
 import Reveal from "@/components/Reveal";
+import { TARIFAS_TIPO, ETIQUETA_TARIFA_TIPO_SELECTOR } from "@/lib/tarifa";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
 
@@ -62,6 +63,7 @@ export default function ProveedorForm({
         ref: refCode,
         aniosExperiencia: form.get("aniosExperiencia") || undefined,
         tarifaAproximada: form.get("tarifaAproximada") || undefined,
+        tarifaTipo: form.get("tarifaTipo") || undefined,
         linkedinUrl: form.get("linkedinUrl") || undefined,
       }),
     });
@@ -268,7 +270,17 @@ export default function ProveedorForm({
                 placeholder="Años de experiencia"
                 className={inputClass}
               />
-              <input name="tarifaAproximada" placeholder="Tarifa aprox. (ej. $15-25/hora)" className={inputClass} />
+              <input name="tarifaAproximada" placeholder="Tarifa aprox. (ej. $15-25 o $500.000)" className={inputClass} />
+            </div>
+            <div>
+              <p className="text-xs font-semibold text-ink/50 mb-1.5">¿Cómo cobras?</p>
+              <select name="tarifaTipo" defaultValue="PROYECTO" className={`${inputClass} bg-white`}>
+                {TARIFAS_TIPO.map((t) => (
+                  <option key={t} value={t}>
+                    {ETIQUETA_TARIFA_TIPO_SELECTOR[t]}
+                  </option>
+                ))}
+              </select>
             </div>
             <input
               name="linkedinUrl"

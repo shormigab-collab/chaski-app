@@ -30,6 +30,7 @@ export default async function PerfilProveedor() {
           ciudad: usuario.ciudad ?? "",
           aniosExperiencia: proveedor?.aniosExperiencia ?? null,
           tarifaAproximada: proveedor?.tarifaAproximada ?? "",
+          tarifaTipo: proveedor?.tarifaTipo ?? "PROYECTO",
           linkedinUrl: proveedor?.linkedinUrl ?? "",
           portafolio: parsePortafolio(proveedor?.portafolio),
           verificado: proveedor?.verificado ?? false,

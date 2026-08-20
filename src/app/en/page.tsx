@@ -58,6 +58,7 @@ export default async function EnglishLandingPage() {
     pais: p.user.pais,
     aniosExperiencia: p.aniosExperiencia,
     tarifaAproximada: p.tarifaAproximada,
+                  tarifaTipo: p.tarifaTipo,
     categorias: p.categorias.map((c) => ({ id: c.id, nombre: c.nombre, slug: c.slug })),
     memberSince: p.createdAt,
     calificacionProm: p.calificacionProm,

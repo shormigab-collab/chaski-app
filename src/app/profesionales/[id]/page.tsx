@@ -5,6 +5,7 @@ import { MapPin, Briefcase, Star, DollarSign, Linkedin, ShieldCheck } from "luci
 import { prisma } from "@/lib/db";
 import CategoryIcon from "@/components/CategoryIcon";
 import { parsePortafolio, ACENTOS_PORTAFOLIO } from "@/lib/portafolio";
+import { formatearTarifa } from "@/lib/tarifa";
 import ReportarBoton from "@/components/ReportarBoton";
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
@@ -120,7 +121,7 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
             {proveedor.tarifaAproximada && (
               <span className="flex items-center gap-1.5">
                 <DollarSign className="w-4 h-4 shrink-0" strokeWidth={1.75} />
-                {proveedor.tarifaAproximada}
+                {formatearTarifa(proveedor.tarifaAproximada, proveedor.tarifaTipo)}
               </span>
             )}
             {proveedor.linkedinUrl && (

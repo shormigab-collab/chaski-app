@@ -53,7 +53,9 @@ model Proveedor {
   bio            String?
   fotoUrl        String?  // foto de perfil, guardada como data URL base64
   aniosExperiencia Int?    @default(0)
-  tarifaAproximada String? // texto libre, ej. "$15-25 USD/hora" (no forzamos moneda ni estructura)
+  tarifaAproximada String? // monto en texto libre, ej. "50000" o "15-25"
+  // Como cobra: "HORA" | "PROYECTO" | "MES"
+  tarifaTipo       String  @default("PROYECTO")
   linkedinUrl    String?  // link opcional a LinkedIn; no implica verificacion real todavia
   portafolio     String?  // JSON de un array de proyectos: [{ titulo, descripcion?, imagenUrl }], max 6
   creditos       Int      @default(3) // creditos de bienvenida

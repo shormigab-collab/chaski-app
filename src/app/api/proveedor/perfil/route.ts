@@ -19,6 +19,7 @@ const esquema = z.object({
   categoriaIds: z.array(z.string()).min(1),
   aniosExperiencia: z.coerce.number().int().min(0).max(60).optional(),
   tarifaAproximada: z.string().trim().max(60).optional(),
+  tarifaTipo: z.enum(["HORA", "PROYECTO", "MES"]).optional(),
   linkedinUrl: z.string().trim().max(200).optional(),
   portafolio: z.array(proyectoEsquema).max(MAX_PROYECTOS_PORTAFOLIO).optional(),
 });
@@ -41,6 +42,8 @@ export async function PUT(req: Request) {
     data: { nombre: data.nombre, telefono: data.telefono, ciudad: data.ciudad },
   });
 
+  // "as any": tarifaTipo es un campo nuevo que aun no esta reflejado en el
+  // tipo generado de Prisma en este entorno de desarrollo (ver lib/tarifa.ts).
   await prisma.proveedor.update({
     where: { id: usuario.proveedor.id },
     data: {
@@ -48,10 +51,11 @@ export async function PUT(req: Request) {
       fotoUrl: data.fotoUrl,
       aniosExperiencia: data.aniosExperiencia,
       tarifaAproximada: data.tarifaAproximada,
+      tarifaTipo: data.tarifaTipo,
       linkedinUrl: data.linkedinUrl,
       portafolio: data.portafolio ? JSON.stringify(data.portafolio) : undefined,
       categorias: { set: data.categoriaIds.map((id) => ({ id })) },
-    },
+    } as any,
   });
 
   return NextResponse.json({ ok: true });
