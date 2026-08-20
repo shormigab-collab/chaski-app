@@ -184,19 +184,25 @@ export default function SolicitudCard({
           </div>
 
           {!propuesta && (
-            <button
-              type="button"
-              onClick={prepararPropuesta}
-              disabled={generandoPropuesta}
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 disabled:opacity-50"
-            >
-              {generandoPropuesta ? (
-                <Loader2 className="w-3.5 h-3.5 animate-spin" />
-              ) : (
+            <div className="mt-3 bg-gradient-to-r from-brand-50 to-coral-50 border border-brand-100 rounded-xl p-3.5">
+              <p className="text-xs font-semibold text-brand-600 mb-2 flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5" />
-              )}
-              {generandoPropuesta ? "Preparando mensaje..." : "Preparar mi propuesta con IA"}
-            </button>
+                Deja que la IA te ayude a dar el primer paso
+              </p>
+              <button
+                type="button"
+                onClick={prepararPropuesta}
+                disabled={generandoPropuesta}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-brand-500 text-white px-4 py-2.5 rounded-lg text-sm font-bold shadow-sm shadow-brand-900/10 hover:bg-brand-600 disabled:opacity-50 transition-colors"
+              >
+                {generandoPropuesta ? (
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                  <Sparkles className="w-4 h-4" />
+                )}
+                {generandoPropuesta ? "Preparando mensaje..." : "Preparar mi propuesta con IA"}
+              </button>
+            </div>
           )}
           {errorPropuesta && <p className="text-red-600 text-xs mt-2">{errorPropuesta}</p>}
           {propuesta && (
