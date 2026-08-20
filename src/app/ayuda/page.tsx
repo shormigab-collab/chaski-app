@@ -17,7 +17,8 @@ export default function AyudaPage() {
           <h2 className="text-lg font-semibold text-ink mb-2">¿Cómo funcionan los créditos para profesionales?</h2>
           <p className="text-ink/60">
             Cada profesional recibe créditos de bienvenida al crear su perfil. Desbloquear el contacto de un
-            cliente cuesta 1 crédito. Puedes comprar más créditos desde tu panel cuando los necesites.
+            cliente cuesta entre 1 y 3 créditos, según el presupuesto de la solicitud (a mayor presupuesto,
+            mayor costo). Puedes comprar más créditos desde tu panel cuando los necesites.
           </p>
         </div>
         <div>

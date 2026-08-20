@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { obtenerUsuarioActual } from "@/lib/auth";
+import { calcularCostoCreditos } from "@/lib/creditos";
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
   const usuario = await obtenerUsuarioActual();
@@ -25,27 +26,33 @@ export async function POST(req: Request, { params }: { params: { id: string } })
     return NextResponse.json({ ok: true, yaDesbloqueada: true });
   }
 
-  if (usuario.proveedor.creditos < 1) {
+  // El costo en creditos escala segun el presupuesto de la solicitud (1-3
+  // creditos): a mas presupuesto, mas vale la pena el lead, mas cuesta.
+  const costo = calcularCostoCreditos(solicitud.presupuesto, solicitud.presupuestoMoneda);
+
+  if (usuario.proveedor.creditos < costo) {
     return NextResponse.json(
-      { error: "No tienes créditos suficientes. Compra más créditos para continuar." },
+      {
+        error: `Esta solicitud cuesta ${costo} crédito${costo === 1 ? "" : "s"} y no tienes suficientes. Compra más créditos para continuar.`,
+      },
       { status: 402 }
     );
   }
 
-  // Transaccion: descuenta 1 credito y registra el desbloqueo de forma atomica
+  // Transaccion: descuenta el costo y registra el desbloqueo de forma atomica
   await prisma.$transaction([
     prisma.proveedor.update({
       where: { id: usuario.proveedor.id },
-      data: { creditos: { decrement: 1 } },
+      data: { creditos: { decrement: costo } },
     }),
     prisma.desbloqueo.create({
       data: {
         proveedorId: usuario.proveedor.id,
         solicitudId: solicitud.id,
-        creditosUsados: 1,
+        creditosUsados: costo,
       },
     }),
   ]);
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, costo });
 }

@@ -22,6 +22,7 @@ type Solicitud = {
   preferenciaContacto: string; // "TELEFONO" | "CORREO" | "AMBOS"
   totalDesbloqueos: number;
   tiempoTexto: string;
+  costoCreditos: number;
 };
 
 const NOTA_PREFERENCIA: Record<string, string> = {
@@ -79,8 +80,13 @@ export default function SolicitudCard({
 
       <p className="text-gray-600 text-sm mt-2">{solicitud.descripcion}</p>
       {solicitud.presupuesto && (
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-500 mt-1 flex items-center gap-2 flex-wrap">
           Presupuesto: {formatearPresupuesto(solicitud.presupuesto, solicitud.presupuestoMoneda)}
+          {solicitud.costoCreditos > 1 && (
+            <span className="text-xs font-semibold uppercase tracking-wide text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full">
+              {solicitud.costoCreditos === 2 ? "Presupuesto alto" : "Presupuesto premium"}
+            </span>
+          )}
         </p>
       )}
 
@@ -149,7 +155,8 @@ export default function SolicitudCard({
       ) : (
         <div className="mt-4 flex items-center justify-between gap-3">
           <span className="inline-flex items-center gap-1.5 text-sm text-gray-500 font-medium">
-            <Coins className="w-4 h-4 text-brand-500" strokeWidth={1.75} />1 crédito
+            <Coins className="w-4 h-4 text-brand-500" strokeWidth={1.75} />
+            {solicitud.costoCreditos} crédito{solicitud.costoCreditos === 1 ? "" : "s"}
           </span>
           <button
             onClick={desbloquear}

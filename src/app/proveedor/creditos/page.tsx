@@ -18,7 +18,7 @@ export default async function CreditosPage({
       <h1 className="text-2xl font-bold mb-1">Comprar créditos</h1>
       <p className="text-gray-600 mb-6">
         Tienes <strong>{usuario.proveedor.creditos}</strong> créditos disponibles. Cada contacto
-        desbloqueado cuesta 1 crédito.
+        desbloqueado cuesta entre 1 y 3 créditos, según el presupuesto de la solicitud.
       </p>
 
       {searchParams.estado === "exito" && (

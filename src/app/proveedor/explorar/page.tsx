@@ -3,6 +3,7 @@ import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { enmascararTelefono, enmascararCorreo } from "@/lib/contacto";
 import { tiempoRelativo } from "@/lib/tiempoRelativo";
+import { calcularCostoCreditos } from "@/lib/creditos";
 import SolicitudCard from "./SolicitudCard";
 
 export default async function ExplorarSolicitudes() {
@@ -63,6 +64,7 @@ export default async function ExplorarSolicitudes() {
                 preferenciaContacto: s.preferenciaContacto,
                 totalDesbloqueos: s._count.desbloqueos,
                 tiempoTexto: tiempoRelativo(s.createdAt),
+                costoCreditos: calcularCostoCreditos(s.presupuesto, s.presupuestoMoneda),
               }}
               desbloqueada={desbloqueada}
             />
