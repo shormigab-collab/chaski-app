@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Sparkles } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 import { nombreCategoria } from "@/lib/categoriasEn";
@@ -26,6 +27,7 @@ export default function NuevaSolicitudForm({
   const [error, setError] = useState("");
   const [exito, setExito] = useState(false);
   const [cargando, setCargando] = useState(false);
+  const [ultimaSolicitudId, setUltimaSolicitudId] = useState("");
 
   const [categoriaId, setCategoriaId] = useState(
     categorias.find((c) => c.slug === categoriaInicial)?.id ?? ""
@@ -178,6 +180,8 @@ export default function NuevaSolicitudForm({
     });
     setCargando(false);
     if (res.ok) {
+      const data = await res.json();
+      setUltimaSolicitudId(data.id || "");
       setExito(true);
       setPaso(1);
       setTitulo("");
@@ -208,9 +212,17 @@ export default function NuevaSolicitudForm({
       </div>
 
       {exito && (
-        <p className="mb-6 bg-brand-50 border border-brand-100 text-brand-600 text-sm rounded-xl p-3.5">
-          {t.exito}
-        </p>
+        <div className="mb-6 bg-brand-50 border border-brand-100 text-brand-600 text-sm rounded-xl p-3.5">
+          <p>{t.exito}</p>
+          {ultimaSolicitudId && (
+            <Link
+              href={`/cliente/solicitudes/${ultimaSolicitudId}/matches`}
+              className="inline-block mt-2 font-semibold underline hover:text-brand-700"
+            >
+              {lang === "en" ? "See recommended professionals" : "Ver profesionales recomendados"}
+            </Link>
+          )}
+        </div>
       )}
 
       {/* Paso 1: categoria */}

@@ -197,8 +197,40 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
     }
   }
 
+  const itemsCompletitud = [
+    { label: "Foto de perfil", ok: !!fotoUrl },
+    { label: "Biografía", ok: perfil.bio.trim().length >= 20 },
+    { label: "Especialidades", ok: seleccionadas.length > 0 },
+    { label: "Portafolio", ok: proyectos.filter((p) => p.titulo.trim() && p.imagenUrl.trim()).length > 0 },
+    { label: "Años de experiencia", ok: !!perfil.aniosExperiencia && perfil.aniosExperiencia > 0 },
+    { label: "Tarifa aproximada", ok: !!perfil.tarifaAproximada.trim() },
+  ];
+  const completadas = itemsCompletitud.filter((i) => i.ok).length;
+  const porcentajeCompletitud = Math.round((completadas / itemsCompletitud.length) * 100);
+
   return (
     <form onSubmit={onSubmit} className="space-y-5">
+      {/* Completitud del perfil: no penaliza a proveedores nuevos por no
+          tener resenas, solo refleja que tan completa esta la informacion
+          del perfil mismo. Se recalcula tras guardar (router.refresh). */}
+      <div className="border border-black/5 rounded-2xl bg-brand-50/40 p-4">
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-sm font-semibold text-ink">Completitud del perfil</p>
+          <span className="text-sm font-bold text-brand-600">{porcentajeCompletitud}%</span>
+        </div>
+        <div className="h-2 rounded-full bg-black/10 overflow-hidden mb-2">
+          <div
+            className="h-full bg-brand-500 rounded-full transition-all duration-500"
+            style={{ width: `${porcentajeCompletitud}%` }}
+          />
+        </div>
+        {completadas < itemsCompletitud.length && (
+          <p className="text-xs text-ink/50">
+            Te falta: {itemsCompletitud.filter((i) => !i.ok).map((i) => i.label).join(", ")}.
+          </p>
+        )}
+      </div>
+
       {/* Foto de perfil */}
       <div className="flex items-center gap-4">
         <button

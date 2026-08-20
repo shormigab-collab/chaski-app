@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { MapPin, Phone, Mail, Users, Coins } from "lucide-react";
+import { MapPin, Phone, Mail, Users, Coins, Sparkles, Loader2, Copy, Check } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 import ReportarBoton from "@/components/ReportarBoton";
+import MatchExplanation from "@/components/MatchExplanation";
 import { formatearPresupuesto } from "@/lib/moneda";
+import type { NivelCompatibilidad } from "@/lib/matching";
 
 type Solicitud = {
   id: string;
@@ -23,6 +25,8 @@ type Solicitud = {
   totalDesbloqueos: number;
   tiempoTexto: string;
   costoCreditos: number;
+  matchNivel: NivelCompatibilidad;
+  matchRazones: string[];
 };
 
 const NOTA_PREFERENCIA: Record<string, string> = {
@@ -43,10 +47,33 @@ export default function SolicitudCard({
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
   const [mostrarMapa, setMostrarMapa] = useState(false);
+  const [propuesta, setPropuesta] = useState("");
+  const [generandoPropuesta, setGenerandoPropuesta] = useState(false);
+  const [errorPropuesta, setErrorPropuesta] = useState("");
+  const [copiado, setCopiado] = useState(false);
   const mapaSrc = `https://www.google.com/maps?q=${encodeURIComponent(
     solicitud.ciudad
   )}&output=embed`;
   const primerNombre = solicitud.nombreCliente.split(" ")[0];
+
+  async function prepararPropuesta() {
+    setErrorPropuesta("");
+    setGenerandoPropuesta(true);
+    const res = await fetch(`/api/solicitudes/${solicitud.id}/propuesta`, { method: "POST" });
+    const data = await res.json();
+    setGenerandoPropuesta(false);
+    if (res.ok) {
+      setPropuesta(data.mensaje);
+    } else {
+      setErrorPropuesta(data.error || "No se pudo preparar el mensaje.");
+    }
+  }
+
+  async function copiarPropuesta() {
+    await navigator.clipboard.writeText(propuesta);
+    setCopiado(true);
+    setTimeout(() => setCopiado(false), 2000);
+  }
 
   async function desbloquear() {
     setError("");
@@ -79,6 +106,10 @@ export default function SolicitudCard({
       <p className="text-gray-400 text-sm mt-1.5">{NOTA_PREFERENCIA[solicitud.preferenciaContacto] || NOTA_PREFERENCIA.AMBOS}</p>
 
       <p className="text-gray-600 text-sm mt-2">{solicitud.descripcion}</p>
+
+      <div className="mt-3">
+        <MatchExplanation nivel={solicitud.matchNivel} razones={solicitud.matchRazones} />
+      </div>
       {solicitud.presupuesto && (
         <p className="text-sm text-gray-500 mt-1 flex items-center gap-2 flex-wrap">
           Presupuesto: {formatearPresupuesto(solicitud.presupuesto, solicitud.presupuestoMoneda)}
@@ -151,6 +182,45 @@ export default function SolicitudCard({
               Enviar correo
             </a>
           </div>
+
+          {!propuesta && (
+            <button
+              type="button"
+              onClick={prepararPropuesta}
+              disabled={generandoPropuesta}
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600 hover:text-brand-700 disabled:opacity-50"
+            >
+              {generandoPropuesta ? (
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+              ) : (
+                <Sparkles className="w-3.5 h-3.5" />
+              )}
+              {generandoPropuesta ? "Preparando mensaje..." : "Preparar mi propuesta con IA"}
+            </button>
+          )}
+          {errorPropuesta && <p className="text-red-600 text-xs mt-2">{errorPropuesta}</p>}
+          {propuesta && (
+            <div className="mt-3 bg-white border border-green-200 rounded-lg p-3">
+              <p className="text-xs font-semibold text-green-800 mb-1.5 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                Borrador de mensaje — revísalo antes de enviarlo tú mismo
+              </p>
+              <textarea
+                value={propuesta}
+                onChange={(e) => setPropuesta(e.target.value)}
+                rows={5}
+                className="w-full text-sm border border-black/10 rounded-lg px-3 py-2 outline-none focus:border-brand-500 transition-colors resize-none"
+              />
+              <button
+                type="button"
+                onClick={copiarPropuesta}
+                className="mt-2 inline-flex items-center gap-1.5 text-xs font-semibold bg-brand-50 text-brand-600 px-3 py-1.5 rounded-lg hover:bg-brand-100"
+              >
+                {copiado ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                {copiado ? "Copiado" : "Copiar mensaje"}
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="mt-4 flex items-center justify-between gap-3">

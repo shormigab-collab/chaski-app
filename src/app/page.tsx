@@ -14,6 +14,7 @@ import ComunidadPreview from "@/components/ComunidadPreview";
 import Beneficios from "@/components/Beneficios";
 import Comparacion from "@/components/Comparacion";
 import Confianza from "@/components/Confianza";
+import CopilotoBanner from "@/components/CopilotoBanner";
 
 // Le dice a Google que esta pagina (en espanol) y "/en" son la misma
 // oferta en dos idiomas/mercados, no contenido duplicado ni paginas que
@@ -135,6 +136,8 @@ export default async function HomePage() {
       </section>
 
       <TrustBar />
+
+      <CopilotoBanner />
 
       {/* Fila compacta: categorías / talento en acción / comunidad, lado a lado en desktop */}
       <section className="max-w-6xl mx-auto px-4 py-16 sm:py-20">
