@@ -22,6 +22,9 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
 
   const linksInvitado = esIngles ? (
     <>
+      <Link href="/en/blog" className="text-ink/60 hover:text-ink transition-colors">
+        Blog
+      </Link>
       <Link href="/login" className="text-ink/60 hover:text-ink transition-colors">
         Log in
       </Link>
@@ -204,11 +207,9 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
               <Link href={esIngles ? "/en#interesado" : "/registro/proveedor"} className={filaLink}>
                 {esIngles ? "Create a profile" : "Crear perfil profesional"}
               </Link>
-              {!esIngles && (
-                <Link href="/blog" className={filaLink}>
-                  Blog
-                </Link>
-              )}
+              <Link href={esIngles ? "/en/blog" : "/blog"} className={filaLink}>
+                Blog
+              </Link>
 
               <p className={tituloSeccion}>{esIngles ? "Change Language" : "Cambiar idioma"}</p>
               <div className="flex gap-2 py-1">
