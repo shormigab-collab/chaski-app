@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Camera, ImagePlus, Plus, X, ShieldCheck, Clock, FileText } from "lucide-react";
 import CategoryIcon from "@/components/CategoryIcon";
 import { ACENTOS_PORTAFOLIO, MAX_PROYECTOS_PORTAFOLIO, type ProyectoPortafolio } from "@/lib/portafolio";
@@ -308,6 +309,13 @@ export default function PerfilForm({ categorias, perfil }: { categorias: Categor
             </option>
           ))}
         </select>
+        <p className="text-xs text-ink/45 mt-1.5">
+          ¿No sabes cuál elegir?{" "}
+          <Link href="/blog/como-fijar-tu-tarifa-freelance" target="_blank" className="text-brand-600 font-medium hover:underline">
+            Lee nuestra guía para fijar tu tarifa
+          </Link>
+          .
+        </p>
       </div>
       <input
         name="linkedinUrl"
