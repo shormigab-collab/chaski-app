@@ -198,6 +198,89 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "como-fijar-tu-tarifa-freelance",
+    titulo: "Cómo fijar tu tarifa como freelancer: ¿por hora, por proyecto o por mes?",
+    categoria: "Guía para freelancers",
+    imagen: "/images/blog/como-fijar-tu-tarifa-freelance.webp",
+    imagenAlt: "Profesional independiente calculando su tarifa para un nuevo proyecto",
+    descripcionMeta:
+      "Guía práctica para freelancers en Latinoamérica: cómo elegir entre cobrar por hora, por proyecto o por mes, cómo calcular un rango justo y errores comunes al poner precio a tu trabajo.",
+    extracto:
+      "Poner precio a tu trabajo es una de las decisiones más difíciles al empezar como independiente. Esta guía explica cuándo cobrar por hora, por proyecto o por mes, cómo calcular un rango justo y los errores más comunes que hacen que un freelancer se quede cobrando poco por años.",
+    fecha: "2026-08-23",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Uno de los momentos más incómodos al trabajar de forma independiente es cuando un cliente pregunta '¿cuánto cobras?' y no tienes una respuesta clara. No es solo cuestión de decir un número: también hay que decidir la unidad. ¿Por hora? ¿Por el proyecto completo? ¿Un monto fijo al mes? Cada una tiene sentido según el tipo de trabajo, y elegir mal puede hacer que termines trabajando de más por lo mismo dinero.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Por hora, por proyecto o por mes: ¿cuándo usar cada una?",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "No hay una unidad 'correcta' para todos los casos — depende de qué tan definido está el trabajo y qué tan predecible es el esfuerzo que requiere.",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Por hora: tiene sentido cuando el alcance no está totalmente definido, cuando es soporte o mantenimiento continuo, o cuando el cliente quiere flexibilidad para pedir más o menos trabajo según el mes.",
+          "Por proyecto: funciona mejor cuando el entregable es claro desde el inicio (por ejemplo, un logo, un sitio web de 5 páginas, una campaña puntual). Le da certeza al cliente sobre el costo total y a ti te protege si trabajas más rápido de lo esperado.",
+          "Por mes: es ideal para relaciones continuas donde el cliente necesita disponibilidad constante (por ejemplo, gestión de redes sociales, soporte técnico recurrente, contabilidad mensual). Te da ingresos predecibles en vez de depender de proyecto en proyecto.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "En chaski, cuando creas tu perfil profesional puedes indicar cuál de estas tres formas usas para cobrar, así el cliente sabe desde el primer momento cómo funciona tu tarifa antes de escribirte — sin necesidad de aclararlo en cada conversación.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Cómo calcular un rango justo",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Antes de poner cualquier número, investiga cuánto cobran otros profesionales con un nivel de experiencia similar al tuyo, en tu categoría y en tu país (o en el país del cliente, si trabajas para el exterior). Si vas a cobrar por proyecto, calcula primero cuántas horas te tomaría realistamente y multiplica por tu tarifa por hora ideal — así evitas subestimar el tiempo real que requiere el trabajo, algo que le pasa a casi todo freelancer al empezar.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Si vas a cobrar por mes, ten claro qué incluye exactamente ese monto (cuántas horas, cuántas revisiones, qué tan rápido respondes) y qué pasa si el cliente pide algo fuera de eso. Dejarlo por escrito desde el inicio evita que el 'apoyo puntual' se convierta en trabajo extra no pagado.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Errores comunes al poner tu tarifa",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Cobrar por hora en un proyecto con alcance claro: terminas 'penalizado' si trabajas rápido, porque ganas menos por ser eficiente.",
+          "No incluir el tiempo que no es 'visible' para el cliente: reuniones, ajustes, comunicación, administración — todo eso cuenta y hay que reflejarlo en el precio.",
+          "Anclarte tan bajo al principio que después sientes que subir la tarifa es 'mucho', cuando en realidad solo estás alcanzando un precio justo.",
+          "No revisar tu tarifa nunca: es normal y saludable ajustarla cada 6-12 meses a medida que creces tu experiencia y portafolio.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Cuándo y cómo subir tu tarifa",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Si llevas meses con la agenda llena y sigues aceptando todo lo que te llega, es una señal clara de que puedes subir tu tarifa sin perder clientes. Aplica el nuevo precio a los proyectos nuevos primero (no hace falta subírselo de golpe a clientes actuales), y comunícalo con seguridad: no necesitas justificarte de más, un simple 'a partir de este mes mi tarifa es X' es suficiente para la mayoría de clientes serios.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Al final, la tarifa correcta es la que te permite vivir bien de tu trabajo sin sentir que estás regalando tu tiempo. Si todavía no tienes perfil en chaski, puedes crear el tuyo gratis, elegir cómo prefieres cobrar (hora, proyecto o mes) y recibir 5 créditos de bienvenida para contactar a tus primeros clientes.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {
