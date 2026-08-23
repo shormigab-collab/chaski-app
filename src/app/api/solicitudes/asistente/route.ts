@@ -1,19 +1,18 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
-import { obtenerUsuarioActual } from "@/lib/auth";
 import { preguntarClaude } from "@/lib/anthropic";
 
 const esquema = z.object({
   texto: z.string().trim().min(10).max(1000),
 });
 
+// Sin autenticacion a proposito: este endpoint no lee ni escribe nada del
+// usuario, solo convierte un texto libre en categoria/titulo/descripcion
+// sugeridos. Lo usan tanto clientes ya logueados (pagina de nueva
+// solicitud) como personas que apenas se estan registrando (paso 2 del
+// wizard de /registro/cliente, antes de que exista su cuenta/sesion).
 export async function POST(req: Request) {
-  const usuario = await obtenerUsuarioActual();
-  if (!usuario || usuario.role !== "CLIENTE") {
-    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
-  }
-
   const body = await req.json();
   const parsed = esquema.safeParse(body);
   if (!parsed.success) {
