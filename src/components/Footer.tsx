@@ -2,12 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { SVGProps } from "react";
 import { Linkedin, Facebook, Instagram, X } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
 
-// Redes sociales de chaski. LinkedIn y Facebook ya existen; X e Instagram
-// aun no se han creado, asi que apuntan al handle esperado ("usechaski")
-// y quedan listos para cuando el usuario cree esas cuentas.
+// lucide-react no incluye el logo de TikTok (no es un icono generico, es
+// una marca), asi que se dibuja a mano como SVG, con el mismo tamano y
+// grosor que los demas iconos de esta franja.
+function TikTokIcon({ className, strokeWidth: _strokeWidth, ...rest }: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true" {...rest}>
+      <path d="M16.6 5.82c-.9-.98-1.4-2.26-1.4-3.6h-3.16v13.44c0 1.62-1.32 2.94-2.94 2.94a2.94 2.94 0 0 1-2.94-2.94 2.94 2.94 0 0 1 2.94-2.94c.3 0 .58.04.85.13V9.63a6.12 6.12 0 0 0-.85-.06 6.1 6.1 0 0 0-6.1 6.1 6.1 6.1 0 0 0 6.1 6.1 6.1 6.1 0 0 0 6.1-6.1V9.01a9.24 9.24 0 0 0 5.4 1.73V7.58a5.9 5.9 0 0 1-3.5-1.76z" />
+    </svg>
+  );
+}
+
+// Redes sociales de chaski. LinkedIn, Facebook y TikTok ya existen; X e
+// Instagram aun no se han creado, asi que apuntan al handle esperado
+// ("usechaski") y quedan listos para cuando el usuario cree esas cuentas.
 const REDES = [
   {
     Icono: Linkedin,
@@ -27,6 +39,12 @@ const REDES = [
     href: "https://instagram.com/usechaski",
     label: "Instagram",
     bg: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af]",
+  },
+  {
+    Icono: TikTokIcon,
+    href: "https://www.tiktok.com/@usechaski",
+    label: "TikTok",
+    bg: "bg-ink",
   },
 ];
 
