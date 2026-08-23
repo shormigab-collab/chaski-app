@@ -631,7 +631,7 @@ export default function RegistroClienteForm({ categorias }: { categorias: Catego
                       <select
                         value={presupuestoMoneda}
                         onChange={(e) => setPresupuestoMoneda(e.target.value as Moneda)}
-                        className={`${inputClass} w-auto shrink-0`}
+                        className="border border-border rounded-xl px-2.5 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-300 focus:border-brand-400 transition-colors bg-white shrink-0"
                       >
                         {MONEDAS.map((m) => (
                           <option key={m} value={m}>
