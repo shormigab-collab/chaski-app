@@ -96,6 +96,90 @@ export const POSTS_EN: PostBlogEn[] = [
       },
     ],
   },
+  {
+    slug: "how-to-vet-a-latam-freelancer",
+    titulo: "How to Vet a Freelancer in Latin America: Questions to Ask and Red Flags to Watch",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/how-to-vet-a-latam-freelancer.webp",
+    imagenAlt: "A client on a video call with a freelance professional, reviewing a checklist",
+    descripcionMeta:
+      "A practical checklist for US businesses hiring freelancers in Latin America: what to ask on a first call, how to verify real work, and the red flags that matter most before you pay.",
+    extracto:
+      "Cost and timezone are easy to evaluate. Trust is the hard part. Here's a practical way to vet a LatAm freelancer before you commit — what to ask, what to check, and the red flags that actually matter.",
+    fecha: "2026-08-26",
+    minutosLectura: 5,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Cost savings and timezone overlap are easy to evaluate on paper. What actually stops US businesses from hiring in Latin America is trust — you can't walk over to someone's desk, and if a project goes wrong, recourse feels murky. The good news is that vetting a freelancer abroad isn't fundamentally different from vetting one down the street. It just requires being a bit more deliberate about a few specific things.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Start with a video call, not just messages",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "A 15-minute video call tells you more than a week of back-and-forth messages. You're checking for two things: does this person understand what you're actually trying to accomplish (not just what you typed), and do they communicate clearly enough that a project won't get lost in translation — literal or otherwise. If someone avoids a call and insists on text-only, that's worth noting, not necessarily disqualifying, but worth noting.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Ask for work tied to specific claims",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Anyone can send a portfolio link. What's harder to fake is context: ask what their specific role was on a past project, what the client's actual goal was, and what they'd do differently now. A freelancer who did the work can answer this in seconds. Someone padding a portfolio usually can't get past the first follow-up question.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Get a direct way to reach them",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "A phone number, WhatsApp, or personal email — something outside whatever platform you found them on. This matters less for security and more as a signal: professionals who plan to be around for repeat work are generally fine sharing this. Someone who's cagey about it, or only wants contact routed through an inbox they might abandon tomorrow, is a mild flag.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Start with a small, well-defined project",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "This is the single best risk-reducer available, and it costs you almost nothing. Instead of committing to a three-month engagement on day one, scope a small piece of real work — a single deliverable, a one-week sprint, something with a clear finish line. You learn more about how someone actually works from one small project than from any number of calls or portfolio reviews, and if it doesn't go well, the downside is contained.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Red flags worth taking seriously",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Asking for full payment upfront before any work or scope has been agreed on.",
+          "Vague or evasive answers when you ask specific questions about how they'll approach the work.",
+          "Pricing dramatically below the range you're seeing from comparable profiles, with no clear reason why.",
+          "No verifiable way to reach them outside a single messaging thread.",
+          "Pressure to skip a small trial project and jump straight to a large, long-term commitment.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Where verification can do some of this work for you",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "None of this has to be entirely manual. On chaski, professionals can verify their identity, and verified profiles show a badge on their public page — it's not a guarantee of quality, but it does confirm the person behind the profile is who they say they are, which removes one layer of uncertainty before you even get on a call.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "None of this takes more than an extra hour of diligence, and it applies whether you're hiring across the hall or across a continent. If you're ready to start, you can post a project on chaski for free and hear directly from LatAm professionals who fit what you need.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPostEn(slug: string) {
