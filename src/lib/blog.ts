@@ -281,6 +281,89 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "como-armar-portafolio-que-consiga-clientes",
+    titulo: "Cómo armar un portafolio que te consiga clientes",
+    categoria: "Guía para freelancers",
+    imagen: "/images/blog/como-armar-portafolio-que-consiga-clientes.webp",
+    imagenAlt: "Diseñadora independiente revisando su portafolio de proyectos en la laptop",
+    descripcionMeta:
+      "Guía práctica para freelancers en Latinoamérica: qué proyectos incluir en tu portafolio, cómo describirlos y errores comunes que hacen que un cliente no te contacte.",
+    extracto:
+      "Un portafolio bien armado hace la mitad del trabajo de conseguir un cliente antes de que te escriban. Esta guía explica qué proyectos mostrar, cómo describirlos y los errores más comunes que hacen que un portafolio no convierta.",
+    fecha: "2026-09-01",
+    minutosLectura: 5,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Antes de que un cliente te escriba, ya te evaluó. Revisó tu perfil, miró tus proyectos anteriores y decidió si vale la pena contactarte — todo eso pasa antes de la primera conversación. Un portafolio bien armado no es un detalle estético: es lo que convierte a alguien que está mirando perfiles en alguien que te escribe a ti y no al siguiente.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Calidad antes que cantidad",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "No necesitas 15 proyectos, necesitas 3 o 4 buenos. En chaski, por ejemplo, el portafolio permite hasta 6 proyectos — y eso es suficiente para casi cualquier categoría. Un portafolio con muchos proyectos mediocres genera menos confianza que uno corto con trabajo que realmente demuestre lo que sabes hacer. Si estás empezando y no tienes trabajo pagado todavía, un proyecto personal bien ejecutado cuenta más que uno real hecho a medias.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Elige proyectos que representen el trabajo que quieres seguir haciendo",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Este es el error más común: mostrar todo lo que has hecho en vez de lo que quieres que te sigan pidiendo. Si hiciste un logo hace dos años pero ya no quieres hacer diseño de marca, no lo pongas — atrae exactamente al cliente equivocado. Tu portafolio debería ser un espejo de la categoría de trabajo en la que quieres que te encuentren, no un archivo histórico de todo lo que alguna vez hiciste.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Cómo describir cada proyecto",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Un título y una imagen no bastan. La descripción es donde realmente conviertes: cuenta brevemente cuál era el problema del cliente, qué hiciste tú específicamente (no 'participé en', sino 'diseñé' o 'desarrollé') y qué resultado tuvo si lo sabes (más visitas, más ventas, entrega a tiempo). Dos o tres frases son suficientes — no es un ensayo, es una prueba rápida de que sabes lo que haces.",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Título claro y específico: 'Rediseño de tienda en línea para marca de ropa' en vez de solo 'Proyecto web'.",
+          "Qué problema resolvías y qué hiciste tú exactamente en el proyecto.",
+          "Un resultado concreto si lo tienes, aunque sea aproximado.",
+          "Una sola imagen representativa por proyecto — no satures con capturas de pantalla de todo el proceso.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Las imágenes importan más de lo que crees",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Una captura de pantalla pixelada o mal recortada le resta más credibilidad a tu trabajo que no tener imagen. Usa capturas nítidas, bien iluminadas si son fotos de producto físico, y si es posible, muestra el resultado final terminado, no un boceto o versión intermedia. Si tu trabajo es difícil de mostrar visualmente (por ejemplo, consultoría o contabilidad), usa una imagen simple y profesional del contexto — una reunión, un documento, un gráfico — en vez de dejarlo en blanco.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Errores que alejan clientes",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Portafolio vacío o con placeholders genéricos: para muchos clientes, esto pesa más que un perfil nuevo sin reseñas.",
+          "Proyectos sin ningún contexto, solo una imagen y un título de una palabra.",
+          "Mezclar categorías muy distintas sin explicar por qué (confunde sobre en qué te especializas realmente).",
+          "Imágenes que no corresponden al proyecto descrito, o capturas genéricas bajadas de internet.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Un portafolio no tiene que ser perfecto para empezar a funcionar — tiene que ser honesto, claro y mostrar tu mejor trabajo real. Si todavía no has cargado el tuyo, puedes hacerlo gratis desde tu perfil en chaski y empezar a recibir contactos de clientes que ya vieron lo que sabes hacer antes de escribirte.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {
