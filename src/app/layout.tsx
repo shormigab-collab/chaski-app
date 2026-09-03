@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -79,6 +80,7 @@ export default async function RootLayout({
 
         <BackToTop />
         <ChatSoporte />
+        <Analytics />
       </body>
     </html>
   );
