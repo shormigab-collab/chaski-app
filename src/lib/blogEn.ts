@@ -180,6 +180,81 @@ export const POSTS_EN: PostBlogEn[] = [
       },
     ],
   },
+  {
+    slug: "how-to-onboard-a-latam-freelancer",
+    titulo: "How to Onboard a Freelancer in Latin America (So the First 30 Days Actually Work)",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/hire-latam-freelancers-cost-guide.webp",
+    imagenAlt: "A manager and a new freelance team member on a video call during onboarding",
+    descripcionMeta:
+      "A practical onboarding checklist for US businesses working with freelancers in Latin America: setting expectations, communication cadence, and the mistakes that derail the first month.",
+    extracto:
+      "Hiring the right person is only half the job. Here's how to onboard a freelancer in Latin America so the first 30 days build trust instead of confusion — communication cadence, tools, and expectations.",
+    fecha: "2026-09-07",
+    minutosLectura: 5,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Most of the advice on hiring in Latin America stops at the offer letter — cost comparisons, vetting checklists, red flags to avoid. But a good chunk of failed engagements aren't hiring mistakes at all. They're onboarding mistakes: nobody set clear expectations in the first week, and by week three both sides are frustrated for reasons that had nothing to do with skill.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Put the working agreement in writing, even if it's short",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Before any work starts, write down — even in a two-paragraph email — what's being delivered, by when, how often you'll check in, and how and when payment happens. This isn't about legal protection so much as making sure both sides are picturing the same engagement. A surprising number of early conflicts trace back to one side assuming weekly check-ins and the other assuming they'd only hear from you at the deadline.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Agree on a communication cadence, not just a tool",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Slack vs. email vs. WhatsApp matters less than agreeing on how often you'll actually talk. A short weekly check-in — 15 minutes, video on — does more for a new working relationship than daily async messages ever will, especially in the first few weeks. It's also the fastest way to catch a misunderstanding about scope before it turns into wasted work.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Use the timezone overlap on purpose",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Most of Latin America shares meaningful working-hour overlap with the US — that's one of the real advantages over hiring further offshore. Use it deliberately in the first weeks: schedule your check-ins during hours that work for both of you, and don't default to async-only just because the person is in a different country. The overlap is only useful if you actually take advantage of it.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Give feedback early, even small feedback",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Waiting until the final deliverable to say something isn't working wastes everyone's time. If the first draft is close but not quite right, say so after the first draft — not after the third. New collaborators, especially ones you haven't built a long history with yet, can't read between the lines the way a longtime team member might. Direct, early feedback is a kindness, not a criticism.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Mistakes that derail the first month",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "No kickoff conversation — just a task list dropped in a message with no context on the bigger goal.",
+          "Going silent between the hire and the first deliverable, then being surprised the result missed the mark.",
+          "Changing scope mid-project without acknowledging that it changes the timeline or cost.",
+          "Paying late or inconsistently, which erodes trust faster than almost anything else in a new working relationship.",
+          "Treating the first project as a test instead of a real collaboration — freelancers can tell, and it shows in the effort back.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "None of this is complicated, but it's easy to skip when you're moving fast. A clear first conversation, a simple cadence, and early feedback do more for a long-term working relationship than almost anything else you can control. If you're ready to find someone to build that relationship with, you can post a project on chaski for free and hear directly from LatAm professionals who fit what you need.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPostEn(slug: string) {

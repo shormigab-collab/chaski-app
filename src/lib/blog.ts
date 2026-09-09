@@ -364,6 +364,90 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "que-preguntar-antes-de-contratar-freelancer",
+    titulo: "Qué preguntar antes de contratar a un freelancer: señales de alerta",
+    categoria: "Guía para clientes",
+    imagen: "/images/blog/como-contratar-freelance-colombia.webp",
+    imagenAlt: "Cliente en videollamada con un profesional independiente antes de contratarlo",
+    descripcionMeta:
+      "Guía práctica para evaluar a un freelancer antes de contratarlo en Colombia y Latinoamérica: qué preguntar, qué revisar y las señales de alerta que no debes ignorar.",
+    extracto:
+      "El precio y la disponibilidad son fáciles de comparar. Lo difícil es saber si puedes confiar en la persona antes de pagarle. Esta guía cubre qué preguntar, qué revisar y las señales de alerta más comunes antes de contratar a un freelancer.",
+    fecha: "2026-09-07",
+    minutosLectura: 5,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Comparar precios y disponibilidad es fácil. Lo difícil es saber si la persona que estás por contratar realmente va a cumplir — sobre todo si nunca has trabajado con ella antes. La buena noticia es que evaluar a un freelancer no es tan distinto a evaluar a cualquier proveedor: solo hay que ser un poco más deliberado en unas cuantas cosas puntuales antes de comprometerte.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Empieza con una llamada, no solo mensajes de texto",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Una videollamada de 15 minutos dice más que una semana de mensajes de WhatsApp. Ahí puedes notar dos cosas: si la persona entendió lo que realmente necesitas (no solo lo que escribiste en el mensaje) y si se comunica con claridad. Si alguien evita la llamada e insiste en seguir todo por texto, no es una razón automática para descartarlo, pero sí vale la pena tomarlo en cuenta.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Pide contexto sobre proyectos anteriores, no solo el link del portafolio",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Cualquiera puede mandar un link a un portafolio. Lo que es más difícil de improvisar es el contexto: pregunta cuál fue su rol exacto en un proyecto anterior, cuál era el objetivo del cliente y qué haría diferente ahora. Alguien que de verdad hizo el trabajo responde esto en segundos. Alguien que solo está mostrando trabajo ajeno o de un equipo generalmente no pasa la segunda pregunta de seguimiento.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Consigue una forma directa de contactarlo",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Un número de teléfono, WhatsApp o correo personal — algo fuera de la plataforma donde lo encontraste. Esto importa menos por seguridad y más como señal: los profesionales que planean quedarse trabajando a largo plazo normalmente no tienen problema en compartir esto. Si alguien es evasivo al respecto o insiste en que todo pase solo por un chat que podría abandonar mañana, es una alerta leve.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Empieza con un proyecto pequeño y bien definido",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Esta es la mejor forma de reducir el riesgo, y casi no cuesta nada. En vez de comprometerte a un proyecto de tres meses desde el primer día, define una tarea pequeña con un entregable claro — algo de una semana, con un final concreto. Vas a aprender más sobre cómo trabaja esa persona con un proyecto chico real que con cualquier cantidad de llamadas o revisiones de portafolio, y si algo no funciona, el riesgo queda contenido.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Señales de alerta que sí debes tomar en serio",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Pedir el pago completo por adelantado antes de acordar cualquier alcance o entregable.",
+          "Respuestas vagas o evasivas cuando le preguntas algo específico sobre cómo va a hacer el trabajo.",
+          "Cobrar muy por debajo del rango que ves en perfiles similares, sin ninguna razón clara.",
+          "No tener ninguna forma verificable de contacto fuera de un solo chat.",
+          "Presionarte para saltarte un proyecto de prueba pequeño e ir directo a un compromiso grande y largo.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Cuando la plataforma ya hace parte de esta verificación por ti",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "No todo tiene que ser manual. En chaski, los proveedores pueden verificar su identidad, y los perfiles verificados muestran una insignia visible en su página pública — no es garantía de calidad, pero sí confirma que la persona detrás del perfil es quien dice ser, lo que te quita una capa de incertidumbre incluso antes de la primera llamada.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Nada de esto toma más de una hora extra de trabajo, y aplica sin importar si contratas a alguien en tu misma ciudad o en otro país. Si estás listo para empezar, puedes publicar tu proyecto gratis en chaski y recibir contacto directo de profesionales verificados que encajan con lo que necesitas.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {
