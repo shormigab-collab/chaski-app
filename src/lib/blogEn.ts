@@ -255,6 +255,71 @@ export const POSTS_EN: PostBlogEn[] = [
       },
     ],
   },
+  {
+    slug: "employee-vs-freelancer-real-cost",
+    titulo: "Employee vs. Freelancer: The Real Cost of Hiring In-House vs a LatAm Contractor",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/employee-vs-freelancer-real-cost.webp",
+    imagenAlt: "Split scene of an in-house employee working in an office next to a LatAm freelance contractor on a video call",
+    descripcionMeta:
+      "A real breakdown of what a US employee actually costs beyond salary — payroll taxes, benefits, overhead — compared to hiring a freelance contractor in Latin America.",
+    extracto:
+      "A $100,000 salary rarely means $100,000 in actual cost. Here's what a US employee really costs once you add payroll taxes and benefits, and how that compares to hiring a freelance contractor in Latin America.",
+    fecha: "2026-09-10",
+    minutosLectura: 5,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "When businesses compare the cost of hiring in-house versus hiring a freelancer, they usually compare salary to hourly rate — and that comparison is misleading in one specific way: a salary is never the full cost of an employee. There's a real, well-documented gap between what you pay someone and what it actually costs to employ them, and it matters a lot when you're deciding how to staff a project.",
+      },
+      {
+        tipo: "titulo",
+        texto: "What a $100K employee actually costs",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "According to SHRM and BLS data, the fully loaded cost of a US employee typically runs 1.25 to 1.4 times their base salary once you add mandatory payroll taxes (the employer's share of FICA), unemployment insurance, workers' comp, health insurance, retirement matching, and other benefits. Federal data puts benefit costs at roughly $13.68 per hour on top of $32.37 in wages for the average private-sector employee — meaning every dollar of salary carries about 40 cents in additional employer cost. So a $100,000 salary typically means $125,000–$140,000 in real cost to the business, before you even count equipment, office space, or management overhead.",
+      },
+      {
+        tipo: "titulo",
+        texto: "What a contractor actually costs",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "A freelance contractor invoicing $100,000 a year costs you exactly $100,000 — no employer-side payroll tax, no benefits, no unemployment insurance, no workers' comp. Contractors typically charge more per hour than an equivalent salaried role specifically because they're covering their own taxes and benefits out of that rate. But even accounting for a higher hourly rate, a well-scoped contractor engagement usually lands well below the fully loaded cost of an equivalent employee — especially if you don't need that role filled year-round.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Where the LatAm comparison changes the math further",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "This is where hiring in Latin America specifically shifts the equation again: rates for comparable skill levels typically run 55–70% below US rates. So you're not just avoiding the 25–40% employer overhead of a US hire — you're also avoiding the rate premium that comes with US-based contractor pricing. Combined, the gap between 'fully loaded US employee' and 'LatAm contractor for the same output' is usually the single biggest cost lever available for a growing business, well before you get into negotiating vendor contracts or cutting other expenses.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Where in-house still makes more sense",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "None of this means contractors are always the right call. In-house employees make more sense when a role needs deep, ongoing institutional knowledge, tight day-to-day integration with your team, or when the work genuinely requires someone full-time year-round rather than in defined projects. The cost math favors contractors most clearly for well-scoped, project-based work — which is exactly the kind of engagement that's easiest to start small and low-risk.",
+      },
+      {
+        tipo: "titulo",
+        texto: "A practical way to test it",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Before committing to a full-time hire, price out what the same output would cost as a defined project with a freelance contractor. If a role can be scoped into deliverables rather than an open-ended job description, that's usually a sign a contractor engagement is worth testing first. If you're ready to try it, you can post a project on chaski for free and hear directly from LatAm professionals who fit what you need.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPostEn(slug: string) {

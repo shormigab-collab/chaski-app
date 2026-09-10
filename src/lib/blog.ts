@@ -448,6 +448,78 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "freelance-o-agencia-que-te-conviene",
+    titulo: "Freelance o agencia: qué te conviene según tu proyecto",
+    categoria: "Guía para clientes",
+    imagen: "/images/blog/freelance-o-agencia-que-te-conviene.webp",
+    imagenAlt: "Un freelancer trabajando solo junto a un equipo de agencia colaborando en otra mesa",
+    descripcionMeta:
+      "Comparación práctica entre contratar un freelancer y contratar una agencia: costos, velocidad, control y en qué casos conviene cada opción.",
+    extracto:
+      "No hay una respuesta única — depende del proyecto. Esta guía compara costos, velocidad y nivel de control entre contratar un freelancer independiente y contratar una agencia, para que decidas con información real.",
+    fecha: "2026-09-10",
+    minutosLectura: 5,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Cuando necesitas contratar ayuda profesional, la primera decisión no es a quién contratar, sino qué tipo de proveedor: ¿un freelancer independiente o una agencia? Ambos pueden hacer buen trabajo, pero encajan mejor en situaciones distintas. Esta guía compara las diferencias reales para que decidas según tu proyecto, no según cuál suena más 'seguro'.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Costo",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Un freelancer casi siempre cuesta menos que una agencia por el mismo trabajo, porque no está cubriendo los gastos fijos de una oficina, un equipo de ventas o varios niveles de gerencia entre tú y quien hace el trabajo real. Una agencia puede cobrar 2 o 3 veces más por una tarea comparable — parte de eso paga procesos y garantías que un freelancer no ofrece, pero para un proyecto pequeño o mediano, ese costo extra no siempre se traduce en mejor resultado.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Velocidad y comunicación",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Con un freelancer hablas directamente con la persona que hace el trabajo — no hay intermediarios que filtren o retrasen la comunicación. Eso suele significar respuestas más rápidas y menos malentendidos, porque no hay que 'traducir' lo que pediste a través de un gerente de cuenta. Las agencias, a cambio, suelen tener procesos más estructurados de seguimiento, que ayudan en proyectos largos con muchas partes móviles.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Capacidad y respaldo",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Aquí es donde una agencia gana terreno: si tu proyecto necesita varias disciplinas a la vez (por ejemplo, diseño, desarrollo y redacción trabajando en paralelo) o si necesitas garantía de continuidad aunque una persona específica se enferme o renuncie, una agencia tiene más capacidad de absorber eso. Un freelancer, por definición, es una sola persona — si tu proyecto depende de mucho volumen simultáneo, puede quedarse corto.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Flexibilidad",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Los freelancers suelen ser más flexibles para proyectos pequeños, puntuales o de alcance cambiante — no hay contratos mínimos ni procesos de aprobación largos para ajustar el rumbo. Las agencias, especialmente las más grandes, funcionan mejor con alcances definidos desde el inicio y cambian de dirección más lento porque involucran a más gente en cada decisión.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Cuándo conviene cada opción",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Freelance: proyectos puntuales, presupuesto ajustado, necesitas hablar directo con quien hace el trabajo, o el alcance puede cambiar sobre la marcha.",
+          "Agencia: proyectos grandes con varias disciplinas en paralelo, necesitas garantía de continuidad del equipo, o el proceso interno de tu empresa requiere un proveedor con estructura formal (facturación corporativa, contratos tipo, etc.).",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "No es una decisión de 'cuál es mejor' sino 'cuál encaja con lo que necesitas ahora'. Muchas empresas usan ambos según el proyecto: freelancers para tareas puntuales y agencias para iniciativas grandes y continuas. Si tu próximo proyecto encaja en el primer grupo, puedes publicarlo gratis en chaski y recibir contacto directo de profesionales independientes en Latinoamérica.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {
