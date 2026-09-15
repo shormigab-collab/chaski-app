@@ -10,7 +10,7 @@ import ReferralBanner from "./ReferralBanner";
 type UsuarioConProveedor = {
   id: string;
   nombre: string;
-  role: "CLIENTE" | "PROVEEDOR" | "ADMIN";
+  role: "CLIENTE" | "PROVEEDOR" | "ADMIN" | "EQUIPO";
   proveedor?: { creditos: number } | null;
 } | null;
 
@@ -103,12 +103,25 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
     </>
   );
 
+  const linksEquipo = (
+    <>
+      <Link href="/crm" className="text-ink/60 hover:text-ink transition-colors">
+        CRM
+      </Link>
+      <form action="/api/auth/logout" method="post">
+        <button className="text-ink/60 hover:text-ink transition-colors">Salir</button>
+      </form>
+    </>
+  );
+
   const linksActivos = !usuario
     ? linksInvitado
     : usuario.role === "CLIENTE"
     ? linksCliente
     : usuario.role === "PROVEEDOR"
     ? linksProveedor
+    : usuario.role === "EQUIPO"
+    ? linksEquipo
     : linksAdmin;
 
   // El toggle de idioma solo tiene sentido en las paginas de mercadeo
@@ -306,6 +319,13 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
                 <Link href="/admin" className={filaLink}>
                   <ShieldCheck className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
                   Admin
+                </Link>
+              )}
+
+              {usuario.role === "EQUIPO" && (
+                <Link href="/crm" className={filaLink}>
+                  <ShieldCheck className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                  CRM
                 </Link>
               )}
 

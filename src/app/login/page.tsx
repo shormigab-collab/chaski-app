@@ -29,7 +29,13 @@ export default function LoginPage() {
     if (res.ok) {
       const data = await res.json();
       const destino =
-        data.role === "PROVEEDOR" ? "/proveedor/explorar" : data.role === "ADMIN" ? "/admin" : "/cliente/solicitudes";
+        data.role === "PROVEEDOR"
+          ? "/proveedor/explorar"
+          : data.role === "ADMIN"
+          ? "/admin"
+          : data.role === "EQUIPO"
+          ? "/crm"
+          : "/cliente/solicitudes";
       router.push(destino);
       router.refresh();
     } else {

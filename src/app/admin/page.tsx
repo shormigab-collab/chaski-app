@@ -2,8 +2,10 @@ import { redirect } from "next/navigation";
 import { obtenerUsuarioActual } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { getSupabaseAdmin, BUCKET_VERIFICACIONES } from "@/lib/supabaseAdmin";
+import Link from "next/link";
 import CategoryIcon from "@/components/CategoryIcon";
 import AdminBotonAccion from "./AdminBotonAccion";
+import AgregarMiembroForm from "./AgregarMiembroForm";
 
 // Ventanas de tiempo para el resumen "Esta semana": los ultimos 7 dias
 // comparados contra los 7 dias anteriores a esos, para saber si el
@@ -46,6 +48,7 @@ export default async function AdminPage() {
     solicitudesSemanaAnterior,
     desbloqueosEstaSemana,
     desbloqueosSemanaAnterior,
+    miembrosEquipo,
   ] = await Promise.all([
     prisma.user.count({ where: { role: "CLIENTE" } }),
     prisma.user.count({ where: { role: "PROVEEDOR" } }),
@@ -70,6 +73,7 @@ export default async function AdminPage() {
     prisma.solicitud.count({ where: { createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
     prisma.desbloqueo.count({ where: { createdAt: { gte: haceUnaSemana } } }),
     prisma.desbloqueo.count({ where: { createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
+    prisma.user.findMany({ where: { role: "EQUIPO" }, orderBy: { createdAt: "desc" } }),
   ]);
 
   const ingresosCOP = transacciones
@@ -117,7 +121,15 @@ export default async function AdminPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
-      <h1 className="text-2xl font-bold mb-8">Panel de administración</h1>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-2xl font-bold">Panel de administración</h1>
+        <Link
+          href="/crm"
+          className="bg-ink text-white text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition-opacity"
+        >
+          Ir al CRM →
+        </Link>
+      </div>
 
       <h2 className="text-xl font-bold mb-1">Esta semana (últimos 7 días)</h2>
       <p className="text-sm text-gray-500 mb-3">Para saber si buscar proveedores y ayudar a publicar solicitudes está dando resultado.</p>
@@ -320,6 +332,38 @@ export default async function AdminPage() {
           </tbody>
         </table>
       </div>
+
+      <h2 className="text-xl font-bold mb-1 mt-10">Equipo con acceso al CRM</h2>
+      <p className="text-sm text-gray-500 mb-3">
+        Crea una cuenta para cada persona que necesite entrar a{" "}
+        <Link href="/crm" className="text-brand-600 hover:underline">/crm</Link>. Pueden cambiar la contraseña luego
+        desde su perfil.
+      </p>
+      <div className="mb-4">
+        <AgregarMiembroForm />
+      </div>
+      {miembrosEquipo.length > 0 && (
+        <div className="overflow-x-auto mb-10">
+          <table className="w-full text-sm border rounded-xl overflow-hidden">
+            <thead className="bg-gray-50 text-left">
+              <tr>
+                <th className="p-3">Nombre</th>
+                <th className="p-3">Correo</th>
+                <th className="p-3">Desde</th>
+              </tr>
+            </thead>
+            <tbody>
+              {miembrosEquipo.map((m) => (
+                <tr key={m.id} className="border-t">
+                  <td className="p-3">{m.nombre}</td>
+                  <td className="p-3">{m.email}</td>
+                  <td className="p-3">{m.createdAt.toLocaleDateString("es-CO")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }

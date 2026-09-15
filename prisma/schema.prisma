@@ -19,7 +19,7 @@ model User {
   passwordHash  String
   nombre        String
   telefono      String?
-  role          String   // "CLIENTE" | "PROVEEDOR" | "ADMIN"
+  role          String   // "CLIENTE" | "PROVEEDOR" | "ADMIN" | "EQUIPO" (EQUIPO = acceso al CRM interno)
   ciudad        String?
   pais          String   @default("Colombia")
   createdAt     DateTime @default(now())
@@ -35,6 +35,11 @@ model User {
   transacciones Transaccion[]
   resenasHechas Resena[]      @relation("ResenasHechas")
   reportesHechos Reporte[]
+
+  // CRM interno (equipo de Chaski, no relacionado a clientes/proveedores
+  // del marketplace).
+  crmContactosPropios CrmContacto[]
+  crmActividades      CrmActividad[]
 }
 
 model Categoria {
@@ -169,4 +174,66 @@ model LeadUS {
   empresa   String?
   mensaje   String
   createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------
+// CRM interno de Chaski (equipo de ventas/outreach). No tiene relacion
+// con los clientes/proveedores del marketplace: es para llevar el
+// seguimiento de las empresas y personas con las que el equipo de
+// Chaski esta hablando para que usen la plataforma.
+// ---------------------------------------------------------------------
+
+model CrmEmpresa {
+  id        String   @id @default(cuid())
+  nombre    String
+  sitioWeb  String?
+  notas     String?
+  createdAt DateTime @default(now())
+
+  contactos CrmContacto[]
+}
+
+model CrmContacto {
+  id        String      @id @default(cuid())
+  nombre    String
+  email     String?
+  telefono  String?
+  empresaId String?
+  empresa   CrmEmpresa? @relation(fields: [empresaId], references: [id], onDelete: SetNull)
+
+  // Etapa del pipeline: "NUEVO" | "CONTACTADO" | "NEGOCIANDO" | "GANADO" | "PERDIDO"
+  etapa  String  @default("NUEVO")
+  origen String? // de donde salio el lead, ej. "LinkedIn", "Referido", "Reddit"
+  notas  String?
+
+  propietarioId String?
+  propietario   User?   @relation(fields: [propietarioId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tareas      CrmTarea[]
+  actividades CrmActividad[]
+}
+
+model CrmTarea {
+  id          String      @id @default(cuid())
+  contactoId  String
+  contacto    CrmContacto @relation(fields: [contactoId], references: [id], onDelete: Cascade)
+  titulo      String
+  fechaLimite DateTime?
+  completada  Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+}
+
+model CrmActividad {
+  id         String      @id @default(cuid())
+  contactoId String
+  contacto   CrmContacto @relation(fields: [contactoId], references: [id], onDelete: Cascade)
+  // "NOTA" | "LLAMADA" | "CORREO" | "REUNION"
+  tipo       String
+  contenido  String
+  autorId    String?
+  autor      User?       @relation(fields: [autorId], references: [id], onDelete: SetNull)
+  createdAt  DateTime    @default(now())
 }

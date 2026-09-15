@@ -8,7 +8,7 @@ const COOKIE_NAME = "sesion_token";
 
 export type SessionPayload = {
   userId: string;
-  role: "CLIENTE" | "PROVEEDOR" | "ADMIN";
+  role: "CLIENTE" | "PROVEEDOR" | "ADMIN" | "EQUIPO";
 };
 
 export async function hashPassword(password: string) {
@@ -67,4 +67,10 @@ export async function obtenerUsuarioActual() {
   // en el schema lo guardamos como String en vez de enum. Aqui lo tipamos
   // de vuelta para que el resto de la app lo use con seguridad de tipos.
   return { ...usuario, role: usuario.role as SessionPayload["role"] };
+}
+
+// Acceso al CRM interno: solo el equipo de Chaski (rol EQUIPO) y los
+// administradores (rol ADMIN, que ya tienen acceso a todo).
+export function esEquipoCrm(usuario: { role: string } | null | undefined) {
+  return !!usuario && (usuario.role === "EQUIPO" || usuario.role === "ADMIN");
 }
