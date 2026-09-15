@@ -7,7 +7,7 @@ export type EtapaCrm = "NUEVO" | "CONTACTADO" | "NEGOCIANDO" | "GANADO" | "PERDI
 export const ETAPAS_CRM: { valor: EtapaCrm; etiqueta: string; color: string; bg: string }[] = [
   { valor: "NUEVO", etiqueta: "Nuevo", color: "text-gray-600", bg: "bg-gray-100" },
   { valor: "CONTACTADO", etiqueta: "Contactado", color: "text-brand-700", bg: "bg-brand-50" },
-  { valor: "NEGOCIANDO", etiqueta: "Negociando", color: "text-gold-700", bg: "bg-gold-50" },
+  { valor: "NEGOCIANDO", etiqueta: "Negociando", color: "text-gold-600", bg: "bg-gold-50" },
   { valor: "GANADO", etiqueta: "Ganado", color: "text-emerald-700", bg: "bg-emerald-50" },
   { valor: "PERDIDO", etiqueta: "Perdido", color: "text-coral-700", bg: "bg-coral-50" },
 ];
