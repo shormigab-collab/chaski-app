@@ -520,6 +520,76 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "como-recibir-pagos-internacionales-freelancer",
+    titulo: "Cómo recibir pagos de clientes internacionales siendo freelancer en Latinoamérica",
+    categoria: "Guía para freelancers",
+    imagen: "/images/blog/como-recibir-pagos-internacionales-freelancer.webp",
+    imagenAlt: "Freelancer latinoamericano revisando una transferencia internacional en su laptop",
+    descripcionMeta:
+      "Guía práctica para freelancers en Latinoamérica: qué plataforma conviene más para cobrar a clientes en EE.UU. o Europa (Wise, Payoneer, PayPal, transferencia bancaria), cuánto cobra cada una en comisión y qué es el formulario W-8BEN que probablemente te van a pedir.",
+    extracto:
+      "Si ya tienes o estás por conseguir tu primer cliente internacional, el momento de la verdad llega cuando toca decidir cómo te va a pagar. Esta guía compara las plataformas más usadas para cobrar desde Latinoamérica, cuánto se queda cada una en el camino y qué es ese formulario en inglés que probablemente te van a pedir firmar.",
+    fecha: "2026-09-18",
+    minutosLectura: 7,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Conseguir un cliente en Estados Unidos o Europa es una gran noticia, pero trae una pregunta que casi ningún freelancer resuelve bien la primera vez: ¿por dónde te van a pagar? No es un detalle menor — según la plataforma que elijas, puedes terminar perdiendo entre el 1% y el 5% de cada pago en comisiones y tipo de cambio, además de esperar días de más para ver la plata en tu cuenta. Esta guía compara las opciones más comunes para que decidas con información real, no adivinando.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Las opciones más usadas para cobrar desde Latinoamérica",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Wise: usa la tasa de cambio real (la misma que ves en Google), sin margen escondido. La comisión total suele quedar entre 0.5% y 2% dependiendo de la moneda y el país. Es, en la mayoría de los casos, la opción más barata para recibir dólares o euros y convertirlos a pesos, soles o el peso que uses.",
+          "Payoneer: cobra alrededor de 1% por la transferencia más un margen cambiario de aproximadamente 0.5%, para un total cercano al 2%. Es muy usada porque muchas plataformas de freelance (Upwork, Fiverr) la tienen integrada directamente, así que si ya trabajas con esas plataformas probablemente ya tengas cuenta.",
+          "PayPal: es la más conocida, pero también la más cara para Latinoamérica — el margen cambiario suele estar entre 3% y 4% por encima de la tasa real, más una comisión fija según el país. En varios países de la región además tiene restricciones para retirar directo a tu cuenta bancaria local, así que conviene revisar esto antes de pedirle a un cliente que te pague por ahí.",
+          "Transferencia bancaria (wire transfer): funciona en cualquier país, pero suele tener comisiones fijas más altas (entre USD 15 y 50 por transferencia, a veces cobradas por ambos bancos) y tarda de 2 a 5 días hábiles. Tiene sentido para pagos grandes y puntuales, pero es caro si tu cliente te paga con frecuencia montos pequeños.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Como referencia rápida: si te pagan con frecuencia y en montos medianos, Wise suele ganar. Si tu cliente ya usa Payoneer porque contrata a través de una plataforma grande, tiene sentido simplemente usar esa. PayPal conviene solo si el cliente insiste y no hay otra opción — pero entonces vale la pena pedirle un poco más para compensar lo que se va a quedar en comisiones.",
+      },
+      {
+        tipo: "titulo",
+        texto: "El formulario que probablemente te van a pedir: W-8BEN",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Si tu cliente es una empresa en Estados Unidos, es muy probable que en algún momento te pida firmar un formulario llamado W-8BEN. No es nada que debas temer: es simplemente la forma en que tu cliente le confirma al gobierno de EE.UU. que tú no eres una persona ni empresa estadounidense, y por lo tanto no le corresponde retenerte impuestos ni reportar el pago ante el IRS. El formulario lo guarda tu cliente en sus archivos — no lo envías tú directamente a ninguna autoridad, y es válido desde que lo firmas hasta el 31 de diciembre del tercer año siguiente.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Si un cliente en EE.UU. no te pide este formulario y no tiene ningún documento tuyo en regla, por defecto podría verse obligado a retenerte hasta un 30% del pago como impuesto — así que en realidad te conviene ser tú quien lo mencione primero. Puedes decir algo simple como: 'Para que no tengas que retenerme impuestos en EE.UU., te puedo firmar un W-8BEN, es un formulario corto y estándar para contratistas internacionales.' Eso solo ya te posiciona como alguien que sabe cómo funciona esto.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Cómo evitar sorpresas con retenciones y bloqueos",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Si vas a usar PayPal, verifica tu cuenta completamente (identidad, cuenta bancaria vinculada) antes de recibir tu primer pago grande — las cuentas nuevas o sin verificar son las que más sufren bloqueos temporales de fondos.",
+          "Ten una cuenta en dólares o la moneda del cliente, aunque sea en Wise o Payoneer, en vez de convertir automáticamente todo a tu moneda local — así decides tú cuándo convertir, en vez de que la plataforma te dé la tasa del día que sea.",
+          "Acuerda por escrito, antes de empezar el trabajo, quién asume el costo de la transferencia — en pagos internacionales es normal dividir la diferencia o que cada uno pague su lado de la comisión.",
+          "Si el pago es grande (varios miles de dólares), compara el costo real de Wise vs. transferencia bancaria directa para ese monto específico — a veces la comisión fija de un wire se vuelve más barata en proporción cuando el monto es alto.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Saber cómo cobrar bien no solo te ahorra dinero en cada pago — también te hace ver más profesional frente a un cliente internacional, que es exactamente el tipo de detalle que hace que te vuelva a contratar. Si todavía no tienes perfil en chaski, puedes crear el tuyo gratis y empezar a recibir contacto directo de clientes, sin bidding wars ni comisión de la plataforma sobre lo que cobras.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {

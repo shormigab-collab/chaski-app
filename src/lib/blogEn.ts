@@ -320,6 +320,76 @@ export const POSTS_EN: PostBlogEn[] = [
       },
     ],
   },
+  {
+    slug: "how-to-pay-latam-freelancers-guide",
+    titulo: "How to Pay Freelancers in Latin America: Payment Methods, Fees, and Tax Forms",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/how-to-pay-latam-freelancers-guide.webp",
+    imagenAlt: "A business owner reviewing an international payment on a laptop before sending it",
+    descripcionMeta:
+      "A practical guide for US businesses paying freelancers in Latin America: comparing Wise, Payoneer, PayPal, and bank wire fees, plus what the W-8BEN form is and when you actually need a 1099.",
+    extracto:
+      "You've found the right freelancer in Colombia, Peru, or Argentina — now comes the part nobody explains clearly: how do you actually pay them? Here's a straightforward comparison of payment methods, what they cost, and the one tax form you'll almost certainly need.",
+    fecha: "2026-09-18",
+    minutosLectura: 7,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Hiring a freelancer in Latin America is usually the easy part — the rates make sense, the timezone overlap works, and you've found someone with the right portfolio. Then it's time to actually send the first payment, and most businesses realize they haven't thought through how. The method you pick affects how much of your payment actually reaches the freelancer, how long it takes, and whether you need any paperwork on file. Here's what to know before you send that first invoice payment.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Comparing the main payment methods",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Wise: uses the real mid-market exchange rate with no hidden markup, and total fees typically run 0.5–2% depending on the currency pair. For most ongoing freelancer payments to Latin America, this ends up being the cheapest and fastest option, usually landing same-day or within a day.",
+          "Payoneer: charges around 1% for the transfer plus roughly a 0.5% exchange rate markup, landing near 2% total. It's widely used because platforms like Upwork and Fiverr have it built in, so if your freelancer already has an account from other client work, it's a convenient default.",
+          "PayPal: the most familiar option but also the most expensive for this use case — exchange rate markups typically run 3–4% above the real rate, plus a fixed per-country fee. It's also worth knowing that PayPal can place holds on new or high-volume accounts for up to 21 days, and withdrawal to local banks is limited or unavailable in some Latin American countries.",
+          "Bank wire transfer: works reliably everywhere but comes with higher fixed costs — typically $15–50 per transfer, sometimes charged by both the sending and receiving bank — and takes 2–5 business days. It makes the most sense for large, infrequent payments rather than regular smaller ones.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "As a rule of thumb: if you're paying the same freelancer regularly, Wise is usually the best default for both of you. If they already use Payoneer through other platform work, there's no reason to set up something new. PayPal is fine for a one-off small payment when convenience matters more than the fee, and a bank wire makes sense for large, occasional payments where the fixed fee is small relative to the total.",
+      },
+      {
+        tipo: "titulo",
+        texto: "The tax form you'll likely need: W-8BEN",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "If your freelancer is a foreign individual performing all their work outside the US, the document you need on file is Form W-8BEN — not a 1099. The W-8BEN is the contractor's certification that they're not a US person, which is what justifies not withholding taxes or filing a 1099-NEC for that payment. You keep this form in your own records; you don't send it to the IRS. A signed W-8BEN stays valid from the date it's signed through December 31 of the third following calendar year, so you're not re-collecting it before every payment.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "The form matters more than it might seem: without a valid W-8BEN on file, you technically can't treat the payment as exempt from withholding, and the default 30% withholding rule applies to US-source payments to an undocumented foreign payee. In practice, most businesses simply ask for the signed form before the first payment goes out — it takes the freelancer a few minutes to fill out, and it protects you if the engagement is ever reviewed.",
+      },
+      {
+        tipo: "titulo",
+        texto: "A few things that save you headaches later",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Get the W-8BEN signed before the first payment, not after — it's a much easier conversation to have upfront than retroactively.",
+          "Agree in writing on who absorbs the transfer fee, especially for smaller recurring payments where a flat fee eats a bigger percentage.",
+          "If you're using PayPal, send a small test payment first rather than a large first invoice — new-account holds are far more common on big first transactions.",
+          "Keep a simple written record of each payment (date, amount, method) — it's the kind of thing that takes two minutes now and saves a headache if you ever need to reconcile it later.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "None of this is complicated once you've done it once — it just isn't obvious the first time. Getting the payment method and paperwork right from the start is also a small signal to a good freelancer that you're an easy client to work with, which matters more than people expect when you want to keep working with the same person long-term. If you're ready to find that person, you can post a project on chaski for free and hear directly from LatAm professionals who fit what you need.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPostEn(slug: string) {
