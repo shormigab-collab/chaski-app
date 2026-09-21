@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ChatSoporte from "@/components/ChatSoporte";
+import RegistrarSW from "@/components/RegistrarSW";
 import { obtenerUsuarioActual } from "@/lib/auth";
 
 // Manrope para encabezados (font-heading), Inter para cuerpo de texto e
@@ -62,6 +63,27 @@ export const metadata: Metadata = {
   // con canonical="/" apuntando al home. El hreflang / canonical de la
   // portada en espanol vs "/en" se define en cada page.tsx por separado
   // (ver src/app/page.tsx y src/app/en/page.tsx).
+
+  // PWA: hace que el navegador ofrezca "instalar" chaski (Android/desktop)
+  // y que se vea bien al agregarla a la pantalla de inicio en iPhone.
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "chaski",
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+};
+
+// Next.js 14 separo "themeColor" de metadata hacia este export aparte.
+export const viewport: Viewport = {
+  themeColor: "#3B2F8F",
 };
 
 export default async function RootLayout({
@@ -80,6 +102,7 @@ export default async function RootLayout({
 
         <BackToTop />
         <ChatSoporte />
+        <RegistrarSW />
         <Analytics />
       </body>
     </html>

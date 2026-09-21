@@ -12,6 +12,7 @@ export default async function CrmLayout({ children }: { children: React.ReactNod
 
   const links = [
     { href: "/crm", label: "Pipeline" },
+    { href: "/crm/prospeccion", label: "Prospección" },
     { href: "/crm/contactos", label: "Contactos" },
     { href: "/crm/empresas", label: "Empresas" },
     { href: "/crm/tareas", label: "Tareas" },
