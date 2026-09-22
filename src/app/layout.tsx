@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ChatSoporte from "@/components/ChatSoporte";
 import RegistrarSW from "@/components/RegistrarSW";
+import CapacitorNativo from "@/components/CapacitorNativo";
 import { obtenerUsuarioActual } from "@/lib/auth";
 
 // Manrope para encabezados (font-heading), Inter para cuerpo de texto e
@@ -26,6 +27,39 @@ const inter = Inter({
 const TITULO = "chaski — Encuentra al profesional ideal en LatAm";
 const DESCRIPCION =
   "Publica tu proyecto gratis y recibe propuestas directas de expertos en diseño, desarrollo, marketing, contabilidad y más en Latinoamérica.";
+
+// Datos estructurados (JSON-LD) a nivel de todo el sitio: le dicen a Google
+// que chaski es una organizacion real y le asocian estas redes sociales
+// (asi Google puede mostrarlas en el panel de conocimiento si el sitio
+// crece lo suficiente). Van en el layout raiz para que esten en TODAS
+// las paginas.
+//
+// A proposito NO se agrego "WebSite.potentialAction" (SearchAction, el
+// que a veces hace que Google muestre una caja de busqueda debajo del
+// resultado): /profesionales todavia no tiene una busqueda por texto via
+// URL, asi que declarar eso seria structured data que promete algo que
+// el sitio no hace. Cuando exista una busqueda real por URL, se agrega.
+const organizacionJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "chaski",
+  url: "https://www.usechaski.com",
+  logo: "https://www.usechaski.com/icons/icon-512.png",
+  sameAs: [
+    "https://www.linkedin.com/company/usechaski",
+    "https://www.facebook.com/profile.php?id=61593459986605",
+    "https://x.com/usechaski",
+    "https://instagram.com/usechaski",
+    "https://www.tiktok.com/@usechaski",
+  ],
+};
+
+const sitioWebJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "chaski",
+  url: "https://www.usechaski.com",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.usechaski.com"),
@@ -95,6 +129,16 @@ export default async function RootLayout({
   return (
     <html lang="es" className={`${manrope.variable} ${inter.variable}`}>
       <body className="font-sans antialiased bg-cream text-ink">
+        {/* eslint-disable-next-line react/no-danger */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizacionJsonLd) }}
+        />
+        {/* eslint-disable-next-line react/no-danger */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(sitioWebJsonLd) }}
+        />
         <Navbar usuario={usuario} />
         <main className="min-h-screen">{children}</main>
 
@@ -103,6 +147,7 @@ export default async function RootLayout({
         <BackToTop />
         <ChatSoporte />
         <RegistrarSW />
+        <CapacitorNativo />
         <Analytics />
       </body>
     </html>

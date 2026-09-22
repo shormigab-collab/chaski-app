@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>chaski</title>
+    <style>
+      html, body {
+        margin: 0;
+        height: 100%;
+        background: #17133A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: -apple-system, system-ui, sans-serif;
+      }
+      .marca {
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        background: #3B2F8F;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FF6B5F;
+        font-size: 28px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      Esta pagina NO es la app: Capacitor esta configurado con
+      server.url apuntando a https://www.usechaski.com, asi que la app
+      carga la web real ahi. Esta pagina local solo se ve una fraccion
+      de segundo (detras del splash screen nativo) mientras arranca, o
+      si la carga remota falla por completo. Por eso es minima.
+    -->
+    <div class="marca">&raquo;</div>
+  </body>
+</html>

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx prisma/seed.ts",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "cap:sync": "npx cap sync"
   },
   "dependencies": {
     "next": "14.2.15",
@@ -21,7 +22,14 @@
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.454.0",
     "resend": "^4.0.1",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "@capacitor/core": "^8.5.1",
+    "@capacitor/ios": "^8.5.2",
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/status-bar": "^8.0.3",
+    "@capacitor/splash-screen": "^8.0.0",
+    "@capacitor/network": "^8.0.1",
+    "@capacitor/app": "^8.1.1"
   },
   "devDependencies": {
     "typescript": "^5.5.4",
@@ -36,7 +44,8 @@
     "autoprefixer": "^10.4.20",
     "tsx": "^4.19.0",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.15"
+    "eslint-config-next": "14.2.15",
+    "@capacitor/cli": "^8.5.1"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

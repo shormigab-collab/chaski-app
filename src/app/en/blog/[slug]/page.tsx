@@ -28,12 +28,36 @@ function formatearFecha(iso: string) {
   });
 }
 
+const BASE_URL = "https://www.usechaski.com";
+
 export default function PostBlogEnPage({ params }: { params: { slug: string } }) {
   const post = obtenerPostEn(params.slug);
   if (!post) notFound();
 
+  const articuloJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.titulo,
+    description: post.descripcionMeta,
+    image: `${BASE_URL}${post.imagen}`,
+    datePublished: post.fecha,
+    dateModified: post.fecha,
+    author: { "@type": "Organization", name: "chaski", url: BASE_URL },
+    publisher: {
+      "@type": "Organization",
+      name: "chaski",
+      logo: { "@type": "ImageObject", url: `${BASE_URL}/icons/icon-512.png` },
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}/en/blog/${post.slug}` },
+  };
+
   return (
     <article>
+      {/* eslint-disable-next-line react/no-danger */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articuloJsonLd) }}
+      />
       <div className="relative h-56 sm:h-80 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={post.imagen} alt={post.imagenAlt} className="w-full h-full object-cover" />

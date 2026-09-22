@@ -53,8 +53,45 @@ export default async function PerfilProfesionalPage({ params }: { params: { id: 
   const ubicacion = [proveedor.user.ciudad, proveedor.user.pais].filter(Boolean).join(", ");
   const proyectosPortafolio = parsePortafolio(proveedor.portafolio);
 
+  // Person: describe al profesional para Google (rol, ubicacion, rating
+  // si tiene reseñas). "aggregateRating" solo se incluye cuando hay al
+  // menos una reseña real — nunca se inventan calificaciones.
+  const BASE_URL = "https://www.usechaski.com";
+  const perfilJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: proveedor.user.nombre,
+    url: `${BASE_URL}/profesionales/${proveedor.id}`,
+    ...(proveedor.fotoUrl ? { image: proveedor.fotoUrl } : {}),
+    ...(proveedor.categorias[0]?.nombre ? { jobTitle: proveedor.categorias[0].nombre } : {}),
+    ...(proveedor.bio ? { description: proveedor.bio } : {}),
+    ...(ubicacion
+      ? {
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: proveedor.user.ciudad || undefined,
+            addressCountry: proveedor.user.pais || undefined,
+          },
+        }
+      : {}),
+    ...(proveedor.totalResenas > 0
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: proveedor.calificacionProm,
+            reviewCount: proveedor.totalResenas,
+          },
+        }
+      : {}),
+  };
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-12 sm:py-16">
+      {/* eslint-disable-next-line react/no-danger */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(perfilJsonLd) }}
+      />
       <Link href="/profesionales" className="text-sm text-ink/50 hover:text-ink transition-colors">
         ← Todos los profesionales
       </Link>
