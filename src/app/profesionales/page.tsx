@@ -84,7 +84,7 @@ export default async function ProfesionalesPage() {
             {combos.map((c) => (
               <Link
                 key={`${c.categoriaSlug}__${c.ciudadSlug}`}
-                href={`/profesionales/${c.categoriaSlug}/${c.ciudadSlug}`}
+                href={`/profesionales/categoria/${c.categoriaSlug}/${c.ciudadSlug}`}
                 className="text-xs font-medium text-ink/55 bg-black/[0.03] hover:bg-brand-50 hover:text-brand-600 px-3 py-1.5 rounded-full transition-colors"
               >
                 {c.categoriaNombre} en {c.ciudadDisplay}

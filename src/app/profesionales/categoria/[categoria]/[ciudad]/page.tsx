@@ -14,6 +14,13 @@ import { slugificarCiudad } from "@/lib/ciudad";
 // (thin content / doorway pages), asi que es mejor no tener la pagina a
 // tener una vacia. A medida que se sumen mas profesionales, mas de
 // estas combinaciones se activan solas, sin tocar codigo.
+//
+// Nota sobre la ruta: vive en /profesionales/categoria/[categoria]/
+// [ciudad] (con "categoria" como palabra fija) y NO directo en
+// /profesionales/[categoria]/[ciudad], porque Next.js no permite que
+// dos ramas bajo el mismo padre usen nombres de segmento dinamico
+// distintos — y /profesionales/[id] (el perfil individual) ya usa "id"
+// justo ahi. Con "categoria" como carpeta fija se evita el choque.
 const BASE_URL = "https://www.usechaski.com";
 
 async function buscarDatos(categoriaSlug: string, ciudadSlug: string) {
@@ -52,7 +59,7 @@ export async function generateMetadata({
   return {
     title: titulo,
     description: descripcion,
-    alternates: { canonical: `/profesionales/${params.categoria}/${params.ciudad}` },
+    alternates: { canonical: `/profesionales/categoria/${params.categoria}/${params.ciudad}` },
     openGraph: { title: titulo, description: descripcion },
   };
 }
@@ -88,7 +95,7 @@ export default async function CategoriaCiudadPage({
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: `Contratar ${nombreCategoriaMin} freelance en ${ciudadDisplay}`,
-    url: `${BASE_URL}/profesionales/${params.categoria}/${params.ciudad}`,
+    url: `${BASE_URL}/profesionales/categoria/${params.categoria}/${params.ciudad}`,
     isPartOf: { "@type": "WebSite", name: "chaski", url: BASE_URL },
   };
 

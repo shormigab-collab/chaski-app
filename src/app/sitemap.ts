@@ -66,7 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (comboVistos.has(clave)) continue;
         comboVistos.add(clave);
         rutasCategoriaCiudad.push({
-          url: `${BASE_URL}/profesionales/${c.slug}/${ciudadSlug}`,
+          url: `${BASE_URL}/profesionales/categoria/${c.slug}/${ciudadSlug}`,
           changeFrequency: "weekly",
           priority: 0.6,
         });
