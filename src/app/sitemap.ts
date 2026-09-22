@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/db";
 import { POSTS } from "@/lib/blog";
 import { POSTS_EN } from "@/lib/blogEn";
+import { slugificarCiudad } from "@/lib/ciudad";
 
 const BASE_URL = "https://www.usechaski.com";
 
@@ -39,18 +40,42 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   let rutasProveedores: MetadataRoute.Sitemap = [];
+  let rutasCategoriaCiudad: MetadataRoute.Sitemap = [];
   try {
-    const proveedores = await prisma.proveedor.findMany({ select: { id: true, createdAt: true } });
+    const proveedores = await prisma.proveedor.findMany({
+      select: { id: true, createdAt: true, user: { select: { ciudad: true } }, categorias: { select: { slug: true } } },
+    });
     rutasProveedores = proveedores.map((p) => ({
       url: `${BASE_URL}/profesionales/${p.id}`,
       lastModified: p.createdAt,
       changeFrequency: "weekly",
       priority: 0.5,
     }));
+
+    // Paginas de "categoria en ciudad": solo se listan combinaciones que
+    // tienen al menos un profesional real (ver src/app/profesionales/
+    // [categoria]/[ciudad]/page.tsx — esas paginas dan 404 si no hay
+    // resultados, asi que nunca deben aparecer aqui vacias).
+    const comboVistos = new Set<string>();
+    for (const p of proveedores) {
+      if (!p.user.ciudad) continue;
+      const ciudadSlug = slugificarCiudad(p.user.ciudad);
+      if (!ciudadSlug) continue;
+      for (const c of p.categorias) {
+        const clave = `${c.slug}__${ciudadSlug}`;
+        if (comboVistos.has(clave)) continue;
+        comboVistos.add(clave);
+        rutasCategoriaCiudad.push({
+          url: `${BASE_URL}/profesionales/${c.slug}/${ciudadSlug}`,
+          changeFrequency: "weekly",
+          priority: 0.6,
+        });
+      }
+    }
   } catch {
     // Si la base de datos no responde al generar el sitemap, se
     // devuelven igual las rutas fijas en vez de romper el build.
   }
 
-  return [...rutasEstaticas, ...rutasBlog, ...rutasBlogEn, ...rutasProveedores];
+  return [...rutasEstaticas, ...rutasBlog, ...rutasBlogEn, ...rutasProveedores, ...rutasCategoriaCiudad];
 }

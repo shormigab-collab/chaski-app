@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
 import ProfesionalCard from "@/components/ProfesionalCard";
+import { slugificarCiudad } from "@/lib/ciudad";
 
 export const metadata = {
   title: "Profesionales | chaski",
@@ -29,6 +30,25 @@ export default async function ProfesionalesPage() {
     verificado: p.verificado,
   }));
 
+  // Combinaciones reales de categoria+ciudad (derivadas de los
+  // proveedores que ya se cargaron arriba, sin otra consulta a la BD).
+  // Sirven de enlaces internos hacia /profesionales/[categoria]/[ciudad]
+  // para que Google las descubra al rastrear el sitio, no solo via
+  // sitemap. Solo aparecen combinaciones con profesionales reales.
+  const comboVistos = new Set<string>();
+  const combos: { categoriaSlug: string; categoriaNombre: string; ciudadSlug: string; ciudadDisplay: string }[] = [];
+  for (const p of items) {
+    if (!p.ciudad) continue;
+    const ciudadSlug = slugificarCiudad(p.ciudad);
+    if (!ciudadSlug) continue;
+    for (const c of p.categorias) {
+      const clave = `${c.slug}__${ciudadSlug}`;
+      if (comboVistos.has(clave)) continue;
+      comboVistos.add(clave);
+      combos.push({ categoriaSlug: c.slug, categoriaNombre: c.nombre, ciudadSlug, ciudadDisplay: p.ciudad });
+    }
+  }
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 sm:py-16">
       <h1 className="text-2xl sm:text-3xl font-bold text-ink mb-2">Profesionales en chaski</h1>
@@ -54,6 +74,23 @@ export default async function ProfesionalesPage() {
           >
             Crear mi perfil profesional
           </Link>
+        </div>
+      )}
+
+      {combos.length > 0 && (
+        <div className="mt-16 pt-8 border-t border-black/5">
+          <h2 className="text-sm font-semibold text-ink/60 mb-3">Explora por especialidad y ciudad</h2>
+          <div className="flex flex-wrap gap-2">
+            {combos.map((c) => (
+              <Link
+                key={`${c.categoriaSlug}__${c.ciudadSlug}`}
+                href={`/profesionales/${c.categoriaSlug}/${c.ciudadSlug}`}
+                className="text-xs font-medium text-ink/55 bg-black/[0.03] hover:bg-brand-50 hover:text-brand-600 px-3 py-1.5 rounded-full transition-colors"
+              >
+                {c.categoriaNombre} en {c.ciudadDisplay}
+              </Link>
+            ))}
+          </div>
         </div>
       )}
     </div>
