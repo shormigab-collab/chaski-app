@@ -390,6 +390,143 @@ export const POSTS_EN: PostBlogEn[] = [
       },
     ],
   },
+  {
+    slug: "working-with-latam-freelancers-time-zones",
+    titulo: "Working With LatAm Freelancers Across Time Zones: A Practical Guide for US Teams",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/working-with-latam-freelancers-time-zones.webp",
+    imagenAlt: "A US team lead on a video call with a freelancer in Latin America, with two clocks on the wall",
+    descripcionMeta:
+      "How time zones really work when hiring freelancers in Latin America: which countries overlap with US hours, how to set response-time expectations, and simple habits that keep remote work smooth.",
+    extracto:
+      "One of the biggest advantages of hiring in Latin America is overlap with US working hours. Here's how the time zones actually line up, and how to build a workflow that makes the most of it.",
+    fecha: "2026-10-07",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "When US businesses think about hiring remote talent abroad, time zones are usually the first worry — and often the reason Latin America stands out. Unlike hiring across an ocean, most of the region sits within a few hours of US time, which makes real-time collaboration realistic: quick calls, same-day replies, and meetings that don't happen at midnight for anyone.",
+      },
+      {
+        tipo: "titulo",
+        texto: "How the time zones line up",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Colombia, Peru, and Ecuador sit at UTC-5 year-round and don't observe daylight saving time, which means they match US Central Time during the summer and US Eastern Time during the winter.",
+          "Mexico City is at UTC-6 and, as of this writing, no longer changes clocks for daylight saving, so it lines up with US Central Time in winter and sits an hour behind US Central in summer.",
+          "Argentina and Brazil (São Paulo) are at UTC-3 with no daylight saving time, so they're one to two hours ahead of US Eastern depending on the time of year — still comfortable overlap for most of the US workday.",
+          "Chile observes daylight saving time on a different schedule from the US, so the offset shifts a few weeks each year — worth double-checking when you schedule recurring meetings in spring and fall.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Because rules can change, always confirm current offsets with a time zone converter before locking in a recurring meeting — especially around the dates when the US and your freelancer's country switch (or don't switch) clocks.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Set expectations on day one",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Agree on core overlap hours: a window of two to four hours a day when both of you are online and reachable, even if the rest of the schedule is flexible.",
+          "Define response-time expectations: for example, replies within the same business day for normal messages, and a specific channel for anything urgent.",
+          "Clarify holidays: Latin American countries have their own national holidays that differ from US ones. Ask for a list of upcoming days off so deadlines don't collide with them.",
+          "Choose one place for updates: whether it's Slack, email, or a project tool, pick one so nothing gets lost across channels.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Habits that make remote work smooth",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "The teams that work best across borders tend to rely less on live meetings and more on clear written communication. Write down tasks with context and a due date, record short screen-share videos instead of scheduling a call for every question, and end each week with a short written recap of what's done and what's next. This keeps work moving even when you're both offline at different times, and it creates a record you can both refer back to.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "When you do need a live conversation, use the overlap window and keep it focused: send an agenda beforehand, finish with clear next steps, and put them in writing right after. If you're ready to find someone whose schedule fits yours, you can post a project on chaski for free and hear directly from Latin American professionals — no bidding wars and no platform commission.",
+      },
+    ],
+  },
+  {
+    slug: "hire-virtual-assistant-latin-america",
+    titulo: "How to Hire a Virtual Assistant in Latin America: Tasks, What to Check, and How to Start",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/hire-virtual-assistant-latin-america.webp",
+    imagenAlt: "A small business owner handing off scheduling and email tasks to a remote virtual assistant",
+    descripcionMeta:
+      "A practical guide for US business owners on hiring a virtual assistant from Latin America: which tasks to delegate, what to evaluate before hiring, and how to run a short paid trial before committing.",
+    extracto:
+      "If your days disappear into email, scheduling, and admin work, a virtual assistant can give hours back. Here's what to delegate, what to check before you hire, and how to start with a low-risk trial.",
+    fecha: "2026-10-07",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "A virtual assistant (VA) is an independent professional who supports you remotely with administrative and operational work — everything from managing your calendar to cleaning up a spreadsheet. For founders and small teams, it's one of the most accessible ways to reclaim time for the work only you can do, without taking on a full-time hire. Hiring from Latin America adds a practical benefit on top: overlapping working hours with the US, so handoffs and quick questions happen in real time.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Tasks that are easy to delegate",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Calendar and inbox management: scheduling meetings, sorting email, drafting routine replies, sending reminders.",
+          "Basic customer support: answering common questions by email or chat using guidelines you provide.",
+          "Data and admin work: updating spreadsheets, entering information into a CRM, organizing files and invoices.",
+          "Social media support: scheduling posts that are already written, replying to comments, compiling simple reports.",
+          "Research: finding vendors, comparing options, building prospect or contact lists.",
+          "Bookkeeping support and payment follow-ups, if the assistant has relevant experience.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "How to decide what to hand off first",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Track your own work for one week and mark the tasks that are repetitive, don't depend on your unique judgment, and drain your energy. Those are your best starting points. Anything that needs your direct decision — strategy, pricing, key relationships — stays with you. Delegating well isn't about giving up control; it's about spending your best hours on the work that actually moves the business.",
+      },
+      {
+        tipo: "titulo",
+        texto: "What to check before you hire",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Tool experience: ask directly about the tools you use — Google Workspace, Microsoft 365, your CRM, your scheduling software.",
+          "English level: do a short written sample or a brief call to confirm they communicate comfortably at the level your work requires.",
+          "Availability and time zone: agree on working hours, expected response times, and what happens during local holidays.",
+          "References or past work: ask for concrete examples or a contact from a previous client when possible.",
+          "Handling of sensitive information: if they'll access accounts or customer data, discuss confidentiality and a secure way to share logins, such as a password manager rather than messages.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Start with a small, paid trial",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "The lowest-risk way to begin is a short paid trial: one or two weeks, a few clearly written tasks, and an agreed rate up front. You'll see how they follow instructions, how they communicate when something is unclear, and whether the working relationship feels easy. If it goes well, expand the scope or hours gradually. If it doesn't, you've spent very little to learn that.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Ready to take the first step? You can post what you need on chaski for free and hear directly from Latin American professionals who are interested in helping — no bidding wars, and no platform commission on what you pay them.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPostEn(slug: string) {

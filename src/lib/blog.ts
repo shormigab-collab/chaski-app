@@ -590,6 +590,141 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "como-armar-contrato-servicios-freelance",
+    titulo: "Cómo armar un contrato de servicios freelance: qué debe incluir y qué errores evitar",
+    categoria: "Guía para freelancers",
+    imagen: "/images/blog/como-armar-contrato-servicios-freelance.webp",
+    imagenAlt: "Freelancer y cliente revisando y firmando un contrato de servicios en una mesa de trabajo",
+    descripcionMeta:
+      "Guía práctica para freelancers en Latinoamérica: qué cláusulas debe tener un contrato de servicios (alcance, pagos, revisiones, propiedad intelectual, terminación) y cómo evitar los problemas más comunes con clientes.",
+    extracto:
+      "Un contrato no es desconfianza, es claridad. Esta guía explica, en lenguaje simple, las cláusulas que debería tener cualquier acuerdo de trabajo freelance y los errores que más dolores de cabeza causan cuando algo sale mal.",
+    fecha: "2026-10-07",
+    minutosLectura: 7,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Muchos freelancers empiezan a trabajar con un 'dale, arrancamos' por WhatsApp y un precio acordado de palabra. Funciona hasta que el cliente pide algo que no estaba en el plan, se demora tres meses en pagar, o dice que lo que entregaste 'no era lo que imaginaba'. Un contrato escrito no es desconfianza: es la forma de que ambas partes tengan la misma idea de qué se va a hacer, cuánto cuesta y qué pasa si algo cambia. Y no tiene que ser un documento de veinte páginas con lenguaje de abogado — uno claro de una o dos páginas ya te protege mucho.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Las cláusulas que no deberían faltar",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Alcance del trabajo: qué vas a hacer, con el mayor detalle razonable. 'Diseñar un logo' es vago; 'diseñar un logo con 3 propuestas iniciales y entrega en formatos PNG, SVG y PDF' es claro. Lo que no está escrito se vuelve discusión después.",
+          "Entregables y plazos: qué vas a entregar y para cuándo, y qué necesitas tú del cliente para cumplirlo (textos, accesos, aprobaciones). Aclara que si el cliente demora en responder, el plazo se corre en la misma proporción.",
+          "Precio y forma de pago: monto total, moneda, método de pago y fechas. Para proyectos de varios días o semanas, lo más común es pedir un anticipo (por ejemplo, la mitad al inicio) y el resto contra entrega. Indica también qué pasa si un pago se atrasa.",
+          "Revisiones incluidas: cuántas rondas de cambios están dentro del precio. Sin este límite, un proyecto puede alargarse indefinidamente. Lo que exceda ese número se cobra aparte.",
+          "Propiedad intelectual: quién es dueño del trabajo final y desde cuándo. Lo habitual es que los derechos pasen al cliente una vez se complete el pago, no antes. También conviene aclarar si puedes mostrar el trabajo en tu portafolio.",
+          "Confidencialidad: si vas a ver información sensible del negocio del cliente, es normal que te pida (o que tú ofrezcas) no compartirla con terceros.",
+          "Terminación: cómo cualquiera de las dos partes puede dar por terminado el acuerdo, con cuánto aviso, y cómo se paga el trabajo ya realizado hasta ese punto.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Errores comunes que conviene evitar",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Empezar a trabajar sin anticipo con un cliente nuevo: si no hay ningún pago de por medio, el riesgo de quedarte sin cobrar recae completamente en ti.",
+          "Dejar el alcance abierto ('lo que haga falta'): es la causa número uno de proyectos que se vuelven más grandes que lo que cobraste.",
+          "Aceptar cambios importantes por mensaje sin dejar registro: si el cliente cambia el alcance, confirma por escrito el nuevo precio y plazo antes de seguir.",
+          "Copiar un contrato de internet sin leerlo: un modelo genérico puede incluir cláusulas que no aplican a tu caso o que te perjudican. Léelo completo y ajústalo.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Contratos con clientes de otro país",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Si tu cliente está en otro país, vale la pena sumar dos puntos: en qué moneda y por qué medio se hará el pago (y quién asume las comisiones de la transferencia), y qué ley se aplicaría si hubiera un desacuerdo. No tienes que resolver esto como abogado, pero sí dejarlo escrito para que no sea una sorpresa. Una firma electrónica simple suele ser suficiente para este tipo de acuerdos entre contratistas independientes y clientes, aunque los requisitos exactos dependen de cada país.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Una aclaración importante: esta guía es informativa y no reemplaza asesoría legal. Si el proyecto es grande, involucra mucho dinero o propiedad intelectual de alto valor, vale la pena que un abogado revise tu modelo de contrato una vez — y luego lo reutilizas con ajustes menores en cada proyecto. Y si todavía no tienes perfil en chaski, puedes crear el tuyo gratis y recibir contacto directo de clientes, sin comisión de la plataforma sobre lo que cobras.",
+      },
+    ],
+  },
+  {
+    slug: "como-contratar-asistente-virtual",
+    titulo: "Cómo contratar un asistente virtual: qué tareas delegar, cuánto cuesta y cómo empezar",
+    categoria: "Guía para clientes",
+    imagen: "/images/blog/como-contratar-asistente-virtual.webp",
+    imagenAlt: "Emprendedor delegando tareas de agenda y correo a un asistente virtual desde su computador",
+    descripcionMeta:
+      "Guía para emprendedores y pequeños negocios: qué tareas puede hacer un asistente virtual, cómo definir qué delegar, qué revisar antes de contratar y cómo empezar con una prueba corta sin comprometerte de más.",
+    extracto:
+      "Si sientes que tu día se va en correos, agenda y tareas repetitivas, un asistente virtual puede devolverte horas. Esta guía explica qué tareas conviene delegar, qué preguntar antes de contratar y cómo arrancar sin riesgo.",
+    fecha: "2026-10-07",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Un asistente virtual (o AV) es un profesional independiente que te ayuda de forma remota con tareas administrativas y operativas: desde ordenar tu agenda hasta responder correos o actualizar una hoja de cálculo. Para un emprendedor o un negocio pequeño, es una de las formas más accesibles de recuperar tiempo para lo que realmente mueve el negocio, sin tener que contratar a alguien de tiempo completo.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Qué tareas se pueden delegar",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Gestión de agenda y correo: coordinar reuniones, filtrar y responder mensajes rutinarios, enviar recordatorios.",
+          "Atención al cliente básica: responder preguntas frecuentes por correo o chat siguiendo guías que tú le des.",
+          "Tareas de datos: actualizar hojas de cálculo, cargar información en un CRM, organizar archivos y facturas.",
+          "Redes sociales: programar publicaciones ya creadas, responder comentarios, hacer reportes simples.",
+          "Investigación: buscar proveedores, comparar opciones, armar listas de contactos o de prospectos.",
+          "Teneduría de libros básica y seguimiento de pagos, si el asistente tiene esa experiencia.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Cómo decidir qué delegar primero",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Una manera sencilla de empezar: durante una semana, anota todo lo que haces y marca las tareas que son repetitivas, que no requieren tu criterio único y que te quitan energía. Esas son las candidatas ideales. Lo que sigue necesitando tu decisión directa (estrategia, precios, relaciones clave) sigue siendo tuyo. Delegar no es soltar el control: es dejar de gastar tu mejor tiempo en lo que otro puede hacer igual de bien con instrucciones claras.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Qué revisar antes de contratar",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Experiencia con las herramientas que usas: Google Workspace, Microsoft 365, tu CRM, tu herramienta de agenda. Pregunta directamente por ellas.",
+          "Nivel de idioma: si tus clientes o tu comunicación son en inglés, haz una prueba corta de escritura o una llamada breve para evaluarlo.",
+          "Zona horaria y disponibilidad: acuerda desde el inicio en qué horas va a estar disponible y cuánto tarda normalmente en responder.",
+          "Referencias o trabajos previos: pide ejemplos concretos o contacto de un cliente anterior cuando sea posible.",
+          "Cómo maneja la información sensible: si va a tener acceso a cuentas o datos de clientes, habla de confidencialidad y de cómo se compartirán los accesos de forma segura.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Cómo empezar sin riesgo",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Lo más sensato es arrancar con una prueba corta y acotada: una o dos semanas con unas pocas tareas bien definidas, por escrito, con un pago acordado de antemano. Así ves cómo trabaja, qué tan bien sigue instrucciones y si la comunicación fluye, antes de comprometerte con algo más grande. Si va bien, amplías las tareas o las horas poco a poco; si no, el costo de haberlo probado fue pequeño.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Si estás listo para dar ese primer paso, en chaski puedes publicar lo que necesitas gratis y recibir contacto directo de profesionales de Latinoamérica interesados en ayudarte, sin comisiones ni intermediarios.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {
