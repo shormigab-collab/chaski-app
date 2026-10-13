@@ -15,6 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/como-funciona`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE_URL}/profesionales`, changeFrequency: "daily", priority: 0.9 },
     { url: `${BASE_URL}/blog`, changeFrequency: "weekly", priority: 0.6 },
+    { url: `${BASE_URL}/calculadora-tarifa-freelance`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/registro/cliente`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/registro/proveedor`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/en`, changeFrequency: "monthly", priority: 0.7 },

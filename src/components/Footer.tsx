@@ -171,6 +171,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/calculadora-tarifa-freelance" className="text-ink/60 hover:text-brand-500 transition-colors">
+                Calculadora de tarifa
+              </Link>
+            </li>
+            <li>
               <Link href="/en" className="text-ink/60 hover:text-brand-500 transition-colors">
                 English
               </Link>
