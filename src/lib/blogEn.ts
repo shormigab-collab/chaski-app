@@ -527,6 +527,136 @@ export const POSTS_EN: PostBlogEn[] = [
       },
     ],
   },
+  {
+    slug: "how-to-write-a-project-brief-for-a-freelancer",
+    titulo: "How to Write a Project Brief for a Freelancer (With a Simple Template)",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/how-to-write-a-project-brief-for-a-freelancer.webp",
+    imagenAlt: "A business owner filling out a checklist of goals, scope, and budget before hiring a freelancer",
+    descripcionMeta:
+      "Learn how to write a clear project brief for a freelancer: what to include (goal, scope, budget, deadline), common mistakes to avoid, and a simple template you can copy today.",
+    extracto:
+      "Most projects that go sideways start with a vague description. A good brief saves time, prevents misunderstandings, and attracts better freelancers. Here's what to include and a template to start from.",
+    fecha: "2026-10-13",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "A project brief is a short document that tells a freelancer what you need, why you need it, and under what conditions. It doesn't have to be long or formal — one well-thought-out page removes most of the usual problems: proposals that miss the mark, quotes that can't be compared, and endless rounds of revisions. Experienced freelancers also tend to prefer clients who can explain clearly what they're looking for.",
+      },
+      {
+        tipo: "titulo",
+        texto: "What a good brief includes",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Who you are and what your business does: two or three sentences give the freelancer context about your audience and style.",
+          "The goal of the project: what you want to achieve, not just what you want built. 'I want more bookings from my website' guides better than 'I want a redesign.'",
+          "Scope and deliverables: what should be finished at the end (for example: five web pages, three logo options, ten social posts). The more concrete, the better.",
+          "References: examples of work or brands you like — and, if possible, something you don't like. A link or an image says more than a paragraph.",
+          "Timeline: your ideal delivery date, and any important milestones such as a launch or an event.",
+          "Budget: a number or a range. Many clients leave it out for fear of overpaying, but sharing it avoids proposals far outside your range and saves time for everyone.",
+          "What you'll provide: copy, logos, access, photos — and how quickly you can respond. Delays often come from this side of the table.",
+          "How you'll evaluate proposals: whether price, past experience, portfolio, or speed matters most to you.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Common mistakes",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Being too vague ('something modern and clean'): everyone interprets that differently.",
+          "Bundling several projects into one: if you need a logo, a website, and social media, it may make sense to hire in stages or with different specialists.",
+          "Leaving out budget and timeline: it forces freelancers to guess and usually results in proposals that are hard to compare.",
+          "Changing scope midway without saying so: if something changes, tell them early and agree on a new price and date.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "A simple template to copy",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "About my business: [what I do, who for].",
+          "Project goal: [what I want to achieve].",
+          "Deliverables: [concrete list].",
+          "References: [links or examples].",
+          "Ideal delivery date: [date].",
+          "Approximate budget: [amount or range].",
+          "What I'll provide: [materials, access, response times].",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "With that ready, the next step gets much easier. On chaski you can post your project for free and hear directly from interested professionals across Latin America — no bidding wars and no platform commission. The clearer your brief, the better the proposals you'll get.",
+      },
+    ],
+  },
+  {
+    slug: "nearshore-vs-offshore-latin-america-us-businesses",
+    titulo: "Nearshore vs. Offshore: Why Many US Businesses Look to Latin America",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/nearshore-vs-offshore-latin-america-us-businesses.webp",
+    imagenAlt: "A world map with a short connection from the United States to Latin America and a long one to another continent",
+    descripcionMeta:
+      "Nearshore vs. offshore hiring explained: how time zone overlap, communication, and cost trade-offs differ, and when hiring freelancers in Latin America makes sense for a US business.",
+    extracto:
+      "When a US business looks for remote talent, the first question is often where. This guide explains the difference between nearshore and offshore, and what to weigh before choosing.",
+    fecha: "2026-10-13",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Offshore hiring means working with people in distant countries, often many time zones away. Nearshore means working with people in nearby countries — for US businesses, that usually means Latin America. Neither is automatically better; the right choice depends on the kind of work, how much real-time collaboration you need, and how you like to manage projects. Here's how the two compare on the factors that matter most.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Where nearshore tends to help",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Time zone overlap: most of Latin America sits within a few hours of US time zones, so live calls, quick questions, and same-day replies are realistic without anyone working at midnight.",
+          "Easier collaboration: shared working hours make it simpler to onboard someone, give feedback while a task is fresh, and handle urgent issues.",
+          "Cultural familiarity: many professionals in the region work regularly with US clients and are used to US business practices and communication styles, though experience varies by person.",
+          "Simpler travel and logistics: for the occasional in-person kickoff or team meetup, flights are shorter and cheaper.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Where offshore can still make sense",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Asynchronous work: tasks that don't need back-and-forth — data entry, some kinds of production work — can run well across large time differences.",
+          "Specialized skills: if you need a very particular expertise, the best fit might simply be in another region.",
+          "Round-the-clock coverage: spreading work across distant time zones can support overnight support or monitoring.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "What to weigh before deciding",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Start with how much live collaboration the work requires. If you'll want daily check-ins, quick feedback, or calls with your own customers, overlap matters a lot. Then consider communication: confirm English level with a short call or writing sample, whatever the country. And look at total cost, not just hourly rates — time spent clarifying tasks, fixing misunderstandings, or waiting for answers has a real price too. Rates vary widely by country, specialty, and experience, so compare a few profiles rather than relying on averages.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "If nearshore sounds like a fit, you can post your project on chaski for free and hear directly from Latin American professionals — no bidding wars and no platform commission — then decide with a short call and a small trial project.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPostEn(slug: string) {

@@ -725,6 +725,140 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "como-escribir-brief-proyecto-freelancer",
+    titulo: "Cómo escribir un brief de proyecto para un freelancer (con plantilla)",
+    categoria: "Guía para clientes",
+    imagen: "/images/blog/como-escribir-brief-proyecto-freelancer.webp",
+    imagenAlt: "Un cliente completando una lista con los objetivos y el presupuesto de su proyecto antes de contratar",
+    descripcionMeta:
+      "Aprende a escribir un brief claro para contratar a un freelancer: qué debe incluir (objetivo, alcance, presupuesto, plazos), errores comunes y una plantilla simple para copiar y usar hoy.",
+    extracto:
+      "La mayoría de los proyectos que salen mal empiezan con una descripción vaga. Un buen brief ahorra tiempo, evita malentendidos y hace que los mejores profesionales quieran trabajar contigo. Aquí tienes qué incluir y una plantilla lista para usar.",
+    fecha: "2026-10-13",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Un brief es el documento corto donde le explicas a un freelancer qué necesitas, para qué y bajo qué condiciones. No tiene que ser largo ni formal: con una página bien pensada ya reduces gran parte de los problemas típicos, como propuestas que no se ajustan a lo que querías, cotizaciones muy distintas entre sí o revisiones interminables. Además, los profesionales con más experiencia suelen preferir trabajar con clientes que saben explicar lo que buscan.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Qué debe incluir un buen brief",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Quién eres y a qué se dedica tu negocio: dos o tres frases bastan. Le da contexto al profesional para entender tu público y tu estilo.",
+          "El objetivo del proyecto: qué quieres lograr, no solo qué quieres que hagan. 'Quiero más reservas desde mi página web' orienta mejor que 'quiero rediseñar mi página'.",
+          "Alcance y entregables: qué debe estar listo al final (por ejemplo: 5 páginas web, 3 versiones de logo, 10 publicaciones). Cuanto más concreto, mejor.",
+          "Referencias: ejemplos de trabajos o marcas que te gustan (y, si puedes, algo que no te gusta). Una imagen o un enlace dice más que un párrafo.",
+          "Plazos: fecha límite deseada y si hay fechas intermedias importantes, como un lanzamiento o un evento.",
+          "Presupuesto: un monto o un rango. Muchos clientes lo omiten por miedo a pagar de más, pero decirlo evita recibir propuestas fuera de tu alcance y ahorra tiempo a ambos.",
+          "Qué vas a aportar tú: textos, logos, accesos, fotos y cuánto tardarás en responder. Los retrasos suelen venir de este lado.",
+          "Cómo evaluarás propuestas: si te importa más el precio, la experiencia previa, el portafolio o la rapidez.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Errores comunes al escribir un brief",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Ser demasiado vago ('necesito algo moderno y bonito'): cada persona interpreta eso de forma distinta.",
+          "Mezclar varios proyectos en uno: si necesitas logo, página web y redes sociales, quizá convenga contratar por etapas o con distintos especialistas.",
+          "No mencionar el presupuesto ni el plazo: obliga al profesional a adivinar y suele terminar en propuestas poco comparables.",
+          "Cambiar el alcance sobre la marcha sin avisar: si algo cambia, díselo cuanto antes y acuerden de nuevo precio y fecha.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Plantilla simple para copiar",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Sobre mi negocio: [qué hago, para quién].",
+          "Objetivo del proyecto: [qué quiero lograr].",
+          "Qué necesito que entregues: [lista concreta].",
+          "Referencias: [enlaces o ejemplos].",
+          "Fecha deseada de entrega: [fecha].",
+          "Presupuesto aproximado: [monto o rango].",
+          "Lo que yo voy a aportar: [materiales, accesos, tiempos de respuesta].",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Con esto listo, el siguiente paso es mucho más fácil. En chaski puedes publicar tu proyecto gratis y recibir contacto directo de profesionales de Latinoamérica interesados, sin comisiones ni intermediarios. Mientras más claro sea tu brief, mejores serán las propuestas que recibas.",
+      },
+    ],
+  },
+  {
+    slug: "como-escribir-propuesta-que-gane-proyectos",
+    titulo: "Cómo escribir una propuesta que gane proyectos como freelancer",
+    categoria: "Guía para freelancers",
+    imagen: "/images/blog/como-escribir-propuesta-que-gane-proyectos.webp",
+    imagenAlt: "Freelancer redactando una propuesta para un cliente en su laptop",
+    descripcionMeta:
+      "Guía para freelancers: cómo estructurar una propuesta comercial que convenza (entender el problema, tu enfoque, entregables, precio y siguiente paso) y errores que hacen que te descarten.",
+    extracto:
+      "Responder con una propuesta genérica es la forma más rápida de que te ignoren. Esta guía explica cómo armar una propuesta corta, clara y centrada en el cliente, y qué errores evitar.",
+    fecha: "2026-10-13",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Cuando un cliente publica un proyecto, normalmente recibe varias respuestas. Muchas son casi idénticas: un saludo, una lista de habilidades y un 'quedo atento'. La propuesta que destaca no es necesariamente la de quien tiene más experiencia, sino la que demuestra que entendió lo que el cliente necesita y que sabe cómo resolverlo. La buena noticia es que eso se puede aprender con una estructura sencilla.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Una estructura que funciona",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Empieza por el cliente, no por ti: en una o dos frases, demuestra que leíste el proyecto. Menciona algo específico de lo que pidió, en vez de un saludo genérico.",
+          "Resume el problema o el objetivo con tus propias palabras: así el cliente confirma que están en la misma página.",
+          "Explica tu enfoque: cómo piensas abordarlo, en pasos cortos. No necesitas revelar todo, pero sí mostrar que tienes un plan.",
+          "Muestra una prueba relevante: uno o dos trabajos parecidos al suyo (con enlace), mejor que una lista larga de proyectos sin relación.",
+          "Define entregables, plazo y precio: claro y sin rodeos. Si hay opciones (básica y completa), puedes ofrecer dos paquetes.",
+          "Cierra con un siguiente paso concreto: por ejemplo, proponer una llamada corta o hacer una pregunta que ayude a avanzar.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Errores que hacen que te descarten",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Enviar el mismo texto a todos los clientes: se nota y transmite poco interés.",
+          "Hablar solo de ti: el cliente quiere saber cómo vas a resolver su problema, no tu biografía completa.",
+          "No mencionar el precio ni el plazo, o hacerlo de manera ambigua: genera desconfianza y alarga la conversación.",
+          "Prometer más de lo razonable para ganar el proyecto: puede salirte caro cuando toque cumplir.",
+          "Mensajes muy largos: la mayoría de las veces, una propuesta de entre 150 y 250 palabras se lee completa; una de varias páginas, no tanto.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Haz preguntas inteligentes",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Una o dos preguntas bien pensadas pueden diferenciarte más que cualquier lista de habilidades: '¿Qué resultado esperas ver en los primeros 30 días?' o '¿Tienes ya una identidad de marca definida o hay que crearla?'. Muestran criterio profesional y, de paso, te ayudan a calcular mejor el esfuerzo antes de cotizar.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Y recuerda que no todos los proyectos valen la pena: si algo no encaja con tu experiencia o el presupuesto es claramente insuficiente, es mejor decir que no con amabilidad. Si todavía no tienes perfil en chaski, puedes crear el tuyo gratis y recibir contacto directo de clientes, sin comisión de la plataforma sobre lo que cobras.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {
