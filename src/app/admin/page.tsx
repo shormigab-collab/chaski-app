@@ -7,29 +7,40 @@ import CategoryIcon from "@/components/CategoryIcon";
 import AdminBotonAccion from "./AdminBotonAccion";
 import AgregarMiembroForm from "./AgregarMiembroForm";
 
-// Ventanas de tiempo para el resumen "Esta semana": los ultimos 7 dias
-// comparados contra los 7 dias anteriores a esos, para saber si el
-// esfuerzo diario (buscar proveedores, ayudar a publicar solicitudes,
-// etc.) esta dando resultado semana a semana.
-function rangosSemana() {
+// Periodo del resumen: ultimos 7 dias, ultimos 30 dias o todo el tiempo
+// (se elige con ?periodo=7 | 30 | todo). Para 7 y 30 dias se compara contra
+// el periodo anterior de la misma duracion, para saber si el esfuerzo
+// (buscar proveedores, ayudar a publicar solicitudes, etc.) esta dando
+// resultado. En "todo" no hay comparacion.
+type Periodo = "7" | "30" | "todo";
+
+function rangosPeriodo(periodo: Periodo) {
+  if (periodo === "todo") return { desde: null as Date | null, anteriorDesde: null as Date | null };
+  const dias = periodo === "30" ? 30 : 7;
   const ahora = new Date();
-  const haceUnaSemana = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
-  const haceDosSemanas = new Date(ahora.getTime() - 14 * 24 * 60 * 60 * 1000);
-  return { haceUnaSemana, haceDosSemanas };
+  const desde = new Date(ahora.getTime() - dias * 24 * 60 * 60 * 1000);
+  const anteriorDesde = new Date(ahora.getTime() - 2 * dias * 24 * 60 * 60 * 1000);
+  return { desde, anteriorDesde };
 }
 
-function tendencia(actual: number, anterior: number) {
+function tendencia(actual: number, anterior: number, etiqueta: string) {
   const diff = actual - anterior;
-  if (diff > 0) return { texto: `+${diff} vs. semana pasada`, color: "text-emerald-600" };
-  if (diff < 0) return { texto: `${diff} vs. semana pasada`, color: "text-coral-600" };
-  return { texto: "igual que la semana pasada", color: "text-gray-400" };
+  if (diff > 0) return { texto: `+${diff} vs. ${etiqueta}`, color: "text-emerald-600" };
+  if (diff < 0) return { texto: `${diff} vs. ${etiqueta}`, color: "text-coral-600" };
+  return { texto: `igual que ${etiqueta}`, color: "text-gray-400" };
 }
 
-export default async function AdminPage() {
+export default async function AdminPage({ searchParams }: { searchParams: { periodo?: string } }) {
   const usuario = await obtenerUsuarioActual();
   if (!usuario || usuario.role !== "ADMIN") redirect("/login");
 
-  const { haceUnaSemana, haceDosSemanas } = rangosSemana();
+  const periodo: Periodo = searchParams.periodo === "30" || searchParams.periodo === "todo" ? searchParams.periodo : "7";
+  const { desde, anteriorDesde } = rangosPeriodo(periodo);
+  const filtroActual = desde ? { gte: desde } : undefined;
+  const filtroAnterior = desde && anteriorDesde ? { gte: anteriorDesde, lt: desde } : undefined;
+  const etiquetaPeriodo =
+    periodo === "todo" ? "todo el tiempo" : periodo === "30" ? "últimos 30 días" : "últimos 7 días";
+  const etiquetaAnterior = periodo === "30" ? "los 30 días anteriores" : "la semana pasada";
 
   const [
     totalClientes,
@@ -65,16 +76,54 @@ export default async function AdminPage() {
       orderBy: { nombre: "asc" },
     }),
     prisma.leadUS.findMany({ orderBy: { createdAt: "desc" }, take: 50 }),
-    prisma.user.count({ where: { role: "CLIENTE", createdAt: { gte: haceUnaSemana } } }),
-    prisma.user.count({ where: { role: "CLIENTE", createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
-    prisma.user.count({ where: { role: "PROVEEDOR", createdAt: { gte: haceUnaSemana } } }),
-    prisma.user.count({ where: { role: "PROVEEDOR", createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
-    prisma.solicitud.count({ where: { createdAt: { gte: haceUnaSemana } } }),
-    prisma.solicitud.count({ where: { createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
-    prisma.desbloqueo.count({ where: { createdAt: { gte: haceUnaSemana } } }),
-    prisma.desbloqueo.count({ where: { createdAt: { gte: haceDosSemanas, lt: haceUnaSemana } } }),
+    prisma.user.count({ where: { role: "CLIENTE", createdAt: filtroActual } }),
+    filtroAnterior ? prisma.user.count({ where: { role: "CLIENTE", createdAt: filtroAnterior } }) : Promise.resolve(0),
+    prisma.user.count({ where: { role: "PROVEEDOR", createdAt: filtroActual } }),
+    filtroAnterior ? prisma.user.count({ where: { role: "PROVEEDOR", createdAt: filtroAnterior } }) : Promise.resolve(0),
+    prisma.solicitud.count({ where: { createdAt: filtroActual } }),
+    filtroAnterior ? prisma.solicitud.count({ where: { createdAt: filtroAnterior } }) : Promise.resolve(0),
+    prisma.desbloqueo.count({ where: { createdAt: filtroActual } }),
+    filtroAnterior ? prisma.desbloqueo.count({ where: { createdAt: filtroAnterior } }) : Promise.resolve(0),
     prisma.user.findMany({ where: { role: "EQUIPO" }, orderBy: { createdAt: "desc" } }),
   ]);
+
+  // Demanda del periodo: que piden los clientes y que contactos desbloquean
+  // los proveedores. Importante: chaski no registra las busquedas que hacen
+  // los proveedores, asi que el mejor indicador de "que estan buscando" es
+  // a que solicitudes les gastan creditos (desbloqueos).
+  const [solicitudesPorCategoria, desbloqueosPeriodo, solicitudesRecientes] = await Promise.all([
+    prisma.solicitud.groupBy({
+      by: ["categoriaId"],
+      where: { createdAt: filtroActual },
+      _count: { _all: true },
+    }),
+    prisma.desbloqueo.findMany({
+      where: { createdAt: filtroActual },
+      select: { solicitud: { select: { categoriaId: true } } },
+    }),
+    prisma.solicitud.findMany({
+      where: { createdAt: filtroActual },
+      include: { categoria: true, _count: { select: { desbloqueos: true } } },
+      orderBy: { createdAt: "desc" },
+      take: 15,
+    }),
+  ]);
+  const solicitudesPorCat = new Map(solicitudesPorCategoria.map((g) => [g.categoriaId, g._count._all]));
+  const desbloqueosPorCat = new Map<string, number>();
+  for (const d of desbloqueosPeriodo) {
+    const id = d.solicitud.categoriaId;
+    desbloqueosPorCat.set(id, (desbloqueosPorCat.get(id) || 0) + 1);
+  }
+  const demandaPorCategoria = categorias
+    .map((c) => ({
+      id: c.id,
+      slug: c.slug,
+      nombre: c.nombre,
+      solicitudes: solicitudesPorCat.get(c.id) || 0,
+      desbloqueos: desbloqueosPorCat.get(c.id) || 0,
+    }))
+    .filter((c) => c.solicitudes > 0 || c.desbloqueos > 0)
+    .sort((a, b) => b.desbloqueos - a.desbloqueos || b.solicitudes - a.solicitudes);
 
   const ingresosCOP = transacciones
     .filter((t) => t.estado === "APROBADA")
@@ -131,13 +180,103 @@ export default async function AdminPage() {
         </Link>
       </div>
 
-      <h2 className="text-xl font-bold mb-1">Esta semana (últimos 7 días)</h2>
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-1">
+        <h2 className="text-xl font-bold">Resumen: {etiquetaPeriodo}</h2>
+        <div className="inline-flex border rounded-lg overflow-hidden text-sm">
+          {(
+            [
+              ["7", "7 días"],
+              ["30", "30 días"],
+              ["todo", "Todo el tiempo"],
+            ] as const
+          ).map(([valor, texto]) => (
+            <Link
+              key={valor}
+              href={`/admin?periodo=${valor}`}
+              className={`px-3 py-1.5 font-medium transition-colors ${
+                periodo === valor ? "bg-ink text-white" : "bg-white text-gray-600 hover:bg-gray-50"
+              }`}
+            >
+              {texto}
+            </Link>
+          ))}
+        </div>
+      </div>
       <p className="text-sm text-gray-500 mb-3">Para saber si buscar proveedores y ayudar a publicar solicitudes está dando resultado.</p>
       <div className="grid sm:grid-cols-4 gap-4 mb-10">
-        <WeeklyMetricCard label="Nuevos clientes" value={clientesEstaSemana} anterior={clientesSemanaAnterior} />
-        <WeeklyMetricCard label="Nuevos proveedores" value={proveedoresEstaSemana} anterior={proveedoresSemanaAnterior} />
-        <WeeklyMetricCard label="Solicitudes publicadas" value={solicitudesEstaSemana} anterior={solicitudesSemanaAnterior} />
-        <WeeklyMetricCard label="Desbloqueos (contactos)" value={desbloqueosEstaSemana} anterior={desbloqueosSemanaAnterior} />
+        <WeeklyMetricCard label="Nuevos clientes" value={clientesEstaSemana} anterior={clientesSemanaAnterior} comparar={periodo !== "todo"} etiqueta={etiquetaAnterior} />
+        <WeeklyMetricCard label="Nuevos proveedores" value={proveedoresEstaSemana} anterior={proveedoresSemanaAnterior} comparar={periodo !== "todo"} etiqueta={etiquetaAnterior} />
+        <WeeklyMetricCard label="Solicitudes publicadas" value={solicitudesEstaSemana} anterior={solicitudesSemanaAnterior} comparar={periodo !== "todo"} etiqueta={etiquetaAnterior} />
+        <WeeklyMetricCard label="Desbloqueos (contactos)" value={desbloqueosEstaSemana} anterior={desbloqueosSemanaAnterior} comparar={periodo !== "todo"} etiqueta={etiquetaAnterior} />
+      </div>
+
+      <h2 className="text-xl font-bold mb-1">Qué buscan los proveedores ({etiquetaPeriodo})</h2>
+      <p className="text-sm text-gray-500 mb-3">
+        chaski no guarda las búsquedas de los proveedores; el mejor indicador de lo que les interesa es a qué
+        solicitudes les gastan créditos (desbloqueos). Ordenado por desbloqueos.
+      </p>
+      <div className="overflow-x-auto mb-6">
+        <table className="w-full text-sm border rounded-xl overflow-hidden">
+          <thead className="bg-gray-50 text-left">
+            <tr>
+              <th className="p-3">Categoría</th>
+              <th className="p-3">Solicitudes de clientes</th>
+              <th className="p-3">Desbloqueos de proveedores</th>
+            </tr>
+          </thead>
+          <tbody>
+            {demandaPorCategoria.map((c) => (
+              <tr key={c.id} className="border-t">
+                <td className="p-3">
+                  <span className="inline-flex items-center gap-2">
+                    <CategoryIcon slug={c.slug} className="w-4 h-4 text-brand-500" />
+                    {c.nombre}
+                  </span>
+                </td>
+                <td className="p-3 tabular-nums">{c.solicitudes}</td>
+                <td className="p-3 tabular-nums">{c.desbloqueos}</td>
+              </tr>
+            ))}
+            {demandaPorCategoria.length === 0 && (
+              <tr>
+                <td className="p-3 text-gray-500" colSpan={3}>Sin actividad en este periodo.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 className="font-semibold mb-2">Solicitudes recientes</h3>
+      <div className="overflow-x-auto mb-10">
+        <table className="w-full text-sm border rounded-xl overflow-hidden">
+          <thead className="bg-gray-50 text-left">
+            <tr>
+              <th className="p-3">Solicitud</th>
+              <th className="p-3">Categoría</th>
+              <th className="p-3">Ciudad</th>
+              <th className="p-3">Presupuesto</th>
+              <th className="p-3">Desbloqueos</th>
+              <th className="p-3">Fecha</th>
+            </tr>
+          </thead>
+          <tbody>
+            {solicitudesRecientes.map((s) => (
+              <tr key={s.id} className="border-t align-top">
+                <td className="p-3 max-w-xs">{s.titulo}</td>
+                <td className="p-3 whitespace-nowrap">{s.categoria.nombre}</td>
+                <td className="p-3 whitespace-nowrap">{s.ciudad}</td>
+                <td className="p-3 whitespace-nowrap">{s.presupuesto ? `${s.presupuesto} ${s.presupuestoMoneda}` : "—"}</td>
+                <td className="p-3 tabular-nums">{s._count.desbloqueos}</td>
+                <td className="p-3 whitespace-nowrap">{s.createdAt.toLocaleDateString("es-CO")}</td>
+              </tr>
+            ))}
+            {solicitudesRecientes.length === 0 && (
+              <tr>
+                <td className="p-3 text-gray-500" colSpan={6}>Sin solicitudes en este periodo.</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
 
       {(pendientesVerificacion.length > 0 || reportesPendientes.length > 0) && (
@@ -377,13 +516,25 @@ function MetricCard({ label, value }: { label: string; value: number }) {
   );
 }
 
-function WeeklyMetricCard({ label, value, anterior }: { label: string; value: number; anterior: number }) {
-  const t = tendencia(value, anterior);
+function WeeklyMetricCard({
+  label,
+  value,
+  anterior,
+  comparar,
+  etiqueta,
+}: {
+  label: string;
+  value: number;
+  anterior: number;
+  comparar: boolean;
+  etiqueta: string;
+}) {
+  const t = tendencia(value, anterior, etiqueta);
   return (
     <div className="border rounded-xl p-5 text-center">
       <div className="text-3xl font-bold text-brand-600 tabular-nums">{value}</div>
       <div className="text-sm text-gray-500 mb-1.5">{label}</div>
-      <div className={`text-xs font-medium ${t.color}`}>{t.texto}</div>
+      {comparar && <div className={`text-xs font-medium ${t.color}`}>{t.texto}</div>}
     </div>
   );
 }
