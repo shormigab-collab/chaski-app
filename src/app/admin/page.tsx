@@ -103,9 +103,9 @@ export default async function AdminPage({ searchParams }: { searchParams: { peri
     }),
     prisma.solicitud.findMany({
       where: { createdAt: filtroActual },
-      include: { categoria: true, _count: { select: { desbloqueos: true } } },
+      include: { categoria: true, cliente: true, _count: { select: { desbloqueos: true } } },
       orderBy: { createdAt: "desc" },
-      take: 15,
+      take: 30,
     }),
   ]);
   const solicitudesPorCat = new Map(solicitudesPorCategoria.map((g) => [g.categoriaId, g._count._all]));
@@ -255,6 +255,9 @@ export default async function AdminPage({ searchParams }: { searchParams: { peri
               <th className="p-3">Categoría</th>
               <th className="p-3">Ciudad</th>
               <th className="p-3">Presupuesto</th>
+              <th className="p-3">Cliente</th>
+              <th className="p-3">Correo</th>
+              <th className="p-3">Teléfono</th>
               <th className="p-3">Desbloqueos</th>
               <th className="p-3">Fecha</th>
             </tr>
@@ -266,13 +269,33 @@ export default async function AdminPage({ searchParams }: { searchParams: { peri
                 <td className="p-3 whitespace-nowrap">{s.categoria.nombre}</td>
                 <td className="p-3 whitespace-nowrap">{s.ciudad}</td>
                 <td className="p-3 whitespace-nowrap">{s.presupuesto ? `${s.presupuesto} ${s.presupuestoMoneda}` : "—"}</td>
+                <td className="p-3 whitespace-nowrap">{s.cliente.nombre}</td>
+                <td className="p-3 whitespace-nowrap">
+                  <a href={`mailto:${s.cliente.email}`} className="text-brand-600 hover:underline">
+                    {s.cliente.email}
+                  </a>
+                </td>
+                <td className="p-3 whitespace-nowrap">
+                  {s.telefonoContacto ? (
+                    <a
+                      href={`https://wa.me/${s.telefonoContacto.replace(/[^0-9]/g, "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-brand-600 hover:underline"
+                    >
+                      {s.telefonoContacto}
+                    </a>
+                  ) : (
+                    "—"
+                  )}
+                </td>
                 <td className="p-3 tabular-nums">{s._count.desbloqueos}</td>
                 <td className="p-3 whitespace-nowrap">{s.createdAt.toLocaleDateString("es-CO")}</td>
               </tr>
             ))}
             {solicitudesRecientes.length === 0 && (
               <tr>
-                <td className="p-3 text-gray-500" colSpan={6}>Sin solicitudes en este periodo.</td>
+                <td className="p-3 text-gray-500" colSpan={9}>Sin solicitudes en este periodo.</td>
               </tr>
             )}
           </tbody>
