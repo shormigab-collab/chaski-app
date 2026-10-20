@@ -16,6 +16,7 @@ import {
 import CategoryIcon from "@/components/CategoryIcon";
 import Logo from "@/components/Logo";
 import Reveal from "@/components/Reveal";
+import TurnstileWidget from "@/components/TurnstileWidget";
 import { nombreCategoria } from "@/lib/categoriasEn";
 import { MONEDAS, type Moneda } from "@/lib/moneda";
 
@@ -35,6 +36,9 @@ export default function RegistroClienteForm({ categorias }: { categorias: Catego
   const [error, setError] = useState("");
   const [cargando, setCargando] = useState(false);
   const [cuentaCreada, setCuentaCreada] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [captchaKey, setCaptchaKey] = useState(0);
+  const [sitioWeb, setSitioWeb] = useState(""); // honeypot anti-bots
 
   // paso 1: cuenta
   const [nombre, setNombre] = useState("");
@@ -276,9 +280,13 @@ export default function RegistroClienteForm({ categorias }: { categorias: Catego
           password,
           telefono: telefonoContacto,
           ciudad,
+          turnstileToken,
+          sitioWeb,
         }),
       });
       if (!resReg.ok) {
+        setTurnstileToken("");
+        setCaptchaKey((k) => k + 1);
         const data = await resReg.json();
         setCargando(false);
         setError(data.error || t.errRegistro);
@@ -675,6 +683,21 @@ export default function RegistroClienteForm({ categorias }: { categorias: Catego
                   </div>
                 </div>
               </div>
+            )}
+
+            {paso === total && !cuentaCreada && (
+              <>
+                <input
+                  value={sitioWeb}
+                  onChange={(e) => setSitioWeb(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  name="sitioWeb"
+                  className="absolute left-[-9999px] w-px h-px opacity-0"
+                />
+                <TurnstileWidget onToken={setTurnstileToken} resetKey={captchaKey} />
+              </>
             )}
 
             {error && <p className="text-coral-600 text-sm mt-4">{error}</p>}

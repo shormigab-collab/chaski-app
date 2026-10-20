@@ -3,6 +3,8 @@ import { randomBytes } from "crypto";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { enviarCorreoRecuperacion } from "@/lib/email";
+import { limitarPorIp } from "@/lib/rateLimit";
+import { verificarTurnstile, ipDeSolicitud, MENSAJE_CAPTCHA } from "@/lib/turnstile";
 
 const esquema = z.object({
   email: z.string().email(),
@@ -14,7 +16,14 @@ const MENSAJE_GENERICO = {
 };
 
 export async function POST(req: Request) {
+  // Maximo 3 correos de recuperacion por IP cada 15 minutos.
+  if (!limitarPorIp(`recuperar:${ipDeSolicitud(req) ?? "anon"}`, 3, 15 * 60 * 1000)) {
+    return NextResponse.json({ error: "Demasiados intentos. Espera unos minutos." }, { status: 429 });
+  }
   const body = await req.json();
+  if (!(await verificarTurnstile(body?.turnstileToken, ipDeSolicitud(req)))) {
+    return NextResponse.json({ error: MENSAJE_CAPTCHA }, { status: 400 });
+  }
   const parsed = esquema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json({ error: "Correo inválido" }, { status: 400 });

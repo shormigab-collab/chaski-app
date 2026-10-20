@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { preguntarClaude } from "@/lib/anthropic";
+import { ipDeSolicitud } from "@/lib/turnstile";
+import { limitarPorIp } from "@/lib/rateLimit";
 
 const esquema = z.object({
   texto: z.string().trim().min(10).max(1000),
@@ -13,6 +15,10 @@ const esquema = z.object({
 // solicitud) como personas que apenas se estan registrando (paso 2 del
 // wizard de /registro/cliente, antes de que exista su cuenta/sesion).
 export async function POST(req: Request) {
+  // Sin login, asi que se limita por IP para proteger el costo de la IA.
+  if (!limitarPorIp(`asistente:${ipDeSolicitud(req) ?? "anon"}`, 15, 10 * 60 * 1000)) {
+    return NextResponse.json({ error: "Demasiados intentos seguidos. Espera unos minutos." }, { status: 429 });
+  }
   const body = await req.json();
   const parsed = esquema.safeParse(body);
   if (!parsed.success) {

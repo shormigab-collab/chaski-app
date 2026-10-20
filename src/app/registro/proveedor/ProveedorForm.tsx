@@ -7,6 +7,7 @@ import { Gift, Sparkles, ArrowRight, Check, User, MessageSquare, ShieldCheck } f
 import CategoryIcon from "@/components/CategoryIcon";
 import Logo from "@/components/Logo";
 import Reveal from "@/components/Reveal";
+import TurnstileWidget from "@/components/TurnstileWidget";
 import { TARIFAS_TIPO, ETIQUETA_TARIFA_TIPO_SELECTOR } from "@/lib/tarifa";
 
 type Categoria = { id: string; nombre: string; slug: string; icono: string };
@@ -32,6 +33,8 @@ export default function ProveedorForm({
   const [cargando, setCargando] = useState(false);
   const [seleccionadas, setSeleccionadas] = useState<string[]>([]);
   const creditosAMostrar = refCode ? CREDITOS_REFERIDO : CREDITOS_BIENVENIDA;
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   function toggleCategoria(id: string) {
     setSeleccionadas((prev) =>
@@ -65,6 +68,8 @@ export default function ProveedorForm({
         tarifaAproximada: form.get("tarifaAproximada") || undefined,
         tarifaTipo: form.get("tarifaTipo") || undefined,
         linkedinUrl: form.get("linkedinUrl") || undefined,
+        turnstileToken,
+        sitioWeb: form.get("sitioWeb") || undefined,
       }),
     });
     setCargando(false);
@@ -72,6 +77,8 @@ export default function ProveedorForm({
       router.push("/proveedor/explorar?nuevo=1");
       router.refresh();
     } else {
+      setTurnstileToken("");
+      setCaptchaKey((k) => k + 1);
       const data = await res.json();
       setError(data.error || "No se pudo crear la cuenta");
     }
@@ -320,6 +327,15 @@ export default function ProveedorForm({
                 ))}
               </div>
             </div>
+
+            <input
+              name="sitioWeb"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute left-[-9999px] w-px h-px opacity-0"
+            />
+            <TurnstileWidget onToken={setTurnstileToken} resetKey={captchaKey} />
 
             {error && <p className="text-coral-600 text-sm">{error}</p>}
 

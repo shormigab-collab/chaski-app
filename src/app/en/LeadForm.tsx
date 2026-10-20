@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 export default function LeadForm() {
   const [nombre, setNombre] = useState("");
@@ -10,6 +11,9 @@ export default function LeadForm() {
   const [enviando, setEnviando] = useState(false);
   const [enviado, setEnviado] = useState(false);
   const [error, setError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [captchaKey, setCaptchaKey] = useState(0);
+  const [sitioWeb, setSitioWeb] = useState(""); // honeypot
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -18,12 +22,14 @@ export default function LeadForm() {
     const res = await fetch("/api/leads-us", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nombre, email, empresa: empresa || undefined, mensaje }),
+      body: JSON.stringify({ nombre, email, empresa: empresa || undefined, mensaje, turnstileToken, sitioWeb }),
     });
     setEnviando(false);
     if (res.ok) {
       setEnviado(true);
     } else {
+      setTurnstileToken("");
+      setCaptchaKey((k) => k + 1);
       const data = await res.json();
       setError(data.error || "Something went wrong. Please try again.");
     }
@@ -82,6 +88,16 @@ export default function LeadForm() {
         placeholder="What kind of help are you looking for? (e.g. a designer for a new logo, a developer to build an app, ongoing bookkeeping...)"
         className="w-full border border-black/10 rounded-xl px-4 py-3 outline-none focus:border-brand-500 transition-colors"
       />
+      <input
+        value={sitioWeb}
+        onChange={(e) => setSitioWeb(e.target.value)}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] w-px h-px opacity-0"
+        name="sitioWeb"
+      />
+      <TurnstileWidget onToken={setTurnstileToken} resetKey={captchaKey} />
       {error && <p className="text-coral-600 text-sm">{error}</p>}
       <button
         disabled={enviando}

@@ -4,11 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { Mail, ArrowLeft, CheckCircle2 } from "lucide-react";
 import Logo from "@/components/Logo";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 export default function RecuperarPage() {
   const [enviado, setEnviado] = useState(false);
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -18,12 +21,14 @@ export default function RecuperarPage() {
     const res = await fetch("/api/auth/recuperar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: form.get("email") }),
+      body: JSON.stringify({ email: form.get("email"), turnstileToken }),
     });
     setCargando(false);
     if (res.ok) {
       setEnviado(true);
     } else {
+      setTurnstileToken("");
+      setCaptchaKey((k) => k + 1);
       setError("Correo inválido, revísalo e intenta de nuevo.");
     }
   }
@@ -74,6 +79,8 @@ export default function RecuperarPage() {
                     />
                   </div>
                 </div>
+
+                <TurnstileWidget onToken={setTurnstileToken} resetKey={captchaKey} />
 
                 {error && <p className="text-coral-600 text-sm">{error}</p>}
 

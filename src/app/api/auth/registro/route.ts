@@ -3,6 +3,8 @@ import { z } from "zod";
 import { prisma } from "@/lib/db";
 import { hashPassword, crearSesion } from "@/lib/auth";
 import { generarCodigoReferido } from "@/lib/referidos";
+import { limitarPorIp } from "@/lib/rateLimit";
+import { verificarTurnstile, ipDeSolicitud, MENSAJE_CAPTCHA } from "@/lib/turnstile";
 
 const esquemaBase = z.object({
   role: z.enum(["CLIENTE", "PROVEEDOR"]),
@@ -25,7 +27,16 @@ const CREDITOS_REFERIDO = 7; // bono si viene invitado por otro proveedor
 const CREDITOS_BONO_REFERENTE = 3; // bono para quien invito
 
 export async function POST(req: Request) {
+  // Maximo 5 registros por IP cada hora.
+  if (!limitarPorIp(`registro:${ipDeSolicitud(req) ?? "anon"}`, 5, 60 * 60 * 1000)) {
+    return NextResponse.json({ error: "Demasiados intentos. Inténtalo de nuevo más tarde." }, { status: 429 });
+  }
   const body = await req.json();
+  // Trampa para bots: este campo oculto lo llenan los robots, las personas no.
+  if (body?.sitioWeb) return NextResponse.json({ ok: true });
+  if (!(await verificarTurnstile(body?.turnstileToken, ipDeSolicitud(req)))) {
+    return NextResponse.json({ error: MENSAJE_CAPTCHA }, { status: 400 });
+  }
   const parsed = esquemaBase.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json({ error: "Datos inválidos" }, { status: 400 });

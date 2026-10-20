@@ -5,12 +5,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Mail, Lock, Eye, EyeOff, MessageSquare, ShieldCheck, ArrowLeft } from "lucide-react";
 import Logo from "@/components/Logo";
+import TurnstileWidget from "@/components/TurnstileWidget";
 
 export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [cargando, setCargando] = useState(false);
   const [verPassword, setVerPassword] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [captchaKey, setCaptchaKey] = useState(0);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -23,9 +26,15 @@ export default function LoginPage() {
       body: JSON.stringify({
         email: form.get("email"),
         password: form.get("password"),
+        turnstileToken,
       }),
     });
     setCargando(false);
+    if (!res.ok) {
+      // el token solo sirve una vez: se pide uno nuevo
+      setTurnstileToken("");
+      setCaptchaKey((k) => k + 1);
+    }
     if (res.ok) {
       const data = await res.json();
       const destino =
@@ -144,6 +153,8 @@ export default function LoginPage() {
                   </button>
                 </div>
               </div>
+
+              <TurnstileWidget onToken={setTurnstileToken} resetKey={captchaKey} />
 
               {error && <p className="text-coral-600 text-sm">{error}</p>}
 
