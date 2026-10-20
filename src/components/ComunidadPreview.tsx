@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Heart, MessageCircle, Sparkles, UserPlus } from "lucide-react";
+import { prisma } from "@/lib/db";
+import { tiempoRelativo } from "@/lib/tiempoRelativo";
 
 // NOTA: este post es un ejemplo ilustrativo (nombre, texto, reacciones,
 // foto de avatar y comentarios inventados) que replica el mockup de
@@ -9,7 +11,100 @@ import { Heart, MessageCircle, Sparkles, UserPlus } from "lucide-react";
 // uso libre), no de la persona mencionada. Se marca explicitamente como
 // ejemplo en el pie de la tarjeta. Reemplazar por publicaciones reales
 // en cuanto la fase 2 este lista.
-export default function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }) {
+// Muestra las publicaciones REALES mas recientes de profesionales. Si aun no
+// hay ninguna (o la tabla todavia no existe), cae al ejemplo ilustrativo de
+// abajo para que la seccion nunca se vea rota.
+export default async function ComunidadPreview({ lang = "es" }: { lang?: "es" | "en" }) {
+  let reales: Awaited<ReturnType<typeof cargarPublicaciones>> = [];
+  try {
+    reales = await cargarPublicaciones();
+  } catch {
+    reales = [];
+  }
+  if (reales.length === 0) return <EjemploIlustrativo lang={lang} />;
+
+  const en = lang === "en";
+  return (
+    <div className="bg-white border border-border rounded-2xl p-5 h-full flex flex-col">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="font-bold text-ink">{en ? "Community" : "Comunidad"}</h2>
+      </div>
+
+      <div className="space-y-3">
+        {reales.map((p) => (
+          <div key={p.id} className="rounded-xl border border-border overflow-hidden flex flex-col">
+            <div className="flex items-center gap-2.5 p-3">
+              {p.fotoUrl ? (
+                <img src={p.fotoUrl} alt={p.nombre} loading="lazy" className="w-8 h-8 rounded-full object-cover shrink-0" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-brand-100 text-brand-700 text-xs font-bold flex items-center justify-center shrink-0">
+                  {p.nombre.charAt(0).toUpperCase()}
+                </div>
+              )}
+              <div className="leading-tight min-w-0">
+                <div className="text-xs font-semibold text-ink/80 truncate">{p.nombre}</div>
+                <div className="text-[11px] text-ink/40 truncate">
+                  {[p.categoria, tiempoRelativo(p.createdAt)].filter(Boolean).join(" · ")}
+                </div>
+              </div>
+            </div>
+            <p className="px-3 pb-3 text-xs text-ink/65 leading-relaxed whitespace-pre-line line-clamp-5">{p.texto}</p>
+            {p.enlaceUrl && (
+              <a
+                href={p.enlaceUrl}
+                target="_blank"
+                rel="noopener noreferrer nofollow ugc"
+                className="mx-3 mb-3 rounded-lg border border-border px-2.5 py-2 text-[11px] font-semibold text-brand-600 truncate hover:bg-brand-50/40"
+              >
+                {p.enlaceTitulo || p.enlaceUrl}
+              </a>
+            )}
+            <div className="flex justify-end p-3 pt-0">
+              <Link
+                href={`/profesionales/${p.proveedorId}`}
+                className="text-[11px] font-semibold text-white bg-brand-500 px-2.5 py-1.5 rounded-lg hover:bg-brand-600"
+              >
+                {en ? "Request services" : "Solicitar sus servicios"}
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <Link
+        href="/registro/proveedor"
+        className="mt-3 text-center text-xs text-brand-600 font-semibold hover:text-brand-700"
+      >
+        {en ? "Create my profile and share your work" : "Crea tu perfil y comparte tu trabajo"} →
+      </Link>
+    </div>
+  );
+}
+
+async function cargarPublicaciones() {
+  const filas = await prisma.publicacion.findMany({
+    orderBy: { createdAt: "desc" },
+    take: 2,
+    include: {
+      proveedor: {
+        include: { user: { select: { nombre: true } }, categorias: { select: { nombre: true }, take: 1 } },
+      },
+    },
+  });
+  return filas.map((f) => ({
+    id: f.id,
+    proveedorId: f.proveedorId,
+    nombre: f.proveedor.user.nombre,
+    fotoUrl: f.proveedor.fotoUrl,
+    categoria: f.proveedor.categorias[0]?.nombre ?? "",
+    texto: f.texto,
+    enlaceUrl: f.enlaceUrl,
+    enlaceTitulo: f.enlaceTitulo,
+    createdAt: f.createdAt,
+  }));
+}
+
+function EjemploIlustrativo({ lang = "es" }: { lang?: "es" | "en" }) {
   const t =
     lang === "en"
       ? {

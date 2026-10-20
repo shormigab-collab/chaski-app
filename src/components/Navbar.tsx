@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X, Search, User, Gift, Coins, Info, FileText, ShieldCheck, LogOut } from "lucide-react";
+import { X, Search, User, Gift, MessageSquare, Coins, Info, FileText, ShieldCheck, LogOut } from "lucide-react";
 import Logo from "./Logo";
 import ReferralBanner from "./ReferralBanner";
 
@@ -76,6 +76,9 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
       </Link>
       <Link href="/proveedor/perfil" className="text-ink/60 hover:text-ink transition-colors">
         Mi perfil
+      </Link>
+      <Link href="/proveedor/comunidad" className="text-ink/60 hover:text-ink transition-colors">
+        Comunidad
       </Link>
       <Link href="/proveedor/invitar" className="text-ink/60 hover:text-ink transition-colors">
         Invitar y ganar
@@ -282,6 +285,10 @@ export default function Navbar({ usuario }: { usuario: UsuarioConProveedor }) {
                   <Link href="/proveedor/perfil" className={filaLink}>
                     <User className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
                     Mi perfil
+                  </Link>
+                  <Link href="/proveedor/comunidad" className={filaLink}>
+                    <MessageSquare className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />
+                    Comunidad
                   </Link>
                   <Link href="/proveedor/invitar" className={filaLink}>
                     <Gift className="w-4 h-4 mr-2.5 text-ink/40 shrink-0" strokeWidth={1.75} />

@@ -6,7 +6,7 @@ import { tiempoRelativo } from "@/lib/tiempoRelativo";
 import { calcularCostoCreditos } from "@/lib/creditos";
 import { calcularCompatibilidad, type ProveedorParaMatch } from "@/lib/matching";
 import { parsePortafolio } from "@/lib/portafolio";
-import SolicitudCard from "./SolicitudCard";
+import ListaSolicitudes, { type ItemSolicitud } from "./ListaSolicitudes";
 
 export default async function ExplorarSolicitudes() {
   const usuario = await obtenerUsuarioActual();
@@ -51,6 +51,39 @@ export default async function ExplorarSolicitudes() {
     totalResenas: proveedorConDatos?.totalResenas ?? 0,
   };
 
+  const items: ItemSolicitud[] = solicitudes.map((s) => {
+    const desbloqueada = idsDesbloqueados.has(s.id);
+    const resultadoMatch = calcularCompatibilidad(datosProveedorMatch, {
+      categoriaId: s.categoriaId,
+      ciudad: s.ciudad,
+      titulo: s.titulo,
+      descripcion: s.descripcion,
+    });
+    return {
+      desbloqueada,
+      creadaMs: s.createdAt.getTime(),
+      solicitud: {
+        id: s.id,
+        titulo: s.titulo,
+        descripcion: s.descripcion,
+        ciudad: s.ciudad,
+        presupuesto: s.presupuesto,
+        presupuestoMoneda: s.presupuestoMoneda,
+        categoriaNombre: s.categoria.nombre,
+        categoriaSlug: s.categoria.slug,
+        nombreCliente: s.cliente.nombre,
+        telefonoMostrar: desbloqueada ? s.telefonoContacto : enmascararTelefono(s.telefonoContacto),
+        correoMostrar: desbloqueada ? s.cliente.email : enmascararCorreo(s.cliente.email),
+        preferenciaContacto: s.preferenciaContacto,
+        totalDesbloqueos: s._count.desbloqueos,
+        tiempoTexto: tiempoRelativo(s.createdAt),
+        costoCreditos: calcularCostoCreditos(s.presupuesto, s.presupuestoMoneda),
+        matchNivel: resultadoMatch.nivel,
+        matchRazones: resultadoMatch.razones,
+      },
+    };
+  });
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-6">
@@ -66,42 +99,7 @@ export default async function ExplorarSolicitudes() {
         </p>
       )}
 
-      <div className="space-y-4">
-        {solicitudes.map((s) => {
-          const desbloqueada = idsDesbloqueados.has(s.id);
-          const resultadoMatch = calcularCompatibilidad(datosProveedorMatch, {
-            categoriaId: s.categoriaId,
-            ciudad: s.ciudad,
-            titulo: s.titulo,
-            descripcion: s.descripcion,
-          });
-          return (
-            <SolicitudCard
-              key={s.id}
-              solicitud={{
-                id: s.id,
-                titulo: s.titulo,
-                descripcion: s.descripcion,
-                ciudad: s.ciudad,
-                presupuesto: s.presupuesto,
-                presupuestoMoneda: s.presupuestoMoneda,
-                categoriaNombre: s.categoria.nombre,
-                categoriaSlug: s.categoria.slug,
-                nombreCliente: s.cliente.nombre,
-                telefonoMostrar: desbloqueada ? s.telefonoContacto : enmascararTelefono(s.telefonoContacto),
-                correoMostrar: desbloqueada ? s.cliente.email : enmascararCorreo(s.cliente.email),
-                preferenciaContacto: s.preferenciaContacto,
-                totalDesbloqueos: s._count.desbloqueos,
-                tiempoTexto: tiempoRelativo(s.createdAt),
-                costoCreditos: calcularCostoCreditos(s.presupuesto, s.presupuestoMoneda),
-                matchNivel: resultadoMatch.nivel,
-                matchRazones: resultadoMatch.razones,
-              }}
-              desbloqueada={desbloqueada}
-            />
-          );
-        })}
-      </div>
+      {solicitudes.length > 0 && <ListaSolicitudes items={items} />}
     </div>
   );
 }

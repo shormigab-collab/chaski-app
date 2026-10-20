@@ -81,6 +81,21 @@ model Proveedor {
   categorias     Categoria[]
   desbloqueos    Desbloqueo[]
   resenasRecibidas Resena[]
+  publicaciones  Publicacion[]
+}
+
+// Publicacion de la Comunidad: un texto corto de un profesional, con un
+// enlace opcional (articulo, proyecto, portafolio). Se muestra en el inicio.
+model Publicacion {
+  id           String    @id @default(cuid())
+  proveedorId  String
+  proveedor    Proveedor @relation(fields: [proveedorId], references: [id], onDelete: Cascade)
+  texto        String
+  enlaceUrl    String?
+  enlaceTitulo String?
+  createdAt    DateTime  @default(now())
+
+  @@index([createdAt])
 }
 
 model Solicitud {
