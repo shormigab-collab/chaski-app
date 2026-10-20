@@ -658,7 +658,7 @@ export const POSTS: PostBlog[] = [
     titulo: "Cómo contratar un asistente virtual: qué tareas delegar, cuánto cuesta y cómo empezar",
     categoria: "Guía para clientes",
     imagen: "/images/blog/como-contratar-asistente-virtual.webp",
-    imagenAlt: "Emprendedor delegando tareas de agenda y correo a un asistente virtual desde su computador",
+    imagenAlt: "Emprendedora organizando su agenda y delegando tareas a un asistente virtual por videollamada",
     descripcionMeta:
       "Guía para emprendedores y pequeños negocios: qué tareas puede hacer un asistente virtual, cómo definir qué delegar, qué revisar antes de contratar y cómo empezar con una prueba corta sin comprometerte de más.",
     extracto:
@@ -730,7 +730,7 @@ export const POSTS: PostBlog[] = [
     titulo: "Cómo escribir un brief de proyecto para un freelancer (con plantilla)",
     categoria: "Guía para clientes",
     imagen: "/images/blog/como-escribir-brief-proyecto-freelancer.webp",
-    imagenAlt: "Un cliente completando una lista con los objetivos y el presupuesto de su proyecto antes de contratar",
+    imagenAlt: "Un cliente y una diseñadora revisando un brief de proyecto con referencias visuales sobre la mesa",
     descripcionMeta:
       "Aprende a escribir un brief claro para contratar a un freelancer: qué debe incluir (objetivo, alcance, presupuesto, plazos), errores comunes y una plantilla simple para copiar y usar hoy.",
     extracto:
@@ -801,7 +801,7 @@ export const POSTS: PostBlog[] = [
     titulo: "Cómo escribir una propuesta que gane proyectos como freelancer",
     categoria: "Guía para freelancers",
     imagen: "/images/blog/como-escribir-propuesta-que-gane-proyectos.webp",
-    imagenAlt: "Freelancer redactando una propuesta para un cliente en su laptop",
+    imagenAlt: "Freelancer preparando una propuesta en su laptop mientras conversa con un cliente por videollamada",
     descripcionMeta:
       "Guía para freelancers: cómo estructurar una propuesta comercial que convenza (entender el problema, tu enfoque, entregables, precio y siguiente paso) y errores que hacen que te descarten.",
     extracto:
@@ -864,7 +864,7 @@ export const POSTS: PostBlog[] = [
     titulo: "Cómo pedir reseñas a tus clientes siendo freelancer (y por qué importan tanto)",
     categoria: "Guía para freelancers",
     imagen: "/images/blog/como-pedir-resenas-clientes-freelancer.webp",
-    imagenAlt: "Freelancer recibiendo una reseña de cinco estrellas de un cliente satisfecho",
+    imagenAlt: "Freelancer sonriendo al recibir una reseña de cinco estrellas de un cliente satisfecho",
     descripcionMeta:
       "Guía para freelancers: cuándo y cómo pedir reseñas a tus clientes, qué mensaje enviar, cómo responder a una reseña negativa y por qué las reseñas ayudan a conseguir más proyectos.",
     extracto:

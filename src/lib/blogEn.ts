@@ -467,7 +467,7 @@ export const POSTS_EN: PostBlogEn[] = [
     tituloSeo: "Hire a Virtual Assistant in Latin America: A Guide",
     categoria: "Guide for clients",
     imagen: "/images/blog/hire-virtual-assistant-latin-america.webp",
-    imagenAlt: "A small business owner handing off scheduling and email tasks to a remote virtual assistant",
+    imagenAlt: "A business owner planning her schedule and handing off tasks to a remote virtual assistant on a video call",
     descripcionMeta:
       "A practical guide for US business owners on hiring a virtual assistant from Latin America: which tasks to delegate, what to evaluate before hiring, and how to run a short paid trial before committing.",
     extracto:
@@ -539,7 +539,7 @@ export const POSTS_EN: PostBlogEn[] = [
     titulo: "How to Write a Project Brief for a Freelancer (With a Simple Template)",
     categoria: "Guide for clients",
     imagen: "/images/blog/how-to-write-a-project-brief-for-a-freelancer.webp",
-    imagenAlt: "A business owner filling out a checklist of goals, scope, and budget before hiring a freelancer",
+    imagenAlt: "A client and a designer reviewing a project brief with visual references on a shared table",
     descripcionMeta:
       "Learn how to write a clear project brief for a freelancer: what to include (goal, scope, budget, deadline), common mistakes to avoid, and a simple template you can copy today.",
     extracto:
