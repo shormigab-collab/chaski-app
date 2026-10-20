@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/registro/proveedor`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/en`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE_URL}/en/virtual-assistants`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${BASE_URL}/asistentes-virtuales`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${BASE_URL}/en/blog`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${BASE_URL}/ayuda`, changeFrequency: "monthly", priority: 0.3 },
     { url: `${BASE_URL}/terminos`, changeFrequency: "yearly", priority: 0.1 },

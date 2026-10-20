@@ -14,7 +14,10 @@ export const metadata: Metadata = {
     "latam virtual assistant",
     "remote virtual assistant latin america",
   ],
-  alternates: { canonical: "/en/virtual-assistants" },
+  alternates: {
+    canonical: "/en/virtual-assistants",
+    languages: { es: "/asistentes-virtuales", en: "/en/virtual-assistants" },
+  },
 };
 
 const FAQS = [

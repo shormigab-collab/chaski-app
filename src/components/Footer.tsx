@@ -176,6 +176,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/asistentes-virtuales" className="text-ink/60 hover:text-brand-500 transition-colors">
+                Contratar asistente virtual
+              </Link>
+            </li>
+            <li>
               <Link href="/en" className="text-ink/60 hover:text-brand-500 transition-colors">
                 English
               </Link>
