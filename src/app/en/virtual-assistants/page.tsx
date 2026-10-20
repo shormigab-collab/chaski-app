@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 import Comparacion from "@/components/Comparacion";
 
 export const metadata: Metadata = {
-  title: "Hire a Virtual Assistant from Latin America (LatAm) | chaski",
+  title: "Hire a Virtual Assistant from Latin America (LatAm)",
   description:
     "Post your project free and get contacted directly by virtual assistants from Latin America. Overlapping US time zones, no agency fees, no middleman.",
   keywords: [

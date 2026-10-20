@@ -4,7 +4,7 @@ import ProfesionalCard from "@/components/ProfesionalCard";
 import { slugificarCiudad } from "@/lib/ciudad";
 
 export const metadata = {
-  title: "Profesionales | chaski",
+  title: "Profesionales",
   description: "Explora perfiles reales de profesionales independientes en chaski, listos para ayudarte con tu proyecto.",
 };
 

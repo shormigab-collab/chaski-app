@@ -1,4 +1,4 @@
-export const metadata = { title: "Política de privacidad | chaski" };
+export const metadata = { title: "Política de privacidad" };
 
 export default function PrivacidadPage() {
   return (

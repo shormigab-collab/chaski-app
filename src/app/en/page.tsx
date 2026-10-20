@@ -17,7 +17,7 @@ import Confianza from "@/components/Confianza";
 import LeadForm from "./LeadForm";
 
 export const metadata: Metadata = {
-  title: "Hire Virtual Assistants & Freelance Talent from LatAm | chaski",
+  title: "Hire Virtual Assistants & Freelance Talent from LatAm",
   description:
     "Find virtual assistants and freelance talent from Latin America (LatAm). Post your project free and get contacted directly by designers, developers, marketers, VAs and more. No agency fees.",
   keywords: [

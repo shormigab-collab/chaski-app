@@ -8,7 +8,7 @@ import ProfesionalCard from "@/components/ProfesionalCard";
 import MatchExplanation from "@/components/MatchExplanation";
 import { CheckCircle2 } from "lucide-react";
 
-export const metadata = { title: "Profesionales recomendados | chaski" };
+export const metadata = { title: "Profesionales recomendados" };
 
 export default async function MatchesSolicitud({ params }: { params: { id: string } }) {
   const usuario = await obtenerUsuarioActual();

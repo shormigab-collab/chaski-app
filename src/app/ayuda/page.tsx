@@ -1,4 +1,4 @@
-export const metadata = { title: "Centro de ayuda | chaski" };
+export const metadata = { title: "Centro de ayuda" };
 
 export default function AyudaPage() {
   return (

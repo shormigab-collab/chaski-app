@@ -53,7 +53,7 @@ export async function generateMetadata({
   const datos = await buscarDatos(params.categoria, params.ciudad);
   if (!datos) return {};
 
-  const titulo = `Contratar ${datos.categoria.nombre.toLowerCase()} freelance en ${datos.ciudadDisplay} | chaski`;
+  const titulo = `Contratar ${datos.categoria.nombre.toLowerCase()} freelance en ${datos.ciudadDisplay}`;
   const descripcion = `Encuentra profesionales independientes de ${datos.categoria.nombre.toLowerCase()} en ${datos.ciudadDisplay}. Publica tu proyecto gratis en chaski y recibe propuestas directas, sin comisiones.`;
 
   return {

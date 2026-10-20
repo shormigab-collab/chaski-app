@@ -10,7 +10,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const post = obtenerPostEn(params.slug);
   if (!post) return {};
   return {
-    title: `${post.titulo} | chaski`,
+    title: post.titulo,
     description: post.descripcionMeta,
     openGraph: {
       title: post.titulo,

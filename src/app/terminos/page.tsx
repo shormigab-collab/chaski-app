@@ -1,4 +1,4 @@
-export const metadata = { title: "Términos y condiciones | chaski" };
+export const metadata = { title: "Términos y condiciones" };
 
 export default function TerminosPage() {
   return (

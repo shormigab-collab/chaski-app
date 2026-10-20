@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Calcula la tarifa mínima por hora y por proyecto que necesitas cobrar como freelancer según tu ingreso deseado, gastos, impuestos y horas facturables. Gratis.",
   alternates: { canonical: "/calculadora-tarifa-freelance" },
   openGraph: {
-    title: "Calculadora de tarifa freelance | chaski",
+    title: "Calculadora de tarifa freelance",
     description: "Descubre cuánto necesitas cobrar por hora y por proyecto para llegar a tu ingreso deseado.",
   },
 };

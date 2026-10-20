@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db";
 import CopilotoFlow from "./CopilotoFlow";
 
 export const metadata = {
-  title: "Chaski Copiloto | chaski",
+  title: "Chaski Copiloto",
   description: "Cuéntanos tu proyecto en tus palabras y arma tu proyecto con ayuda de IA.",
 };
 
