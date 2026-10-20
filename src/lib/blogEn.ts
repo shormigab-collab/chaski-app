@@ -657,6 +657,72 @@ export const POSTS_EN: PostBlogEn[] = [
       },
     ],
   },
+  {
+    slug: "how-to-review-a-freelancer-portfolio",
+    titulo: "How to Review a Freelancer's Portfolio: A Checklist for Clients",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/how-to-review-a-freelancer-portfolio.webp",
+    imagenAlt: "A client reviewing a freelancer's portfolio on a laptop with a checklist beside it",
+    descripcionMeta:
+      "How to evaluate a freelancer's portfolio before you hire: what to look for beyond pretty visuals, questions to ask about each project, and red flags that suggest the work isn't really theirs.",
+    extracto:
+      "A polished portfolio can be misleading if you don't know what to look for. Here's a practical checklist for judging whether a freelancer's past work fits your project.",
+    fecha: "2026-10-20",
+    minutosLectura: 5,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "A portfolio is the closest thing to a preview of how a freelancer will work for you. But it's easy to be impressed by attractive visuals and miss what matters: whether this person has solved problems like yours, and whether the work shown is really theirs. A few minutes of structured review can save you from a costly mismatch.",
+      },
+      {
+        tipo: "titulo",
+        texto: "What to look for",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Relevance: look for projects similar to yours in type, industry, or complexity. A great logo designer isn't automatically the right person to build your website.",
+          "Results, not just visuals: strong portfolios explain the goal and what changed afterward — more sign-ups, a clearer brand, faster processes — rather than only showing screenshots.",
+          "Consistency: a few excellent projects are better than many uneven ones. Check that the quality holds across pieces.",
+          "Range and fit of style: make sure their style matches what you want, or that they show they can adapt to different briefs.",
+          "Recency: work from the last couple of years is a better guide to current skills, especially in fast-changing fields like design and development.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Questions to ask about specific projects",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "What was your exact role? Did you do the whole project or one part of it?",
+          "What was the goal, and how did you approach it?",
+          "What was the hardest part, and how did you handle it?",
+          "How long did it take, and what did the client need to provide?",
+          "Can I speak with that client, or see the live result?",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Red flags",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Vague answers about their role in a project that looks impressive.",
+          "Only mockups or concept pieces and no real client work, with no explanation of why.",
+          "Samples that look generic or identical to stock templates.",
+          "Unwillingness to share any context, links, or references.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "None of these alone means someone is a bad fit, but they're reasons to ask more questions before committing. A short paid trial project is also a reliable way to confirm what the portfolio suggests. If you'd like to review profiles side by side, you can browse professionals on chaski or post your project for free and hear directly from Latin American freelancers who fit what you need.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPostEn(slug: string) {

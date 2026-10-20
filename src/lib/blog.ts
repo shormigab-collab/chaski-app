@@ -859,6 +859,72 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "como-pedir-resenas-clientes-freelancer",
+    titulo: "Cómo pedir reseñas a tus clientes siendo freelancer (y por qué importan tanto)",
+    categoria: "Guía para freelancers",
+    imagen: "/images/blog/como-pedir-resenas-clientes-freelancer.webp",
+    imagenAlt: "Freelancer recibiendo una reseña de cinco estrellas de un cliente satisfecho",
+    descripcionMeta:
+      "Guía para freelancers: cuándo y cómo pedir reseñas a tus clientes, qué mensaje enviar, cómo responder a una reseña negativa y por qué las reseñas ayudan a conseguir más proyectos.",
+    extracto:
+      "Para quien no te conoce, una reseña de un cliente anterior pesa más que cualquier cosa que digas de ti mismo. Esta guía explica cuándo pedirla, cómo hacerlo sin incomodar y qué hacer si recibes una crítica.",
+    fecha: "2026-10-20",
+    minutosLectura: 5,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Cuando un cliente nuevo evalúa a varios freelancers, rara vez puede comprobar quién es mejor. Lo que sí puede ver es qué dicen otros clientes. Una reseña real funciona como una recomendación: reduce la duda de contratar a alguien desconocido. El problema es que muchos freelancers terminan un proyecto, cobran y nunca piden esa opinión, ya sea por pena o por olvido.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Cuándo pedirla",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "El mejor momento es justo después de entregar el trabajo y de que el cliente exprese que está conforme: en ese punto el resultado está fresco y la relación es buena. Esperar semanas hace que el cliente olvide detalles o se sienta menos motivado. Si el proyecto fue largo, también puedes pedirla al cerrar una etapa importante.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Cómo pedirla sin incomodar",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Hazlo fácil: envía el enlace directo donde puede dejar la reseña y aclara que toma dos minutos.",
+          "Sé específico con lo que ayudaría: 'me sirve mucho que cuentes cómo fue el proceso y el resultado'. Esto produce reseñas más útiles que un simple 'excelente'.",
+          "Agradece primero: empieza por agradecer la confianza y el trabajo en conjunto, y luego haz la petición.",
+          "No presiones ni ofrezcas descuentos a cambio de una reseña positiva: debe ser una opinión honesta, y las plataformas serias lo desaconsejan.",
+          "Haz un recordatorio amable si pasan unos días: un solo mensaje de seguimiento es suficiente.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Un mensaje que puedes adaptar",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "'Hola [nombre], muchas gracias por confiar en mí para [proyecto]; fue un gusto trabajar contigo. Si quedaste conforme, me ayudaría mucho que dejaras una breve reseña sobre cómo fue la experiencia. Aquí tienes el enlace: [enlace]. Toma solo un par de minutos. ¡Gracias de nuevo!'",
+      },
+      {
+        tipo: "titulo",
+        texto: "Qué hacer si recibes una reseña negativa",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "No es el fin del mundo, y manejarla bien puede jugar a tu favor. Responde con calma, sin ponerte a la defensiva: agradece el comentario, reconoce lo que pueda ser cierto y explica brevemente qué harías distinto o cómo lo resolviste. Quien lea tu perfil verá a alguien profesional. Y si la reseña contiene información falsa o es abusiva, revisa si la plataforma tiene un mecanismo para reportarla.",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Con el tiempo, las reseñas se acumulan y se vuelven uno de tus mejores argumentos de venta. En chaski, los clientes pueden calificar a los profesionales y esa calificación aparece en tu perfil público. Si todavía no tienes perfil, puedes crearlo gratis y empezar a construir tu reputación desde tu primer proyecto.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {
