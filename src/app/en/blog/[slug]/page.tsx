@@ -10,10 +10,11 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const post = obtenerPostEn(params.slug);
   if (!post) return {};
   return {
-    title: post.titulo,
+    title: post.tituloSeo ?? post.titulo,
     description: post.descripcionMeta,
+    alternates: { canonical: `/en/blog/${post.slug}` },
     openGraph: {
-      title: post.titulo,
+      title: post.tituloSeo ?? post.titulo,
       description: post.descripcionMeta,
       type: "article",
     },
@@ -30,9 +31,45 @@ function formatearFecha(iso: string) {
 
 const BASE_URL = "https://www.usechaski.com";
 
+// Articulos relacionados por tema, empezando por los que ya reciben
+// impresiones en Google (costos, pagos, asistentes virtuales).
+const RELACIONADOS: Record<string, string[]> = {
+  "employee-vs-freelancer-real-cost": [
+    "hire-latin-america-freelancers-cost-guide",
+    "how-to-pay-latam-freelancers-guide",
+    "nearshore-vs-offshore-latin-america-us-businesses",
+  ],
+  "how-to-pay-latam-freelancers-guide": [
+    "hire-latin-america-freelancers-cost-guide",
+    "employee-vs-freelancer-real-cost",
+    "how-to-onboard-a-latam-freelancer",
+  ],
+  "hire-latin-america-freelancers-cost-guide": [
+    "employee-vs-freelancer-real-cost",
+    "hire-virtual-assistant-latin-america",
+    "how-to-vet-a-latam-freelancer",
+  ],
+  "hire-virtual-assistant-latin-america": [
+    "hire-latin-america-freelancers-cost-guide",
+    "how-to-vet-a-latam-freelancer",
+    "how-to-write-a-project-brief-for-a-freelancer",
+  ],
+};
+
 export default function PostBlogEnPage({ params }: { params: { slug: string } }) {
   const post = obtenerPostEn(params.slug);
   if (!post) notFound();
+
+  // Enlaces internos entre articulos del mismo tema (ayuda a Google a
+  // entender la relacion y mantiene al lector en el sitio). Si un articulo
+  // no tiene lista propia, se muestran los mas recientes.
+  const idsRelacionados = RELACIONADOS[post.slug] ?? [];
+  const relacionados = [
+    ...idsRelacionados.map((s) => obtenerPostEn(s)),
+    ...POSTS_EN.filter((p) => p.slug !== post.slug && !idsRelacionados.includes(p.slug)),
+  ]
+    .filter((p): p is NonNullable<typeof p> => !!p && p.slug !== post.slug)
+    .slice(0, 3);
 
   const articuloJsonLd = {
     "@context": "https://schema.org",
@@ -106,7 +143,31 @@ export default function PostBlogEnPage({ params }: { params: { slug: string } })
           >
             Post your project free on chaski
           </Link>
+          <p className="text-sm text-ink/55 mt-4">
+            Looking for admin or operations help?{" "}
+            <Link href="/en/virtual-assistants" className="text-brand-600 font-semibold hover:text-brand-700">
+              Hire a virtual assistant from Latin America
+            </Link>
+          </p>
         </div>
+
+        {relacionados.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-lg font-bold text-ink mb-4">Keep reading</h2>
+            <div className="space-y-3">
+              {relacionados.map((r) => (
+                <Link
+                  key={r.slug}
+                  href={`/en/blog/${r.slug}`}
+                  className="block border border-black/5 bg-white rounded-xl p-4 hover:border-brand-300 transition-colors"
+                >
+                  <span className="text-sm font-semibold text-ink">{r.tituloSeo ?? r.titulo}</span>
+                  <span className="block text-xs text-ink/45 mt-1">{r.minutosLectura} min read</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </article>
   );

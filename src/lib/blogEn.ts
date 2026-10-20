@@ -15,6 +15,9 @@ export type CategoriaBlogEn = "Guide for clients" | "Guide for freelancers";
 export type PostBlogEn = {
   slug: string;
   titulo: string;
+  // Titulo corto (<= ~55 caracteres) para la etiqueta <title> y Google, que
+  // corta los titulos largos. Si no existe, se usa "titulo".
+  tituloSeo?: string;
   categoria: CategoriaBlogEn;
   imagen: string;
   imagenAlt: string;
@@ -29,6 +32,7 @@ export const POSTS_EN: PostBlogEn[] = [
   {
     slug: "hire-latin-america-freelancers-cost-guide",
     titulo: "Hiring Freelancers in Latin America: A Cost Guide for US Businesses",
+    tituloSeo: "Cost of Hiring Freelancers in Latin America",
     categoria: "Guide for clients",
     imagen: "/images/blog/hire-latam-freelancers-cost-guide.webp",
     imagenAlt: "A small business team reviewing numbers and a project together on a laptop",
@@ -258,6 +262,7 @@ export const POSTS_EN: PostBlogEn[] = [
   {
     slug: "employee-vs-freelancer-real-cost",
     titulo: "Employee vs. Freelancer: The Real Cost of Hiring In-House vs a LatAm Contractor",
+    tituloSeo: "Freelancer vs Employee: The True Cost of Hiring",
     categoria: "Guide for clients",
     imagen: "/images/blog/employee-vs-freelancer-real-cost.webp",
     imagenAlt: "Split scene of an in-house employee working in an office next to a LatAm freelance contractor on a video call",
@@ -323,6 +328,7 @@ export const POSTS_EN: PostBlogEn[] = [
   {
     slug: "how-to-pay-latam-freelancers-guide",
     titulo: "How to Pay Freelancers in Latin America: Payment Methods, Fees, and Tax Forms",
+    tituloSeo: "How to Pay Freelancers Internationally: Fees & Forms",
     categoria: "Guide for clients",
     imagen: "/images/blog/how-to-pay-latam-freelancers-guide.webp",
     imagenAlt: "A business owner reviewing an international payment on a laptop before sending it",
@@ -458,6 +464,7 @@ export const POSTS_EN: PostBlogEn[] = [
   {
     slug: "hire-virtual-assistant-latin-america",
     titulo: "How to Hire a Virtual Assistant in Latin America: Tasks, What to Check, and How to Start",
+    tituloSeo: "Hire a Virtual Assistant in Latin America: A Guide",
     categoria: "Guide for clients",
     imagen: "/images/blog/hire-virtual-assistant-latin-america.webp",
     imagenAlt: "A small business owner handing off scheduling and email tasks to a remote virtual assistant",
