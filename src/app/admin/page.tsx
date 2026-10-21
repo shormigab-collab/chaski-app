@@ -7,16 +7,16 @@ import CategoryIcon from "@/components/CategoryIcon";
 import AdminBotonAccion from "./AdminBotonAccion";
 import AgregarMiembroForm from "./AgregarMiembroForm";
 
-// Periodo del resumen: ultimos 7 dias, ultimos 30 dias o todo el tiempo
-// (se elige con ?periodo=7 | 30 | todo). Para 7 y 30 dias se compara contra
+// Periodo del resumen: ultimas 24 horas, 7 dias, 30 dias o todo el tiempo
+// (se elige con ?periodo=24h | 7 | 30 | todo). Menos "todo" se compara contra
 // el periodo anterior de la misma duracion, para saber si el esfuerzo
 // (buscar proveedores, ayudar a publicar solicitudes, etc.) esta dando
 // resultado. En "todo" no hay comparacion.
-type Periodo = "7" | "30" | "todo";
+type Periodo = "24h" | "7" | "30" | "todo";
 
 function rangosPeriodo(periodo: Periodo) {
   if (periodo === "todo") return { desde: null as Date | null, anteriorDesde: null as Date | null };
-  const dias = periodo === "30" ? 30 : 7;
+  const dias = periodo === "30" ? 30 : periodo === "24h" ? 1 : 7;
   const ahora = new Date();
   const desde = new Date(ahora.getTime() - dias * 24 * 60 * 60 * 1000);
   const anteriorDesde = new Date(ahora.getTime() - 2 * dias * 24 * 60 * 60 * 1000);
@@ -34,13 +34,20 @@ export default async function AdminPage({ searchParams }: { searchParams: { peri
   const usuario = await obtenerUsuarioActual();
   if (!usuario || usuario.role !== "ADMIN") redirect("/login");
 
-  const periodo: Periodo = searchParams.periodo === "30" || searchParams.periodo === "todo" ? searchParams.periodo : "7";
+  const periodo: Periodo = searchParams.periodo === "24h" || searchParams.periodo === "30" || searchParams.periodo === "todo" ? searchParams.periodo : "7";
   const { desde, anteriorDesde } = rangosPeriodo(periodo);
   const filtroActual = desde ? { gte: desde } : undefined;
   const filtroAnterior = desde && anteriorDesde ? { gte: anteriorDesde, lt: desde } : undefined;
   const etiquetaPeriodo =
-    periodo === "todo" ? "todo el tiempo" : periodo === "30" ? "últimos 30 días" : "últimos 7 días";
-  const etiquetaAnterior = periodo === "30" ? "los 30 días anteriores" : "la semana pasada";
+    periodo === "todo"
+      ? "todo el tiempo"
+      : periodo === "30"
+      ? "últimos 30 días"
+      : periodo === "24h"
+      ? "últimas 24 horas"
+      : "últimos 7 días";
+  const etiquetaAnterior =
+    periodo === "30" ? "los 30 días anteriores" : periodo === "24h" ? "las 24 horas anteriores" : "la semana pasada";
 
   const [
     totalClientes,
@@ -185,6 +192,7 @@ export default async function AdminPage({ searchParams }: { searchParams: { peri
         <div className="inline-flex border rounded-lg overflow-hidden text-sm">
           {(
             [
+              ["24h", "24 horas"],
               ["7", "7 días"],
               ["30", "30 días"],
               ["todo", "Todo el tiempo"],
