@@ -32,7 +32,7 @@ export type GrupoEmpresa = {
   senales: SenalUI[];
 };
 
-const NOMBRE_FUENTE: Record<string, string> = { GETONBOARD: "Get on Board" };
+const NOMBRE_FUENTE: Record<string, string> = { GETONBOARD: "Get on Board", ADZUNA: "Adzuna" };
 
 async function actualizar(id: string, cuerpo: Record<string, unknown>) {
   const res = await fetch(`/api/crm/senales/${id}`, {
@@ -249,6 +249,12 @@ function Senal({ s, empresa }: { s: SenalUI; empresa: string }) {
 
 export default function SenalesLista({ grupos }: { grupos: GrupoEmpresa[] }) {
   const [verDescartadas, setVerDescartadas] = useState(false);
+  const [fuente, setFuente] = useState("");
+  const [categoria, setCategoria] = useState("");
+
+  const todas = grupos.flatMap((g) => g.senales);
+  const fuentes = Array.from(new Set(todas.map((s) => s.fuente)));
+  const categorias = Array.from(new Set(todas.map((s) => s.categoriaNombre))).sort();
 
   if (grupos.length === 0) {
     return (
@@ -261,13 +267,36 @@ export default function SenalesLista({ grupos }: { grupos: GrupoEmpresa[] }) {
 
   return (
     <div className="space-y-5">
-      <label className="flex items-center gap-2 text-sm text-gray-600">
-        <input type="checkbox" checked={verDescartadas} onChange={(e) => setVerDescartadas(e.target.checked)} />
-        Mostrar descartadas
-      </label>
+      <div className="flex flex-wrap items-center gap-3">
+        <select value={fuente} onChange={(e) => setFuente(e.target.value)} className="border rounded-lg px-3 py-2 text-sm bg-white">
+          <option value="">Todas las fuentes</option>
+          {fuentes.map((f) => (
+            <option key={f} value={f}>
+              {NOMBRE_FUENTE[f] ?? f}
+            </option>
+          ))}
+        </select>
+        <select value={categoria} onChange={(e) => setCategoria(e.target.value)} className="border rounded-lg px-3 py-2 text-sm bg-white">
+          <option value="">Todas las categorías</option>
+          {categorias.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
+        <label className="flex items-center gap-2 text-sm text-gray-600">
+          <input type="checkbox" checked={verDescartadas} onChange={(e) => setVerDescartadas(e.target.checked)} />
+          Mostrar descartadas
+        </label>
+      </div>
 
       {grupos.map((g) => {
-        const visibles = g.senales.filter((s) => verDescartadas || s.estado !== "DESCARTADA");
+        const visibles = g.senales.filter(
+          (s) =>
+            (verDescartadas || s.estado !== "DESCARTADA") &&
+            (!fuente || s.fuente === fuente) &&
+            (!categoria || s.categoriaNombre === categoria)
+        );
         if (visibles.length === 0) return null;
         return (
           <section key={g.empresa} className="bg-gray-50 border rounded-2xl p-4">
