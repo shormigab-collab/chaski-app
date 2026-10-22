@@ -16,14 +16,12 @@ import type { ResultadoFuente, VacanteSenal } from "./getonboard";
 
 // Paises que probamos. Que Adzuna los soporte NO esta confirmado: el resultado
 // de cada uno aparece en el mensaje de sincronizacion.
-const PAISES: { codigo: string; iso: string; nombre: string }[] = [
-  { codigo: "co", iso: "CO", nombre: "Colombia" },
-  { codigo: "mx", iso: "MX", nombre: "México" },
-  { codigo: "br", iso: "BR", nombre: "Brasil" },
-  { codigo: "ar", iso: "AR", nombre: "Argentina" },
-  { codigo: "cl", iso: "CL", nombre: "Chile" },
-  { codigo: "pe", iso: "PE", nombre: "Perú" },
-];
+// Verificado con la propia API (error UNSUPPORTED_COUNTRY): Adzuna solo cubre
+// at, au, be, br, ca, ch, de, es, fr, gb, in, it, mx, nl, nz, pl, sg, us, za.
+// En LatAm: solo Mexico y Brasil. Colombia, Argentina, Chile y Peru NO estan.
+// Brasil se deja fuera por ahora: sus vacantes estan en portugues y los
+// borradores son en español.
+const PAISES: { codigo: string; iso: string; nombre: string }[] = [{ codigo: "mx", iso: "MX", nombre: "México" }];
 
 const CONSULTAS = ["asistente virtual", "ventas", "community manager", "marketing digital", "diseñador gráfico", "contador"];
 
@@ -54,7 +52,7 @@ async function consultar(pais: string, query: string): Promise<TrabajoAdzuna[]> 
     cache: "no-store",
   });
   if (!res.ok) {
-    const cuerpo = (await res.text().catch(() => "")).slice(0, 200);
+    const cuerpo = (await res.text().catch(() => "")).replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").slice(0, 200);
     throw new Error(`HTTP ${res.status} ${res.statusText} ${cuerpo}`.trim());
   }
   const json = (await res.json()) as { results?: TrabajoAdzuna[] };
@@ -74,7 +72,17 @@ export async function obtenerVacantesAdzuna(): Promise<ResultadoFuente> {
   // Un pais a la vez (las 6 consultas de cada pais en paralelo) para no
   // disparar demasiadas llamadas juntas y gastar la cuota de la prueba.
   for (const p of PAISES) {
-    const res = await Promise.allSettled(CONSULTAS.map((q) => consultar(p.codigo, q)));
+    // Una busqueda a la vez con una pausa corta: en paralelo Adzuna responde
+    // HTTP 429 (demasiadas peticiones).
+    const res: PromiseSettledResult<TrabajoAdzuna[]>[] = [];
+    for (const q of CONSULTAS) {
+      try {
+        res.push({ status: "fulfilled", value: await consultar(p.codigo, q) });
+      } catch (reason) {
+        res.push({ status: "rejected", reason });
+      }
+      await new Promise((r) => setTimeout(r, 700));
+    }
     const errores = res.filter((r): r is PromiseRejectedResult => r.status === "rejected");
     const exitos = res.filter((r): r is PromiseFulfilledResult<TrabajoAdzuna[]> => r.status === "fulfilled");
 
