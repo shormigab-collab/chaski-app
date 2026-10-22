@@ -267,6 +267,8 @@ model SenalEmpresa {
   borrador  String?
   borradorAprobado Boolean @default(false)
   contactoEmail String?
+  contactoNombre String?
+  contactoCargo String?
   enviadoEn DateTime?
   notas     String?
   seguimientoEn DateTime?

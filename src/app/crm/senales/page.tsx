@@ -14,10 +14,16 @@ export default async function SenalesPage() {
   try {
     [filas, ultimaSync] = await Promise.all([
       db.senalEmpresa.findMany({ orderBy: [{ prioridad: "desc" }, { publicadaEn: "desc" }], take: 500 }),
-      db.senalSync.findFirst({ orderBy: { createdAt: "desc" } }),
+      db.senalSync.findMany({ orderBy: { createdAt: "desc" }, take: 10 }),
     ]);
   } catch (err) {
     errorTabla = err instanceof Error ? err.message : String(err);
+  }
+
+  // Ultima sincronizacion de cada fuente (la lista viene de la mas nueva a la mas vieja).
+  const ultimasSync: any[] = [];
+  for (const s of Array.isArray(ultimaSync) ? ultimaSync : []) {
+    if (!ultimasSync.some((x) => x.fuente === s.fuente)) ultimasSync.push(s);
   }
 
   // Agrupa por empresa: la prioridad del grupo es la mayor de sus vacantes.
@@ -41,6 +47,8 @@ export default async function SenalesPage() {
       borrador: f.borrador ?? "",
       borradorAprobado: f.borradorAprobado,
       contactoEmail: f.contactoEmail ?? "",
+      contactoNombre: f.contactoNombre ?? "",
+      contactoCargo: f.contactoCargo ?? "",
       notas: f.notas ?? "",
       seguimientoEn: f.seguimientoEn ? f.seguimientoEn.toISOString().slice(0, 10) : "",
       seguimientoHecho: f.seguimientoHecho,
@@ -63,16 +71,20 @@ export default async function SenalesPage() {
         <SincronizarBoton />
       </div>
 
-      {ultimaSync && (
+      {ultimasSync.map((s: any) => (
         <div
-          className={`text-xs rounded-lg border px-3 py-2 mb-5 ${
-            ultimaSync.ok ? "bg-emerald-50 border-emerald-200 text-emerald-800" : "bg-red-50 border-red-200 text-red-800"
+          key={s.fuente}
+          className={`text-xs rounded-lg border px-3 py-2 mb-3 ${
+            s.ok ? "bg-emerald-50 border-emerald-200 text-emerald-800" : "bg-red-50 border-red-200 text-red-800"
           }`}
         >
-          <span className="font-semibold">Última sincronización ({new Date(ultimaSync.createdAt).toLocaleString("es-CO")}):</span>{" "}
-          {ultimaSync.mensaje}
+          <span className="font-semibold">
+            {s.fuente === "ADZUNA" ? "Adzuna" : s.fuente === "GETONBOARD" ? "Get on Board" : s.fuente} (
+            {new Date(s.createdAt).toLocaleString("es-CO")}):
+          </span>{" "}
+          {s.mensaje}
         </div>
-      )}
+      ))}
 
       {errorTabla && (
         <div className="text-sm rounded-lg border border-red-200 bg-red-50 text-red-800 p-3 mb-5">

@@ -9,6 +9,8 @@ const esquema = z.object({
   borrador: z.string().max(4000).optional(),
   borradorAprobado: z.boolean().optional(),
   contactoEmail: z.string().trim().max(200).optional(),
+  contactoNombre: z.string().trim().max(120).optional(),
+  contactoCargo: z.string().trim().max(120).optional(),
   notas: z.string().max(4000).optional(),
   estado: z.enum(["NUEVA", "DESCARTADA", "ENVIADA"]).optional(),
   // fecha de seguimiento (YYYY-MM-DD) o "" para quitarla
@@ -36,6 +38,8 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   }
   if (d.borradorAprobado !== undefined && d.borrador === undefined) data.borradorAprobado = d.borradorAprobado;
   if (d.contactoEmail !== undefined) data.contactoEmail = d.contactoEmail || null;
+  if (d.contactoNombre !== undefined) data.contactoNombre = d.contactoNombre || null;
+  if (d.contactoCargo !== undefined) data.contactoCargo = d.contactoCargo || null;
   if (d.notas !== undefined) data.notas = d.notas || null;
 
   if (d.estado !== undefined) {

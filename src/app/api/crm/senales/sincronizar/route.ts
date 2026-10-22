@@ -1,27 +1,30 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { obtenerUsuarioActual, esEquipoCrm } from "@/lib/auth";
-import { obtenerVacantesGetOnBoard } from "@/lib/senales/getonboard";
+import { obtenerVacantesGetOnBoard, type ResultadoFuente } from "@/lib/senales/getonboard";
+import { obtenerVacantesAdzuna } from "@/lib/senales/adzuna";
 import { calcularPrioridad, construirBorrador } from "@/lib/senales/borrador";
 
 // "as any": modelos nuevos de Prisma; ver nota en /api/crm/contactos/route.ts
 const db = prisma as any;
 
-// Las 9 busquedas se hacen en paralelo, pero damos margen por si la fuente
+// Las busquedas se hacen en paralelo, pero damos margen por si la fuente
 // responde lento.
 export const maxDuration = 60;
 
-export async function POST() {
-  const usuario = await obtenerUsuarioActual();
-  if (!esEquipoCrm(usuario)) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+const NOMBRE_EN_BORRADOR: Record<string, string> = {
+  GETONBOARD: "Get on Board",
+  ADZUNA: "una bolsa de empleo en línea",
+};
 
-  let resultado;
+async function procesarFuente(fuente: string, obtener: () => Promise<ResultadoFuente>) {
+  let resultado: ResultadoFuente;
   try {
-    resultado = await obtenerVacantesGetOnBoard();
+    resultado = await obtener();
   } catch (err) {
     const mensaje = err instanceof Error ? err.message : String(err);
-    await db.senalSync.create({ data: { fuente: "GETONBOARD", ok: false, mensaje, nuevas: 0 } }).catch(() => {});
-    return NextResponse.json({ ok: false, mensaje }, { status: 200 });
+    await db.senalSync.create({ data: { fuente, ok: false, mensaje, nuevas: 0 } }).catch(() => {});
+    return { ok: false, mensaje, nuevas: 0 };
   }
 
   // Vacantes por empresa, para la prioridad
@@ -32,7 +35,7 @@ export async function POST() {
   try {
     for (const v of resultado.vacantes) {
       const existente = await db.senalEmpresa.findUnique({
-        where: { fuente_fuenteId: { fuente: "GETONBOARD", fuenteId: v.fuenteId } },
+        where: { fuente_fuenteId: { fuente, fuenteId: v.fuenteId } },
         select: { id: true },
       });
       const { prioridad, razon } = calcularPrioridad({
@@ -48,7 +51,7 @@ export async function POST() {
 
       await db.senalEmpresa.create({
         data: {
-          fuente: "GETONBOARD",
+          fuente,
           fuenteId: v.fuenteId,
           empresa: v.empresa,
           empresaWeb: v.empresaWeb,
@@ -65,6 +68,7 @@ export async function POST() {
             titulo: v.titulo,
             categoriaNombre: v.categoria.nombre,
             argumento: v.categoria.argumento,
+            fuenteNombre: NOMBRE_EN_BORRADOR[fuente],
           }),
         },
       });
@@ -72,11 +76,27 @@ export async function POST() {
     }
   } catch (err) {
     const mensaje = `Error al guardar en la base de datos: ${err instanceof Error ? err.message : String(err)}`;
-    await db.senalSync.create({ data: { fuente: "GETONBOARD", ok: false, mensaje, nuevas } }).catch(() => {});
-    return NextResponse.json({ ok: false, mensaje }, { status: 200 });
+    await db.senalSync.create({ data: { fuente, ok: false, mensaje, nuevas } }).catch(() => {});
+    return { ok: false, mensaje, nuevas };
   }
 
   const mensaje = `${resultado.mensaje} Señales nuevas guardadas: ${nuevas}.`;
-  await db.senalSync.create({ data: { fuente: "GETONBOARD", ok: resultado.ok, mensaje, nuevas } }).catch(() => {});
-  return NextResponse.json({ ok: resultado.ok, mensaje, nuevas });
+  await db.senalSync.create({ data: { fuente, ok: resultado.ok, mensaje, nuevas } }).catch(() => {});
+  return { ok: resultado.ok, mensaje, nuevas };
+}
+
+export async function POST() {
+  const usuario = await obtenerUsuarioActual();
+  if (!esEquipoCrm(usuario)) return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+
+  const gob = await procesarFuente("GETONBOARD", obtenerVacantesGetOnBoard);
+  // Adzuna solo corre si las llaves estan configuradas en Vercel.
+  // Si faltan, se deja un aviso visible en pantalla (no se salta en silencio).
+  const adz = await procesarFuente("ADZUNA", obtenerVacantesAdzuna);
+
+  return NextResponse.json({
+    ok: gob.ok && (adz ? adz.ok : true),
+    mensaje: [gob.mensaje, adz?.mensaje].filter(Boolean).join(" || "),
+    nuevas: gob.nuevas + (adz?.nuevas ?? 0),
+  });
 }

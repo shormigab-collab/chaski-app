@@ -16,6 +16,8 @@ export type SenalUI = {
   borrador: string;
   borradorAprobado: boolean;
   contactoEmail: string;
+  contactoNombre: string;
+  contactoCargo: string;
   notas: string;
   seguimientoEn: string;
   seguimientoHecho: boolean;
@@ -48,6 +50,8 @@ function Senal({ s, empresa }: { s: SenalUI; empresa: string }) {
   const router = useRouter();
   const [borrador, setBorrador] = useState(s.borrador);
   const [email, setEmail] = useState(s.contactoEmail);
+  const [nombre, setNombre] = useState(s.contactoNombre);
+  const [cargo, setCargo] = useState(s.contactoCargo);
   const [notas, setNotas] = useState(s.notas);
   const [fecha, setFecha] = useState(s.seguimientoEn);
   const [error, setError] = useState("");
@@ -106,6 +110,32 @@ function Senal({ s, empresa }: { s: SenalUI; empresa: string }) {
               disabled={s.estado === "ENVIADA"}
               className="w-full border rounded-lg px-3 py-2 text-sm mt-1"
             />
+          </div>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <input
+              value={nombre}
+              onChange={(e) => setNombre(e.target.value)}
+              onBlur={() => nombre !== s.contactoNombre && accion({ contactoNombre: nombre })}
+              placeholder="Nombre del contacto"
+              className="flex-1 min-w-[160px] border rounded-lg px-3 py-2 text-sm"
+            />
+            <input
+              value={cargo}
+              onChange={(e) => setCargo(e.target.value)}
+              onBlur={() => cargo !== s.contactoCargo && accion({ contactoCargo: cargo })}
+              placeholder="Cargo (ej. Reclutadora)"
+              className="flex-1 min-w-[160px] border rounded-lg px-3 py-2 text-sm"
+            />
+            {s.estado === "NUEVA" && nombre.trim() && /^Hola equipo de /.test(borrador) && (
+              <button
+                type="button"
+                onClick={() => setBorrador(borrador.replace(/^Hola equipo de [^\n]*,/, `Hola ${nombre.trim().split(/\s+/)[0]},`))}
+                className="text-xs font-semibold border px-3 py-2 rounded-lg hover:bg-gray-50"
+              >
+                Saludar por su nombre
+              </button>
+            )}
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
