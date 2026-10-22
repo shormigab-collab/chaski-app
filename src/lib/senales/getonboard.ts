@@ -24,6 +24,13 @@ const CONSULTAS = [
   "contador",
   "redactor",
   "desarrollador",
+  "ventas",
+  "sales",
+  "business development",
+  "social media",
+  "content",
+  "seo",
+  "atención al cliente",
 ];
 
 // Paises de LatAm (codigo ISO) en que buscamos empresas.

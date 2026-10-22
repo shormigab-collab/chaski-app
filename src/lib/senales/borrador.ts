@@ -38,10 +38,11 @@ export function construirBorrador(opts: {
   titulo: string;
   categoriaNombre: string;
   argumento: string;
+  fuenteNombre?: string;
 }): string {
   return `Hola equipo de ${opts.empresa},
 
-Vi que publicaron la vacante «${opts.titulo}» en Get on Board. ${opts.argumento}
+Vi que publicaron la vacante «${opts.titulo}» en ${opts.fuenteNombre || "Get on Board"}. ${opts.argumento}
 
 En chaski publican lo que necesitan gratis y profesionales independientes de Latinoamérica les escriben directamente, sin intermediarios. Es un marketplace abierto: ustedes revisan cada perfil y deciden con quién trabajar.
 

@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/db";
 import SincronizarBoton from "./SincronizarBoton";
+import AgregarManual from "./AgregarManual";
 import SenalesLista, { type GrupoEmpresa } from "./SenalesLista";
 
 export const dynamic = "force-dynamic";
@@ -54,7 +55,7 @@ export default async function SenalesPage() {
         <div>
           <h1 className="text-2xl font-bold">Señales de empresas</h1>
           <p className="text-sm text-gray-500 max-w-2xl">
-            Empresas de Latinoamérica que publicaron vacantes en Get on Board en áreas donde chaski tiene freelancers.
+            Empresas de Latinoamérica que publicaron vacantes (Get on Board automático, más las que agregues tú a mano) en áreas donde chaski tiene freelancers.
             Es una señal de que podrían necesitar apoyo, no una confirmación. Nada se envía solo: tú revisas y apruebas
             cada mensaje.
           </p>
@@ -79,6 +80,8 @@ export default async function SenalesPage() {
           Error real: {errorTabla}
         </div>
       )}
+
+      <AgregarManual />
 
       <SenalesLista grupos={grupos} />
     </div>

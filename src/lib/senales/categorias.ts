@@ -43,6 +43,14 @@ const REGLAS: { patron: RegExp; categoria: CategoriaSenal }[] = [
     },
   },
   {
+    patron: /\bsales\b|ventas|vendedor|\bsdr\b|\bbdr\b|business development|account executive|ejecutiv[oa] comercial|\bcomercial\b|desarrollo de negocio/i,
+    categoria: {
+      slug: "ventas",
+      nombre: "Ventas / desarrollo de negocio",
+      argumento: "Pueden sumar apoyo comercial (prospección, seguimiento, cierre) con profesionales independientes por proyecto o comisión, sin ampliar la nómina.",
+    },
+  },
+  {
     patron: /design|dise[ñn]ad|ux|ui\b|gr[aá]fic|brand/i,
     categoria: {
       slug: "diseno-grafico",
@@ -73,6 +81,13 @@ export function clasificarVacante(titulo: string, categoriaFuente: string): Cate
   for (const r of REGLAS) if (r.patron.test(titulo)) return r.categoria;
   for (const r of REGLAS) if (r.patron.test(categoriaFuente)) return r.categoria;
   return null;
+}
+
+// Lista para el selector de "Agregar señal manual".
+export const CATEGORIAS_SENAL: CategoriaSenal[] = REGLAS.map((r) => r.categoria);
+
+export function categoriaPorSlug(slug: string): CategoriaSenal | null {
+  return REGLAS.find((r) => r.categoria.slug === slug)?.categoria ?? null;
 }
 
 export function argumentoPorSlug(slug: string): string {
