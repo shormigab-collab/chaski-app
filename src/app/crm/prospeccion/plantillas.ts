@@ -30,7 +30,7 @@ export function plantillaEn(nombre: string) {
   const asunto = "Hiring freelance talent in Latin America?";
   const cuerpo = `Hi ${n},
 
-I noticed your business might benefit from freelance support (development, design, marketing, VA work, etc.), and wanted to introduce chaski: you post what you need for free and vetted professionals across Latin America reach out to you directly — no bidding wars, no middleman commission.
+I noticed your business might benefit from freelance support (development, design, marketing, VA work, etc.), and wanted to introduce chaski: you post what you need for free and independent professionals across Latin America reach out to you directly — no bidding wars, no middleman commission.
 
 If it's helpful, here's a quick overview: https://www.usechaski.com/en
 

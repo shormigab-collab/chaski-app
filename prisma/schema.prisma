@@ -241,6 +241,52 @@ model CrmTarea {
   createdAt   DateTime    @default(now())
 }
 
+// Senales de prospeccion: una fila por vacante publicada en una fuente
+// externa (hoy Get on Board) por una empresa que podria necesitar apoyo
+// freelance. Es evidencia real con enlace a la fuente, nunca un dato
+// inventado. El borrador de mensaje lo arma la plataforma, pero solo una
+// persona lo aprueba y marca como enviado.
+model SenalEmpresa {
+  id        String   @id @default(cuid())
+  fuente    String   // "GETONBOARD"
+  fuenteId  String   // id de la vacante en la fuente
+  empresa   String
+  empresaWeb String?
+  empresaPais String?
+  titulo    String   // titulo real de la vacante
+  url       String   // enlace publico a la vacante
+  categoriaSlug String // categoria de chaski a la que se asocia
+  categoriaNombre String
+  publicadaEn DateTime?
+  prioridad Int      @default(1)
+  razon     String?  // por que tiene esa prioridad
+  detectadaEn DateTime @default(now())
+
+  // "NUEVA" | "DESCARTADA" | "ENVIADA"
+  estado    String   @default("NUEVA")
+  borrador  String?
+  borradorAprobado Boolean @default(false)
+  contactoEmail String?
+  enviadoEn DateTime?
+  notas     String?
+  seguimientoEn DateTime?
+  seguimientoHecho Boolean @default(false)
+
+  @@unique([fuente, fuenteId])
+  @@index([empresa])
+}
+
+// Resultado de cada sincronizacion con una fuente, para mostrar tal cual
+// el error real cuando algo falla (nunca un mensaje generico).
+model SenalSync {
+  id        String   @id @default(cuid())
+  fuente    String
+  ok        Boolean
+  mensaje   String
+  nuevas    Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
 model CrmActividad {
   id         String      @id @default(cuid())
   contactoId String
