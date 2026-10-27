@@ -925,6 +925,94 @@ export const POSTS: PostBlog[] = [
       },
     ],
   },
+  {
+    slug: "cuanto-cuesta-un-asistente-virtual-latinoamerica",
+    titulo: "Cuánto cuesta un asistente virtual en Latinoamérica (2026)",
+    categoria: "Guía para clientes",
+    imagen: "/images/blog/como-contratar-asistente-virtual.webp",
+    imagenAlt: "Emprendedora revisando el presupuesto de un asistente virtual en su laptop",
+    descripcionMeta:
+      "Rangos de tarifas de asistentes virtuales en Latinoamérica en 2026, cómo se comparan con EE. UU. y Filipinas, qué hace subir o bajar el precio y los costos ocultos que conviene considerar.",
+    extracto:
+      "¿Cuánto se paga por un asistente virtual en Latinoamérica? Aquí van los rangos de referencia, qué los mueve, cómo se comparan con otras regiones y qué costos extra conviene tener en cuenta antes de contratar.",
+    fecha: "2026-10-27",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "Una de las primeras preguntas al pensar en contratar un asistente virtual es cuánto va a costar. La respuesta corta es que depende, y los rangos son amplios. Antes de dar cifras, una advertencia importante: no existe una tarifa oficial ni un estándar de mercado. Los números que circulan vienen sobre todo de agencias y plataformas que venden estos servicios, y varían de una fuente a otra. Tómalos como referencias para orientarte, no como precios cerrados.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Rangos de referencia por hora",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Latinoamérica: las estimaciones suelen ubicarse entre US$8 y US$25 por hora, según la experiencia, el nivel de inglés y el tipo de tareas. Algunas fuentes sitúan el trabajo administrativo básico en la parte baja de ese rango y los perfiles bilingües con experiencia en la parte alta.",
+          "Estados Unidos: las referencias van desde cerca de US$20 hasta más de US$60 por hora, según la especialidad. Una de las cifras más citadas ubica el promedio de un asistente virtual en EE. UU. alrededor de US$24 por hora.",
+          "Filipinas: suele aparecer como la opción más económica, con estimaciones de entre US$5 y US$15 por hora.",
+          "Agencias: cuando el asistente llega a través de una agencia, el precio suele ser mayor (una fuente habla de un recargo de entre 20 % y 40 % sobre la tarifa de un independiente) a cambio de selección previa y reemplazo si no funciona.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Para dar un ejemplo local: algunas agencias anuncian asistentes en Colombia desde unos US$8 por hora, mientras que las ofertas de empleo de tiempo completo en el país publican salarios mensuales de entre 1,5 y 2,5 millones de pesos. Son dos formas distintas de contratar y no se comparan directamente: la primera es un servicio independiente o de agencia, la segunda es un empleo formal con sus propias obligaciones.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Qué hace subir o bajar el precio",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Tipo de tareas: agenda y correo cuestan menos que gestión de clientes, contabilidad básica, atención al cliente o soporte de herramientas especializadas.",
+          "Nivel de inglés: si necesitas que escriba y hable con fluidez con clientes de EE. UU., el rango sube.",
+          "Experiencia y herramientas: dominar tu CRM, tu software de facturación o tus herramientas de proyectos tiene un valor real.",
+          "Horas y continuidad: un acuerdo de varias horas fijas a la semana suele salir mejor por hora que tareas sueltas.",
+          "Zona horaria: si necesitas disponibilidad en un horario específico, lo más probable es que influya en el precio.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Costos que no siempre se mencionan",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "La tarifa por hora no es todo. Piensa también en el tiempo que tú inviertes en explicar y revisar, en las herramientas (gestor de contraseñas, software de gestión, licencias) y en el período de adaptación. Una de las fuentes que consultamos estima que el software, la incorporación y la gestión pueden sumar entre US$2.000 y US$6.000 al año, aunque esa cifra varía mucho según el tamaño y el tipo de negocio. Si eres tú quien contrata, haz una estimación simple de cuántas horas tuyas va a requerir al inicio.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Si eres tú quien ofrece el servicio",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Esto también sirve a la inversa. Si eres asistente virtual en Colombia o en otro país de la región, ten en cuenta que de tu tarifa salen impuestos, aportes de seguridad social si cotizas como independiente, comisiones de plataformas y costos de conexión o equipo. Calcula cuánto necesitas ganar neto y trabaja hacia atrás, en vez de copiar la tarifa de otra persona. Nuestra calculadora de tarifa freelance puede ayudarte con ese cálculo.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Cómo evitar pagar de más (o de menos)",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Define las tareas por escrito antes de pedir presupuestos: así los precios son comparables.",
+          "Pide dos o tres propuestas y compara no solo la tarifa, sino la experiencia, la disponibilidad y la comunicación.",
+          "Desconfía de las tarifas excepcionalmente bajas: pueden indicar poca experiencia o un servicio que no se mantiene en el tiempo.",
+          "Empieza con una prueba corta y pagada antes de comprometerte con más horas.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Si quieres ver propuestas reales, en chaski puedes publicar lo que necesitas gratis y recibir contacto directo de asistentes virtuales y otros profesionales de Latinoamérica, sin comisiones ni intermediarios. Tú comparas perfiles y decides con quién trabajar.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPost(slug: string) {

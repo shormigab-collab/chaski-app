@@ -50,9 +50,14 @@ const RELACIONADOS: Record<string, string[]> = {
     "how-to-vet-a-latam-freelancer",
   ],
   "hire-virtual-assistant-latin-america": [
+    "how-much-does-a-virtual-assistant-cost-latin-america",
     "hire-latin-america-freelancers-cost-guide",
     "how-to-vet-a-latam-freelancer",
-    "how-to-write-a-project-brief-for-a-freelancer",
+  ],
+  "how-much-does-a-virtual-assistant-cost-latin-america": [
+    "hire-virtual-assistant-latin-america",
+    "how-to-pay-latam-freelancers-guide",
+    "hire-latin-america-freelancers-cost-guide",
   ],
 };
 

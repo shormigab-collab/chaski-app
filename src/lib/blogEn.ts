@@ -730,6 +730,87 @@ export const POSTS_EN: PostBlogEn[] = [
       },
     ],
   },
+  {
+    slug: "how-much-does-a-virtual-assistant-cost-latin-america",
+    titulo: "How Much Does a Virtual Assistant Cost in Latin America? 2026 Rates Compared",
+    tituloSeo: "Virtual Assistant Cost in Latin America (2026)",
+    categoria: "Guide for clients",
+    imagen: "/images/blog/hire-virtual-assistant-latin-america.webp",
+    imagenAlt: "A business owner reviewing a virtual assistant budget on a laptop",
+    descripcionMeta:
+      "What virtual assistants in Latin America typically charge per hour in 2026, how rates compare with the US and the Philippines, what drives the price, and the hidden costs to plan for.",
+    extracto:
+      "Rates for virtual assistants vary widely. Here's what's typical in Latin America, how it compares with the US and the Philippines, what moves the price, and the extra costs worth planning for.",
+    fecha: "2026-10-27",
+    minutosLectura: 6,
+    contenido: [
+      {
+        tipo: "parrafo",
+        texto:
+          "If you're thinking about hiring a virtual assistant (VA), cost is probably the first question. The honest answer is that it depends, and the ranges are wide. One caveat before the numbers: there is no official rate or market standard. Most of the figures you'll find online come from agencies and platforms that sell VA services, and they don't always agree with each other. Treat everything below as a rough guide for budgeting, not a quote.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Typical hourly ranges",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Latin America: estimates generally fall between about $8 and $25 per hour, depending on experience, English level, and the kind of work. Basic admin tends to sit at the lower end; bilingual assistants with specialized experience sit at the higher end.",
+          "United States: references range from roughly $20 to more than $60 per hour depending on specialty. One of the more commonly cited averages for a US-based VA is around $24 per hour.",
+          "The Philippines: usually the lowest-cost option, with estimates of roughly $5 to $15 per hour.",
+          "Agencies: when a VA is placed through an agency, the price is usually higher (one source cites a 20% to 40% markup over an independent's rate) in exchange for vetting and replacement if it doesn't work out.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Why do US businesses look at Latin America in the middle of that spectrum? Mostly because of working hours. Many Latin American countries share US time zones, so questions get answered in real time and handoffs don't wait overnight. For work that benefits from quick back-and-forth, that overlap can matter more than saving a few dollars an hour.",
+      },
+      {
+        tipo: "titulo",
+        texto: "What moves the price up or down",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Type of work: calendar and inbox management costs less than client communication, bookkeeping support, customer service, or specialized tools.",
+          "English level: if your assistant will write or speak with your customers, expect to pay more for strong English.",
+          "Experience with your tools: knowing your CRM, invoicing software, or project tools has real value.",
+          "Hours and consistency: a steady block of hours each week often works out cheaper per hour than occasional tasks.",
+          "Schedule requirements: needing coverage during specific hours can affect the rate.",
+        ],
+      },
+      {
+        tipo: "titulo",
+        texto: "Costs that don't show up in the hourly rate",
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "The hourly rate isn't the whole picture. Count your own time for explaining tasks and reviewing results, plus tools (a password manager, project software, licenses) and a short adjustment period at the start. One source we reviewed estimates that software, onboarding, and management can add roughly $2,000 to $6,000 a year, though that figure varies a lot with the size and type of business. A simple estimate of how many of your own hours the first month will take is a good reality check.",
+      },
+      {
+        tipo: "titulo",
+        texto: "Paying fairly and avoiding surprises",
+      },
+      {
+        tipo: "lista",
+        items: [
+          "Write down the tasks before asking for quotes, so the proposals you get are comparable.",
+          "Get two or three proposals and compare more than price: experience, availability, and how clearly they communicate.",
+          "Be cautious with very low rates. They can signal limited experience or a service that won't last.",
+          "Start with a short paid trial before committing to a larger number of hours.",
+          "Agree on how you'll pay (and in what currency) up front, and read our guide to paying Latin American freelancers internationally to compare options and fees.",
+        ],
+      },
+      {
+        tipo: "parrafo",
+        texto:
+          "Ready to see real options? You can post what you need on chaski for free and hear directly from virtual assistants and other professionals across Latin America — no bidding wars and no platform commission. You compare profiles and decide who to work with.",
+      },
+    ],
+  },
 ];
 
 export function obtenerPostEn(slug: string) {
